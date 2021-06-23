@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "es5",
+    "allowJs": true,
+    "checkJs": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "strict": true
+  },
+  "include": ["./src/**/*.ts", "index.d.ts"]
+}

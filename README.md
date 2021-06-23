@@ -1,2 +1,15 @@
-# 96tm-JSFE2021Q1
-Private repository for @96tm
+# 🚀 Welcome to your new awesome project!
+
+This project has been created using **webpack-cli**, you can now run
+
+```
+npm run build
+```
+
+or
+
+```
+yarn build
+```
+
+to bundle your application
