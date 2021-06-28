@@ -1,0 +1,36 @@
+.button-game-wrap {
+  position: absolute;
+  margin-left: 100%;
+  transform: translate(125%, 0);
+}
+
+.button-game {
+  width: $button-game-diameter;
+  height: $button-game-diameter;
+  background: $button-green-color;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+
+  .button-game__text {
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1.75rem;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+    transition: all 0.7s;
+  }
+
+  &.train {
+    background: $button-green-color center url('../icons/icon-repeat.svg')
+      no-repeat;
+
+    .button-game__text {
+      display: none;
+    }
+  }
+}

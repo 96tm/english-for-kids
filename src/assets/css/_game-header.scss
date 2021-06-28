@@ -1,0 +1,86 @@
+@import 'score';
+
+$header-margin: 40px;
+$header-padding-top: 18px;
+$mode-button-border-radius: 21px;
+
+.game-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: $header-margin;
+  padding-top: $header-padding-top;
+
+  .game-header__mode-wrap {
+    width: $mode-checkbox-width;
+    height: $mode-checkbox-height;
+    position: relative;
+    border-radius: $mode-button-border-radius;
+    display: flex;
+    align-items: center;
+
+    .game-header-mode__play,
+    .game-header-mode__train {
+      width: 50%;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 10px;
+      line-height: 0.8rem;
+      color: #fff;
+    }
+
+    .game-header-mode__train {
+      margin-left: 11px;
+    }
+
+    .game-header-mode__play {
+      opacity: 0;
+      margin-right: 11px;
+      text-align: right;
+    }
+
+    .game-header__mode {
+      @extend .game-header__mode-wrap;
+      position: absolute;
+      background: $green-color;
+      transition: 1s all;
+      display: flex;
+
+      .game-header-mode__circle {
+        width: $mode-circle-diameter;
+        height: $mode-circle-diameter;
+        position: absolute;
+        top: 50%;
+        right: 6px;
+        transform: translate(0, -50%);
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0px 3px 4px -2px rgb(0 0 0 / 50%);
+      }
+    }
+
+    .game-header__mode-checkbox {
+      z-index: 2;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+
+      &:checked {
+        & ~ .game-header__mode {
+          background: $gray-color-disabled;
+        }
+        & ~ .game-header__mode .game-header-mode__train {
+          opacity: 0;
+        }
+        & ~ .game-header__mode .game-header-mode__play {
+          opacity: 1;
+        }
+        & ~ .game-header__mode .game-header-mode__circle {
+          right: initial;
+          left: 6px;
+        }
+      }
+    }
+  }
+}

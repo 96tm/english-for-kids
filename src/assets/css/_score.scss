@@ -1,0 +1,30 @@
+$score-wrap-col-gap: 20px;
+$star-width: 20px;
+
+.game-header__score-wrap {
+  display: flex;
+  margin-right: $score-wrap-col-gap;
+  column-gap: $score-wrap-col-gap;
+
+  .game-header__score-star {
+    position: relative;
+    width: $star-width;
+    height: $star-width;
+    background: center url('../icons/star-unchecked.png') no-repeat;
+    background-size: cover;
+    transform: translate(0, 25%);
+
+    &::after {
+      content: attr(data-number-of-tries);
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translate(-50%, 100%);
+    }
+
+    &.checked {
+      background: center url('../icons/star-checked.png') no-repeat;
+      background-size: cover;
+    }
+  }
+}

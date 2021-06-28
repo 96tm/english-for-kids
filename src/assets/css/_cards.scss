@@ -1,0 +1,15 @@
+@import 'card';
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: $row-gap;
+
+  &::after {
+    content: '';
+    width: $card-width;
+    height: 0;
+    max-width: $card-min-width;
+  }
+}

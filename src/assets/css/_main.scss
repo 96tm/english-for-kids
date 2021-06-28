@@ -1,0 +1,114 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+html,
+body,
+.guidelines,
+.container {
+  height: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+}
+
+.page-wrap {
+  width: 70%;
+  flex-shrink: 0;
+  max-width: $game-guidelines-width;
+  position: relative;
+}
+
+.game-menu-toggle-checkbox,
+.game-menu-toggle-bar-wrap {
+  margin-left: calc((100vw - min(70%, 1005px)) / 2);
+}
+
+.game-menu-toggle-bar-wrap {
+  position: absolute;
+  width: $menu-button-toggle-width;
+  height: $menu-button-toggle-height;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+  padding: 0 10px 0;
+
+  .game-menu-toggle-bar {
+    position: relative;
+    width: 100%;
+    background: $gray-color;
+    height: 4px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: $gray-color;
+      top: -10px;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: $gray-color;
+      bottom: -10px;
+    }
+  }
+}
+
+.game-menu-toggle-checkbox {
+  position: absolute;
+  z-index: 2;
+  width: $menu-button-toggle-width;
+  height: $menu-button-toggle-height;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.game-menu-toggle-checkbox:checked {
+  margin-left: calc(((70% - min(70%, 1007px)) / 2) + 30%);
+
+  & ~ .game-menu-toggle-bar-wrap {
+    margin-left: calc(((70% - min(70%, 1007px)) / 2) + 30%);
+
+    .game-menu-toggle-bar {
+      background: transparent;
+      &::before,
+      &::after {
+        background: $dark-gray-color;
+      }
+      &::before {
+        top: 0;
+        transform: rotate(45deg);
+      }
+      &::after {
+        bottom: 0;
+        transform: rotate(-45deg);
+      }
+    }
+  }
+  & ~ .game-menu {
+    margin-left: 0;
+    margin-right: calc((70% - min(70%, 1007px)) / 2);
+  }
+  & ~ .page-wrap {
+    .button-game-wrap {
+      transform: translate(-100%, 0);
+    }
+  }
+}
