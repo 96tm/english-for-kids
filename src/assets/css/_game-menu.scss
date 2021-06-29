@@ -24,6 +24,10 @@ $login-button-width: 248px;
     padding: $menu-items-padding-top $menu-items-padding-right 0 0;
   }
 
+  .game-menu__title {
+    text-transform: capitalize;
+  }
+
   .game-menu__title,
   .game-menu__item {
     min-height: $game-menu-item-height;
@@ -37,11 +41,11 @@ $login-button-width: 248px;
     list-style: none;
   }
 
-  .game-menu__item {
+  .game-menu__link {
     text-decoration: none;
     color: inherit;
 
-    &.selected {
+    &.active {
       text-decoration: underline;
     }
   }

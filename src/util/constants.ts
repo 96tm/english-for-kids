@@ -29,6 +29,7 @@ const CSSClasses = {
   gameMenuList: 'game-menu__list',
   gameMenuLogin: 'game-menu__login',
   gameMenuItem: 'game-menu__item',
+  gameMenuLink: 'game-menu__link',
   gameMenuItemsWrap: 'game-menu__items',
 
   gameHeader: 'game-header',
@@ -50,6 +51,7 @@ const CSSClasses = {
 
   checked: 'checked',
   hidden: 'hidden',
+  active: 'active',
 };
 
 const Labels = {
@@ -57,6 +59,7 @@ const Labels = {
   play: 'Play',
   login: 'Login',
   start: 'Start',
+  mainMenu: 'Main Page',
 };
 
 const Constants = {

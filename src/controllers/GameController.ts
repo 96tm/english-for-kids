@@ -9,6 +9,10 @@ class GameController extends Controller {
     super();
     this.component = new GamePage(global, rootComponent);
   }
+
+  async init() {
+    await (this.component as GamePage).init();
+  }
 }
 
 export default GameController;

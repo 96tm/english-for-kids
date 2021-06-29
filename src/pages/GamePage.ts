@@ -31,4 +31,8 @@ export default class GamePage extends Component {
 
     this.gamePageWrap = new GamePageWrap(global, this);
   }
+
+  async init() {
+    await this.gameMenu.init();
+  }
 }

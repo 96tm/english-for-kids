@@ -4,10 +4,12 @@ import GameController from './controllers/GameController';
 
 import RouterService from './util/RouterService';
 
-const global = window;
+(async () => {
+  const global = window;
 
-const gameController = new GameController(global, null);
-
-RouterService.init({
-  game: gameController,
-});
+  const gameController = new GameController(global, null);
+  await gameController.init();
+  RouterService.init({
+    game: gameController,
+  });
+})();
