@@ -23,6 +23,6 @@ module.exports = {
   ],
   plugins: ['@typescript-eslint'],
   rules: {
-    'no-underscore-dangle': false,
+    'no-underscore-dangle': 0,
   },
 };

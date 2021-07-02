@@ -13,7 +13,7 @@ class Card extends Component {
   overlay: IComponent;
 
   constructor(global: Window, rootComponent: IComponent) {
-    super(global, rootComponent, 'div', [Constants.CSSClasses.gamePageMain]);
+    super(global, rootComponent, 'div', [Constants.CSSClasses.card]);
     this.inner = new Component(global, this, 'div', [
       Constants.CSSClasses.cardInner,
     ]);

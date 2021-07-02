@@ -9,7 +9,6 @@ $login-button-width: 248px;
   flex-direction: column;
   align-items: flex-end;
   width: 30%;
-  height: 100%;
   margin-left: -30%;
   margin-right: calc((100vw - min(70%, 1005px)) / 2);
   font-size: 1.375rem;
@@ -22,6 +21,7 @@ $login-button-width: 248px;
     flex-direction: column;
     align-items: flex-start;
     padding: $menu-items-padding-top $menu-items-padding-right 0 0;
+    height: 100%;
   }
 
   .game-menu__title {
@@ -38,6 +38,7 @@ $login-button-width: 248px;
   .game-menu__list {
     margin: 0;
     padding: 0;
+    flex-grow: 1;
     list-style: none;
   }
 
@@ -60,5 +61,6 @@ $login-button-width: 248px;
     color: #fff;
     border-radius: 5px;
     text-decoration: none;
+    margin-bottom: $button-login-margin-bottom;
   }
 }

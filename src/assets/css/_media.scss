@@ -5,26 +5,25 @@
     height: 48%;
   }
 
+  .button-game-wrap {
+    margin-left: calc(50%);
+    top: 0;
+    bottom: initial;
+    transform: translate(-50%, -105%);
+  }
+
   .game-menu-toggle-checkbox:checked {
     & ~ .game-menu {
       margin-left: 0;
       margin-right: calc((70% - min(70%, #{$game-guidelines-width})) / 2);
     }
-    & ~ .page-wrap {
-      .button-game-wrap {
-        transform: translate(-50%, 50%);
-      }
+    & ~ .inner-container .button-game-wrap {
+      transform: translate(-50%, -105%);
     }
   }
 
   .game-header {
     margin-bottom: calc(#{$button-game-diameter} + 2%);
-  }
-
-  .button-game-wrap {
-    margin-left: calc(50%);
-    top: 0;
-    transform: translate(-50%, 50%);
   }
 }
 
@@ -72,7 +71,8 @@
     }
   }
 
-  .page-wrap {
+  .page-wrap,
+  .categories-wrap {
     margin-left: 5%;
     width: 90%;
   }
@@ -98,7 +98,8 @@
       margin-left: 0;
       margin-right: calc((70% - min(70%, #{$game-guidelines-width})) / 2);
     }
-    & ~ .page-wrap {
+    & ~ .page-wrap,
+    & ~ .categories-wrap {
       display: none;
 
       .button-game-wrap {

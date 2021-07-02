@@ -5,6 +5,7 @@ import Constants from '../../util/constants';
 
 class GameHeaderScore extends Component {
   starRight: IComponent;
+
   starWrong: Component;
 
   constructor(global: Window, rootComponent: IComponent) {

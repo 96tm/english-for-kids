@@ -18,6 +18,7 @@ class Router {
   addRoutes(routes: RoutingTable) {
     Object.keys(routes).forEach((routeName) => {
       this.routes[routeName] = routes[routeName];
+      routes[routeName].hide();
     });
   }
 
@@ -40,6 +41,6 @@ class Router {
   }
 }
 
-const RouterService = new Router(window, 'game');
+const RouterService = new Router(window, 'main');
 
 export default RouterService;

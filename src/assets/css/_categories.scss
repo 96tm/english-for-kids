@@ -1,0 +1,6 @@
+@import 'cards';
+@import 'category';
+
+.categories-wrap {
+  @extend .cards;
+}

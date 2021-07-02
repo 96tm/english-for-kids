@@ -2,9 +2,15 @@ const SERVER_URL = '';
 const NUMBER_OF_STARS = 3;
 const SCHOOL_LINK = 'https://rs.school/js';
 const NUMBER_OF_CARDS = 8;
+const NUMBER_OF_CATEGORIES = 8;
 
 const CSSClasses = {
+  root: 'root',
   container: 'container',
+  innerContainer: 'inner-container',
+  contentWrap: 'content-wrap',
+  categoriesWrap: 'categories-wrap',
+  category: 'category',
 
   gameMenuToggleCheckbox: 'game-menu-toggle-checkbox',
   gameMenuToggleButton: 'game-menu-toggle-bar-wrap',
@@ -19,7 +25,7 @@ const CSSClasses = {
   gameButtonText: 'button-game__text',
 
   card: 'card',
-  cardInner: 'card__iner',
+  cardInner: 'card__inner',
   cardFront: 'card__front',
   cardBack: 'card__back',
   cardOverlay: 'card__overlay',
@@ -69,6 +75,7 @@ const Constants = {
   NUMBER_OF_STARS,
   SCHOOL_LINK,
   NUMBER_OF_CARDS,
+  NUMBER_OF_CATEGORIES,
 };
 
 export default Constants;

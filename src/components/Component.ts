@@ -40,15 +40,15 @@ export default class Component implements IComponent {
     this._textContent = value;
   }
 
-  get tagName() {
+  get tagName(): string {
     return this._tagName;
   }
 
-  get classList() {
+  get classList(): string[] {
     return this._classList;
   }
 
-  get attributes() {
+  get attributes(): AttributeRecord {
     return this._attributes;
   }
 

@@ -3,6 +3,7 @@ import IComponent from '../IComponent';
 
 import Constants from '../../util/constants';
 import AttributeRecord from '../../util/AttributeRecord';
+import Events from '../../util/Events';
 
 class GameMenu extends Component {
   menuTitle: IComponent;
@@ -33,7 +34,7 @@ class GameMenu extends Component {
         Constants.CSSClasses.gameMenuLink,
         Constants.CSSClasses.active,
       ],
-      { href: '' }
+      { href: '#main' }
     );
     this.menuTitle.textContent = Constants.Labels.mainMenu;
     this.activeItem = this.menuTitle;
@@ -48,6 +49,7 @@ class GameMenu extends Component {
       { href: '' }
     );
     this.loginButton.textContent = Constants.Labels.login;
+    this.addEventListeners();
   }
 
   async init(): Promise<void> {
@@ -60,10 +62,25 @@ class GameMenu extends Component {
     });
   }
 
+  addEventListeners(): void {
+    this.menuItemsWrap.element.addEventListener('click', this.handleMenuClick);
+  }
+
+  private handleMenuClick: (event: MouseEvent) => void = (event) => {
+    const target = event.target as HTMLElement;
+    if (
+      target.classList.contains(Constants.CSSClasses.gameMenuLink) ||
+      target.classList.contains(Constants.CSSClasses.gameMenuLogin)
+    ) {
+      // event.preventDefault();
+      Events.menuClick.emit(`'hehehey', ${target}, ${target.tagName}`);
+    }
+  };
+
   append(
-    tagName: string = 'a',
+    tagName = 'a',
     classList: string[] = [Constants.CSSClasses.gameMenuLink],
-    attributes: AttributeRecord = { href: '' }
+    attributes: AttributeRecord = { href: '#game' }
   ): IComponent {
     const li = new Component(this.global, this.menuList, 'li', [
       Constants.CSSClasses.gameMenuItem,
