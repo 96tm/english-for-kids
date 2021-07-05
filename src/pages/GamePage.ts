@@ -3,6 +3,7 @@ import IComponent from '../components/IComponent';
 import Constants from '../util/constants';
 import GameButton from '../components/game-page/GameButton';
 import GameBoard from '../components/game-page/GameBoard';
+import ICard from '../models/ICard';
 
 class GamePage extends Component {
   gameBoard: IComponent;
@@ -13,6 +14,10 @@ class GamePage extends Component {
     super(global, rootComponent, 'div', [Constants.CSSClasses.gamePageWrap]);
     this.gameBoard = new GameBoard(global, this);
     this.gameButton = new GameButton(global, this);
+  }
+
+  addCards(cards: ICard[]): void {
+    (this.gameBoard as GameBoard).addCards(cards);
   }
 }
 

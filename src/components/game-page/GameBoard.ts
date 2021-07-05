@@ -2,27 +2,43 @@ import Component from '../Component';
 import IComponent from '../IComponent';
 
 import Constants from '../../util/constants';
-import AttributeRecord from '../../util/AttributeRecord';
 import Card from './Card';
+import Events from '../../util/Events';
+import ICard from '../../models/ICard';
 
 class GameBoard extends Component {
   cards: IComponent[] = [];
 
   constructor(global: Window, rootComponent: IComponent) {
     super(global, rootComponent, 'div', [Constants.CSSClasses.gameBoard]);
-    this.init();
   }
 
-  init(): void {
-    for (let i = 0; i < Constants.NUMBER_OF_CARDS; i += 1) {
-      this.addOneCard();
-    }
+  addCards(cardModels: ICard[]): void {
+    this.cards = [];
+    this.element.innerHTML = '';
+    cardModels.forEach((cardModel) => {
+      this.addOneCard(cardModel);
+    });
   }
 
-  addOneCard(): IComponent {
-    const card = new Card(this.global, this);
+  addOneCard(cardModel: ICard): IComponent {
+    const card = new Card(this.global, this, { ...cardModel });
     this.cards.push(card);
     return card;
+  }
+
+  addEventListeners(): void {
+    this.element.addEventListener('click', GameBoard.handleBoardClick);
+  }
+
+  removeEventListeners(): void {
+    this.element.removeEventListener('click', GameBoard.handleBoardClick);
+  }
+
+  private static handleBoardClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const word = target.dataset.name as string;
+    Events.boardClick.emit(word);
   }
 }
 

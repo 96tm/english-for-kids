@@ -34,10 +34,11 @@ class GameMenu extends Component {
         Constants.CSSClasses.gameMenuLink,
         Constants.CSSClasses.active,
       ],
-      { href: '#main' }
+      { href: '#main', 'data-menu-link-title': Constants.Labels.mainMenu }
     );
     this.menuTitle.textContent = Constants.Labels.mainMenu;
     this.activeItem = this.menuTitle;
+    this.activeItem.element.classList.add(Constants.CSSClasses.active);
     this.menuList = new Component(global, this.menuItemsWrap, 'ul', [
       Constants.CSSClasses.gameMenuList,
     ]);
@@ -49,15 +50,19 @@ class GameMenu extends Component {
       { href: '' }
     );
     this.loginButton.textContent = Constants.Labels.login;
+    this.menuLinks.push(this.menuTitle);
     this.addEventListeners();
   }
 
   async init(): Promise<void> {
-    const categories = await fetch('../../images.json').then((response) =>
+    const categories = await fetch('../../cards.json').then((response) =>
       response.json()
     );
     Object.keys(categories).forEach((key) => {
-      const action = this.append();
+      const action = this.append('a', [Constants.CSSClasses.gameMenuLink], {
+        href: '#game',
+        'data-menu-link-title': key,
+      });
       action.textContent = key;
     });
   }
@@ -68,14 +73,25 @@ class GameMenu extends Component {
 
   private handleMenuClick: (event: MouseEvent) => void = (event) => {
     const target = event.target as HTMLElement;
-    if (
-      target.classList.contains(Constants.CSSClasses.gameMenuLink) ||
-      target.classList.contains(Constants.CSSClasses.gameMenuLogin)
-    ) {
-      // event.preventDefault();
-      Events.menuClick.emit(`'hehehey', ${target}, ${target.tagName}`);
+    if (target.classList.contains(Constants.CSSClasses.gameMenuLink)) {
+      const menuLinkTitle = target.dataset.menuLinkTitle as string;
+      if (target.classList.contains(Constants.CSSClasses.gameMenuTitle)) {
+        this.setActiveMenuItem(menuLinkTitle);
+      } else {
+        Events.menuClick.emit(target.dataset.menuLinkTitle as string);
+      }
+    } else if (target.classList.contains(Constants.CSSClasses.gameMenuLogin)) {
+      throw Error('Not implemented');
     }
   };
+
+  setActiveMenuItem(itemName: string): void {
+    this.activeItem.element.classList.remove(Constants.CSSClasses.active);
+    this.activeItem = this.menuLinks.find(
+      (link) => link.element.dataset.menuLinkTitle === itemName
+    ) as IComponent;
+    this.activeItem.element.classList.add(Constants.CSSClasses.active);
+  }
 
   append(
     tagName = 'a',

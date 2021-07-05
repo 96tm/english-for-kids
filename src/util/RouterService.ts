@@ -1,4 +1,6 @@
 import { RoutingTable } from './RoutingTable';
+import Events from './Events';
+import Constants from './constants';
 
 class Router {
   constructor(
@@ -7,11 +9,12 @@ class Router {
     private routes: RoutingTable = {}
   ) {}
 
-  showRoute(route: string): void {
+  async showRoute(route: string): Promise<void> {
     if (this.routes[route]) {
       this.routes[this.currentRoute].hide();
       this.currentRoute = route;
-      this.routes[route].show();
+      await this.routes[route].show();
+      Events.routeChange.emit(route);
     }
   }
 
@@ -22,21 +25,21 @@ class Router {
     });
   }
 
-  init(routes: RoutingTable): void {
+  async init(routes: RoutingTable): Promise<void> {
     this.addRoutes(routes);
-    this.global.addEventListener('popstate', () => {
+    this.global.addEventListener('popstate', async () => {
       if (!this.global.location.hash) {
         const thisGlobal = this.global;
         thisGlobal.location.hash = this.currentRoute;
       } else {
-        this.showRoute(this.global.location.hash.slice(1));
+        await this.showRoute(this.global.location.hash.slice(1));
       }
     });
     const hashString = window.location.hash;
     if (hashString) {
-      this.showRoute(hashString.slice(1));
+      await this.showRoute(hashString.slice(1));
     } else {
-      this.showRoute(this.currentRoute);
+      await this.showRoute(this.currentRoute);
     }
   }
 }

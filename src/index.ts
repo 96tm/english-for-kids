@@ -19,6 +19,7 @@ import ContainerPage from './pages/ContainerPage';
     global,
     (containerController.component as ContainerPage).contentWrap
   );
+  await gameController.init();
 
   root.render();
 
@@ -26,10 +27,11 @@ import ContainerPage from './pages/ContainerPage';
     global,
     (containerController.component as ContainerPage).contentWrap
   );
-  await mainPageController.init();
 
-  RouterService.init({
+  await RouterService.init({
     game: gameController,
     main: mainPageController,
   });
+  await RouterService.showRoute('main');
+  await mainPageController.init();
 })();

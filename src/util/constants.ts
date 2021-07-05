@@ -11,6 +11,8 @@ const CSSClasses = {
   contentWrap: 'content-wrap',
   categoriesWrap: 'categories-wrap',
   category: 'category',
+  categoryLink: 'category-link',
+  categoryImage: 'category-image',
 
   gameMenuToggleCheckbox: 'game-menu-toggle-checkbox',
   gameMenuToggleButton: 'game-menu-toggle-bar-wrap',
@@ -66,6 +68,7 @@ const Labels = {
   login: 'Login',
   start: 'Start',
   mainMenu: 'Main Page',
+  gameRoute: 'game',
 };
 
 const Constants = {

@@ -1,8 +1,8 @@
 import Component from '../components/Component';
 import IComponent from '../components/IComponent';
 import Constants from '../util/constants';
-import GameMenuToggleButton from '../components/game-page/GameMenuToggleButton';
-import GameMenu from '../components/game-page/GameMenu';
+import GameMenuToggleButton from '../components/shared/GameMenuToggleButton';
+import GameMenu from '../components/shared/GameMenu';
 import GameHeader from '../components/game-page/GameHeader';
 import GameFooter from '../components/game-page/GameFooter';
 
