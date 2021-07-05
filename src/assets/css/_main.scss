@@ -9,9 +9,14 @@ body {
   font-size: 16px;
 }
 
+html,
 body,
 .root,
-.container {
+.container,
+.inner-container,
+.content-wrap,
+.page-wrap,
+.cards {
   height: 100%;
 }
 

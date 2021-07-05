@@ -10,7 +10,7 @@ export default class CardModel {
     this.audio = new Audio(`../public/${this.audioSrc}`);
   }
 
-  playAudio(): void {
+  async playAudio(): Promise<void> {
     this.audio.currentTime = 0;
     this.audio.play();
   }

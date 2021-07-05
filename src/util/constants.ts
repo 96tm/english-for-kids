@@ -29,8 +29,13 @@ const CSSClasses = {
   card: 'card',
   cardInner: 'card__inner',
   cardFront: 'card__front',
+  cardFrontImage: 'card__image-front',
+  cardFrontText: 'card__text-front',
   cardBack: 'card__back',
+  cardBackImage: 'card__image-back',
+  cardBackText: 'card__text-back',
   cardOverlay: 'card__overlay',
+  cardButtonTurn: 'card__button-turn',
 
   gameMenu: 'game-menu',
   gameMenuTitle: 'game-menu__title',
@@ -60,6 +65,7 @@ const CSSClasses = {
   checked: 'checked',
   hidden: 'hidden',
   active: 'active',
+  animated: 'animated',
 };
 
 const Labels = {
@@ -69,6 +75,7 @@ const Labels = {
   start: 'Start',
   mainMenu: 'Main Page',
   gameRoute: 'game',
+  wordIllustration: 'Word illustration',
 };
 
 const Constants = {

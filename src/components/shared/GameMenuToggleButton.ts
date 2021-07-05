@@ -9,9 +9,6 @@ class GameMenuToggleButton extends Component {
       Constants.CSSClasses.gameMenuToggleButton,
     ]);
     this.append('div', [Constants.CSSClasses.gameMenuToggleBar]);
-    // const toggleBar = new Component(global, this, 'div', [
-    //   Constants.CSSClasses.gameMenuToggleBar,
-    // ]);
   }
 }
 

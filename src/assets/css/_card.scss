@@ -1,24 +1,18 @@
-$card-color-right: rgba(10, 207, 131, 0.3);
-$card-color-wrong: rgba(242, 78, 30, 0.3);
-
 $card-min-height: 268px;
 $card-min-width: 317px;
 $card-perspective: 1000px;
+$card-button-turn-diameter: 19px;
+$card-button-turn-margin: 17px;
+$card-button-turn-color: #16b6a1;
 
 /* #region card */
 .card {
   width: $card-width;
   max-width: $card-min-width;
   padding-top: $card-width;
-  border: 1px solid red;
   background-color: transparent;
   perspective: $card-perspective;
   border-radius: 4px;
-  cursor: pointer;
-}
-
-.card:hover {
-  transform: scale(1.01);
 }
 
 .card:hover .card__inner {
@@ -33,14 +27,16 @@ $card-perspective: 1000px;
 }
 
 .card__inner {
-  position: relative;
+  position: absolute;
+  left: 0;
+  top: 0;
   width: 100%;
   height: 100%;
   transition: transform 0.6s;
   transform-style: preserve-3d;
 }
 
-.card.animated .card__inner {
+.card.animated:hover .card__inner {
   transform: rotateY(-180deg);
 }
 
@@ -58,34 +54,52 @@ $card-perspective: 1000px;
   visibility: visible;
 }
 
-.card-wrong .card__overlay {
-  // background: url('../icons/icon-wrong.svg') no-repeat right 10px top 10px,
-  //   $card-color-wrong;
-}
-
-.card-right .card__overlay {
-  // background: url('../icons/icon-right.svg') no-repeat right 10px top 10px,
-  //   $card-color-right;
-}
-
 .card__front,
 .card__back {
   position: absolute;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .card__front {
-  background-color: #bbb;
-  color: black;
   transform: rotateY(180deg);
 }
 
-.card__back {
-  background-color: #2980b9;
-  // background-image: url('../images/card-back.png');
-  background-size: cover;
-  color: white;
+.card__text-front,
+.card__text-back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 14%;
+  font-size: 1.375rem;
+  line-height: 1.625rem;
+  color: #000;
+  text-transform: lowercase;
+}
+
+.card__button-turn {
+  position: absolute;
+  right: $card-button-turn-margin;
+  width: $card-button-turn-diameter;
+  height: $card-button-turn-diameter;
+  mask: url('../icons/icon-turn.svg') no-repeat;
+  background-color: #000;
+  mask-size: 100% 100%;
+  -webkit-mask: url('../icons/icon-turn.svg') no-repeat;
+  -webkit-mask-size: 100% 100%;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    background: $card-button-turn-color;
+  }
+}
+
+.card__image-front,
+.card__image-back {
+  width: 100%;
+  height: 86%;
+  border-radius: 5px;
 }
 /* #endregion card */

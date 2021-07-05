@@ -13,25 +13,25 @@ class GameController extends Controller {
     super();
     this.component = new GamePage(global, rootComponent);
     this.gameModel = new GameModel();
-    Events.boardClick.add(this.handleBoardClick.bind(this));
-    Events.menuClick.add(this.handleMenuClick.bind(this));
+    Events.boardClick.add(this.handleCardClick);
+    Events.menuClick.add(this.handleMenuClick);
+    Events.cardClick.add(this.handleCardClick);
   }
 
   async init(): Promise<void> {
     await this.gameModel.setCategories();
   }
 
-  private async handleMenuClick(category: string): Promise<void> {
-    console.log('menu click', category);
+  private handleMenuClick: (category: string) => Promise<void> = async (
+    category
+  ) => {
     const cards = await this.gameModel.setActiveCategory(category);
     (this.component as GamePage).addCards(cards);
-  }
+  };
 
-  private handleBoardClick(word: string) {
-    console.log('click', word);
-
-    this.gameModel.playAudio(word);
-  }
+  private handleCardClick: (word: string) => void = async (word) => {
+    await this.gameModel.playAudio(word);
+  };
 }
 
 export default GameController;
