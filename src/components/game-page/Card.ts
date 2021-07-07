@@ -138,8 +138,4 @@ export default class Card extends Component {
     this.removeCardClickListener();
     this.addEventListeners();
   }
-
-  reset(): void {
-    this.element.classList.remove(Constants.CSSClasses.cardRight);
-  }
 }

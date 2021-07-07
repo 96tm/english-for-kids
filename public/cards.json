@@ -298,5 +298,99 @@
       "image": "img/laugh.jpg",
       "audioSrc": "audio/laugh.mp3"
     }
+  ],
+  "Sports": [
+    {
+      "word": "swimming",
+      "translation": "плавание",
+      "image": "img/swimming.jpg",
+      "audioSrc": "audio/swimming.mp3"
+    },
+    {
+      "word": "basketball",
+      "translation": "баскетбол",
+      "image": "img/basketball.jpg",
+      "audioSrc": "audio/basketball.mp3"
+    },
+    {
+      "word": "football",
+      "translation": "регби",
+      "image": "img/football.jpg",
+      "audioSrc": "audio/football.mp3"
+    },
+    {
+      "word": "tennis",
+      "translation": "теннис",
+      "image": "img/tennis.jpg",
+      "audioSrc": "audio/tennis.mp3"
+    },
+    {
+      "word": "volleyball",
+      "translation": "волейбол",
+      "image": "img/volleyball.jpg",
+      "audioSrc": "audio/volleyball.mp3"
+    },
+    {
+      "word": "soccer",
+      "translation": "футбол",
+      "image": "img/soccer.jpg",
+      "audioSrc": "audio/soccer.mp3"
+    },
+    {
+      "word": "skiing",
+      "translation": "лыжный спорт",
+      "image": "img/skiing.jpg",
+      "audioSrc": "audio/skiing.mp3"
+    }
+  ],
+  "Colors": [
+    {
+      "word": "red",
+      "translation": "красный",
+      "image": "img/red.jpg",
+      "audioSrc": "audio/red.mp3"
+    },
+    {
+      "word": "orange",
+      "translation": "оранжевый",
+      "image": "img/orange.jpg",
+      "audioSrc": "audio/orange.mp3"
+    },
+    {
+      "word": "yellow",
+      "translation": "желтый",
+      "image": "img/yellow.jpg",
+      "audioSrc": "audio/yellow.mp3"
+    },
+    {
+      "word": "green",
+      "translation": "зеленый",
+      "image": "img/green.jpg",
+      "audioSrc": "audio/green.mp3"
+    },
+    {
+      "word": "blue",
+      "translation": "голубой",
+      "image": "img/blue.jpg",
+      "audioSrc": "audio/blue.mp3"
+    },
+    {
+      "word": "indigo",
+      "translation": "синий",
+      "image": "img/indigo.jpg",
+      "audioSrc": "audio/indigo.mp3"
+    },
+    {
+      "word": "violet",
+      "translation": "фиолетовый",
+      "image": "img/violet.jpg",
+      "audioSrc": "audio/violet.mp3"
+    },
+    {
+      "word": "white",
+      "translation": "белый",
+      "image": "img/white.jpg",
+      "audioSrc": "audio/white.mp3"
+    }
   ]
 }
