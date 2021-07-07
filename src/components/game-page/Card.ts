@@ -28,6 +28,10 @@ export default class Card extends Component {
 
   translation: string;
 
+  frontTextPanel: IComponent;
+
+  backTextPanel: IComponent;
+
   constructor(
     global: Window,
     rootComponent: IComponent,
@@ -51,7 +55,10 @@ export default class Card extends Component {
       [Constants.CSSClasses.cardFrontImage],
       { src: image, alt: Constants.Labels.wordIllustration }
     );
-    this.frontText = new Component(global, this.front, 'div', [
+    this.frontTextPanel = new Component(global, this.front, 'div', [
+      Constants.CSSClasses.cardFrontTextPanel,
+    ]);
+    this.frontText = new Component(global, this.frontTextPanel, 'div', [
       Constants.CSSClasses.cardFrontText,
     ]);
     this.back = new Component(global, this.inner, 'div', [
@@ -64,7 +71,10 @@ export default class Card extends Component {
       [Constants.CSSClasses.cardBackImage],
       { src: image, alt: Constants.Labels.wordIllustration }
     );
-    this.backText = new Component(global, this.back, 'div', [
+    this.backTextPanel = new Component(global, this.back, 'div', [
+      Constants.CSSClasses.cardBackTextPanel,
+    ]);
+    this.backText = new Component(global, this.backTextPanel, 'div', [
       Constants.CSSClasses.cardBackText,
     ]);
     this.overlay = new Component(global, this, 'div', [
@@ -72,7 +82,7 @@ export default class Card extends Component {
     ]);
     this.backText.textContent = word;
     this.frontText.textContent = translation;
-    this.buttonTurn = new Component(global, this.backText, 'button', [
+    this.buttonTurn = new Component(global, this.backTextPanel, 'button', [
       Constants.CSSClasses.cardButtonTurn,
     ]);
     this.addEventListeners();
@@ -90,10 +100,6 @@ export default class Card extends Component {
     this.element.removeEventListener('click', this.handleCardClick);
   }
 
-  private handleButtonTurnClick: () => void = () => {
-    this.element.classList.add(Constants.CSSClasses.animated);
-  };
-
   private handleMouseLeave: () => void = () => {
     this.element.classList.remove(Constants.CSSClasses.animated);
   };
@@ -102,6 +108,8 @@ export default class Card extends Component {
     const target = event.target as HTMLElement;
     if (target !== this.buttonTurn.element) {
       Events.cardClick.emit(this.word);
+    } else {
+      this.element.classList.add(Constants.CSSClasses.animated);
     }
   };
 
@@ -118,18 +126,20 @@ export default class Card extends Component {
   }
 
   setPlayMode(): void {
-    this.buttonTurn.element.classList.add(Constants.CSSClasses.hidden);
-    this.backText.textContent = '';
-    this.frontText.textContent = '';
+    this.element.classList.remove(Constants.CSSClasses.cardRight);
+    this.element.classList.add(Constants.CSSClasses.cardFull);
     this.removeEventListeners();
     this.addCardClickListener();
   }
 
   setTrainMode(): void {
-    this.buttonTurn.element.classList.remove(Constants.CSSClasses.hidden);
-    this.backText.textContent = this.word;
-    this.frontText.textContent = this.translation;
+    this.element.classList.remove(Constants.CSSClasses.cardRight);
+    this.element.classList.remove(Constants.CSSClasses.cardFull);
     this.removeCardClickListener();
     this.addEventListeners();
+  }
+
+  reset(): void {
+    this.element.classList.remove(Constants.CSSClasses.cardRight);
   }
 }

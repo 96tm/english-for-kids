@@ -15,10 +15,15 @@ export default class GamePage extends Component {
     super(global, rootComponent, 'div', [Constants.CSSClasses.gamePageWrap]);
     this.gameBoard = new GameBoard(global, this);
     this.gameButton = new GameButton(global, this);
+    Events.gameStopped.add(this.handleGameStopped);
   }
 
   addCards(cards: ICard[]): void {
     (this.gameBoard as GameBoard).addCards(cards);
     Events.cardsLoad.emit();
   }
+
+  private handleGameStopped: () => void = () => {
+    (this.gameButton as GameButton).setButtonStart();
+  };
 }

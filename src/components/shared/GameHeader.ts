@@ -15,14 +15,10 @@ export default class GameHeader extends Component {
     super(global, rootComponent, 'header', [Constants.CSSClasses.gameHeader]);
     this.headerScore = new GameHeaderScore(global, this);
     this.modeButton = new GameHeaderModeButton(global, this);
-    Events.routeChange.add(this.handleRouteChange.bind(this));
+    Events.gameStopped.add(this.handleGameStopped);
   }
 
-  private handleRouteChange(route: string): void {
-    if (route !== Constants.Labels.gameRoute) {
-      this.headerScore.element.classList.add(Constants.CSSClasses.hidden);
-    } else {
-      this.headerScore.element.classList.remove(Constants.CSSClasses.hidden);
-    }
-  }
+  private handleGameStopped: () => void = () => {
+    this.headerScore.element.innerHTML = '';
+  };
 }

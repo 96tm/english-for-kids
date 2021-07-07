@@ -16,6 +16,8 @@ const cardGuess = new Signal<boolean, void>();
 const gameFinished = new Signal<void, void>();
 const cardsLoad = new Signal<void, void>();
 const finishScreenShow = new Signal<IGameFinishedRecord, void>();
+const gameStopped = new Signal<void, void>();
+const gameStarted = new Signal<void, void>();
 
 const Events = {
   menuClick,
@@ -32,6 +34,8 @@ const Events = {
   gameFinished,
   cardsLoad,
   finishScreenShow,
+  gameStopped,
+  gameStarted,
 };
 
 export default Events;

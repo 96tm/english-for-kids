@@ -62,9 +62,15 @@ export default class GameModel {
     const numberOfWrongGuesses =
       this.numberOfGuesses - this.numberOfRightGuesses;
     if (numberOfWrongGuesses) {
-      return `${numberOfWrongGuesses} errors`;
+      return `${numberOfWrongGuesses} error${
+        numberOfWrongGuesses === 1 ? '' : 's'
+      }`;
     }
     return Constants.Labels.winMessage;
+  }
+
+  get isFinished(): boolean {
+    return this.numberOfRightGuesses === this.boardModel.cards.length;
   }
 
   async playAudio(word: string): Promise<void> {
@@ -81,7 +87,6 @@ export default class GameModel {
       const promise = this.playAudioByIndex(this.currentIndex);
       return promise;
     }
-    Events.gameFinished.emit();
     return Promise.resolve();
   }
 
@@ -97,6 +102,7 @@ export default class GameModel {
     this.currentIndex = 0;
     this.numberOfGuesses = 0;
     this.numberOfRightGuesses = 0;
+    Events.gameStopped.emit();
   }
 
   async repeat(): Promise<void> {

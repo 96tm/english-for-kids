@@ -21,15 +21,13 @@ export default class GameHeaderScore extends Component {
   };
 
   addStarRight: () => void = () => {
-    const star = new Component(this.global, this, 'div', [
+    this.append('div', [
       Constants.CSSClasses.gameHeaderScoreStar,
       Constants.CSSClasses.checked,
     ]);
   };
 
   addStarWrong: () => void = () => {
-    const star = new Component(this.global, this, 'div', [
-      Constants.CSSClasses.gameHeaderScoreStar,
-    ]);
+    this.append('div', [Constants.CSSClasses.gameHeaderScoreStar]);
   };
 }

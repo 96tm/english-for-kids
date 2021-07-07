@@ -3,7 +3,7 @@ const NUMBER_OF_STARS = 3;
 const SCHOOL_LINK = 'https://rs.school/js';
 const NUMBER_OF_CARDS = 8;
 const NUMBER_OF_CATEGORIES = 8;
-const FINISH_SCREEN_DURATION = 1500;
+const FINISH_SCREEN_DURATION = 2000;
 
 const CSSClasses = {
   root: 'root',
@@ -32,12 +32,15 @@ const CSSClasses = {
   gameButtonRepeat: 'button-game-repeat',
 
   card: 'card',
+  cardFull: 'card-full',
   cardInner: 'card__inner',
   cardFront: 'card__front',
   cardFrontImage: 'card__image-front',
+  cardFrontTextPanel: 'card__text-panel-front',
   cardFrontText: 'card__text-front',
   cardBack: 'card__back',
   cardBackImage: 'card__image-back',
+  cardBackTextPanel: 'card__text-panel-back',
   cardBackText: 'card__text-back',
   cardOverlay: 'card__overlay',
   cardButtonTurn: 'card__button-turn',

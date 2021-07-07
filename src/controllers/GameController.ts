@@ -26,11 +26,21 @@ export default class GameController extends Controller {
     Events.gameButtonClick.add(this.handleGameButtonClick);
     Events.cardsLoad.add(this.handleCardsLoad);
     Events.gameFinished.add(this.handleGameFinished);
+    Events.gameStopped.add(this.handleGameStopped);
+    Events.routeChange.add(this.handleRouteChange);
   }
 
   async init(): Promise<void> {
     await this.gameModel.setCategories();
   }
+
+  private handleRouteChange: () => void = () => {
+    this.gameModel.stop();
+  };
+
+  private handleGameStopped: () => void = () => {
+    this.setCardComponents(this.gameModel.mode);
+  };
 
   private handleGameFinished: () => Promise<void> = async () => {
     Events.finishScreenShow.emit({
@@ -53,17 +63,21 @@ export default class GameController extends Controller {
     if (this.gameModel.mode === GameMode.train) {
       await this.gameModel.playAudio(word);
     } else if (this.gameModel.status === GameStatus.active) {
+      this.gameModel.numberOfGuesses += 1;
       if (this.checkWord(word)) {
         ((this.component as GamePage).gameBoard as GameBoard)
           .getCard(word)
           .markAsRight();
         this.gameModel.numberOfRightGuesses += 1;
         Events.cardGuess.emit(true);
-        this.gameModel.playNextWord();
+        if (this.gameModel.isFinished) {
+          Events.gameFinished.emit();
+        } else {
+          this.gameModel.playNextWord();
+        }
       } else {
         Events.cardGuess.emit(false);
       }
-      this.gameModel.numberOfGuesses += 1;
     }
   };
 
@@ -89,6 +103,9 @@ export default class GameController extends Controller {
   private handleGameModeChange: (mode: GameMode) => void = (mode) => {
     this.gameModel.mode = mode;
     this.setCardComponents(mode);
+    if (this.gameModel.mode === GameMode.train) {
+      this.gameModel.stop();
+    }
   };
 
   private handleCardsLoad: () => void = () => {
