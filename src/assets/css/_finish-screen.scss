@@ -1,0 +1,36 @@
+$finish-screen-background: #fff;
+
+.finish-screen {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: $finish-screen-background;
+  z-index: calc(#{$max-z-index} - 1);
+}
+
+.finish-screen::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: no-repeat url('../icons/smile.svg');
+  background-size: 50% 50%;
+  background-position: center;
+  z-index: $max-z-index;
+}
+
+.finish-screen-lose::before {
+  background: no-repeat url('../icons/sad.svg');
+  background-position: center;
+  background-size: 50% 50%;
+}
+
+.finish-screen__message {
+  padding-top: 5%;
+  color: red;
+  font-size: 4rem;
+}

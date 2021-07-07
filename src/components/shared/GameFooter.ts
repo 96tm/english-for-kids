@@ -4,7 +4,7 @@ import IComponent from '../IComponent';
 import Constants from '../../util/constants';
 import AttributeRecord from '../../util/AttributeRecord';
 
-class GameFooter extends Component {
+export default class GameFooter extends Component {
   footerItems: IComponent;
 
   items: IComponent[] = [];
@@ -35,5 +35,3 @@ class GameFooter extends Component {
     return item;
   }
 }
-
-export default GameFooter;

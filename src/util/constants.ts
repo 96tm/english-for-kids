@@ -3,6 +3,7 @@ const NUMBER_OF_STARS = 3;
 const SCHOOL_LINK = 'https://rs.school/js';
 const NUMBER_OF_CARDS = 8;
 const NUMBER_OF_CATEGORIES = 8;
+const FINISH_SCREEN_DURATION = 1500;
 
 const CSSClasses = {
   root: 'root',
@@ -13,6 +14,9 @@ const CSSClasses = {
   category: 'category',
   categoryLink: 'category-link',
   categoryImage: 'category-image',
+  finishScreen: 'finish-screen',
+  finishScreenLose: 'finish-screen-lose',
+  finishScreenMessage: 'finish-screen__message',
 
   gameMenuToggleCheckbox: 'game-menu-toggle-checkbox',
   gameMenuToggleButton: 'game-menu-toggle-bar-wrap',
@@ -25,6 +29,7 @@ const CSSClasses = {
   gameButtonWrap: 'button-game-wrap',
   gameButton: 'button-game',
   gameButtonText: 'button-game__text',
+  gameButtonRepeat: 'button-game-repeat',
 
   card: 'card',
   cardInner: 'card__inner',
@@ -36,6 +41,7 @@ const CSSClasses = {
   cardBackText: 'card__text-back',
   cardOverlay: 'card__overlay',
   cardButtonTurn: 'card__button-turn',
+  cardRight: 'card-right',
 
   gameMenu: 'game-menu',
   gameMenuTitle: 'game-menu__title',
@@ -66,6 +72,7 @@ const CSSClasses = {
   hidden: 'hidden',
   active: 'active',
   animated: 'animated',
+  noClicks: 'no-clicks',
 };
 
 const Labels = {
@@ -76,6 +83,7 @@ const Labels = {
   mainMenu: 'Main Page',
   gameRoute: 'game',
   wordIllustration: 'Word illustration',
+  winMessage: 'Win!',
 };
 
 const Constants = {
@@ -86,6 +94,7 @@ const Constants = {
   SCHOOL_LINK,
   NUMBER_OF_CARDS,
   NUMBER_OF_CATEGORIES,
+  FINISH_SCREEN_DURATION,
 };
 
 export default Constants;

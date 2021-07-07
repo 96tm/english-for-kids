@@ -13,8 +13,6 @@ export default class BoardModel {
     const categories = await fetch('../../cards.json').then((response) =>
       response.json()
     );
-    console.log(category, categories, categories[category]);
-
     this.cards = [];
     const cards: ICard[] = categories[category];
     cards.forEach((card) => {
@@ -25,5 +23,9 @@ export default class BoardModel {
 
   getCard(word: string): ICard {
     return this.cards.find((card) => card.word === word) as ICard;
+  }
+
+  shuffleCards(): void {
+    this.cards.sort(() => (Math.random() >= 0.5 ? 1 : -1));
   }
 }

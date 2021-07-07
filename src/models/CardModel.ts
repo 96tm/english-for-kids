@@ -12,6 +12,15 @@ export default class CardModel {
 
   async playAudio(): Promise<void> {
     this.audio.currentTime = 0;
-    this.audio.play();
+    return new Promise((resolve) => {
+      this.audio.addEventListener(
+        'ended',
+        () => {
+          resolve();
+        },
+        { once: true }
+      );
+      this.audio.play();
+    });
   }
 }

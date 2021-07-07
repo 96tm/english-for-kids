@@ -2,24 +2,40 @@ import Controller from './Controller';
 import IComponent from '../components/IComponent';
 import ContainerPage from '../pages/ContainerPage';
 import Events from '../util/Events';
+import Constants from '../util/constants';
+import FinishScreen from '../components/game-page/FinishScreen';
+import IGameFinishedRecord from '../models/IGameFinishedRecord';
 
-class ContainerController extends Controller {
+export default class ContainerController extends Controller {
   component: IComponent;
 
-  constructor(global: Window, rootComponent: IComponent | null) {
+  constructor(private global: Window, rootComponent: IComponent | null) {
     super();
     this.component = new ContainerPage(global, rootComponent);
-    Events.menuClick.add(this.handleMenuClick.bind(this));
+    Events.menuClick.add(this.handleMenuClick);
+    Events.finishScreenShow.add(this.showFinishScreen);
   }
 
-  private handleMenuClick(menuItem: string): void {
+  private handleMenuClick: (menuItem: string) => void = (menuItem) => {
     const { gameMenu } = this.component as ContainerPage;
     gameMenu.setActiveMenuItem(menuItem);
-  }
+  };
 
   async init(): Promise<void> {
     ((await this.component) as ContainerPage).init();
   }
-}
 
-export default ContainerController;
+  showFinishScreen: ({ message, isWin }: IGameFinishedRecord) => Promise<void> =
+    async ({ message, isWin }) => {
+      const screen = new FinishScreen(
+        this.global,
+        this.component.rootComponent as IComponent,
+        message,
+        isWin
+      );
+      await new Promise((resolve) => {
+        setTimeout(resolve, Constants.FINISH_SCREEN_DURATION);
+      });
+      screen.remove();
+    };
+}

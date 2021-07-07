@@ -12,7 +12,6 @@
   border-radius: 50%;
   border: none;
   cursor: pointer;
-
   .button-game__text {
     text-transform: uppercase;
     color: #fff;
@@ -23,15 +22,14 @@
 
   &:hover {
     transform: scale(1.1);
-    transition: all 0.7s;
   }
+}
 
-  &.train {
-    background: $button-green-color center url('../icons/icon-repeat.svg')
-      no-repeat;
+.button-game-repeat {
+  background: $button-green-color center url('../icons/icon-repeat.svg')
+    no-repeat;
 
-    .button-game__text {
-      display: none;
-    }
+  .button-game__text {
+    opacity: 0;
   }
 }

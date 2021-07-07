@@ -4,8 +4,9 @@ import Constants from '../util/constants';
 import GameButton from '../components/game-page/GameButton';
 import GameBoard from '../components/game-page/GameBoard';
 import ICard from '../models/ICard';
+import Events from '../util/Events';
 
-class GamePage extends Component {
+export default class GamePage extends Component {
   gameBoard: IComponent;
 
   gameButton: IComponent;
@@ -18,7 +19,6 @@ class GamePage extends Component {
 
   addCards(cards: ICard[]): void {
     (this.gameBoard as GameBoard).addCards(cards);
+    Events.cardsLoad.emit();
   }
 }
-
-export default GamePage;

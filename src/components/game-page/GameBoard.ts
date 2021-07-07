@@ -13,6 +13,10 @@ class GameBoard extends Component {
     super(global, rootComponent, 'div', [Constants.CSSClasses.gameBoard]);
   }
 
+  getCard(word: string): Card {
+    return this.cards.find((card) => (card as Card).word === word) as Card;
+  }
+
   addCards(cardModels: ICard[]): void {
     this.cards = [];
     this.element.innerHTML = '';

@@ -2,8 +2,10 @@ import Component from '../Component';
 import IComponent from '../IComponent';
 
 import Constants from '../../util/constants';
+import Events from '../../util/Events';
+import GameMode from '../../models/GameMode';
 
-class GameHeaderModeButton extends Component {
+export default class GameHeaderModeButton extends Component {
   checkbox: IComponent;
 
   modeButton: IComponent;
@@ -33,9 +35,26 @@ class GameHeaderModeButton extends Component {
       Constants.CSSClasses.gameHeaderModePlay,
     ]);
     modePlay.textContent = Constants.Labels.play;
-
     this.modeButton.append('div', [Constants.CSSClasses.gameHeaderModeCircle]);
+    this.addEventListeners();
   }
-}
 
-export default GameHeaderModeButton;
+  private addEventListeners(): void {
+    this.checkbox.element.addEventListener(
+      'change',
+      this.handleModeButtonClick
+    );
+  }
+
+  private removeEventListeners(): void {
+    this.checkbox.element.removeEventListener(
+      'change',
+      this.handleModeButtonClick
+    );
+  }
+
+  private handleModeButtonClick: () => void = () => {
+    const { checked } = this.checkbox.element as HTMLInputElement;
+    Events.gameModeChange.emit(checked ? GameMode.play : GameMode.train);
+  };
+}

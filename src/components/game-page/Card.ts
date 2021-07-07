@@ -79,19 +79,13 @@ export default class Card extends Component {
   }
 
   addEventListeners(): void {
-    this.buttonTurn.element.addEventListener(
-      'click',
-      this.handleButtonTurnClick
-    );
+    this.addCardClickListener();
     this.element.addEventListener('mouseleave', this.handleMouseLeave);
     this.element.addEventListener('click', this.handleCardClick);
   }
 
   removeEventListeners(): void {
-    this.buttonTurn.element.removeEventListener(
-      'click',
-      this.handleButtonTurnClick
-    );
+    this.removeCardClickListener();
     this.element.removeEventListener('mouseleave', this.handleMouseLeave);
     this.element.removeEventListener('click', this.handleCardClick);
   }
@@ -110,4 +104,32 @@ export default class Card extends Component {
       Events.cardClick.emit(this.word);
     }
   };
+
+  private addCardClickListener(): void {
+    this.element.addEventListener('click', this.handleCardClick);
+  }
+
+  private removeCardClickListener(): void {
+    this.element.removeEventListener('click', this.handleCardClick);
+  }
+
+  markAsRight(): void {
+    this.element.classList.add(Constants.CSSClasses.cardRight);
+  }
+
+  setPlayMode(): void {
+    this.buttonTurn.element.classList.add(Constants.CSSClasses.hidden);
+    this.backText.textContent = '';
+    this.frontText.textContent = '';
+    this.removeEventListeners();
+    this.addCardClickListener();
+  }
+
+  setTrainMode(): void {
+    this.buttonTurn.element.classList.remove(Constants.CSSClasses.hidden);
+    this.backText.textContent = this.word;
+    this.frontText.textContent = this.translation;
+    this.removeCardClickListener();
+    this.addEventListeners();
+  }
 }

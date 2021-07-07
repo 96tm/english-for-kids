@@ -5,7 +5,7 @@ import Constants from '../../util/constants';
 import AttributeRecord from '../../util/AttributeRecord';
 import Events from '../../util/Events';
 
-class GameMenu extends Component {
+export default class GameMenu extends Component {
   menuTitle: IComponent;
 
   menuItemsWrap: Component;
@@ -107,5 +107,3 @@ class GameMenu extends Component {
     return link;
   }
 }
-
-export default GameMenu;

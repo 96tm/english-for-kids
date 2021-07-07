@@ -2,7 +2,7 @@ import Controller from './Controller';
 import IComponent from '../components/IComponent';
 import MainPage from '../pages/MainPage';
 
-class MainPageController extends Controller {
+export default class MainPageController extends Controller {
   component: IComponent;
 
   constructor(global: Window, rootComponent: IComponent | null) {
@@ -14,5 +14,3 @@ class MainPageController extends Controller {
     await (this.component as MainPage).init();
   }
 }
-
-export default MainPageController;

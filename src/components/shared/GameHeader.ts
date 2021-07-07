@@ -6,7 +6,7 @@ import GameHeaderModeButton from './GameHeaderModeButton';
 import GameHeaderScore from './GameHeaderScore';
 import Events from '../../util/Events';
 
-class GameHeader extends Component {
+export default class GameHeader extends Component {
   headerScore: IComponent;
 
   modeButton: IComponent;
@@ -26,5 +26,3 @@ class GameHeader extends Component {
     }
   }
 }
-
-export default GameHeader;

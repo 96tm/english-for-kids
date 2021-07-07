@@ -3,7 +3,7 @@ import IComponent from '../IComponent';
 
 import Constants from '../../util/constants';
 
-class GameMenuToggleButton extends Component {
+export default class GameMenuToggleButton extends Component {
   constructor(global: Window, rootComponent: IComponent) {
     super(global, rootComponent, 'div', [
       Constants.CSSClasses.gameMenuToggleButton,
@@ -11,5 +11,3 @@ class GameMenuToggleButton extends Component {
     this.append('div', [Constants.CSSClasses.gameMenuToggleBar]);
   }
 }
-
-export default GameMenuToggleButton;
