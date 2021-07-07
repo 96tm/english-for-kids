@@ -15,7 +15,7 @@ $login-button-width: 248px;
   line-height: 1.625rem;
   color: #fff;
   background: linear-gradient(180deg, #0099ae 0%, #00bf82 100%);
-
+  transition: 0.7s;
   .game-menu__items {
     display: flex;
     flex-direction: column;

@@ -1,4 +1,6 @@
-export default class CardModel {
+import ICard from './ICard';
+
+export default class CardModel implements ICard {
   audio: HTMLAudioElement;
 
   constructor(
@@ -10,7 +12,7 @@ export default class CardModel {
     this.audio = new Audio(`../public/${this.audioSrc}`);
   }
 
-  async playAudio(): Promise<void> {
+  async playCardAudio(): Promise<void> {
     this.audio.currentTime = 0;
     return new Promise((resolve) => {
       this.audio.addEventListener(

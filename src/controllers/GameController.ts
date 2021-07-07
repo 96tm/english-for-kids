@@ -9,6 +9,7 @@ import Card from '../components/game-page/Card';
 import GameButton from '../components/game-page/GameButton';
 import Constants from '../util/constants';
 import GameStatus from '../models/GameStatus';
+import RouterService from '../util/RouterService';
 
 export default class GameController extends Controller {
   component: IComponent;
@@ -18,7 +19,7 @@ export default class GameController extends Controller {
   constructor(global: Window, rootComponent: IComponent) {
     super();
     this.component = new GamePage(global, rootComponent);
-    this.gameModel = new GameModel();
+    this.gameModel = new GameModel(global);
     Events.boardClick.add(this.handleCardClick);
     Events.menuClick.add(this.handleMenuClick);
     Events.cardClick.add(this.handleCardClick);
@@ -43,13 +44,19 @@ export default class GameController extends Controller {
   };
 
   private handleGameFinished: () => Promise<void> = async () => {
+    const numberOfWrongGuesses =
+      this.gameModel.numberOfGuesses - this.gameModel.numberOfRightGuesses;
     Events.finishScreenShow.emit({
       message: this.gameModel.createFinishMessage(),
-      isWin:
-        this.gameModel.numberOfGuesses - this.gameModel.numberOfRightGuesses ===
-        0,
+      isWin: numberOfWrongGuesses === 0,
     });
+    if (numberOfWrongGuesses) {
+      await this.gameModel.playLose();
+    } else {
+      await this.gameModel.playWin();
+    }
     this.gameModel.stop();
+    RouterService.setHash(Constants.Labels.mainRoute);
   };
 
   private handleMenuClick: (category: string) => Promise<void> = async (
@@ -61,7 +68,7 @@ export default class GameController extends Controller {
 
   private handleCardClick: (word: string) => void = async (word) => {
     if (this.gameModel.mode === GameMode.train) {
-      await this.gameModel.playAudio(word);
+      await this.gameModel.playCardAudio(word);
     } else if (this.gameModel.status === GameStatus.active) {
       this.gameModel.numberOfGuesses += 1;
       if (this.checkWord(word)) {
@@ -69,16 +76,21 @@ export default class GameController extends Controller {
           .getCard(word)
           .markAsRight();
         this.gameModel.numberOfRightGuesses += 1;
+        await this.gameModel.playCorrect();
         Events.cardGuess.emit(true);
         if (this.gameModel.isFinished) {
+          console.log('finished');
+
           Events.gameFinished.emit();
         } else {
-          this.gameModel.playNextWord();
+          await this.gameModel.playNextWord();
         }
       } else {
+        await this.gameModel.playWrong();
         Events.cardGuess.emit(false);
       }
     }
+    Events.boardEnabled.emit();
   };
 
   private checkWord(word: string): boolean {

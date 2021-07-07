@@ -5,6 +5,7 @@ import GameMenuToggleButton from '../components/shared/GameMenuToggleButton';
 import GameMenu from '../components/shared/GameMenu';
 import GameHeader from '../components/shared/GameHeader';
 import GameFooter from '../components/shared/GameFooter';
+import Events from '../util/Events';
 
 export default class ContainerPage extends Component {
   gameToggleCheckbox: IComponent;
@@ -40,9 +41,33 @@ export default class ContainerPage extends Component {
       Constants.CSSClasses.contentWrap,
     ]);
     this.footer = new GameFooter(global, this.innerContainer);
+    Events.routeChange.add(this.handleRouteChange);
+    this.addEventListeners();
   }
 
   async init(): Promise<void> {
     await this.gameMenu.init();
   }
+
+  addEventListeners(): void {
+    this.element.addEventListener('click', this.handleClick);
+  }
+
+  removeEventListeners(): void {
+    this.element.removeEventListener('click', this.handleClick);
+  }
+
+  private handleRouteChange: (route: string) => void = (route) => {
+    (this.gameToggleCheckbox.element as HTMLInputElement).checked = false;
+  };
+
+  handleClick: (event: MouseEvent) => void = (event) => {
+    const target = event.target as HTMLElement;
+    if (
+      !target.closest(`.${Constants.CSSClasses.gameMenu}`) &&
+      target !== this.gameToggleCheckbox.element
+    ) {
+      (this.gameToggleCheckbox.element as HTMLInputElement).checked = false;
+    }
+  };
 }

@@ -11,9 +11,12 @@ const CSSClasses = {
   innerContainer: 'inner-container',
   contentWrap: 'content-wrap',
   categoriesWrap: 'categories-wrap',
+  categoryWrap: 'category-wrap',
   category: 'category',
   categoryLink: 'category-link',
   categoryImage: 'category-image',
+  categoryImageWrap: 'category-image-wrap',
+  categoryText: 'category-text',
   finishScreen: 'finish-screen',
   finishScreenLose: 'finish-screen-lose',
   finishScreenMessage: 'finish-screen__message',
@@ -64,6 +67,7 @@ const CSSClasses = {
   gameHeaderModeTrain: 'game-header-mode__train',
   gameHeaderModePlay: 'game-header-mode__play',
   gameHeaderModeCircle: 'game-header-mode__circle',
+  gameHeaderHeading: 'game-header__heading',
 
   footer: 'footer',
   footerItems: 'footer__items',
@@ -85,6 +89,7 @@ const Labels = {
   start: 'Start',
   mainMenu: 'Main Page',
   gameRoute: 'game',
+  mainRoute: 'main',
   wordIllustration: 'Word illustration',
   winMessage: 'Win!',
 };

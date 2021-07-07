@@ -18,23 +18,25 @@ export default class MainPage extends Component {
     Object.keys(categories).forEach((key) => {
       const randomIndex = Math.floor(Math.random() * categories[key].length);
       const { image } = categories[key][randomIndex];
-      const action = this.addOneCategory(key, image);
-      action.textContent = key;
+      this.addOneCategory(key, image);
     });
     this.addEventListeners();
   }
 
-  addOneCategory(name: string, image: string): IComponent {
+  addOneCategory(name: string, image: string): void {
     const category = new Category(this.global, this, name, image);
     this.categories.push(category);
-    return category;
   }
 
   addEventListeners(): void {
     this.element.addEventListener('click', (event) => {
       const target = event.target as HTMLElement;
-      if (target.classList.contains(Constants.CSSClasses.categoryLink)) {
-        Events.menuClick.emit(target.dataset.categoryLinkTitle as string);
+      const wrap = target.closest(`.${Constants.CSSClasses.categoryWrap}`);
+      if (wrap) {
+        const link = wrap.querySelector(
+          `.${Constants.CSSClasses.categoryLink}`
+        ) as HTMLElement;
+        Events.menuClick.emit(link.dataset.categoryLinkTitle as string);
       }
     });
   }

@@ -26,6 +26,11 @@ $card-right-opacity: 0.4;
   }
 }
 
+.card__image-front,
+.card__image-back {
+  cursor: pointer;
+}
+
 .card-right {
   pointer-events: none;
   opacity: $card-right-opacity;

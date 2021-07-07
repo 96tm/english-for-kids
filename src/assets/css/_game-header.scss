@@ -5,12 +5,19 @@ $header-padding-top: 18px;
 $mode-button-border-radius: 21px;
 
 .game-header {
+  position: relative;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   margin-bottom: $header-margin;
   padding-top: $header-padding-top;
-
+  .game-header__heading {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 700;
+    font-size: 2rem;
+  }
   .game-header__mode-wrap {
     width: $mode-checkbox-width;
     height: $mode-checkbox-height;
@@ -18,7 +25,6 @@ $mode-button-border-radius: 21px;
     border-radius: $mode-button-border-radius;
     display: flex;
     align-items: center;
-
     .game-header-mode__play,
     .game-header-mode__train {
       width: 50%;
@@ -28,24 +34,20 @@ $mode-button-border-radius: 21px;
       line-height: 0.8rem;
       color: #fff;
     }
-
     .game-header-mode__train {
       margin-left: 11px;
     }
-
     .game-header-mode__play {
       opacity: 0;
       margin-right: 11px;
       text-align: right;
     }
-
     .game-header__mode {
       @extend .game-header__mode-wrap;
       position: absolute;
       background: $green-color;
       transition: 1s all;
       display: flex;
-
       .game-header-mode__circle {
         width: $mode-circle-diameter;
         height: $mode-circle-diameter;

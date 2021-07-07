@@ -9,6 +9,8 @@ import Constants from '../util/constants';
 export default class GameModel {
   static START_DELAY = 1000;
 
+  private audio: HTMLAudioElement;
+
   boardModel: BoardModel;
 
   _mode: GameMode = GameMode.train;
@@ -27,8 +29,41 @@ export default class GameModel {
 
   numberOfGuesses = 0;
 
-  constructor() {
+  constructor(private global: Window) {
     this.boardModel = new BoardModel();
+    this.audio = this.global.document.createElement('audio');
+  }
+
+  async playAudio(
+    src: string,
+    audio: HTMLAudioElement = this.audio
+  ): Promise<void> {
+    audio.setAttribute('src', src);
+    audio.setAttribute('currentTime', '0');
+    return new Promise((resolve) => {
+      audio.addEventListener('ended', () => resolve(), { once: true });
+      audio.play();
+    });
+  }
+
+  async playCorrect(): Promise<void> {
+    this.playAudio('../audio/correct.mp3');
+  }
+
+  async playWrong(): Promise<void> {
+    this.playAudio('../audio/wrong.mp3');
+  }
+
+  async playWin(): Promise<void> {
+    const audio = this.global.document.createElement('audio');
+    await this.playAudio('../audio/win.mp3', audio);
+    audio.remove();
+  }
+
+  async playLose(): Promise<void> {
+    const audio = this.global.document.createElement('audio');
+    this.playAudio('../audio/lose.mp3', audio);
+    audio.remove();
   }
 
   async setActiveCategory(category: string): Promise<ICard[]> {
@@ -73,18 +108,18 @@ export default class GameModel {
     return this.numberOfRightGuesses === this.boardModel.cards.length;
   }
 
-  async playAudio(word: string): Promise<void> {
-    return (this.boardModel.getCard(word) as CardModel).playAudio();
+  async playCardAudio(word: string): Promise<void> {
+    return (this.boardModel.getCard(word) as CardModel).playCardAudio();
   }
 
-  async playAudioByIndex(index: number): Promise<void> {
-    return (this.boardModel.cards[index] as CardModel).playAudio();
+  async playCardAudioByIndex(index: number): Promise<void> {
+    return (this.boardModel.cards[index] as CardModel).playCardAudio();
   }
 
   async playNextWord(): Promise<void> {
     if (this.currentIndex < this.boardModel.cards.length - 1) {
       this.currentIndex += 1;
-      const promise = this.playAudioByIndex(this.currentIndex);
+      const promise = this.playCardAudioByIndex(this.currentIndex);
       return promise;
     }
     return Promise.resolve();
@@ -94,7 +129,7 @@ export default class GameModel {
     this.status = GameStatus.active;
     this.boardModel.shuffleCards();
     await new Promise((res) => setTimeout(res, GameModel.START_DELAY));
-    return this.playAudioByIndex(0);
+    return this.playCardAudioByIndex(0);
   }
 
   stop(): void {
@@ -106,6 +141,6 @@ export default class GameModel {
   }
 
   async repeat(): Promise<void> {
-    return this.playAudioByIndex(this.currentIndex);
+    return this.playCardAudioByIndex(this.currentIndex);
   }
 }

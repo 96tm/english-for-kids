@@ -5,6 +5,7 @@ import GameButton from '../components/game-page/GameButton';
 import GameBoard from '../components/game-page/GameBoard';
 import ICard from '../models/ICard';
 import Events from '../util/Events';
+import Card from '../components/game-page/Card';
 
 export default class GamePage extends Component {
   gameBoard: IComponent;
@@ -16,12 +17,26 @@ export default class GamePage extends Component {
     this.gameBoard = new GameBoard(global, this);
     this.gameButton = new GameButton(global, this);
     Events.gameStopped.add(this.handleGameStopped);
+    Events.boardDisabled.add(this.handleBoardDisabled);
+    Events.boardEnabled.add(this.handleBoardEnabled);
   }
 
   addCards(cards: ICard[]): void {
     (this.gameBoard as GameBoard).addCards(cards);
     Events.cardsLoad.emit();
   }
+
+  private handleBoardEnabled: () => void = () => {
+    (this.gameBoard as GameBoard).cards.forEach((card) => {
+      (card as Card).enable();
+    });
+  };
+
+  private handleBoardDisabled: () => void = () => {
+    (this.gameBoard as GameBoard).cards.forEach((card) => {
+      (card as Card).disable();
+    });
+  };
 
   private handleGameStopped: () => void = () => {
     (this.gameButton as GameButton).setButtonStart();

@@ -1,8 +1,9 @@
 @media (max-width: 1450px) {
-  .card {
+  .card,
+  .category-wrap {
     max-width: initial;
     width: 48%;
-    height: 48%;
+    padding-top: 48%;
   }
 
   .button-game-wrap {
@@ -21,9 +22,8 @@
       transform: translate(-50%, -105%);
     }
   }
-
   .game-header {
-    margin-bottom: calc(#{$button-game-diameter} + 2%);
+    margin-bottom: calc(#{$button-game-diameter} + 5%);
   }
 }
 
@@ -32,7 +32,6 @@
     .game-menu__items {
       align-items: flex-end;
       padding: $menu-items-padding-top 5% 0 0;
-
       .game-menu__login {
         width: 100%;
         padding-left: 5%;
@@ -41,34 +40,35 @@
   }
 }
 
+@media (max-width: 1000px) {
+  .game-header {
+    margin-bottom: calc(#{$button-game-diameter} + 10%);
+  }
+}
+
 @media (max-width: 640px) {
-  .card {
+  .inner-container {
+    width: 100%;
+  }
+  .card,
+  .category-wrap {
     max-width: initial;
     width: $card-width-wide;
     padding-top: $card-width-wide;
   }
   .game-menu {
     position: absolute;
-
     .game-menu__items {
       align-items: flex-end;
       padding: $menu-items-padding-top 5% 0 0;
-
       .game-menu__login {
         width: 100%;
         padding-left: 5%;
       }
     }
   }
-
   .game-header {
     padding-right: 0;
-
-    .game-header__score-wrap {
-      position: absolute;
-      margin: 0;
-      transform: translate(-20%, 200%);
-    }
   }
 
   .page-wrap,
@@ -98,8 +98,7 @@
       margin-left: 0;
       margin-right: calc((70% - min(70%, #{$game-guidelines-width})) / 2);
     }
-    & ~ .page-wrap,
-    & ~ .categories-wrap {
+    & ~ .inner-container {
       display: none;
 
       .button-game-wrap {

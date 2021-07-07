@@ -107,6 +107,7 @@ export default class Card extends Component {
   private handleCardClick: (event: MouseEvent) => void = (event) => {
     const target = event.target as HTMLElement;
     if (target !== this.buttonTurn.element) {
+      Events.boardDisabled.emit();
       Events.cardClick.emit(this.word);
     } else {
       this.element.classList.add(Constants.CSSClasses.animated);
@@ -137,5 +138,13 @@ export default class Card extends Component {
     this.element.classList.remove(Constants.CSSClasses.cardFull);
     this.removeCardClickListener();
     this.addEventListeners();
+  }
+
+  enable(): void {
+    this.addCardClickListener();
+  }
+
+  disable(): void {
+    this.removeCardClickListener();
   }
 }

@@ -12,21 +12,11 @@ body {
 html,
 body,
 .root,
-.container,
 .inner-container,
 .content-wrap,
 .page-wrap,
 .cards {
   height: 100%;
-}
-
-.hidden {
-  display: none;
-}
-
-.no-clicks {
-  pointer-events: none;
-  cursor: pointer;
 }
 
 .container {
@@ -116,4 +106,13 @@ body,
   & ~ .inner-container .button-game-wrap {
     transform: translate(-100%, 0);
   }
+}
+
+.hidden {
+  display: none;
+}
+
+.no-clicks {
+  pointer-events: none;
+  cursor: pointer;
 }

@@ -1,6 +1,5 @@
 import { RoutingTable } from './RoutingTable';
 import Events from './Events';
-import Constants from './constants';
 
 class Router {
   constructor(
@@ -16,6 +15,10 @@ class Router {
       await this.routes[route].show();
       Events.routeChange.emit(route);
     }
+  }
+
+  setHash(hash: string): void {
+    this.global.location.hash = hash;
   }
 
   addRoutes(routes: RoutingTable) {

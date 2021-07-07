@@ -2,12 +2,14 @@ $score-wrap-col-gap: 20px;
 $star-width: 20px;
 
 .game-header__score-wrap {
-  width: 80%;
+  position: absolute;
+  right: 0;
+  width: 100%;
+  transform: translateY(200%);
   height: $star-width;
   display: flex;
   justify-content: flex-end;
   overflow: hidden;
-  margin-right: $score-wrap-col-gap;
   column-gap: $score-wrap-col-gap;
   .game-header__score-star {
     width: $star-width;

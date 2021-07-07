@@ -18,6 +18,8 @@ const cardsLoad = new Signal<void, void>();
 const finishScreenShow = new Signal<IGameFinishedRecord, void>();
 const gameStopped = new Signal<void, void>();
 const gameStarted = new Signal<void, void>();
+const boardDisabled = new Signal<void, void>();
+const boardEnabled = new Signal<void, void>();
 
 const Events = {
   menuClick,
@@ -36,6 +38,8 @@ const Events = {
   finishScreenShow,
   gameStopped,
   gameStarted,
+  boardDisabled,
+  boardEnabled,
 };
 
 export default Events;
