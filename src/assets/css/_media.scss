@@ -22,8 +22,8 @@
       transform: translate(-50%, -105%);
     }
   }
-  .game-header {
-    margin-bottom: calc(#{$button-game-diameter} + 5%);
+  .cards {
+    margin-top: calc(#{$button-game-diameter} + 5%);
   }
 }
 
@@ -41,8 +41,8 @@
 }
 
 @media (max-width: 1000px) {
-  .game-header {
-    margin-bottom: calc(#{$button-game-diameter} + 10%);
+  .cards {
+    margin-top: calc(#{$button-game-diameter} + 10%);
   }
 }
 
@@ -72,6 +72,7 @@
   }
 
   .page-wrap,
+  .stats-page-wrap,
   .categories-wrap {
     margin-left: 5%;
     width: 90%;

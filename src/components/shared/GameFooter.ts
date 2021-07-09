@@ -14,14 +14,27 @@ export default class GameFooter extends Component {
     this.footerItems = new Component(global, this, 'ul', [
       Constants.CSSClasses.footerItems,
     ]);
+    this.init();
   }
 
   init(): void {
-    const item = this.append('li', [Constants.CSSClasses.footerItem], {});
-    item.append(
+    const courseItem = this.append('li', [Constants.CSSClasses.footerItem], {});
+    courseItem.append(
       'a',
       [Constants.CSSClasses.footerLink, Constants.CSSClasses.footerLinkSchool],
       { href: Constants.SCHOOL_LINK }
+    );
+    const yearItem = this.append(
+      'li',
+      [Constants.CSSClasses.footerItem, Constants.CSSClasses.footerItemYear],
+      {}
+    );
+    yearItem.textContent = String(Constants.YEAR);
+    const githubItem = this.append('li', [Constants.CSSClasses.footerItem], {});
+    githubItem.append(
+      'a',
+      [Constants.CSSClasses.footerLink, Constants.CSSClasses.footerLinkGithub],
+      { href: Constants.GITHUB_LINK }
     );
   }
 

@@ -12,9 +12,9 @@ export default class MainPage extends Component {
   }
 
   async init(): Promise<void> {
-    const categories = await fetch('../../cards.json').then((response) =>
-      response.json()
-    );
+    const categories = await fetch('/public/cards.json', {
+      headers: { 'Content-Type': 'application/json' },
+    }).then((response) => response.json());
     Object.keys(categories).forEach((key) => {
       const randomIndex = Math.floor(Math.random() * categories[key].length);
       const { image } = categories[key][randomIndex];
@@ -24,7 +24,7 @@ export default class MainPage extends Component {
   }
 
   addOneCategory(name: string, image: string): void {
-    const category = new Category(this.global, this, name, image);
+    const category = new Category(this.global, this, name, `/public/${image}`);
     this.categories.push(category);
   }
 

@@ -4,7 +4,7 @@ import IComponent from '../IComponent';
 import Constants from '../../util/constants';
 import Events from '../../util/Events';
 
-class GameButton extends Component {
+export default class GameButton extends Component {
   text: IComponent;
 
   button: IComponent;
@@ -52,11 +52,17 @@ class GameButton extends Component {
     this.button.element.classList.remove(Constants.CSSClasses.noClicks);
   };
 
+  hide: () => void = () => {
+    this.element.classList.add(Constants.CSSClasses.hidden);
+  };
+
+  show: () => void = () => {
+    this.element.classList.remove(Constants.CSSClasses.hidden);
+  };
+
   private handleClick: () => void = () => {
     this.setButtonRepeat();
     this.disable();
     Events.gameButtonClick.emit();
   };
 }
-
-export default GameButton;

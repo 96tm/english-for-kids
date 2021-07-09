@@ -24,9 +24,15 @@ export default class Card extends Component {
 
   buttonTurn: IComponent;
 
+  category: string;
+
   word: string;
 
   translation: string;
+
+  image: string;
+
+  audioSrc: string;
 
   frontTextPanel: IComponent;
 
@@ -35,13 +41,16 @@ export default class Card extends Component {
   constructor(
     global: Window,
     rootComponent: IComponent,
-    { word, translation, image }: ICard
+    { category, word, translation, image, audioSrc }: ICard
   ) {
     super(global, rootComponent, 'div', [Constants.CSSClasses.card], {
       'data-word': word,
     });
+    this.category = category;
     this.word = word;
     this.translation = translation;
+    this.image = image;
+    this.audioSrc = audioSrc;
     this.inner = new Component(global, this, 'div', [
       Constants.CSSClasses.cardInner,
     ]);
@@ -111,6 +120,9 @@ export default class Card extends Component {
       Events.cardClick.emit(this.word);
     } else {
       this.element.classList.add(Constants.CSSClasses.animated);
+      Events.statsTrainingClick.emit({
+        ...this,
+      });
     }
   };
 

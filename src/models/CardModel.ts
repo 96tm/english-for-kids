@@ -4,12 +4,13 @@ export default class CardModel implements ICard {
   audio: HTMLAudioElement;
 
   constructor(
+    public category: string,
     public word: string,
     public translation: string,
     public image: string = '',
     public audioSrc: string = ''
   ) {
-    this.audio = new Audio(`../public/${this.audioSrc}`);
+    this.audio = new Audio(`/public/${this.audioSrc}`);
   }
 
   async playCardAudio(): Promise<void> {

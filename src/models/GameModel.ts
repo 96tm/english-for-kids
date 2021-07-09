@@ -47,22 +47,22 @@ export default class GameModel {
   }
 
   async playCorrect(): Promise<void> {
-    this.playAudio('../audio/correct.mp3');
+    this.playAudio('/public/audio/correct.mp3');
   }
 
   async playWrong(): Promise<void> {
-    this.playAudio('../audio/wrong.mp3');
+    this.playAudio('/public/audio/wrong.mp3');
   }
 
   async playWin(): Promise<void> {
     const audio = this.global.document.createElement('audio');
-    await this.playAudio('../audio/win.mp3', audio);
+    await this.playAudio('/public/audio/win.mp3', audio);
     audio.remove();
   }
 
   async playLose(): Promise<void> {
     const audio = this.global.document.createElement('audio');
-    this.playAudio('../audio/lose.mp3', audio);
+    this.playAudio('/public/audio/lose.mp3', audio);
     audio.remove();
   }
 
@@ -71,10 +71,14 @@ export default class GameModel {
     return this.boardModel.loadCards(category);
   }
 
+  loadDifficult(cards: ICard[]): void {
+    this.boardModel.cards = cards;
+  }
+
   async setCategories(): Promise<string[]> {
-    const categories = await fetch('../../cards.json').then((response) =>
-      response.json()
-    );
+    const categories = await fetch('/public/cards.json', {
+      headers: { 'Content-Type': 'application/json' },
+    }).then((response) => response.json());
     Object.keys(categories).forEach((category) => {
       this.categories.push(category);
     });

@@ -20,6 +20,8 @@ export default class GameMenu extends Component {
 
   loginButton: IComponent;
 
+  menuStats: IComponent;
+
   constructor(global: Window, rootComponent: IComponent) {
     super(global, rootComponent, 'aside', [Constants.CSSClasses.gameMenu]);
     this.menuItemsWrap = new Component(global, this, 'div', [
@@ -37,6 +39,16 @@ export default class GameMenu extends Component {
       { href: '#main', 'data-menu-link-title': Constants.Labels.mainMenu }
     );
     this.menuTitle.textContent = Constants.Labels.mainMenu;
+
+    this.menuStats = new Component(
+      global,
+      this.menuItemsWrap,
+      'a',
+      [Constants.CSSClasses.gameMenuStats, Constants.CSSClasses.gameMenuLink],
+      { href: '#stats', 'data-menu-link-title': Constants.Labels.stats }
+    );
+    this.menuStats.textContent = Constants.Labels.stats;
+
     this.activeItem = this.menuTitle;
     this.activeItem.element.classList.add(Constants.CSSClasses.active);
     this.menuList = new Component(global, this.menuItemsWrap, 'ul', [
@@ -50,14 +62,14 @@ export default class GameMenu extends Component {
       { href: '' }
     );
     this.loginButton.textContent = Constants.Labels.login;
-    this.menuLinks.push(this.menuTitle);
+    this.menuLinks.push(this.menuTitle, this.menuStats);
     this.addEventListeners();
   }
 
   async init(): Promise<void> {
-    const categories = await fetch('../../cards.json').then((response) =>
-      response.json()
-    );
+    const categories = await fetch('/public/cards.json', {
+      headers: { 'Content-Type': 'application/json' },
+    }).then((response) => response.json());
     Object.keys(categories).forEach((key) => {
       const action = this.append('a', [Constants.CSSClasses.gameMenuLink], {
         href: '#game',
@@ -75,7 +87,10 @@ export default class GameMenu extends Component {
     const target = event.target as HTMLElement;
     if (target.classList.contains(Constants.CSSClasses.gameMenuLink)) {
       const menuLinkTitle = target.dataset.menuLinkTitle as string;
-      if (target.classList.contains(Constants.CSSClasses.gameMenuTitle)) {
+      if (
+        target.classList.contains(Constants.CSSClasses.gameMenuTitle) ||
+        target.classList.contains(Constants.CSSClasses.gameMenuStats)
+      ) {
         this.setActiveMenuItem(menuLinkTitle);
       } else {
         Events.menuClick.emit(target.dataset.menuLinkTitle as string);

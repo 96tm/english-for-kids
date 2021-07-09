@@ -57,7 +57,7 @@ export default class ContainerPage extends Component {
     this.element.removeEventListener('click', this.handleClick);
   }
 
-  private handleRouteChange: (route: string) => void = (route) => {
+  private handleRouteChange: () => void = () => {
     (this.gameToggleCheckbox.element as HTMLInputElement).checked = false;
   };
 

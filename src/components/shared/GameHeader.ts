@@ -23,7 +23,12 @@ export default class GameHeader extends Component {
     Events.gameStopped.add(this.handleGameStopped);
     Events.menuClick.add(this.handleMenuClick);
     Events.routeChange.add(this.handleRouteChange);
+    Events.statsRepeatDifficult.add(this.handleRepeatDifficult);
   }
+
+  private handleRepeatDifficult: () => void = () => {
+    this.heading.textContent = Constants.Labels.statsRepeatHeading;
+  };
 
   private handleMenuClick: (category: string) => void = (category) => {
     this.heading.textContent = category;
@@ -34,8 +39,14 @@ export default class GameHeader extends Component {
   };
 
   private handleRouteChange: (route: string) => void = (route) => {
-    if (route !== Constants.Labels.gameRoute) {
-      this.heading.textContent = '';
+    if (route === Constants.Labels.mainRoute) {
+      this.heading.textContent = Constants.Labels.mainPageHeading;
+    }
+    if (route === Constants.Labels.statsRoute) {
+      this.modeButton.element.classList.add(Constants.CSSClasses.invisible);
+      this.heading.textContent = Constants.Labels.stats;
+    } else {
+      this.modeButton.element.classList.remove(Constants.CSSClasses.invisible);
     }
   };
 }

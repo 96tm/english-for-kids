@@ -2,7 +2,6 @@
 
 $header-margin: 40px;
 $header-padding-top: 18px;
-$mode-button-border-radius: 21px;
 
 .game-header {
   position: relative;
@@ -25,6 +24,10 @@ $mode-button-border-radius: 21px;
     border-radius: $mode-button-border-radius;
     display: flex;
     align-items: center;
+    &:hover {
+      opacity: 0.5;
+      transition: 0.5s;
+    }
     .game-header-mode__play,
     .game-header-mode__train {
       width: 50%;

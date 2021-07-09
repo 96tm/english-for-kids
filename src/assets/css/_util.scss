@@ -1,0 +1,29 @@
+.container {
+  .hidden {
+    display: none;
+  }
+
+  .no-clicks {
+    pointer-events: none;
+    cursor: pointer;
+  }
+
+  .invisible {
+    pointer-events: none;
+    opacity: 0;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.no-clicks {
+  pointer-events: none;
+  cursor: pointer;
+}
+
+.invisible {
+  pointer-events: none;
+  opacity: 0;
+}

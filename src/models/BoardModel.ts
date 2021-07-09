@@ -4,20 +4,32 @@ import CardModel from './CardModel';
 export default class BoardModel {
   cards: ICard[] = [];
 
-  addOneCard({ word, translation, image, audioSrc }: ICard): void {
-    const card = new CardModel(word, translation, image, audioSrc);
+  addOneCard({ category, word, translation, image, audioSrc }: ICard): void {
+    const card = new CardModel(
+      category,
+      word,
+      translation,
+      `/public/${image}`,
+      audioSrc
+    );
     this.cards.push(card);
   }
 
   async loadCards(category: string): Promise<ICard[]> {
-    const categories = await fetch('../../cards.json').then((response) =>
-      response.json()
-    );
+    const categories = await fetch('/public/cards.json', {
+      headers: { 'Content-Type': 'application/json' },
+    }).then((response) => response.json());
     this.cards = [];
-    const cards: ICard[] = categories[category];
-    cards.forEach((card) => {
-      this.addOneCard(card);
-    });
+    if (categories && categories[category]) {
+      const cards = (categories[category] as ICard[]).map((card) => {
+        const updatedCard = card;
+        updatedCard.category = category;
+        return updatedCard;
+      });
+      cards.forEach((card) => {
+        this.addOneCard(card);
+      });
+    }
     return this.cards;
   }
 

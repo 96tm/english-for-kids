@@ -13,18 +13,20 @@ html,
 body,
 .root,
 .inner-container,
-.content-wrap,
-.page-wrap,
-.cards {
+.stats-page-wrap {
   height: 100%;
 }
 
 .container {
+  position: absolute;
   width: 100%;
+  height: auto;
+  min-height: 100%;
   display: flex;
 }
 
 .page-wrap,
+.stats-page-wrap,
 .categories-wrap {
   position: relative;
 }
@@ -77,6 +79,17 @@ body,
   cursor: pointer;
 }
 
+.game-menu-toggle-checkbox:hover {
+  & ~ .game-menu-toggle-bar-wrap {
+    .game-menu-toggle-bar,
+    .game-menu-toggle-bar::before,
+    .game-menu-toggle-bar::after {
+      transition: 0.5s;
+      background: #5c5c5c;
+    }
+  }
+}
+
 .game-menu-toggle-checkbox:checked {
   margin-left: calc(((70% - min(70%, 1007px)) / 2) + 30%);
 
@@ -106,13 +119,4 @@ body,
   & ~ .inner-container .button-game-wrap {
     transform: translate(-100%, 0);
   }
-}
-
-.hidden {
-  display: none;
-}
-
-.no-clicks {
-  pointer-events: none;
-  cursor: pointer;
 }

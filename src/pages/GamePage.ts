@@ -24,6 +24,11 @@ export default class GamePage extends Component {
   addCards(cards: ICard[]): void {
     (this.gameBoard as GameBoard).addCards(cards);
     Events.cardsLoad.emit();
+    // if (cards.length) {
+    //   (this.gameButton as GameButton).enable();
+    // } else {
+    //   (this.gameButton as GameButton).disable();
+    // }
   }
 
   private handleBoardEnabled: () => void = () => {

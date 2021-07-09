@@ -64,6 +64,7 @@ module.exports = ({ development }) => ({
       patterns: [
         {
           from: 'public',
+          to: 'public',
           noErrorOnMissing: true,
         },
       ],

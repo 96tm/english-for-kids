@@ -1,6 +1,8 @@
+const YEAR = 2021;
 const SERVER_URL = '';
 const NUMBER_OF_STARS = 3;
 const SCHOOL_LINK = 'https://rs.school/js';
+const GITHUB_LINK = 'https://github.com/96tm';
 const NUMBER_OF_CARDS = 8;
 const NUMBER_OF_CATEGORIES = 8;
 const FINISH_SCREEN_DURATION = 2000;
@@ -51,11 +53,32 @@ const CSSClasses = {
 
   gameMenu: 'game-menu',
   gameMenuTitle: 'game-menu__title',
+  gameMenuStats: 'game-menu__stats',
   gameMenuList: 'game-menu__list',
   gameMenuLogin: 'game-menu__login',
   gameMenuItem: 'game-menu__item',
   gameMenuLink: 'game-menu__link',
   gameMenuItemsWrap: 'game-menu__items',
+
+  statsResetButton: 'stats-reset-button',
+  statsRepeatButton: 'stats-repeat-button',
+  statsPageWrap: 'stats-page-wrap',
+  statsTableWrap: 'stats-table-wrap',
+  statsTable: 'stats-table',
+  statsTableHeadingCategory: 'stats-table__heading-category',
+  statsTableHeadingItem: 'stats-table__heading-item',
+  statsTableHeadingTraining: 'stats-table__heading-training',
+  statsTableHeadingRight: 'stats-table__heading-right',
+  statsTableHeadingWrong: 'stats-table__heading-wrong',
+  statsTableHeadingPercentage: 'stats-table__heading-percentage',
+  statsTableChosenHeading: 'chosen',
+  statsColumnCategory: 'word-item__category',
+  statsColumnWord: 'word-item__word',
+  statsColumnTranslation: 'word-item__translation',
+  statsColumnTraining: 'word-item__training',
+  statsColumnRight: 'word-item__right',
+  statsColumnWrong: 'word-item__wrong',
+  statsColumnPercentage: 'word-item__percentage',
 
   gameHeader: 'game-header',
   gameHeaderScoreWrap: 'game-header__score-wrap',
@@ -72,11 +95,14 @@ const CSSClasses = {
   footer: 'footer',
   footerItems: 'footer__items',
   footerItem: 'footer__item',
+  footerItemYear: 'footer__item-year',
   footerLink: 'footer__link',
   footerLinkSchool: 'footer__link-course',
+  footerLinkGithub: 'footer__link-github',
 
   checked: 'checked',
   hidden: 'hidden',
+  invisible: 'invisible',
   active: 'active',
   animated: 'animated',
   noClicks: 'no-clicks',
@@ -88,18 +114,34 @@ const Labels = {
   login: 'Login',
   start: 'Start',
   mainMenu: 'Main Page',
+  stats: 'Statistics',
+  statsReset: 'Reset',
+  statsRepeat: 'Repeat difficult words',
+  statsRepeatHeading: 'Repeat',
   gameRoute: 'game',
   mainRoute: 'main',
+  statsRoute: 'stats',
   wordIllustration: 'Word illustration',
   winMessage: 'Win!',
+  category: 'Category',
+  mainPageHeading: 'Categories',
+  word: 'Word',
+  translation: 'Translation',
+  training: 'Training guesses',
+  right: 'Right guesses',
+  wrong: 'Wrong guesses',
+  percentage: 'Right guesses percentage',
+  statsStorage: 'statsStorage',
 };
 
 const Constants = {
+  YEAR,
   CSSClasses,
   Labels,
   SERVER_URL,
   NUMBER_OF_STARS,
   SCHOOL_LINK,
+  GITHUB_LINK,
   NUMBER_OF_CARDS,
   NUMBER_OF_CATEGORIES,
   FINISH_SCREEN_DURATION,

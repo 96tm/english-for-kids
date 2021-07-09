@@ -3,7 +3,6 @@ import IComponent from '../IComponent';
 
 import Constants from '../../util/constants';
 import Card from './Card';
-import Events from '../../util/Events';
 import ICard from '../../models/ICard';
 
 class GameBoard extends Component {
@@ -29,20 +28,6 @@ class GameBoard extends Component {
     const card = new Card(this.global, this, { ...cardModel });
     this.cards.push(card);
     return card;
-  }
-
-  addEventListeners(): void {
-    this.element.addEventListener('click', GameBoard.handleBoardClick);
-  }
-
-  removeEventListeners(): void {
-    this.element.removeEventListener('click', GameBoard.handleBoardClick);
-  }
-
-  private static handleBoardClick(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-    const word = target.dataset.name as string;
-    Events.boardClick.emit(word);
   }
 }
 

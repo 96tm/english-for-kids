@@ -8,9 +8,12 @@ import Constants from './util/constants';
 import ContainerController from './controllers/ContainerController';
 import MainPageController from './controllers/MainPageController';
 import ContainerPage from './pages/ContainerPage';
+import StatisticsController from './controllers/StatisticsController';
+import StatsService from './util/StatsService';
 
 (async () => {
   const global = window;
+  const statsService = new StatsService(global);
   const root = new Component(global, null, 'div', [Constants.CSSClasses.root]);
   const containerController = new ContainerController(global, root);
   await containerController.init();
@@ -28,9 +31,15 @@ import ContainerPage from './pages/ContainerPage';
     (containerController.component as ContainerPage).contentWrap
   );
 
+  const statisticsController = new StatisticsController(
+    global,
+    (containerController.component as ContainerPage).contentWrap
+  );
+
   await RouterService.init({
     game: gameController,
     main: mainPageController,
+    stats: statisticsController,
   });
   await RouterService.showRoute('main');
   await mainPageController.init();

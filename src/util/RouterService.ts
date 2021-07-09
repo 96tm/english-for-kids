@@ -38,12 +38,7 @@ class Router {
         await this.showRoute(this.global.location.hash.slice(1));
       }
     });
-    const hashString = window.location.hash;
-    if (hashString) {
-      await this.showRoute(hashString.slice(1));
-    } else {
-      await this.showRoute(this.currentRoute);
-    }
+    this.setHash(this.currentRoute);
   }
 }
 

@@ -46,6 +46,10 @@ $login-button-width: 248px;
     text-decoration: none;
     color: inherit;
 
+    &:hover {
+      opacity: 0.5;
+    }
+
     &.active {
       text-decoration: underline;
     }
@@ -54,7 +58,7 @@ $login-button-width: 248px;
   .game-menu__login {
     width: $login-button-width;
     height: $game-menu-item-height;
-    display: flex;
+    display: none;
     align-items: center;
     padding-left: $menu-items-padding-right;
     border: 2px solid #fff;

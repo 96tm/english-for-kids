@@ -1,3 +1,38 @@
-.footer-link__course {
-  background: url('../icons/rs-school-js.svg');
+.footer__items {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0 0 20px 0;
+}
+
+.footer__item {
+  list-style: none;
+  &:not(.footer__item-year):hover {
+    opacity: 0.5;
+    transition: 0.5s;
+  }
+  &.footer__item-year {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+}
+
+.footer__link {
+  display: block;
+  height: 50px;
+}
+
+.footer__link-course {
+  background: no-repeat url('../icons/rs-school-js.svg');
+  background-size: 100% 100%;
+  width: 100px;
+}
+
+.footer__link-github {
+  background: no-repeat url('../icons/github.svg');
+  background-size: 100% 100%;
+  width: 50px;
 }

@@ -10,6 +10,7 @@ import GameButton from '../components/game-page/GameButton';
 import Constants from '../util/constants';
 import GameStatus from '../models/GameStatus';
 import RouterService from '../util/RouterService';
+import ICard from '../models/ICard';
 
 export default class GameController extends Controller {
   component: IComponent;
@@ -20,7 +21,6 @@ export default class GameController extends Controller {
     super();
     this.component = new GamePage(global, rootComponent);
     this.gameModel = new GameModel(global);
-    Events.boardClick.add(this.handleCardClick);
     Events.menuClick.add(this.handleMenuClick);
     Events.cardClick.add(this.handleCardClick);
     Events.gameModeChange.add(this.handleGameModeChange);
@@ -29,6 +29,7 @@ export default class GameController extends Controller {
     Events.gameFinished.add(this.handleGameFinished);
     Events.gameStopped.add(this.handleGameStopped);
     Events.routeChange.add(this.handleRouteChange);
+    Events.statsRepeatDifficult.add(this.handleRepeatDifficult);
   }
 
   async init(): Promise<void> {
@@ -41,6 +42,11 @@ export default class GameController extends Controller {
 
   private handleGameStopped: () => void = () => {
     this.setCardComponents(this.gameModel.mode);
+  };
+
+  private handleRepeatDifficult: (cards: ICard[]) => void = async (cards) => {
+    (this.component as GamePage).addCards(cards);
+    this.gameModel.loadDifficult(cards);
   };
 
   private handleGameFinished: () => Promise<void> = async () => {
@@ -57,6 +63,7 @@ export default class GameController extends Controller {
     }
     this.gameModel.stop();
     RouterService.setHash(Constants.Labels.mainRoute);
+    Events.menuClick.emit(Constants.Labels.mainMenu);
   };
 
   private handleMenuClick: (category: string) => Promise<void> = async (
@@ -67,25 +74,34 @@ export default class GameController extends Controller {
   };
 
   private handleCardClick: (word: string) => void = async (word) => {
+    const wordInfo = this.gameModel.boardModel.getCard(word);
     if (this.gameModel.mode === GameMode.train) {
+      Events.statsTrainingClick.emit({
+        ...wordInfo,
+      });
       await this.gameModel.playCardAudio(word);
     } else if (this.gameModel.status === GameStatus.active) {
       this.gameModel.numberOfGuesses += 1;
+      const currentWordInfo = (this.gameModel as GameModel).getCurrentCard();
       if (this.checkWord(word)) {
         ((this.component as GamePage).gameBoard as GameBoard)
           .getCard(word)
           .markAsRight();
+        Events.statsRightClick.emit({
+          ...currentWordInfo,
+        });
         this.gameModel.numberOfRightGuesses += 1;
         await this.gameModel.playCorrect();
         Events.cardGuess.emit(true);
         if (this.gameModel.isFinished) {
-          console.log('finished');
-
           Events.gameFinished.emit();
         } else {
           await this.gameModel.playNextWord();
         }
       } else {
+        Events.statsWrongClick.emit({
+          ...currentWordInfo,
+        });
         await this.gameModel.playWrong();
         Events.cardGuess.emit(false);
       }
@@ -129,13 +145,15 @@ export default class GameController extends Controller {
     const gamePage = this.component as GamePage;
     const board = gamePage.gameBoard as GameBoard;
     if (mode === GameMode.play) {
-      gamePage.gameButton.element.classList.remove(Constants.CSSClasses.hidden);
+      if (board.cards.length) {
+        (gamePage.gameButton as GameButton).show();
+      }
       (gamePage.gameButton as GameButton).setButtonStart();
       (board.cards as Card[]).forEach((card) => {
         card.setPlayMode();
       });
     } else {
-      gamePage.gameButton.element.classList.add(Constants.CSSClasses.hidden);
+      (gamePage.gameButton as GameButton).hide();
       (gamePage.gameButton as GameButton).setButtonRepeat();
       (board.cards as Card[]).forEach((card) => {
         card.setTrainMode();
