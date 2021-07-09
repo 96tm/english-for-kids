@@ -1,5 +1,6 @@
 import ICard from './ICard';
 import CardModel from './CardModel';
+import Constants from '../util/constants';
 
 export default class BoardModel {
   cards: ICard[] = [];
@@ -9,14 +10,14 @@ export default class BoardModel {
       category,
       word,
       translation,
-      `/public/${image}`,
+      `${Constants.HOMEPAGE}/public/${image}`,
       audioSrc
     );
     this.cards.push(card);
   }
 
   async loadCards(category: string): Promise<ICard[]> {
-    const categories = await fetch('/public/cards.json', {
+    const categories = await fetch(`${Constants.HOMEPAGE}/public/cards.json`, {
       headers: { 'Content-Type': 'application/json' },
     }).then((response) => response.json());
     this.cards = [];

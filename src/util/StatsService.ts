@@ -95,9 +95,9 @@ export default class StatsService {
         word,
         translation,
         image,
-        audioSrc,
-        1
+        audioSrc
       );
+      newWord[parameter] = 1;
       words.push(newWord);
     }
     this.commit();

@@ -6,6 +6,7 @@ const GITHUB_LINK = 'https://github.com/96tm';
 const NUMBER_OF_CARDS = 8;
 const NUMBER_OF_CATEGORIES = 8;
 const FINISH_SCREEN_DURATION = 2000;
+const HOMEPAGE = '';
 
 const CSSClasses = {
   root: 'root',
@@ -135,6 +136,7 @@ const Labels = {
 };
 
 const Constants = {
+  HOMEPAGE,
   YEAR,
   CSSClasses,
   Labels,

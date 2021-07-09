@@ -67,7 +67,7 @@ export default class GameMenu extends Component {
   }
 
   async init(): Promise<void> {
-    const categories = await fetch('/public/cards.json', {
+    const categories = await fetch(`${Constants.HOMEPAGE}/public/cards.json`, {
       headers: { 'Content-Type': 'application/json' },
     }).then((response) => response.json());
     Object.keys(categories).forEach((key) => {
