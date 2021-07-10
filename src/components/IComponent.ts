@@ -2,16 +2,11 @@ import AttributeRecord from '../util/AttributeRecord';
 
 export default interface IComponent {
   element: HTMLElement;
-
-  rootComponent: IComponent | null;
-
   tagName: string;
-
   classList: string[];
-
-  attributes: AttributeRecord;
-
   textContent: string;
+  attributes: AttributeRecord;
+  rootComponent: IComponent | null;
 
   append(
     tagName: string,

@@ -4,6 +4,5 @@ export default interface IController {
   component: IComponent;
 
   show(): void;
-
   hide(): void;
 }

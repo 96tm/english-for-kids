@@ -5,15 +5,10 @@ import Constants from '../../util/constants';
 
 export default class Category extends Component {
   name: string;
-
   imagePath: string;
-
   categoryImage: IComponent;
-
   categoryText: IComponent;
-
   link: IComponent;
-
   categoryImageWrap: IComponent;
 
   constructor(

@@ -1,4 +1,3 @@
-import ICard from './ICard';
 interface IWordStatDTO {
   category: string;
   word: string;

@@ -7,25 +7,15 @@ import Events from '../../util/Events';
 
 export default class StatsTable extends Component {
   table: IComponent;
-
   tableBody: IComponent;
-
   tableHeadingRow: IComponent;
-
   tableHeadingCategory: IComponent;
-
   tableHeadingWord: IComponent;
-
   tableHeadingTranslation: IComponent;
-
   tableHeadingTraining: IComponent;
-
   tableHeadingRight: IComponent;
-
   tableHeadingWrong: IComponent;
-
   tableHeadingPercentage: IComponent;
-
   headingItems: IComponent[];
 
   constructor(global: Window, rootElement: IComponent) {

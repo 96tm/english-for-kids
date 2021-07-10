@@ -1,23 +1,27 @@
 import Controller from './Controller';
+
 import IComponent from '../components/IComponent';
 import StatisticsPage from '../pages/StatisticsPage';
 import StatsTable from '../components/stats-page/StatsTable';
+
 import Constants from '../util/constants';
+
 import StatsObject from '../models/StatsObject';
 import SortType from '../models/SortType';
 import SortOrder from '../models/SortOrder';
-import Events from '../util/Events';
 import IWordStat from '../models/IWordStat';
-import RouterService from '../util/RouterService';
 import ICard from '../models/ICard';
 import CardModel from '../models/CardModel';
+
+import Events from '../util/Events';
+
+import RouterService from '../util/RouterService';
+
 import StatsService from '../util/StatsService';
 
 export default class StatisticsController extends Controller {
   component: IComponent;
-
   sortType = SortType.category;
-
   sortOrder = SortOrder.ascending;
 
   constructor(private global: Window, rootComponent: IComponent) {

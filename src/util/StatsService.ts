@@ -1,9 +1,11 @@
 import Events from './Events';
+
 import IWordStatDTO from '../models/IWordStatDTO';
 import StatsObject from '../models/StatsObject';
-import Constants from './constants';
 import WordStat from '../models/WordStat';
 import StatsParameter from '../models/StatsParameter';
+
+import Constants from './constants';
 
 export default class StatsService {
   storage: StatsObject;

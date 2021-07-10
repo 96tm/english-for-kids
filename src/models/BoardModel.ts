@@ -1,5 +1,6 @@
 import ICard from './ICard';
 import CardModel from './CardModel';
+
 import Constants from '../util/constants';
 
 export default class BoardModel {

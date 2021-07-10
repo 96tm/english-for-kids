@@ -1,5 +1,7 @@
 import Controller from './Controller';
+
 import IComponent from '../components/IComponent';
+
 import MainPage from '../pages/MainPage';
 
 export default class MainPageController extends Controller {

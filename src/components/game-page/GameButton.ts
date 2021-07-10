@@ -2,11 +2,11 @@ import Component from '../Component';
 import IComponent from '../IComponent';
 
 import Constants from '../../util/constants';
+
 import Events from '../../util/Events';
 
 export default class GameButton extends Component {
   text: IComponent;
-
   button: IComponent;
 
   constructor(global: Window, rootComponent: IComponent) {

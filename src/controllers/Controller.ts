@@ -1,4 +1,5 @@
 import IController from './IController';
+
 import IComponent from '../components/IComponent';
 
 export default abstract class Controller implements IController {

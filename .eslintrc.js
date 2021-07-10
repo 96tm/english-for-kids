@@ -24,5 +24,6 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   rules: {
     'no-underscore-dangle': 0,
+    '@typescript-eslint/lines-between-class-members': ['off'],
   },
 };

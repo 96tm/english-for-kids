@@ -2,6 +2,7 @@ import Component from '../Component';
 import IComponent from '../IComponent';
 
 import Constants from '../../util/constants';
+
 import Events from '../../util/Events';
 
 export default class GameHeaderScore extends Component {

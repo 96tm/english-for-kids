@@ -1,16 +1,18 @@
 import Component from '../components/Component';
 import IComponent from '../components/IComponent';
-import Constants from '../util/constants';
 import StatsTable from '../components/stats-page/StatsTable';
-import Events from '../util/Events';
+
 import IWordStat from '../models/IWordStat';
+
+import Constants from '../util/constants';
+
+import Events from '../util/Events';
+
 import StatsService from '../util/StatsService';
 
 export default class StatisticsPage extends Component {
   resetButton: IComponent;
-
   repeatButton: IComponent;
-
   table: IComponent;
 
   constructor(global: Window, rootComponent: IComponent) {

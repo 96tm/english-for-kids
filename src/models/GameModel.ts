@@ -3,30 +3,22 @@ import GameMode from './GameMode';
 import CardModel from './CardModel';
 import ICard from './ICard';
 import GameStatus from './GameStatus';
+
 import Events from '../util/Events';
+
 import Constants from '../util/constants';
 
 export default class GameModel {
   static START_DELAY = 1000;
-
   private audio: HTMLAudioElement;
-
-  boardModel: BoardModel;
-
   _mode: GameMode = GameMode.train;
-
+  boardModel: BoardModel;
   status: GameStatus = GameStatus.inactive;
-
   categories: string[] = [];
-
   activeCategory = '';
-
   currentCard?: ICard;
-
   currentIndex = 0;
-
   numberOfRightGuesses = 0;
-
   numberOfGuesses = 0;
 
   constructor(private global: Window) {

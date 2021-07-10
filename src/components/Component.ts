@@ -1,16 +1,13 @@
 import IComponent from './IComponent';
+
 import AttributeRecord from '../util/AttributeRecord';
 
 export default class Component implements IComponent {
-  element: HTMLElement;
-
   _textContent: string;
-
   _tagName: string;
-
   _classList: string[];
-
   _attributes: AttributeRecord;
+  element: HTMLElement;
 
   constructor(
     public global: Window,

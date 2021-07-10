@@ -1,5 +1,6 @@
 import Component from '../Component';
 import IComponent from '../IComponent';
+
 import Constants from '../../util/constants';
 
 export default class FinishScreen extends Component {

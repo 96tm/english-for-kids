@@ -1,7 +1,9 @@
 import Component from '../components/Component';
 import IComponent from '../components/IComponent';
-import Constants from '../util/constants';
 import Category from '../components/main-page/Category';
+
+import Constants from '../util/constants';
+
 import Events from '../util/Events';
 
 export default class MainPage extends Component {

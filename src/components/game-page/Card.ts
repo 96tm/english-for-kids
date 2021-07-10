@@ -7,36 +7,21 @@ import Events from '../../util/Events';
 
 export default class Card extends Component {
   inner: IComponent;
-
   front: IComponent;
-
   back: IComponent;
-
   overlay: IComponent;
-
   backText: IComponent;
-
   frontText: IComponent;
-
   frontImage: IComponent;
-
   backImage: IComponent;
-
   buttonTurn: IComponent;
-
-  category: string;
-
-  word: string;
-
-  translation: string;
-
-  image: string;
-
-  audioSrc: string;
-
   frontTextPanel: IComponent;
-
   backTextPanel: IComponent;
+  category: string;
+  word: string;
+  translation: string;
+  image: string;
+  audioSrc: string;
 
   constructor(
     global: Window,

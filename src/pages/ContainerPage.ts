@@ -1,25 +1,21 @@
 import Component from '../components/Component';
 import IComponent from '../components/IComponent';
-import Constants from '../util/constants';
 import GameMenuToggleButton from '../components/shared/GameMenuToggleButton';
 import GameMenu from '../components/shared/GameMenu';
 import GameHeader from '../components/shared/GameHeader';
 import GameFooter from '../components/shared/GameFooter';
+
+import Constants from '../util/constants';
+
 import Events from '../util/Events';
 
 export default class ContainerPage extends Component {
   gameToggleCheckbox: IComponent;
-
   gameToggleButton: IComponent;
-
   gameMenu: GameMenu;
-
   gameHeader: IComponent;
-
   contentWrap: IComponent;
-
   footer: IComponent;
-
   innerContainer: IComponent;
 
   constructor(global: Window, rootView: IComponent | null) {

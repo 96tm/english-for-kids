@@ -1,20 +1,24 @@
 import Controller from './Controller';
+
 import IComponent from '../components/IComponent';
-import GamePage from '../pages/GamePage';
-import Events from '../util/Events';
-import GameModel from '../models/GameModel';
-import GameMode from '../models/GameMode';
 import GameBoard from '../components/game-page/GameBoard';
 import Card from '../components/game-page/Card';
 import GameButton from '../components/game-page/GameButton';
-import Constants from '../util/constants';
+import GamePage from '../pages/GamePage';
+
+import Events from '../util/Events';
+
+import GameModel from '../models/GameModel';
+import GameMode from '../models/GameMode';
 import GameStatus from '../models/GameStatus';
-import RouterService from '../util/RouterService';
 import ICard from '../models/ICard';
+
+import Constants from '../util/constants';
+
+import RouterService from '../util/RouterService';
 
 export default class GameController extends Controller {
   component: IComponent;
-
   gameModel: GameModel;
 
   constructor(global: Window, rootComponent: IComponent) {

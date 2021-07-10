@@ -1,7 +1,8 @@
 import Component from '../components/Component';
 import IComponent from '../components/IComponent';
-import Constants from '../util/constants';
 import GameMenu from '../components/shared/GameMenu';
+
+import Constants from '../util/constants';
 
 export default class GamePage extends Component {
   gameMenu: GameMenu;

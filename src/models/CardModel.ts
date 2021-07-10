@@ -1,4 +1,5 @@
 import ICard from './ICard';
+
 import Constants from '../util/constants';
 
 export default class CardModel implements ICard {

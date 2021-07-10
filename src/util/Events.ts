@@ -1,4 +1,5 @@
 import Signal from './Signal';
+
 import GameMode from '../models/GameMode';
 import IGameFinishedRecord from '../models/IGameFinishedRecord';
 import IWordStatDTO from '../models/IWordStatDTO';
@@ -13,7 +14,6 @@ const cardTurn = new Signal<string, void>();
 const cardClick = new Signal<string, void>();
 const gameModeChange = new Signal<GameMode, void>();
 const gameButtonClick = new Signal<void, void>();
-const gameButtonReady = new Signal<void, void>();
 const cardClickRight = new Signal<void, void>();
 const cardGuess = new Signal<boolean, void>();
 const gameFinished = new Signal<void, void>();
@@ -39,7 +39,6 @@ const Events = {
   cardClick,
   gameModeChange,
   gameButtonClick,
-  gameButtonReady, //
   cardClickRight,
   cardGuess,
   gameFinished,

@@ -1,4 +1,5 @@
 import { RoutingTable } from './RoutingTable';
+
 import Events from './Events';
 
 class Router {

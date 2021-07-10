@@ -1,9 +1,13 @@
 import Controller from './Controller';
+
 import IComponent from '../components/IComponent';
 import ContainerPage from '../pages/ContainerPage';
-import Events from '../util/Events';
-import Constants from '../util/constants';
 import FinishScreen from '../components/game-page/FinishScreen';
+
+import Events from '../util/Events';
+
+import Constants from '../util/constants';
+
 import IGameFinishedRecord from '../models/IGameFinishedRecord';
 
 export default class ContainerController extends Controller {

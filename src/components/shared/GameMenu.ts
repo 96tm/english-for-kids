@@ -2,25 +2,20 @@ import Component from '../Component';
 import IComponent from '../IComponent';
 
 import Constants from '../../util/constants';
+
 import AttributeRecord from '../../util/AttributeRecord';
+
 import Events from '../../util/Events';
 
 export default class GameMenu extends Component {
   menuTitle: IComponent;
-
-  menuItemsWrap: Component;
-
   menuList: IComponent;
-
-  menuItems: IComponent[] = [];
-
-  menuLinks: IComponent[] = [];
-
+  menuItemsWrap: Component;
   activeItem: IComponent;
-
   loginButton: IComponent;
-
   menuStats: IComponent;
+  menuItems: IComponent[] = [];
+  menuLinks: IComponent[] = [];
 
   constructor(global: Window, rootComponent: IComponent) {
     super(global, rootComponent, 'aside', [Constants.CSSClasses.gameMenu]);
