@@ -25,41 +25,70 @@ export default class StatsTable extends Component {
     ]);
     const heading = new Component(global, this.table, 'thead');
     this.tableHeadingRow = new Component(this.global, heading, 'tr');
-    this.tableHeadingCategory = this.createTableHeadingItem(
-      SortType.category,
-      Constants.Labels.category,
-      [Constants.CSSClasses.statsTableHeadingCategory]
-    );
-    this.tableHeadingWord = this.createTableHeadingItem(
-      SortType.word,
-      Constants.Labels.word
-    );
-    this.tableHeadingTranslation = this.createTableHeadingItem(
-      SortType.translation,
-      Constants.Labels.translation
-    );
-    this.tableHeadingTraining = this.createTableHeadingItem(
+    [
+      this.tableHeadingCategory,
+      this.tableHeadingWord,
+      this.tableHeadingTranslation,
+    ] = this.initHeadingWordComponents();
+    [
+      this.tableHeadingTraining,
+      this.tableHeadingRight,
+      this.tableHeadingWrong,
+      this.tableHeadingPercentage,
+    ] = this.initHeadingStatsComponents();
+    this.tableBody = new Component(this.global, this.table, 'tbody');
+    this.headingItems = this.initHeadingItems();
+    this.addEventListeners();
+  }
+
+  private initHeadingStatsComponents(): IComponent[] {
+    const tableHeadingTraining = this.createTableHeadingItem(
       SortType.training,
       Constants.Labels.training,
       [Constants.CSSClasses.statsTableHeadingTraining]
     );
-    this.tableHeadingRight = this.createTableHeadingItem(
+    const tableHeadingRight = this.createTableHeadingItem(
       SortType.right,
       Constants.Labels.right,
       [Constants.CSSClasses.statsTableHeadingRight]
     );
-    this.tableHeadingWrong = this.createTableHeadingItem(
+    const tableHeadingWrong = this.createTableHeadingItem(
       SortType.wrong,
       Constants.Labels.wrong,
       [Constants.CSSClasses.statsTableHeadingWrong]
     );
-    this.tableHeadingPercentage = this.createTableHeadingItem(
+    const tableHeadingPercentage = this.createTableHeadingItem(
       SortType.percentage,
       Constants.Labels.percentage,
       [Constants.CSSClasses.statsTableHeadingPercentage]
     );
-    this.tableBody = new Component(this.global, this.table, 'tbody');
-    this.headingItems = [
+    return [
+      tableHeadingTraining,
+      tableHeadingRight,
+      tableHeadingWrong,
+      tableHeadingPercentage,
+    ];
+  }
+
+  private initHeadingWordComponents(): IComponent[] {
+    const tableHeadingCategory = this.createTableHeadingItem(
+      SortType.category,
+      Constants.Labels.category,
+      [Constants.CSSClasses.statsTableHeadingCategory]
+    );
+    const tableHeadingWord = this.createTableHeadingItem(
+      SortType.word,
+      Constants.Labels.word
+    );
+    const tableHeadingTranslation = this.createTableHeadingItem(
+      SortType.translation,
+      Constants.Labels.translation
+    );
+    return [tableHeadingCategory, tableHeadingWord, tableHeadingTranslation];
+  }
+
+  private initHeadingItems(): IComponent[] {
+    return [
       this.tableHeadingCategory,
       this.tableHeadingWord,
       this.tableHeadingTranslation,
@@ -68,7 +97,6 @@ export default class StatsTable extends Component {
       this.tableHeadingWrong,
       this.tableHeadingPercentage,
     ];
-    this.addEventListeners();
   }
 
   private createTableHeadingItem(

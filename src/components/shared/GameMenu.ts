@@ -22,28 +22,8 @@ export default class GameMenu extends Component {
     this.menuItemsWrap = new Component(global, this, 'div', [
       Constants.CSSClasses.gameMenuItemsWrap,
     ]);
-    this.menuTitle = new Component(
-      global,
-      this.menuItemsWrap,
-      'a',
-      [
-        Constants.CSSClasses.gameMenuTitle,
-        Constants.CSSClasses.gameMenuLink,
-        Constants.CSSClasses.active,
-      ],
-      { href: '#main', 'data-menu-link-title': Constants.Labels.mainMenu }
-    );
-    this.menuTitle.textContent = Constants.Labels.mainMenu;
-
-    this.menuStats = new Component(
-      global,
-      this.menuItemsWrap,
-      'a',
-      [Constants.CSSClasses.gameMenuStats, Constants.CSSClasses.gameMenuLink],
-      { href: '#stats', 'data-menu-link-title': Constants.Labels.stats }
-    );
-    this.menuStats.textContent = Constants.Labels.stats;
-
+    this.menuTitle = this.initMenuTitle();
+    this.menuStats = this.initMenuStats();
     this.activeItem = this.menuTitle;
     this.activeItem.element.classList.add(Constants.CSSClasses.active);
     this.menuList = new Component(global, this.menuItemsWrap, 'ul', [
@@ -59,6 +39,34 @@ export default class GameMenu extends Component {
     this.loginButton.textContent = Constants.Labels.login;
     this.menuLinks.push(this.menuTitle, this.menuStats);
     this.addEventListeners();
+  }
+
+  private initMenuStats(): IComponent {
+    const menuStats = new Component(
+      this.global,
+      this.menuItemsWrap,
+      'a',
+      [Constants.CSSClasses.gameMenuStats, Constants.CSSClasses.gameMenuLink],
+      { href: '#stats', 'data-menu-link-title': Constants.Labels.stats }
+    );
+    menuStats.textContent = Constants.Labels.stats;
+    return menuStats;
+  }
+
+  private initMenuTitle(): IComponent {
+    const menuTitle = new Component(
+      this.global,
+      this.menuItemsWrap,
+      'a',
+      [
+        Constants.CSSClasses.gameMenuTitle,
+        Constants.CSSClasses.gameMenuLink,
+        Constants.CSSClasses.active,
+      ],
+      { href: '#main', 'data-menu-link-title': Constants.Labels.mainMenu }
+    );
+    menuTitle.textContent = Constants.Labels.mainMenu;
+    return menuTitle;
   }
 
   async init(): Promise<void> {

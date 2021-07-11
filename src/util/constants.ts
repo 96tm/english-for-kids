@@ -72,6 +72,7 @@ const CSSClasses = {
   statsTableHeadingRight: 'stats-table__heading-right',
   statsTableHeadingWrong: 'stats-table__heading-wrong',
   statsTableHeadingPercentage: 'stats-table__heading-percentage',
+  statsTableWordItem: 'stats-table__word-item',
   statsTableChosenHeading: 'chosen',
   statsColumnCategory: 'word-item__category',
   statsColumnWord: 'word-item__word',

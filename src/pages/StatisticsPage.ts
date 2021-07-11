@@ -65,7 +65,7 @@ export default class StatisticsPage extends Component {
       this.global,
       (this.table as StatsTable).tableBody,
       'tr',
-      ['stats-table__word-item']
+      [Constants.CSSClasses.statsTableWordItem]
     );
     const percentage = StatsService.calcRightPercentage(
       wordStat.right,

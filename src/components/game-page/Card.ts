@@ -39,47 +39,59 @@ export default class Card extends Component {
     this.inner = new Component(global, this, 'div', [
       Constants.CSSClasses.cardInner,
     ]);
-    this.front = new Component(global, this.inner, 'div', [
-      Constants.CSSClasses.cardFront,
-    ]);
-    this.frontImage = new Component(
-      global,
-      this.front,
-      'img',
-      [Constants.CSSClasses.cardFrontImage],
-      { src: image, alt: Constants.Labels.wordIllustration }
-    );
-    this.frontTextPanel = new Component(global, this.front, 'div', [
-      Constants.CSSClasses.cardFrontTextPanel,
-    ]);
-    this.frontText = new Component(global, this.frontTextPanel, 'div', [
-      Constants.CSSClasses.cardFrontText,
-    ]);
-    this.back = new Component(global, this.inner, 'div', [
-      Constants.CSSClasses.cardBack,
-    ]);
-    this.backImage = new Component(
-      global,
-      this.back,
-      'img',
-      [Constants.CSSClasses.cardBackImage],
-      { src: image, alt: Constants.Labels.wordIllustration }
-    );
-    this.backTextPanel = new Component(global, this.back, 'div', [
-      Constants.CSSClasses.cardBackTextPanel,
-    ]);
-    this.backText = new Component(global, this.backTextPanel, 'div', [
-      Constants.CSSClasses.cardBackText,
-    ]);
+    [this.front, this.frontImage, this.frontTextPanel, this.frontText] =
+      this.initFront();
+    [this.back, this.backImage, this.backTextPanel, this.backText] =
+      this.initBack();
     this.overlay = new Component(global, this, 'div', [
       Constants.CSSClasses.cardOverlay,
     ]);
-    this.backText.textContent = word;
-    this.frontText.textContent = translation;
     this.buttonTurn = new Component(global, this.backTextPanel, 'button', [
       Constants.CSSClasses.cardButtonTurn,
     ]);
     this.addEventListeners();
+  }
+
+  private initFront(): [IComponent, IComponent, IComponent, IComponent] {
+    const front = new Component(this.global, this.inner, 'div', [
+      Constants.CSSClasses.cardFront,
+    ]);
+    const frontImage = new Component(
+      this.global,
+      front,
+      'img',
+      [Constants.CSSClasses.cardFrontImage],
+      { src: this.image, alt: Constants.Labels.wordIllustration }
+    );
+    const frontTextPanel = new Component(this.global, front, 'div', [
+      Constants.CSSClasses.cardFrontTextPanel,
+    ]);
+    const frontText = new Component(this.global, frontTextPanel, 'div', [
+      Constants.CSSClasses.cardFrontText,
+    ]);
+    frontText.textContent = this.translation;
+    return [front, frontImage, frontTextPanel, frontText];
+  }
+
+  private initBack(): [IComponent, IComponent, IComponent, IComponent] {
+    const back = new Component(this.global, this.inner, 'div', [
+      Constants.CSSClasses.cardBack,
+    ]);
+    const backImage = new Component(
+      this.global,
+      back,
+      'img',
+      [Constants.CSSClasses.cardBackImage],
+      { src: this.image, alt: Constants.Labels.wordIllustration }
+    );
+    const backTextPanel = new Component(this.global, back, 'div', [
+      Constants.CSSClasses.cardBackTextPanel,
+    ]);
+    const backText = new Component(this.global, backTextPanel, 'div', [
+      Constants.CSSClasses.cardBackText,
+    ]);
+    backText.textContent = this.word;
+    return [back, backImage, backTextPanel, backText];
   }
 
   addEventListeners(): void {
