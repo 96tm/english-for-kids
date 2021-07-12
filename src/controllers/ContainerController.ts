@@ -18,7 +18,17 @@ export default class ContainerController extends Controller {
     this.component = new ContainerPage(global, rootComponent);
     Events.menuClick.add(this.handleMenuClick);
     Events.finishScreenShow.add(this.showFinishScreen);
+    Events.login.add(this.handleLogin);
+    Events.logout.add(this.handleLogout);
   }
+
+  private handleLogout: () => void = () => {
+    this.show();
+  };
+
+  private handleLogin: (login: string) => void = (login) => {
+    this.hide();
+  };
 
   private handleMenuClick: (menuItem: string) => void = (menuItem) => {
     const { gameMenu } = this.component as ContainerPage;

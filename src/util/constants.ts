@@ -94,6 +94,20 @@ const CSSClasses = {
   gameHeaderModeCircle: 'game-header-mode__circle',
   gameHeaderHeading: 'game-header__heading',
 
+  loginPage: 'login',
+  loginWrap: 'login-wrap',
+  loginHeading: 'login__heading',
+  loginForm: 'login__form',
+  loginFieldset: 'login__fieldset',
+  loginInputWrap: 'login__input-wrap',
+  loginInputLabel: 'login__input-label',
+  loginInput: 'login__input',
+  loginInputLogin: 'login__input-login',
+  loginInputPassword: 'login__input-password',
+  loginButtonsWrap: 'login__buttons-wrap',
+  loginButtonLogin: 'login__button-login',
+  loginButtonCancel: 'login__button-cancel',
+
   footer: 'footer',
   footerItems: 'footer__items',
   footerItem: 'footer__item',
@@ -102,12 +116,20 @@ const CSSClasses = {
   footerLinkSchool: 'footer__link-course',
   footerLinkGithub: 'footer__link-github',
 
+  adminNav: 'admin__nav',
+  adminNavMixin: 'admin-nav',
+  adminNavList: 'admin-nav__list',
+  adminNavItem: 'admin-nav__item',
+  adminNavLink: 'admin-nav__link',
+  adminContainer: 'admin__container',
+
   checked: 'checked',
   hidden: 'hidden',
   invisible: 'invisible',
   active: 'active',
   animated: 'animated',
   noClicks: 'no-clicks',
+  overlay: 'overlay',
 };
 
 const Labels = {
@@ -120,6 +142,9 @@ const Labels = {
   statsReset: 'Reset',
   statsRepeat: 'Repeat difficult words',
   statsRepeatHeading: 'Repeat',
+  adminCategoriesRoute: 'categories',
+  adminWordsRoute: 'words',
+  adminRoute: 'admin',
   gameRoute: 'game',
   mainRoute: 'main',
   statsRoute: 'stats',
@@ -128,12 +153,19 @@ const Labels = {
   category: 'Category',
   mainPageHeading: 'Categories',
   word: 'Word',
+  words: 'Words',
+  logout: 'logout',
   translation: 'Translation',
   training: 'Training guesses',
   right: 'Right guesses',
   wrong: 'Wrong guesses',
   percentage: 'Right guesses percentage',
   statsStorage: 'statsStorage',
+  loginHeading: 'Login',
+  loginButtonLogin: 'Login',
+  loginButtonCancel: 'Cancel',
+  loginInputLoginPlaceholder: 'login',
+  loginInputPasswordPlaceholder: 'password',
 };
 
 const Constants = {

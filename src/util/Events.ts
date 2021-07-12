@@ -6,6 +6,7 @@ import IWordStatDTO from '../models/IWordStatDTO';
 import SortType from '../models/SortType';
 import SortOrder from '../models/SortOrder';
 import ICard from '../models/ICard';
+import LoginInfo from '../models/LoginInfo';
 
 const menuClick = new Signal<string, void>();
 const modeButtonClick = new Signal<string, void>();
@@ -30,6 +31,10 @@ const statsCleared = new Signal<void, void>();
 const statsTableSorted = new Signal<[SortType, SortOrder], void>();
 const statsButtonRepeatClick = new Signal<void, void>();
 const statsRepeatDifficult = new Signal<ICard[], void>();
+const loginShow = new Signal<void, void>();
+const loginAttempt = new Signal<LoginInfo, void>();
+const login = new Signal<string, void>();
+const logout = new Signal<void, void>();
 
 const Events = {
   menuClick,
@@ -55,6 +60,10 @@ const Events = {
   statsTableSorted,
   statsButtonRepeatClick,
   statsRepeatDifficult,
+  loginShow,
+  loginAttempt,
+  login,
+  logout,
 };
 
 export default Events;

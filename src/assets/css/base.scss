@@ -2,6 +2,8 @@
 
 @import 'constants';
 
+@import 'main';
+
 @import 'game-menu';
 
 @import 'game-header';
@@ -12,8 +14,6 @@
 
 @import 'button-game';
 
-@import 'main';
-
 @import 'content-wrap';
 
 @import 'inner-container';
@@ -23,6 +23,10 @@
 @import 'finish-screen';
 
 @import 'stats';
+
+@import 'login-form';
+
+@import 'admin-page';
 
 @import 'media';
 

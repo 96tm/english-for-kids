@@ -1,0 +1,99 @@
+$fieldset-padding-left: 61px;
+$fieldset-padding-top: 49px;
+
+.login-wrap {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  z-index: $max-z-index;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.login {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 56%;
+  max-width: 812px;
+  height: 571px;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  font-size: 3rem;
+  line-height: 3.5rem;
+  font-weight: 400;
+  box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.login__heading {
+  text-align: center;
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.login__fieldset {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: $fieldset-padding-top 0 0 $fieldset-padding-left;
+  margin: 0;
+  font-size: 0.88rem;
+  .login__input-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .login__input-label {
+    transform: translateY(-75%);
+    text-transform: capitalize;
+    transition: all 0.2s ease-out;
+    color: rgba(0, 0, 0, 0.38);
+  }
+  .login__input {
+    height: 100%;
+    width: 68%;
+    border: none;
+    border-bottom: 1px solid #000;
+    font-size: 3rem;
+    line-height: 3.5rem;
+  }
+}
+
+.login__input:focus + .login__input-label,
+.login__input:not(:placeholder-shown) + .login__input-label {
+  transform: translateY(-175%);
+}
+
+.login__buttons-wrap {
+  height: 105px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $green-color;
+}
+
+.login__button-login,
+.login__button-cancel {
+  @extend .button;
+  height: 57%;
+}
+
+.login__button-cancel {
+  background: $button-red-color;
+}
+
+.login__button-login {
+  margin-left: 10%;
+}

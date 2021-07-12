@@ -1,0 +1,23 @@
+$nav-color: #00bf82;
+$nav-height: 97px;
+
+.admin__container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.admin__nav {
+  height: $nav-height;
+  background: $nav-color;
+}
+
+.admin-nav__list {
+  display: flex;
+  list-style: none;
+}
+
+.admin-nav__link {
+  text-decoration: none;
+  color: #fff;
+}

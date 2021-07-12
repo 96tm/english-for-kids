@@ -75,7 +75,7 @@ export default class GameMenu extends Component {
     }).then((response) => response.json());
     Object.keys(categories).forEach((key) => {
       const action = this.append('a', [Constants.CSSClasses.gameMenuLink], {
-        href: '#game',
+        href: `#${Constants.Labels.gameRoute}`,
         'data-menu-link-title': key,
       });
       action.textContent = key;
@@ -99,7 +99,8 @@ export default class GameMenu extends Component {
         Events.menuClick.emit(target.dataset.menuLinkTitle as string);
       }
     } else if (target.classList.contains(Constants.CSSClasses.gameMenuLogin)) {
-      throw Error('Not implemented');
+      event.preventDefault();
+      Events.loginShow.emit();
     }
   };
 

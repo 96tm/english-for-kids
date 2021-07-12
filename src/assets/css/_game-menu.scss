@@ -56,14 +56,11 @@ $login-button-width: 248px;
   }
 
   .game-menu__login {
+    @extend .button;
     width: $login-button-width;
     height: $game-menu-item-height;
-    display: none;
-    align-items: center;
     padding-left: $menu-items-padding-right;
-    border: 2px solid #fff;
-    color: #fff;
-    border-radius: 5px;
+    justify-content: flex-start;
     text-decoration: none;
     margin-bottom: $button-login-margin-bottom;
   }

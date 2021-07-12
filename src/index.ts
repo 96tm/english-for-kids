@@ -10,6 +10,8 @@ import MainPageController from './controllers/MainPageController';
 import ContainerPage from './pages/ContainerPage';
 import StatisticsController from './controllers/StatisticsController';
 import StatsService from './util/StatsService';
+import LoginController from './controllers/LoginController';
+import AdminController from './controllers/AdminController';
 
 (async () => {
   const global = window;
@@ -18,6 +20,10 @@ import StatsService from './util/StatsService';
   const containerController = new ContainerController(global, root);
   await containerController.init();
 
+  const loginController = new LoginController(
+    global,
+    containerController.component
+  );
   const gameController = new GameController(
     global,
     (containerController.component as ContainerPage).contentWrap
@@ -36,10 +42,13 @@ import StatsService from './util/StatsService';
     (containerController.component as ContainerPage).contentWrap
   );
 
+  const adminController = new AdminController(global, root);
+
   await RouterService.init({
-    game: gameController,
-    main: mainPageController,
-    stats: statisticsController,
+    [Constants.Labels.gameRoute]: gameController,
+    [Constants.Labels.mainRoute]: mainPageController,
+    [Constants.Labels.statsRoute]: statisticsController,
+    [Constants.Labels.adminRoute]: adminController,
   });
   await RouterService.showRoute('main');
   await mainPageController.init();
