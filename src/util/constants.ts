@@ -124,6 +124,17 @@ const CSSClasses = {
   adminContainer: 'admin__container',
   adminContent: 'admin__content',
   adminCategories: 'admin__categories',
+  adminCategoryCard: 'admin__category-card',
+  adminCategoryCardHeading: 'admin-category-card__heading',
+  adminCategoryCardWordCount: 'admin-category-card__word-count',
+  adminCategoryCardButtonRemove: 'admin-category-card__remove',
+  adminCategoryCardButtonUpdate: 'admin-category-card__update',
+  adminCategoryCardButtonAdd: 'admin-category-card__add',
+  adminCreateCategoryCardButton: 'admin-create-category-card__button',
+  adminCreateWordCardButton: 'admin-create-word-card__button',
+
+  adminWordCard: 'admin__word-card',
+
   adminWords: 'admin__words',
 
   checked: 'checked',
@@ -169,6 +180,8 @@ const Labels = {
   loginButtonCancel: 'Cancel',
   loginInputLoginPlaceholder: 'login',
   loginInputPasswordPlaceholder: 'password',
+  adminCreateCategoryCardHeading: 'Create new category',
+  adminCreateWordCardHeading: 'Add new word',
 };
 
 const Constants = {

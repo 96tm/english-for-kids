@@ -1,5 +1,7 @@
 $nav-color: #00bf82;
 $nav-height: 97px;
+$max-width: 1175px;
+$categories-padding-top: 96px;
 
 .admin__container {
   display: flex;
@@ -8,6 +10,8 @@ $nav-height: 97px;
 }
 
 .admin__content {
+  display: flex;
+  justify-content: center;
   flex-grow: 1;
 }
 
@@ -39,4 +43,15 @@ $nav-height: 97px;
   line-height: 1.6rem;
   text-decoration: none;
   color: #fff;
+}
+
+.admin__categories {
+  width: 82%;
+  max-width: $max-width;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 45px;
+  row-gap: 40px;
+  padding-top: $categories-padding-top;
 }

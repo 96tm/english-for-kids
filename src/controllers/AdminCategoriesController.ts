@@ -1,4 +1,3 @@
-import Component from '../components/Component';
 import IComponent from '../components/IComponent';
 
 import Controller from './Controller';
@@ -10,5 +9,14 @@ export default class AdminCategoriesController extends Controller {
   constructor(global: Window, rootComponent: IComponent | null) {
     super();
     this.component = new AdminCategoriesPage(global, rootComponent);
+  }
+
+  async show(): Promise<void> {
+    await this.init();
+    super.show();
+  }
+
+  async init(): Promise<void> {
+    await (this.component as AdminCategoriesPage).init();
   }
 }
