@@ -18,8 +18,8 @@ export default class LoginPage extends Component {
   inputLoginWrap: IComponent;
   inputPasswordWrap: IComponent;
 
-  constructor(global: Window, rootView: IComponent | null) {
-    super(global, rootView, 'div', [Constants.CSSClasses.loginWrap]);
+  constructor(global: Window, rootComponent: IComponent | null) {
+    super(global, rootComponent, 'div', [Constants.CSSClasses.loginWrap]);
     this.loginContainer = new Component(global, this, 'div', [
       Constants.CSSClasses.loginPage,
     ]);

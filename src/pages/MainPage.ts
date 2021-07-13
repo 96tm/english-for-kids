@@ -9,8 +9,8 @@ import Events from '../util/Events';
 export default class MainPage extends Component {
   categories: IComponent[] = [];
 
-  constructor(global: Window, rootView: IComponent | null) {
-    super(global, rootView, 'div', [Constants.CSSClasses.categoriesWrap]);
+  constructor(global: Window, rootComponent: IComponent | null) {
+    super(global, rootComponent, 'div', [Constants.CSSClasses.categoriesWrap]);
   }
 
   async init(): Promise<void> {

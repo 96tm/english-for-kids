@@ -122,6 +122,9 @@ const CSSClasses = {
   adminNavItem: 'admin-nav__item',
   adminNavLink: 'admin-nav__link',
   adminContainer: 'admin__container',
+  adminContent: 'admin__content',
+  adminCategories: 'admin__categories',
+  adminWords: 'admin__words',
 
   checked: 'checked',
   hidden: 'hidden',
@@ -154,7 +157,7 @@ const Labels = {
   mainPageHeading: 'Categories',
   word: 'Word',
   words: 'Words',
-  logout: 'logout',
+  logout: 'Logout',
   translation: 'Translation',
   training: 'Training guesses',
   right: 'Right guesses',

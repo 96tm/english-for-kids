@@ -8,11 +8,11 @@ export default class AdminContainerPage extends Component {
   nav: IComponent;
   container: IComponent;
 
-  constructor(global: Window, rootView: IComponent | null) {
-    super(global, rootView, 'div', [Constants.CSSClasses.adminContainer]);
+  constructor(global: Window, rootComponent: IComponent | null) {
+    super(global, rootComponent, 'div', [Constants.CSSClasses.adminContainer]);
     this.nav = new Nav(global, this);
     this.container = new Component(global, this, 'div', [
-      Constants.CSSClasses.adminContainer,
+      Constants.CSSClasses.adminContent,
     ]);
   }
 }

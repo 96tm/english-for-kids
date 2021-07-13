@@ -18,8 +18,8 @@ export default class ContainerPage extends Component {
   footer: IComponent;
   innerContainer: IComponent;
 
-  constructor(global: Window, rootView: IComponent | null) {
-    super(global, rootView, 'div', [Constants.CSSClasses.container]);
+  constructor(global: Window, rootComponent: IComponent | null) {
+    super(global, rootComponent, 'div', [Constants.CSSClasses.container]);
     this.gameToggleCheckbox = new Component(
       global,
       this,

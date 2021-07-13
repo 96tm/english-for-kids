@@ -7,17 +7,36 @@ $nav-height: 97px;
   flex-grow: 1;
 }
 
+.admin__content {
+  flex-grow: 1;
+}
+
 .admin__nav {
   height: $nav-height;
+  display: flex;
+  align-items: center;
   background: $nav-color;
 }
 
 .admin-nav__list {
   display: flex;
+  flex-grow: 1;
   list-style: none;
+  padding: 0 65px;
+}
+
+.admin-nav__item:nth-child(2n + 2) {
+  margin-left: 155px;
+}
+
+.admin-nav__item:last-child {
+  margin-left: auto;
 }
 
 .admin-nav__link {
+  font-weight: 700;
+  font-size: 1.375rem;
+  line-height: 1.6rem;
   text-decoration: none;
   color: #fff;
 }

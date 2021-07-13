@@ -22,7 +22,7 @@ export default class LoginController extends Controller {
     if (this.validate(loginInfo)) {
       this.hide();
       Events.login.emit(loginInfo.login);
-      RouterService.setHash(Constants.Labels.adminRoute);
+      RouterService.setHash(Constants.Labels.adminCategoriesRoute);
     }
   };
 

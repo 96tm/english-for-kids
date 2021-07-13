@@ -12,11 +12,16 @@ import StatisticsController from './controllers/StatisticsController';
 import StatsService from './util/StatsService';
 import LoginController from './controllers/LoginController';
 import AdminController from './controllers/AdminController';
+import AdminCategoriesController from './controllers/AdminCategoriesController';
+import AdminContainerPage from './pages/AdminContainerPage';
+import AdminWordsController from './controllers/AdminWordsController';
 
 (async () => {
   const global = window;
   const statsService = new StatsService(global);
   const root = new Component(global, null, 'div', [Constants.CSSClasses.root]);
+  root.render();
+
   const containerController = new ContainerController(global, root);
   await containerController.init();
 
@@ -24,13 +29,12 @@ import AdminController from './controllers/AdminController';
     global,
     containerController.component
   );
+
   const gameController = new GameController(
     global,
     (containerController.component as ContainerPage).contentWrap
   );
   await gameController.init();
-
-  root.render();
 
   const mainPageController = new MainPageController(
     global,
@@ -43,13 +47,23 @@ import AdminController from './controllers/AdminController';
   );
 
   const adminController = new AdminController(global, root);
+  const adminCategoriesController = new AdminCategoriesController(
+    global,
+    (adminController.component as AdminContainerPage).container
+  );
+  const adminWordsController = new AdminWordsController(
+    global,
+    (adminController.component as AdminContainerPage).container
+  );
 
   await RouterService.init({
     [Constants.Labels.gameRoute]: gameController,
     [Constants.Labels.mainRoute]: mainPageController,
     [Constants.Labels.statsRoute]: statisticsController,
     [Constants.Labels.adminRoute]: adminController,
+    [Constants.Labels.adminWordsRoute]: adminWordsController,
+    [Constants.Labels.adminCategoriesRoute]: adminCategoriesController,
   });
-  await RouterService.showRoute('main');
+  await RouterService.showRoute(Constants.Labels.mainRoute);
   await mainPageController.init();
 })();
