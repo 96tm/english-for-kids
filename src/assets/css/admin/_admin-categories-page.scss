@@ -1,0 +1,23 @@
+@import 'admin-category-card';
+@import 'admin-create-category-card';
+
+$max-width: 1175px;
+$categories-padding-top: 96px;
+
+.admin__categories {
+  width: 82%;
+  max-width: $max-width;
+  padding-top: $categories-padding-top;
+}
+
+.admin__categories-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 40px;
+  &::after {
+    content: '';
+    width: $category-card-width;
+    height: 0;
+  }
+}

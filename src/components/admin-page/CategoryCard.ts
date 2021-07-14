@@ -35,12 +35,16 @@ export default class CategoryCard extends Component {
       'a',
       [Constants.CSSClasses.adminCategoryCardWordCountLink],
       {
-        href: `#${this.name.toLowerCase()}/${Constants.Labels.adminWordsRoute}`,
+        href: `#${this.name}/${Constants.Labels.adminWordsRoute}`,
       }
     );
-    this.wordCount = new Component(global, this.wordsLink, 'div', [
-      Constants.CSSClasses.adminCategoryCardWordCount,
-    ]);
+    this.wordCount = new Component(
+      global,
+      this.wordsLink,
+      'div',
+      [Constants.CSSClasses.adminCategoryCardWordCount],
+      { 'data-title': Constants.Labels.adminCategoryCardWordCountTitle }
+    );
     this.wordCount.textContent = String(numberOfWords);
     [
       this.bottomButtonsWrap,

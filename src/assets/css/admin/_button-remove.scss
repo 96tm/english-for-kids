@@ -1,0 +1,35 @@
+$remove-button-color: #666;
+
+.button-remove {
+  position: relative;
+  width: 43px;
+  height: 43px;
+  position: absolute;
+  top: 6px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    &::before,
+    &::after {
+      background: $button-red-color;
+    }
+  }
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 3px;
+    left: 50%;
+    top: 50%;
+    background: $remove-button-color;
+  }
+  &::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  &::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+}

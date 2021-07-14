@@ -1,0 +1,20 @@
+$button-diameter: 150px;
+
+.admin-word-card__heading {
+  @extend .admin-category-card__heading;
+  padding-top: 44px;
+  font-size: 2.25rem;
+}
+
+.admin-create-word-card__button {
+  @extend .admin-create-category-card__button;
+  position: absolute;
+  width: $button-diameter;
+  height: $button-diameter;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  &::before,
+  &::after {
+    height: 12px;
+  }
+}

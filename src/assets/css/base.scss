@@ -4,29 +4,29 @@
 
 @import 'main';
 
-@import 'game-menu';
+@import 'game/game-menu';
 
-@import 'game-header';
+@import 'game/game-header';
 
-@import 'footer';
+@import 'game/footer';
 
-@import 'cards';
+@import 'game/cards';
 
-@import 'button-game';
+@import 'game/button-game';
 
-@import 'content-wrap';
+@import 'game/content-wrap';
 
-@import 'inner-container';
+@import 'game/inner-container';
 
-@import 'categories';
+@import 'game/categories';
 
-@import 'finish-screen';
+@import 'game/finish-screen';
 
 @import 'stats';
 
-@import 'login-form';
+@import 'game/login-form';
 
-@import 'admin-page';
+@import 'admin/admin-page';
 
 @import 'media';
 

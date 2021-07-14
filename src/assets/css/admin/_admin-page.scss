@@ -1,0 +1,17 @@
+@import 'admin-button';
+@import 'button-remove';
+@import 'nav';
+@import 'admin-categories-page';
+@import 'admin-words-page';
+
+.admin__container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.admin__content {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+}
