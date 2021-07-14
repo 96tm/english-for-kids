@@ -1,48 +1,62 @@
-import { RoutingTable } from './RoutingTable';
-
 import Events from './Events';
+import IController from '../controllers/IController';
+import RoutingRecord from './RoutingRecord';
+import Constants from './constants';
 
 class Router {
   constructor(
     private global: Window,
-    public currentRoute: string,
-    private routes: RoutingTable = {}
+    public currentPattern: string,
+    private routingRecords: RoutingRecord[] = []
   ) {}
 
   async showRoute(route: string): Promise<void> {
-    if (this.routes[route]) {
-      this.routes[this.currentRoute].hide();
-      this.currentRoute = route;
-      await this.routes[route].show();
-      Events.routeChange.emit(route);
+    const decodedRoute = decodeURIComponent(route);
+    const controller = this.getController(decodedRoute);
+    if (controller) {
+      const currentController = this.getController(
+        this.currentPattern
+      ) as IController;
+      currentController.hide();
+      this.currentPattern = decodedRoute;
+      await controller.show();
+      Events.routeChange.emit(decodedRoute);
     }
+  }
+
+  getController(route: string): IController | undefined {
+    const routingRecord = this.routingRecords.find((record) => {
+      const regexp = new RegExp(record.pattern);
+      return regexp.test(route);
+    });
+    return routingRecord?.controller;
   }
 
   setHash(hash: string): void {
     this.global.location.hash = hash;
   }
 
-  addRoutes(routes: RoutingTable) {
-    Object.keys(routes).forEach((routeName) => {
-      this.routes[routeName] = routes[routeName];
-      routes[routeName].hide();
+  addRoutePatterns(routingRecords: RoutingRecord[]) {
+    routingRecords.forEach((routingRecord) => {
+      this.routingRecords.push(routingRecord);
+      routingRecord.controller.hide();
     });
   }
 
-  async init(routes: RoutingTable): Promise<void> {
-    this.addRoutes(routes);
+  async init(routes: RoutingRecord[]): Promise<void> {
+    this.addRoutePatterns(routes);
     this.global.addEventListener('popstate', async () => {
       if (!this.global.location.hash) {
         const thisGlobal = this.global;
-        thisGlobal.location.hash = this.currentRoute;
+        thisGlobal.location.hash = this.currentPattern;
       } else {
         await this.showRoute(this.global.location.hash.slice(1));
       }
     });
-    this.setHash(this.currentRoute);
+    this.setHash(this.currentPattern);
   }
 }
 
-const RouterService = new Router(window, 'main');
+const RouterService = new Router(window, Constants.Labels.mainRoute);
 
 export default RouterService;

@@ -123,10 +123,13 @@ const CSSClasses = {
   adminNavLink: 'admin-nav__link',
   adminContainer: 'admin__container',
   adminContent: 'admin__content',
+  adminEditCategory: 'admin__edit-category',
+  adminEditCategoryHeading: 'admin-edit-category__heading',
   adminCategories: 'admin__categories',
   adminCategoriesWrap: 'admin__categories-wrap',
   adminCategoryCard: 'admin__category-card',
   adminCategoryCardHeading: 'admin-category-card__heading',
+  adminCategoryCardWordCountLink: 'admin-category-card__word-count-link',
   adminCategoryCardWordCount: 'admin-category-card__word-count',
   adminCategoryCardButtonRemove: 'admin-category-card__remove',
   adminCategoryCardButtonUpdate: 'admin-category-card__update',
@@ -134,6 +137,13 @@ const CSSClasses = {
   adminCreateCategoryCardButton: 'admin-create-category-card__button',
   adminCreateWordCardButton: 'admin-create-word-card__button',
   adminCategoryCardButtonsWrap: 'admin-category-card__buttons-wrap',
+  adminWordCardInfo: 'admin__category-card-info',
+  adminWordCardInfoImageWrap: 'admin-word-card-info__image-wrap',
+  adminWordCardInfoImage: 'admin-word-card-info__image',
+  adminWordCardInfoButtonChange: 'admin-word-card-info__change',
+  adminWordCardWord: 'admin-word-card__word',
+  adminWordCardTranslation: 'admin-word-card__translation',
+  adminWordCardAudio: 'admin-word-card__audio',
 
   adminWordCard: 'admin__word-card',
 
@@ -186,6 +196,8 @@ const Labels = {
   adminCategoryCardButtonAdd: 'Add word',
   adminCreateCategoryCardHeading: 'Create new category',
   adminCreateWordCardHeading: 'Add new word',
+  adminWordCardImageAlt: 'Word illustration',
+  adminWordCardButtonChange: 'Change',
 };
 
 const Constants = {

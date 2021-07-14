@@ -7,6 +7,7 @@ export default class CategoryCard extends Component {
   name: string;
   numberOfWords: number;
   heading: IComponent;
+  wordsLink: IComponent;
   wordCount: IComponent;
   buttonRemove: IComponent;
   buttonUpdate: IComponent;
@@ -28,29 +29,47 @@ export default class CategoryCard extends Component {
       Constants.CSSClasses.adminCategoryCardHeading,
     ]);
     this.heading.textContent = name;
-    this.wordCount = new Component(global, this, 'div', [
+    this.wordsLink = new Component(
+      global,
+      this,
+      'a',
+      [Constants.CSSClasses.adminCategoryCardWordCountLink],
+      {
+        href: `#${this.name.toLowerCase()}/${Constants.Labels.adminWordsRoute}`,
+      }
+    );
+    this.wordCount = new Component(global, this.wordsLink, 'div', [
       Constants.CSSClasses.adminCategoryCardWordCount,
     ]);
     this.wordCount.textContent = String(numberOfWords);
-    this.buttonRemove = new Component(global, this, 'button', [
+    [
+      this.bottomButtonsWrap,
+      this.buttonUpdate,
+      this.buttonAdd,
+      this.buttonRemove,
+    ] = this.createButtons();
+    this.addEventListeners();
+  }
+
+  private createButtons(): IComponent[] {
+    const buttonRemove = new Component(this.global, this, 'button', [
       Constants.CSSClasses.adminCategoryCardButtonRemove,
     ]);
-    this.bottomButtonsWrap = new Component(global, this, 'div', [
+    const bottomButtonsWrap = new Component(this.global, this, 'div', [
       Constants.CSSClasses.adminCategoryCardButtonsWrap,
     ]);
-    this.buttonUpdate = new Component(
-      global,
+    const buttonUpdate = new Component(
+      this.global,
       this.bottomButtonsWrap,
       'button',
       [Constants.CSSClasses.adminCategoryCardButtonUpdate]
     );
-    this.buttonUpdate.textContent =
-      Constants.Labels.adminCategoryCardButtonUpdate;
-    this.buttonAdd = new Component(global, this.bottomButtonsWrap, 'button', [
+    buttonUpdate.textContent = Constants.Labels.adminCategoryCardButtonUpdate;
+    const buttonAdd = new Component(this.global, bottomButtonsWrap, 'button', [
       Constants.CSSClasses.adminCategoryCardButtonAdd,
     ]);
-    this.buttonAdd.textContent = Constants.Labels.adminCategoryCardButtonAdd;
-    this.addEventListeners();
+    buttonAdd.textContent = Constants.Labels.adminCategoryCardButtonAdd;
+    return [bottomButtonsWrap, buttonUpdate, buttonAdd, buttonRemove];
   }
 
   private addEventListeners(): void {
@@ -69,6 +88,8 @@ export default class CategoryCard extends Component {
       case this.buttonUpdate.element:
         break;
       case this.buttonAdd.element:
+        break;
+      case this.wordCount.element:
         break;
       default:
         break;

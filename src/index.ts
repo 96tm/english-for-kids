@@ -56,14 +56,27 @@ import AdminWordsController from './controllers/AdminWordsController';
     (adminController.component as AdminContainerPage).container
   );
 
-  await RouterService.init({
-    [Constants.Labels.gameRoute]: gameController,
-    [Constants.Labels.mainRoute]: mainPageController,
-    [Constants.Labels.statsRoute]: statisticsController,
-    [Constants.Labels.adminRoute]: adminController,
-    [Constants.Labels.adminWordsRoute]: adminWordsController,
-    [Constants.Labels.adminCategoriesRoute]: adminCategoriesController,
-  });
+  await RouterService.init([
+    { pattern: Constants.Labels.gameRoute, controller: gameController },
+    { pattern: Constants.Labels.mainRoute, controller: mainPageController },
+    {
+      pattern: Constants.Labels.statsRoute,
+      controller: statisticsController,
+    },
+    { pattern: Constants.Labels.adminRoute, controller: adminController },
+    {
+      pattern: Constants.Labels.adminWordsRoute,
+      controller: adminWordsController,
+    },
+    {
+      pattern: Constants.Labels.adminCategoriesRoute,
+      controller: adminCategoriesController,
+    },
+    {
+      pattern: '\\w/words',
+      controller: adminWordsController,
+    },
+  ]);
   await RouterService.showRoute(Constants.Labels.mainRoute);
   await mainPageController.init();
 })();

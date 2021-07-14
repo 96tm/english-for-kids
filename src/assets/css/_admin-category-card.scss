@@ -20,14 +20,23 @@ $category-card-height: 244px;
   font-size: 1.375rem;
   line-height: 1.6rem;
 }
+.admin-category-card__word-count-link {
+  color: inherit;
+  text-decoration: none;
+}
 
 .admin-category-card__word-count {
   padding-left: 32px;
   font-weight: 700;
   font-size: 1.375rem;
   line-height: 1.6rem;
+  &:hover {
+    cursor: pointer;
+    color: $green-color;
+  }
   &::before {
     content: 'WORDS: ';
+    font-weight: 400;
   }
 }
 

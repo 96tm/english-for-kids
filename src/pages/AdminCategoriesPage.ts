@@ -30,7 +30,9 @@ export default class AdminCategoriesPage extends Component {
     this.element.removeEventListener('click', this.handleClick);
   }
 
-  private handleClick: (event: MouseEvent) => void = (event) => {};
+  private handleClick: (event: MouseEvent) => void = (event) => {
+    const target = event.target as HTMLElement;
+  };
 
   private addOneCategory(name: string, numberOfWords: number): IComponent {
     const category = new CategoryCard(
