@@ -1,0 +1,38 @@
+@import 'admin-category-card';
+
+$button-diameter: 85px;
+
+.admin-create-category-card__button {
+  position: relative;
+  width: $button-diameter;
+  height: $button-diameter;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 3px solid rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  &:hover {
+    border: 3px solid $green-color;
+    &::before,
+    &::after {
+      background: $green-color;
+    }
+  }
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 70%;
+    height: 10px;
+    left: 50%;
+    top: 50%;
+    background: $remove-button-color;
+  }
+  &::before {
+    transform: translate(-50%, -50%);
+  }
+  &::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+}

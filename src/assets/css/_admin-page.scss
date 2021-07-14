@@ -1,4 +1,6 @@
-$nav-color: #00bf82;
+@import 'admin-category-card';
+@import 'admin-create-category-card';
+
 $nav-height: 97px;
 $max-width: 1175px;
 $categories-padding-top: 96px;
@@ -19,7 +21,7 @@ $categories-padding-top: 96px;
   height: $nav-height;
   display: flex;
   align-items: center;
-  background: $nav-color;
+  background: $admin-nav-color;
 }
 
 .admin-nav__list {
@@ -48,10 +50,17 @@ $categories-padding-top: 96px;
 .admin__categories {
   width: 82%;
   max-width: $max-width;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  column-gap: 45px;
-  row-gap: 40px;
   padding-top: $categories-padding-top;
+}
+
+.admin__categories-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 40px;
+  &::after {
+    content: '';
+    width: $category-card-width;
+    height: 0;
+  }
 }

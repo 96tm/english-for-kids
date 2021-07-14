@@ -3,15 +3,22 @@ import IComponent from '../components/IComponent';
 
 import Constants from '../util/constants';
 import CategoryCard from '../components/admin-page/CategoryCard';
-// import CreateCategoryCard from '../components/admin-page/CreateCategoryCard';
+import CreateCategoryCard from '../components/admin-page/CreateCategoryCard';
 
 export default class AdminCategoriesPage extends Component {
   categories: IComponent[] = [];
-  // createCategoryCard: IComponent;
+  createCategoryCard: IComponent;
+  categoriesWrap: IComponent;
 
   constructor(global: Window, rootComponent: IComponent | null) {
     super(global, rootComponent, 'div', [Constants.CSSClasses.adminCategories]);
-    // this.createCategoryCard = new CreateCategoryCard(global, this);
+    this.categoriesWrap = new Component(global, this, 'div', [
+      Constants.CSSClasses.adminCategoriesWrap,
+    ]);
+    this.createCategoryCard = new CreateCategoryCard(
+      global,
+      this.categoriesWrap
+    );
     this.addEventListeners();
   }
 
@@ -26,7 +33,12 @@ export default class AdminCategoriesPage extends Component {
   private handleClick: (event: MouseEvent) => void = (event) => {};
 
   private addOneCategory(name: string, numberOfWords: number): IComponent {
-    const category = new CategoryCard(this.global, this, name, numberOfWords);
+    const category = new CategoryCard(
+      this.global,
+      this.categoriesWrap,
+      name,
+      numberOfWords
+    );
     this.categories.push(category);
     return category;
   }
@@ -38,5 +50,10 @@ export default class AdminCategoriesPage extends Component {
     Object.keys(categories).forEach((key) => {
       this.addOneCategory(key, categories[key].length);
     });
+    this.createCategoryCard.remove();
+    this.createCategoryCard = new CreateCategoryCard(
+      this.global,
+      this.categoriesWrap
+    );
   }
 }

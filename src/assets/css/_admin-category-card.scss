@@ -1,0 +1,81 @@
+$remove-button-color: #666;
+$category-card-width: 361px;
+$category-card-height: 244px;
+
+.admin__category-card {
+  position: relative;
+  width: $category-card-width;
+  height: $category-card-height;
+  display: flex;
+  flex-direction: column;
+  padding: 23.3px 19px 24.8px;
+  border: 2px solid rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+}
+
+.admin-category-card__heading {
+  text-align: center;
+  padding-bottom: 34px;
+  font-weight: 700;
+  font-size: 1.375rem;
+  line-height: 1.6rem;
+}
+
+.admin-category-card__word-count {
+  padding-left: 32px;
+  font-weight: 700;
+  font-size: 1.375rem;
+  line-height: 1.6rem;
+  &::before {
+    content: 'WORDS: ';
+  }
+}
+
+.admin-category-card__buttons-wrap {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.admin-category-card__update,
+.admin-category-card__add {
+  @extend .button;
+  width: 40%;
+  height: 34px;
+  border: 2px solid $admin-nav-color;
+  color: $admin-nav-color;
+}
+
+.admin-category-card__remove {
+  position: relative;
+  width: 43px;
+  height: 43px;
+  position: absolute;
+  top: 6px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    &::before,
+    &::after {
+      background: $button-red-color;
+    }
+  }
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    left: 0;
+    top: 50%;
+    background: $remove-button-color;
+  }
+  &::before {
+    transform: translateY(-50%) rotate(45deg);
+  }
+  &::after {
+    transform: translateY(-50%) rotate(-45deg);
+  }
+}

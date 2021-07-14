@@ -11,6 +11,7 @@ export default class CategoryCard extends Component {
   buttonRemove: IComponent;
   buttonUpdate: IComponent;
   buttonAdd: IComponent;
+  bottomButtonsWrap: IComponent;
 
   constructor(
     global: Window,
@@ -24,7 +25,7 @@ export default class CategoryCard extends Component {
     this.name = name;
     this.numberOfWords = numberOfWords;
     this.heading = new Component(global, this, 'div', [
-      Constants.CSSClasses.categoryText,
+      Constants.CSSClasses.adminCategoryCardHeading,
     ]);
     this.heading.textContent = name;
     this.wordCount = new Component(global, this, 'div', [
@@ -34,12 +35,21 @@ export default class CategoryCard extends Component {
     this.buttonRemove = new Component(global, this, 'button', [
       Constants.CSSClasses.adminCategoryCardButtonRemove,
     ]);
-    this.buttonUpdate = new Component(global, this, 'button', [
-      Constants.CSSClasses.adminCategoryCardButtonUpdate,
+    this.bottomButtonsWrap = new Component(global, this, 'div', [
+      Constants.CSSClasses.adminCategoryCardButtonsWrap,
     ]);
-    this.buttonAdd = new Component(global, this, 'button', [
+    this.buttonUpdate = new Component(
+      global,
+      this.bottomButtonsWrap,
+      'button',
+      [Constants.CSSClasses.adminCategoryCardButtonUpdate]
+    );
+    this.buttonUpdate.textContent =
+      Constants.Labels.adminCategoryCardButtonUpdate;
+    this.buttonAdd = new Component(global, this.bottomButtonsWrap, 'button', [
       Constants.CSSClasses.adminCategoryCardButtonAdd,
     ]);
+    this.buttonAdd.textContent = Constants.Labels.adminCategoryCardButtonAdd;
     this.addEventListeners();
   }
 

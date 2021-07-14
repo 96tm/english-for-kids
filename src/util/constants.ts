@@ -124,6 +124,7 @@ const CSSClasses = {
   adminContainer: 'admin__container',
   adminContent: 'admin__content',
   adminCategories: 'admin__categories',
+  adminCategoriesWrap: 'admin__categories-wrap',
   adminCategoryCard: 'admin__category-card',
   adminCategoryCardHeading: 'admin-category-card__heading',
   adminCategoryCardWordCount: 'admin-category-card__word-count',
@@ -132,6 +133,7 @@ const CSSClasses = {
   adminCategoryCardButtonAdd: 'admin-category-card__add',
   adminCreateCategoryCardButton: 'admin-create-category-card__button',
   adminCreateWordCardButton: 'admin-create-word-card__button',
+  adminCategoryCardButtonsWrap: 'admin-category-card__buttons-wrap',
 
   adminWordCard: 'admin__word-card',
 
@@ -180,6 +182,8 @@ const Labels = {
   loginButtonCancel: 'Cancel',
   loginInputLoginPlaceholder: 'login',
   loginInputPasswordPlaceholder: 'password',
+  adminCategoryCardButtonUpdate: 'Update',
+  adminCategoryCardButtonAdd: 'Add word',
   adminCreateCategoryCardHeading: 'Create new category',
   adminCreateWordCardHeading: 'Add new word',
 };
