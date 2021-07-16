@@ -175,6 +175,7 @@ const CSSClasses = {
   adminWordsHeading: 'admin__words-heading',
   adminWordsWrap: 'admin__words-wrap',
 
+  buttonRemove: 'button-remove',
   checked: 'checked',
   hidden: 'hidden',
   invisible: 'invisible',
@@ -182,6 +183,8 @@ const CSSClasses = {
   animated: 'animated',
   noClicks: 'no-clicks',
   overlay: 'overlay',
+  error: 'error',
+  errorContainer: 'error-container',
 };
 
 const Labels = {

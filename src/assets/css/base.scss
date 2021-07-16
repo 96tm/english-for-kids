@@ -2,6 +2,10 @@
 
 @import 'constants';
 
+@import './shared/error';
+
+@import './shared/button-remove';
+
 @import 'main';
 
 @import 'game/game-menu';

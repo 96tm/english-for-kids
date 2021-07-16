@@ -93,6 +93,11 @@ body,
   }
 }
 
+.login__button-login:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
 .game-menu-toggle-checkbox {
   position: absolute;
   z-index: 2;

@@ -27,6 +27,8 @@ class Router {
       this.currentPattern = decodedRoute;
       await controller.show();
       Events.routeChange.emit(decodedRoute);
+    } else {
+      this.showRoute(Constants.Labels.mainRoute);
     }
   }
 

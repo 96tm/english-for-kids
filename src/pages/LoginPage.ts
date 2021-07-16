@@ -2,6 +2,7 @@ import Component from '../components/Component';
 import IComponent from '../components/IComponent';
 import Constants from '../util/constants';
 import Events from '../util/Events';
+import ErrorMessage from '../components/shared/ErrorMessage';
 
 export default class LoginPage extends Component {
   private loginContainer: IComponent;
@@ -38,6 +39,23 @@ export default class LoginPage extends Component {
     [this.buttonsWrap, this.buttonLogin, this.buttonCancel] =
       this.initButtons();
     this.addEventListeners();
+    this.disableSubmit();
+  }
+
+  showError(text: string): void {
+    const error = new ErrorMessage(this.global, text);
+    error.attachTo(this.loginContainer);
+  }
+
+  remove(): void {
+    this.clearInputs();
+    super.remove();
+  }
+
+  private clearInputs(): void {
+    (this.inputLogin.element as HTMLInputElement).value = '';
+    (this.inputPassword.element as HTMLInputElement).value = '';
+    this.disableSubmit();
   }
 
   private initForm(): IComponent[] {
@@ -119,6 +137,7 @@ export default class LoginPage extends Component {
   getLoginData(): { login: string; password: string } {
     const login = (this.inputLogin.element as HTMLInputElement).value;
     const password = (this.inputPassword.element as HTMLInputElement).value;
+    this.clearInputs();
     return { login, password };
   }
 
@@ -138,11 +157,32 @@ export default class LoginPage extends Component {
     }
   };
 
+  private disableSubmit(): void {
+    this.buttonLogin.element.setAttribute('disabled', '');
+  }
+
+  private enableSubmit(): void {
+    this.buttonLogin.element.removeAttribute('disabled');
+  }
+
+  handleInputChange: (event: Event) => void = (event) => {
+    if (
+      (this.inputLogin.element as HTMLInputElement).value &&
+      (this.inputPassword.element as HTMLInputElement).value
+    ) {
+      this.enableSubmit();
+    } else {
+      this.disableSubmit();
+    }
+  };
+
   addEventListeners(): void {
     this.element.addEventListener('click', this.handleClick);
+    this.element.addEventListener('input', this.handleInputChange);
   }
 
   removeEventListeners(): void {
     this.element.removeEventListener('click', this.handleClick);
+    this.element.removeEventListener('change', this.handleInputChange);
   }
 }

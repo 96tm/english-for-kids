@@ -29,6 +29,10 @@ export default class LoginController extends Controller {
       Events.login.emit(loginInfo.login);
       userService.login();
       RouterService.setHash(Constants.Labels.adminCategoriesRoute);
+    } else {
+      (this.component as LoginPage).showError(
+        'No user found with provided login and password'
+      );
     }
   };
 
