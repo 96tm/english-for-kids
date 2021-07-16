@@ -19,7 +19,7 @@ export default class AdminCategoriesPage extends Component {
     ]);
     this.createCategoryCard = new CategoryCard(global, this.categoriesWrap);
     (this.createCategoryCard as CategoryCard).setAddMode();
-    this.addEventListeners();
+    // this.addEventListeners();
     Events.categoryCardClick.add(this.handleCategoryCardClick);
   }
 
@@ -33,8 +33,6 @@ export default class AdminCategoriesPage extends Component {
     ) as CategoryCard;
     switch (data.button) {
       case CategoryCardButton.update:
-        console.log('update in page');
-        console.log(categoryCard.element);
         categoryCard.setEditMode();
         break;
       case CategoryCardButton.cancel:
@@ -50,13 +48,7 @@ export default class AdminCategoriesPage extends Component {
         break;
       case CategoryCardButton.create: {
         (this.createCategoryCard as CategoryCard).setAddMode();
-        const newCategoryCard = new CategoryCard(
-          this.global,
-          this.categoriesWrap,
-          data.newName
-        );
-        this.categories.push(newCategoryCard);
-        this.createCategoryCard.attachTo(this.categoriesWrap);
+
         Events.categoryCreate.emit(data.newName);
         break;
       }
@@ -76,17 +68,17 @@ export default class AdminCategoriesPage extends Component {
     }
   };
 
-  private addEventListeners(): void {
-    this.element.addEventListener('click', this.handleClick);
-  }
+  // private addEventListeners(): void {
+  //   this.element.addEventListener('click', this.handleClick);
+  // }
 
-  private removeEventListeners(): void {
-    this.element.removeEventListener('click', this.handleClick);
-  }
+  // private removeEventListeners(): void {
+  //   this.element.removeEventListener('click', this.handleClick);
+  // }
 
-  private handleClick: (event: MouseEvent) => void = (event) => {
-    const target = event.target as HTMLElement;
-  };
+  // private handleClick: (event: MouseEvent) => void = (event) => {
+  //   const target = event.target as HTMLElement;
+  // };
 
   private addOneCategory(name: string, numberOfWords: number): IComponent {
     const category = new CategoryCard(
@@ -100,19 +92,12 @@ export default class AdminCategoriesPage extends Component {
   }
 
   async init(): Promise<void> {
-    console.log('cat page init');
-
     this.categoriesWrap.element.innerHTML = '';
     const categories = await Api.getAllCategories();
-    categories.forEach((category) => {
-      this.addOneCategory(category.name, category.numberOfWords);
-    });
-
-    this.createCategoryCard.remove();
-    this.createCategoryCard = new CategoryCard(
-      this.global,
-      this.categoriesWrap
+    this.categories = [];
+    categories.forEach((category) =>
+      this.addOneCategory(category.name, category.numberOfWords)
     );
-    (this.createCategoryCard as CategoryCard).setAddMode();
+    this.createCategoryCard.attachTo(this.categoriesWrap);
   }
 }

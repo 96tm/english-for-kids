@@ -4,8 +4,11 @@ import IComponent from '../IComponent';
 import Constants from '../../util/constants';
 import FileInput from './FileInput';
 import TextInput from './TextInput';
-import ICard from '../../models/ICard';
 import IWordCardDTO from '../../models/IWordCardDTO';
+import Events from '../../util/Events';
+import WordCardButton from '../../models/WordCardButton';
+import WordCardDTO from '../../models/WordCardDTO';
+import WordCardUpdateDTO from '../../models/WordCardUpdateDTO';
 
 export default class WordCardContentEdit extends Component {
   buttonSave: IComponent;
@@ -15,6 +18,8 @@ export default class WordCardContentEdit extends Component {
   inputAudio: IComponent;
   inputImage: IComponent;
   buttonsWrap: IComponent;
+  category: string;
+  word: string;
 
   constructor(
     global: Window,
@@ -24,6 +29,8 @@ export default class WordCardContentEdit extends Component {
     super(global, rootComponent, 'div', [
       Constants.CSSClasses.adminWordCardContentEdit,
     ]);
+    this.category = category;
+    this.word = word;
     this.inputWord = new TextInput(
       global,
       this,
@@ -84,5 +91,33 @@ export default class WordCardContentEdit extends Component {
 
   private handleClick: (event: MouseEvent) => void = (event) => {
     const target = event.target as HTMLElement;
+
+    switch (target) {
+      case this.buttonCancel.element:
+        Events.wordCardClick.emit({
+          button: WordCardButton.cancel,
+          wordInfo: new WordCardDTO(this.category, this.word),
+        });
+        break;
+      case this.buttonSave.element:
+        {
+          const audioFile = (this.inputAudio as FileInput).file;
+          const imageFile = (this.inputImage as FileInput).file;
+          Events.wordCardClick.emit({
+            button: WordCardButton.save,
+            wordInfo: new WordCardUpdateDTO(
+              this.category,
+              this.word,
+              (this.inputTranslation as TextInput).value,
+              (this.inputWord as TextInput).value,
+              audioFile,
+              imageFile
+            ),
+          });
+        }
+        break;
+      default:
+        break;
+    }
   };
 }

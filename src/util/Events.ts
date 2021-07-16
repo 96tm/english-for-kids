@@ -10,6 +10,7 @@ import LoginInfo from '../models/LoginInfo';
 import CategoryCardButton from '../models/CategoryCardButton';
 import WordCardButton from '../models/WordCardButton';
 import IWordCardDTO from '../models/IWordCardDTO';
+import IWordCardUpdateDTO from '../models/IWordCardUpdateDTO';
 
 const menuClick = new Signal<string, Promise<void>>();
 const modeButtonClick = new Signal<string, Promise<void>>();
@@ -49,11 +50,12 @@ const categoryUpdate = new Signal<
 const categoryCreate = new Signal<string, Promise<void>>();
 const categoryRemove = new Signal<string, Promise<void>>();
 const wordCardClick = new Signal<
-  { button: WordCardButton; wordInfo: IWordCardDTO },
+  { button: WordCardButton; wordInfo: IWordCardUpdateDTO },
   void
 >();
 const wordCreate = new Signal<IWordCardDTO, Promise<void>>();
 const wordRemove = new Signal<IWordCardDTO, Promise<void>>();
+const wordUpdate = new Signal<IWordCardUpdateDTO, Promise<void>>();
 
 const Events = {
   menuClick,
@@ -90,6 +92,7 @@ const Events = {
   wordCardClick,
   wordCreate,
   wordRemove,
+  wordUpdate,
 };
 
 export default Events;

@@ -2,6 +2,7 @@ import Constants from './constants';
 import ICategoryDTO from '../models/ICategoryDTO';
 import ICard from '../models/ICard';
 import IWordCardDTO from '../models/IWordCardDTO';
+import IWordCardUpdateDTO from '../models/IWordCardUpdateDTO';
 
 export default class Api {
   static async getAllCategories(): Promise<ICategoryDTO[]> {
@@ -12,13 +13,6 @@ export default class Api {
         headers: { 'Content-Type': 'application/json' },
       }
     ).then((response) => response.json());
-    // await fetch(`${Constants.HOMEPAGE}/public/cards.json`, {
-    //   headers: { 'Content-Type': 'application/json' },
-    // }).then((response) => response.json());
-    // Object.keys(categories).forEach((key) => {
-    //   this.addOneCategory(key, categories[key].length);
-    // });
-
     return categories;
   }
 
@@ -46,9 +40,6 @@ export default class Api {
   }
 
   static async getAllWordsByCategory(category: string): Promise<ICard[]> {
-    // categories = await fetch(`${Constants.HOMEPAGE}/public/cards.json`, {
-    //   headers: { 'Content-Type': 'application/json' },
-    // }).then((response) => response.json());
     const words = fetch(
       `${Constants.SERVER_URL}/categories/${category}/words`,
       {
@@ -57,6 +48,27 @@ export default class Api {
       }
     ).then((response) => response.json());
     return words;
+  }
+
+  static async updateWord({
+    category,
+    word,
+    newWord,
+    translation,
+    audio,
+    image,
+  }: IWordCardUpdateDTO): Promise<Response> {
+    const formData = new FormData();
+    formData.append('image', image as File);
+    formData.append('audio', audio as File);
+    formData.append('word', String(newWord));
+    formData.append('translation', translation);
+    formData.append('category', category);
+
+    return fetch(`http://localhost:4000/categories/${category}/words/${word}`, {
+      method: 'PUT',
+      body: formData,
+    });
   }
 
   static async createWord({

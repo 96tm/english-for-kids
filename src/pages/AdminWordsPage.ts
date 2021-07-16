@@ -8,6 +8,7 @@ import Events from '../util/Events';
 import WordCardButton from '../models/WordCardButton';
 import Api from '../util/Api';
 import IWordCardDTO from '../models/IWordCardDTO';
+import IWordCardUpdateDTO from '../models/IWordCardUpdateDTO';
 
 export default class AdminWordsPage extends Component {
   heading: IComponent;
@@ -34,23 +35,21 @@ export default class AdminWordsPage extends Component {
 
   async init(category: string): Promise<void> {
     this.wordsWrap.element.innerHTML = '';
+    (this.createWordCard as WordCard).category = category;
     const words = await Api.getAllWordsByCategory(category);
-    console.log('got words', words);
-
+    this.words = [];
     (words as ICard[]).forEach((word) => {
       const updatedWord = word;
       updatedWord.category = category;
       this.addOneWord(updatedWord);
-      return updatedWord;
     });
     this.heading.textContent = category;
     this.createWordCard.attachTo(this.wordsWrap);
-    (this.createWordCard as WordCard).category = category;
   }
 
   private handleWordCardClick: (data: {
     button: WordCardButton;
-    wordInfo: IWordCardDTO;
+    wordInfo: IWordCardUpdateDTO;
   }) => Promise<void> = async (data) => {
     const wordCard = this.words.find((word) => {
       const currentCategory = (word as WordCard).category;
@@ -81,11 +80,13 @@ export default class AdminWordsPage extends Component {
         }
         break;
       case WordCardButton.create: {
-        Events.wordCreate.emit(data.wordInfo);
         (this.createWordCard as WordCard).setModeAdd();
+        Events.wordCreate.emit(data.wordInfo);
         break;
       }
       case WordCardButton.save:
+        // (wordCard as WordCard).setModeNormal({ ...data.wordInfo });
+        Events.wordUpdate.emit(data.wordInfo);
         break;
       default:
         break;

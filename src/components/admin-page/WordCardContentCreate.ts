@@ -6,7 +6,6 @@ import FileInput from './FileInput';
 import TextInput from './TextInput';
 import Events from '../../util/Events';
 import WordCardButton from '../../models/WordCardButton';
-import WordInfo from '../../models/WordInfo';
 import WordCardDTO from '../../models/WordCardDTO';
 
 export default class WordCardContentCreate extends Component {
@@ -95,8 +94,6 @@ export default class WordCardContentCreate extends Component {
         });
         break;
       case this.buttonCreate.element: {
-        console.log('content cat', this.category);
-
         const audioFile = (this.inputAudio as FileInput).file;
         const imageFile = (this.inputImage as FileInput).file;
         Events.wordCardClick.emit({

@@ -6,6 +6,9 @@ import Events from '../util/Events';
 import Constants from '../util/constants';
 import IWordCardDTO from '../models/IWordCardDTO';
 import Api from '../util/Api';
+import WordCard from '../components/admin-page/WordCard';
+import ICard from '../models/ICard';
+import IWordCardUpdateDTO from '../models/IWordCardUpdateDTO';
 
 export default class AdminWordsController extends Controller {
   component: IComponent;
@@ -20,7 +23,20 @@ export default class AdminWordsController extends Controller {
     Events.routeChange.add(this.handleRouteChange);
     Events.wordCreate.add(this.handleWordCreate);
     Events.wordRemove.add(this.handleWordRemove);
+    Events.wordUpdate.add(this.handleWordUpdate);
   }
+
+  private handleWordUpdate: (
+    wordUpdateInfo: IWordCardUpdateDTO
+  ) => Promise<void> = async (wordUpdateInfo) => {
+    const updatedWord: ICard = await Api.updateWord({
+      ...wordUpdateInfo,
+    }).then((response) => response.json());
+    const updatedWordCard = (this.component as AdminWordsPage).words.find(
+      (word) => (word as WordCard).word === wordUpdateInfo.word
+    );
+    (updatedWordCard as WordCard).setModeNormal({ ...updatedWord });
+  };
 
   private handleRouteChange: (route: string) => Promise<void> = async (
     route

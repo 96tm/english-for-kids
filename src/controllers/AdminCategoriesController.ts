@@ -3,7 +3,6 @@ import IComponent from '../components/IComponent';
 import Controller from './Controller';
 import AdminCategoriesPage from '../pages/AdminCategoriesPage';
 import Events from '../util/Events';
-import Constants from '../util/constants';
 import Api from '../util/Api';
 
 export default class AdminCategoriesController extends Controller {
@@ -15,7 +14,6 @@ export default class AdminCategoriesController extends Controller {
     Events.categoryUpdate.add(this.handleCategoryUpdate);
     Events.categoryCreate.add(this.handleCategoryCreate);
     Events.categoryRemove.add(this.handleCategoryRemove);
-    // Events.routeChange.add(this.handleRouteChange);
   }
 
   // private handleRouteChange: (route: string) => Promise<void> = async (
@@ -42,6 +40,7 @@ export default class AdminCategoriesController extends Controller {
     name
   ) => {
     await Api.createCategory(name);
+    await (this.component as AdminCategoriesPage).init();
   };
 
   private handleCategoryRemove: (name: string) => Promise<void> = async (
@@ -51,8 +50,6 @@ export default class AdminCategoriesController extends Controller {
   };
 
   async show(): Promise<void> {
-    console.log('show cat page');
-
     await this.init();
     super.show();
   }
