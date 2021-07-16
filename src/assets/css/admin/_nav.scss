@@ -1,17 +1,19 @@
 $nav-height: 97px;
 
 .admin__nav {
-  height: $nav-height;
   display: flex;
+  justify-content: center;
   align-items: center;
+  height: $nav-height;
   background: $admin-nav-color;
 }
 
 .admin-nav__list {
   display: flex;
   flex-grow: 1;
+  max-width: $admin-guidelines-width;
   list-style: none;
-  padding: 0 65px;
+  padding: 0;
 }
 
 .admin-nav__item:nth-child(2n + 2) {

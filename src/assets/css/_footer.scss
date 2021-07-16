@@ -1,6 +1,13 @@
+.footer {
+  justify-content: center;
+  display: flex;
+}
+
 .footer__items {
   display: flex;
   justify-content: space-between;
+  width: 100%;
+  max-width: $admin-guidelines-width;
   margin: 0;
   padding: 0 0 20px 0;
 }

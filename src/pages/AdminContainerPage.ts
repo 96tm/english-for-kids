@@ -3,10 +3,12 @@ import IComponent from '../components/IComponent';
 
 import Constants from '../util/constants';
 import Nav from '../components/admin-page/Nav';
+import GameFooter from '../components/shared/GameFooter';
 
 export default class AdminContainerPage extends Component {
   nav: IComponent;
   container: IComponent;
+  footer: IComponent;
 
   constructor(global: Window, rootComponent: IComponent | null) {
     super(global, rootComponent, 'div', [Constants.CSSClasses.adminContainer]);
@@ -14,5 +16,6 @@ export default class AdminContainerPage extends Component {
     this.container = new Component(global, this, 'div', [
       Constants.CSSClasses.adminContent,
     ]);
+    this.footer = new GameFooter(global, this);
   }
 }
