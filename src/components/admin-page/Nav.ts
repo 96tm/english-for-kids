@@ -6,7 +6,9 @@ import Events from '../../util/Events';
 
 export default class Nav extends Component {
   navList: IComponent;
-  navItems: IComponent[];
+  navItems: IComponent[] = [];
+  categoriesItem: IComponent;
+  wordsItem: IComponent;
   logoutItem: IComponent;
 
   constructor(global: Window, rootComponent: IComponent) {
@@ -17,10 +19,33 @@ export default class Nav extends Component {
     this.navList = new Component(global, this, 'ul', [
       Constants.CSSClasses.adminNavList,
     ]);
-    this.navItems = this.createNavItems();
+    this.categoriesItem = new NavItem(
+      this.global,
+      this.navList,
+      Constants.Labels.category,
+      `#${Constants.Labels.adminCategoriesRoute}`
+    );
+    this.wordsItem = new Component(global, this.navList, 'li', [
+      Constants.CSSClasses.adminNavItemInactive,
+    ]);
+    this.wordsItem.textContent = Constants.Labels.words;
     this.logoutItem = this.createLogoutItem();
+    this.navItems = [this.categoriesItem, this.wordsItem, this.logoutItem];
     this.addEventListeners();
+    Events.routeChange.add(this.handleRouteChange);
   }
+
+  private handleRouteChange: (route: string) => Promise<void> = async (
+    route
+  ) => {
+    if (route === Constants.Labels.adminCategoriesRoute) {
+      this.activateItem(this.categoriesItem);
+    } else if (
+      route.split('/').slice(-1)[0] === Constants.Labels.adminWordsRoute
+    ) {
+      this.activateItem(this.wordsItem);
+    }
+  };
 
   private addEventListeners(): void {
     this.element.addEventListener('click', this.handleClick);
@@ -40,23 +65,16 @@ export default class Nav extends Component {
       Constants.Labels.logout,
       `#${Constants.Labels.mainRoute}`
     );
-    this.navItems.push(logoutItem);
     return logoutItem;
   }
 
-  private createNavItems(): IComponent[] {
-    const categoriesItem = new NavItem(
-      this.global,
-      this.navList,
-      Constants.Labels.category,
-      `#${Constants.Labels.adminCategoriesRoute}`
-    );
-    const wordsItem = new NavItem(
-      this.global,
-      this.navList,
-      Constants.Labels.words,
-      `#${Constants.Labels.adminWordsRoute}`
-    );
-    return [categoriesItem, wordsItem];
+  private activateItem(itemToActivate: IComponent): void {
+    this.navItems.forEach((item) => {
+      if (item === itemToActivate) {
+        item.element.classList.add(Constants.CSSClasses.active);
+      } else {
+        item.element.classList.remove(Constants.CSSClasses.active);
+      }
+    });
   }
 }

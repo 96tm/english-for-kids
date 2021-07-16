@@ -16,7 +16,7 @@ $nav-height: 97px;
   padding: 0;
 }
 
-.admin-nav__item:nth-child(2n + 2) {
+.admin-nav__item-inactive:nth-child(2n + 2) {
   margin-left: min(10%, 155px);
   margin-right: 5px;
 }
@@ -33,5 +33,20 @@ $nav-height: 97px;
   color: #fff;
   &:hover {
     opacity: 0.5;
+  }
+}
+
+.admin-nav__item-inactive {
+  @extend .admin-nav__link;
+  cursor: default;
+  &:hover {
+    opacity: initial;
+  }
+}
+
+.admin-nav__item,
+.admin-nav__item-inactive {
+  &.active {
+    text-decoration: underline;
   }
 }

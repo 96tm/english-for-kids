@@ -120,6 +120,7 @@ const CSSClasses = {
   adminNavMixin: 'admin-nav',
   adminNavList: 'admin-nav__list',
   adminNavItem: 'admin-nav__item',
+  adminNavItemInactive: 'admin-nav__item-inactive',
   adminNavLink: 'admin-nav__link',
   adminContainer: 'admin__container',
   adminContent: 'admin__content',
