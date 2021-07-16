@@ -1,0 +1,9 @@
+@media (max-width: 640px) {
+  .admin-nav__list {
+    padding: 0;
+  }
+  .admin-category-card__add,
+  .admin-category-card__update {
+    height: 50px;
+  }
+}

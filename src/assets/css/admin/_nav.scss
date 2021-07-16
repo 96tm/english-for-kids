@@ -15,7 +15,8 @@ $nav-height: 97px;
 }
 
 .admin-nav__item:nth-child(2n + 2) {
-  margin-left: 155px;
+  margin-left: min(10%, 155px);
+  margin-right: 5px;
 }
 
 .admin-nav__item:last-child {
@@ -28,4 +29,7 @@ $nav-height: 97px;
   line-height: 1.6rem;
   text-decoration: none;
   color: #fff;
+  &:hover {
+    opacity: 0.5;
+  }
 }

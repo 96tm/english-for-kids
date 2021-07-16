@@ -1,0 +1,60 @@
+.admin-word-card-normal {
+  @extend .admin__category-card-normal;
+  width: 100%;
+  height: 100%;
+  padding: 23px 54px 13px;
+  border: none;
+}
+
+.admin-word-card__image-wrap {
+  width: 253px;
+  height: 170px;
+  align-self: center;
+}
+
+.admin-word-card__image {
+  width: 100%;
+  height: 100%;
+}
+
+.admin-word-card__change {
+  @extend .admin-button;
+  width: 251px;
+  height: 60px;
+  align-self: center;
+  margin-top: auto;
+}
+
+.admin-word-card__word,
+.admin-word-card__translation,
+.admin-word-card__audio,
+.admin-word-card__image-title-wrap {
+  &::before {
+    content: attr(data-title);
+    font-weight: 700;
+  }
+}
+
+.admin-word-card__word,
+.admin-word-card__translation {
+  padding-bottom: 12px;
+}
+
+.admin-word-card__audio {
+  padding-bottom: 16px;
+  word-break: break-word;
+}
+
+.admin-word-card__image-wrap {
+  margin-top: 10px;
+}
+
+.admin-word-card__image-title-wrap {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.admin-word-card__remove {
+  @extend .button-remove;
+}

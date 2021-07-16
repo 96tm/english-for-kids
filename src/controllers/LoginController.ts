@@ -18,7 +18,9 @@ export default class LoginController extends Controller {
     Events.loginAttempt.add(this.handleLoginAttempt);
   }
 
-  private handleLoginAttempt: (loginInfo: LoginInfo) => void = (loginInfo) => {
+  private handleLoginAttempt: (loginInfo: LoginInfo) => Promise<void> = async (
+    loginInfo
+  ) => {
     if (this.validate(loginInfo)) {
       this.hide();
       Events.login.emit(loginInfo.login);
@@ -30,7 +32,7 @@ export default class LoginController extends Controller {
     return !!(this.component && loginInfo);
   }
 
-  private handleLoginShow: () => void = () => {
+  private handleLoginShow: () => Promise<void> = async () => {
     this.show();
   };
 }

@@ -24,7 +24,7 @@ export default class StatsService {
     translation,
     image,
     audioSrc,
-  }: IWordStatDTO) => void = ({
+  }: IWordStatDTO) => Promise<void> = async ({
     category,
     word,
     translation,
@@ -48,7 +48,7 @@ export default class StatsService {
     translation,
     image,
     audioSrc,
-  }: IWordStatDTO) => void = ({
+  }: IWordStatDTO) => Promise<void> = async ({
     category,
     word,
     translation,
@@ -67,7 +67,7 @@ export default class StatsService {
     translation,
     image,
     audioSrc,
-  }: IWordStatDTO) => void = ({
+  }: IWordStatDTO) => Promise<void> = async ({
     category,
     word,
     translation,
@@ -83,7 +83,10 @@ export default class StatsService {
   private updateStats: (
     { category, word, translation, image, audioSrc }: IWordStatDTO,
     parameter: StatsParameter
-  ) => void = ({ category, word, translation, image, audioSrc }, parameter) => {
+  ) => Promise<void> = async (
+    { category, word, translation, image, audioSrc },
+    parameter
+  ) => {
     if (!this.storage[category]) {
       this.storage[category] = [];
     }
@@ -112,7 +115,7 @@ export default class StatsService {
     );
   }
 
-  private handleStatsCleared: () => void = () => {
+  private handleStatsCleared: () => Promise<void> = async () => {
     this.global.localStorage.removeItem(Constants.Labels.statsStorage);
     this.storage = this.getStorage();
   };

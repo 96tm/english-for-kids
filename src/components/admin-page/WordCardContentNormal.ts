@@ -2,8 +2,12 @@ import Component from '../Component';
 import IComponent from '../IComponent';
 
 import Constants from '../../util/constants';
+import Events from '../../util/Events';
+import WordCardButton from '../../models/WordCardButton';
+import WordInfo from '../../models/WordInfo';
+import WordCardDTO from '../../models/WordCardDTO';
 
-export default class WordCardInfo extends Component {
+export default class WordCardContentNormal extends Component {
   buttonRemove: IComponent;
   buttonChange: IComponent;
   imageTitleWrap: IComponent;
@@ -12,7 +16,6 @@ export default class WordCardInfo extends Component {
   wordComponent: IComponent;
   translationComponent: IComponent;
   audioComponent: IComponent;
-  infoWrap: IComponent;
 
   constructor(
     global: Window,
@@ -23,32 +26,31 @@ export default class WordCardInfo extends Component {
     private audioSrc: string,
     private image: string
   ) {
-    super(global, rootComponent, 'div', [Constants.CSSClasses.adminWordCard]);
-    this.infoWrap = new Component(global, this, 'div', [
-      Constants.CSSClasses.adminWordCardInfoWrap,
+    super(global, rootComponent, 'div', [
+      Constants.CSSClasses.adminWordCardContentNormal,
     ]);
     this.wordComponent = new Component(
       global,
-      this.infoWrap,
+      this,
       'div',
       [Constants.CSSClasses.adminWordCardWord],
-      { 'data-title': Constants.Labels.adminWordCardInfoWord }
+      { 'data-title': Constants.Labels.adminWordCardWord }
     );
     this.wordComponent.textContent = word;
     this.translationComponent = new Component(
       global,
-      this.infoWrap,
+      this,
       'div',
       [Constants.CSSClasses.adminWordCardTranslation],
-      { 'data-title': Constants.Labels.adminWordCardInfoTranslation }
+      { 'data-title': Constants.Labels.adminWordCardTranslation }
     );
     this.translationComponent.textContent = translation;
     this.audioComponent = new Component(
       global,
-      this.infoWrap,
+      this,
       'div',
       [Constants.CSSClasses.adminWordCardAudio],
-      { 'data-title': Constants.Labels.adminWordCardInfoAudio }
+      { 'data-title': Constants.Labels.adminWordCardAudio }
     );
     this.audioComponent.textContent = audioSrc;
     [this.imageTitleWrap, this.imageWrap, this.wordImage] = this.createImage();
@@ -57,10 +59,10 @@ export default class WordCardInfo extends Component {
   }
 
   private createButtons(): IComponent[] {
-    const buttonRemove = new Component(this.global, this.infoWrap, 'button', [
+    const buttonRemove = new Component(this.global, this, 'button', [
       Constants.CSSClasses.adminWordCardButtonRemove,
     ]);
-    const buttonChange = new Component(this.global, this.infoWrap, 'button', [
+    const buttonChange = new Component(this.global, this, 'button', [
       Constants.CSSClasses.adminWordCardButtonChange,
     ]);
     buttonChange.textContent = Constants.Labels.adminWordCardButtonChange;
@@ -71,10 +73,10 @@ export default class WordCardInfo extends Component {
   private createImage(): IComponent[] {
     const imageTitleWrap = new Component(
       this.global,
-      this.infoWrap,
+      this,
       'div',
       [Constants.CSSClasses.adminWordCardImageTitleWrap],
-      { 'data-title': Constants.Labels.adminWordCardInfoImage }
+      { 'data-title': Constants.Labels.adminWordCardImage }
     );
     const imageWrap = new Component(this.global, imageTitleWrap, 'div', [
       Constants.CSSClasses.adminWordCardImageWrap,
@@ -102,5 +104,21 @@ export default class WordCardInfo extends Component {
 
   private handleClick: (event: MouseEvent) => void = (event) => {
     const target = event.target as HTMLElement;
+    switch (target) {
+      case this.buttonChange.element:
+        Events.wordCardClick.emit({
+          button: WordCardButton.change,
+          wordInfo: new WordCardDTO(this.category, this.word, this.translation),
+        });
+        break;
+      case this.buttonRemove.element:
+        Events.wordCardClick.emit({
+          button: WordCardButton.remove,
+          wordInfo: new WordCardDTO(this.category, this.word, this.translation),
+        });
+        break;
+      default:
+        break;
+    }
   };
 }

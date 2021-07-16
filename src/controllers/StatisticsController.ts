@@ -31,7 +31,7 @@ export default class StatisticsController extends Controller {
     Events.statsButtonRepeatClick.add(this.handleStatsButtonRepeatClick);
   }
 
-  private handleStatsButtonRepeatClick: () => void = () => {
+  private handleStatsButtonRepeatClick: () => Promise<void> = async () => {
     RouterService.setHash(Constants.Labels.gameRoute);
     Events.statsRepeatDifficult.emit(this.getDifficultWords());
   };
@@ -59,7 +59,7 @@ export default class StatisticsController extends Controller {
   private handleStatsTableSorted: ([sortType, sortOrder]: [
     SortType,
     SortOrder
-  ]) => void = ([sortType, sortOrder]) => {
+  ]) => Promise<void> = async ([sortType, sortOrder]) => {
     [this.sortType, this.sortOrder] = [sortType, sortOrder];
     this.showSortedTable();
   };

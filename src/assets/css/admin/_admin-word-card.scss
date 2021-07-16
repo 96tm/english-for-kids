@@ -1,66 +1,21 @@
+@import 'admin-word-card-normal';
+@import 'admin-word-card-edit';
+@import 'admin-word-card-add';
+@import 'admin-word-card-create';
+
 .admin__word-card {
   font-size: 1.375rem;
   width: 361px;
-  height: 458px;
+  min-height: 458px;
   border: 2px solid rgba(0, 0, 0, 0.4);
   border-radius: 5px;
   position: relative;
 }
 
-.admin-word-card__info-wrap {
-  @extend .admin__category-card;
-  width: 100%;
-  height: 100%;
-  padding: 23px 54px 13px;
-  border: none;
-}
-
-.admin-word-card__image-wrap {
-  width: 253px;
-  height: 170px;
-  align-self: center;
-}
-
-.admin-word-card__image {
-  width: 100%;
-}
-
-.admin-word-card__change {
-  @extend .admin-button;
-  width: 251px;
-  height: 60px;
-  align-self: center;
-  margin-top: auto;
-}
-
-.admin-word-card__word,
-.admin-word-card__translation,
-.admin-word-card__audio,
-.admin-word-card__image-title-wrap {
-  &::before {
-    content: attr(data-title);
-    font-weight: 700;
-  }
-}
-
-.admin-word-card__word,
-.admin-word-card__translation {
-  padding-bottom: 8px;
-}
-
-.admin-word-card__audio {
-  padding-bottom: 16px;
-}
-
-.admin-word-card__image-wrap {
-  margin-top: 10px;
-}
-
-.admin-word-card__image-title-wrap {
+.admin-word-card__buttons-wrap {
   display: flex;
-  flex-direction: column;
-}
-
-.admin-word-card__remove {
-  @extend .button-remove;
+  justify-content: space-between;
+  width: 100%;
+  height: 60px;
+  margin-top: auto;
 }

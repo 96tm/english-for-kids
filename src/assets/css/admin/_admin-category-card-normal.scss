@@ -1,0 +1,61 @@
+$category-card-padding-top: 23px;
+$category-card-padding-sides: 19px;
+$category-card-padding-bottom: 25px;
+
+.admin__category-card-normal {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: $category-card-padding-top $category-card-padding-sides
+    $category-card-padding-bottom;
+}
+
+.admin-category-card__heading {
+  text-align: center;
+  padding-bottom: 34px;
+  font-weight: 700;
+  font-size: 1.375rem;
+  line-height: 1.6rem;
+}
+
+.admin-category-card__word-count-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.admin-category-card__word-count {
+  padding-left: 32px;
+  font-weight: 700;
+  font-size: 1.375rem;
+  line-height: 1.6rem;
+  &:hover {
+    cursor: pointer;
+    color: $green-color;
+  }
+  &::before {
+    content: attr(data-title);
+    font-weight: 400;
+  }
+}
+
+.admin-category-card__buttons-wrap {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.admin-category-card__update,
+.admin-category-card__add {
+  @extend .admin-button;
+  width: 40%;
+  height: 34px;
+}
+
+.admin-category-card__add {
+  text-decoration: none;
+}
+
+.admin-category-card__remove {
+  @extend .button-remove;
+}

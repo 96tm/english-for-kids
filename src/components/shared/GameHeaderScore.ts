@@ -13,7 +13,9 @@ export default class GameHeaderScore extends Component {
     Events.cardGuess.add(this.handleCardGuess);
   }
 
-  private handleCardGuess: (isRight: boolean) => void = (isRight) => {
+  private handleCardGuess: (isRight: boolean) => Promise<void> = async (
+    isRight
+  ) => {
     if (isRight) {
       this.addStarRight();
     } else {

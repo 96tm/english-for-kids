@@ -22,15 +22,17 @@ export default class ContainerController extends Controller {
     Events.logout.add(this.handleLogout);
   }
 
-  private handleLogout: () => void = () => {
+  private handleLogout: () => Promise<void> = async () => {
     this.show();
   };
 
-  private handleLogin: (login: string) => void = (login) => {
+  private handleLogin: (login: string) => Promise<void> = async (login) => {
     this.hide();
   };
 
-  private handleMenuClick: (menuItem: string) => void = (menuItem) => {
+  private handleMenuClick: (menuItem: string) => Promise<void> = async (
+    menuItem
+  ) => {
     const { gameMenu } = this.component as ContainerPage;
     gameMenu.setActiveMenuItem(menuItem);
   };

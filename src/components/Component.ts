@@ -28,6 +28,12 @@ export default class Component implements IComponent {
     });
   }
 
+  attachTo(rootComponent: IComponent): void {
+    this.remove();
+    this.rootComponent = rootComponent;
+    this.rootComponent.element.append(this.element);
+  }
+
   get textContent(): string {
     return this._textContent;
   }

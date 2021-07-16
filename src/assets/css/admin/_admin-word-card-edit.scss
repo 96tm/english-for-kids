@@ -1,0 +1,32 @@
+.admin-word-card-edit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  padding: 65px 32px 12px;
+  .admin-input-wrap {
+    margin: 0;
+    width: 100%;
+  }
+  .admin-input-wrap:first-child {
+    margin-bottom: 10px;
+  }
+  .admin-input-wrap:nth-child(n + 2) {
+    margin-bottom: 20px;
+  }
+
+  .admin-file-input-wrap:nth-child(n + 3) {
+    margin-bottom: 10px;
+  }
+
+  .admin-word-card__cancel,
+  .admin-word-card__save {
+    @extend .admin-button;
+    width: 45%;
+  }
+
+  .admin-word-card__cancel {
+    border: 1px solid $button-red-color;
+    color: $button-red-color;
+  }
+}

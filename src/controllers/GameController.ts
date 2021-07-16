@@ -40,15 +40,17 @@ export default class GameController extends Controller {
     await this.gameModel.setCategories();
   }
 
-  private handleRouteChange: () => void = () => {
+  private handleRouteChange: () => Promise<void> = async () => {
     this.gameModel.stop();
   };
 
-  private handleGameStopped: () => void = () => {
+  private handleGameStopped: () => Promise<void> = async () => {
     this.setCardComponents(this.gameModel.mode);
   };
 
-  private handleRepeatDifficult: (cards: ICard[]) => void = async (cards) => {
+  private handleRepeatDifficult: (cards: ICard[]) => Promise<void> = async (
+    cards
+  ) => {
     (this.component as GamePage).addCards(cards);
     this.gameModel.loadDifficult(cards);
   };
@@ -77,7 +79,7 @@ export default class GameController extends Controller {
     (this.component as GamePage).addCards(cards);
   };
 
-  private handleCardClick: (word: string) => void = async (word) => {
+  private handleCardClick: (word: string) => Promise<void> = async (word) => {
     const wordInfo = this.gameModel.boardModel.getCard(word);
     if (this.gameModel.mode === GameMode.train) {
       Events.statsTrainingClick.emit({
@@ -132,7 +134,9 @@ export default class GameController extends Controller {
     }
   };
 
-  private handleGameModeChange: (mode: GameMode) => void = (mode) => {
+  private handleGameModeChange: (mode: GameMode) => Promise<void> = async (
+    mode
+  ) => {
     this.gameModel.mode = mode;
     this.setCardComponents(mode);
     if (this.gameModel.mode === GameMode.train) {
@@ -140,7 +144,7 @@ export default class GameController extends Controller {
     }
   };
 
-  private handleCardsLoad: () => void = () => {
+  private handleCardsLoad: () => Promise<void> = async () => {
     const { mode } = this.gameModel;
     this.setCardComponents(mode);
   };

@@ -13,11 +13,11 @@ export default class AdminController extends Controller {
     Events.logout.add(this.handleLogout);
   }
 
-  private handleLogin: (login: string) => void = (loginInfo) => {
+  private handleLogin: (login: string) => Promise<void> = async (loginInfo) => {
     this.show();
   };
 
-  private handleLogout: () => void = () => {
+  private handleLogout: () => Promise<void> = async () => {
     this.hide();
   };
 }

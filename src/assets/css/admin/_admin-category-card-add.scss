@@ -1,8 +1,6 @@
-@import 'admin-category-card';
-
 $button-diameter: 85px;
 
-.admin-create-category-card__button {
+.admin-add-category-card__button {
   position: relative;
   width: $button-diameter;
   height: $button-diameter;
@@ -35,4 +33,8 @@ $button-diameter: 85px;
   &::after {
     transform: translate(-50%, -50%) rotate(90deg);
   }
+}
+
+.admin__category-card-add {
+  padding-top: $category-card-padding-top;
 }

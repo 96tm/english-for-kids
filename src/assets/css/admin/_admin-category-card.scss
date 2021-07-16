@@ -1,58 +1,17 @@
+@import 'admin-category-card-normal';
+@import 'admin-category-card-edit';
+@import 'admin-category-card-add';
+@import 'admin-category-card-create';
+
 $category-card-width: 361px;
 $category-card-height: 244px;
 
 .admin__category-card {
-  position: relative;
   width: $category-card-width;
   height: $category-card-height;
-  display: flex;
-  flex-direction: column;
-  padding: 23.3px 19px 24.8px;
   border: 2px solid rgba(0, 0, 0, 0.4);
   border-radius: 5px;
-}
-
-.admin-category-card__heading {
-  text-align: center;
-  padding-bottom: 34px;
-  font-weight: 700;
-  font-size: 1.375rem;
-  line-height: 1.6rem;
-}
-
-.admin-category-card__word-count-link {
-  color: inherit;
-  text-decoration: none;
-}
-
-.admin-category-card__word-count {
-  padding-left: 32px;
-  font-weight: 700;
-  font-size: 1.375rem;
-  line-height: 1.6rem;
-  &:hover {
-    cursor: pointer;
-    color: $green-color;
-  }
-  &::before {
-    content: attr(data-title);
-    font-weight: 400;
-  }
-}
-
-.admin-category-card__buttons-wrap {
+  position: relative;
   display: flex;
-  justify-content: space-between;
-  margin-top: auto;
-}
-
-.admin-category-card__update,
-.admin-category-card__add {
-  @extend .admin-button;
-  width: 40%;
-  height: 34px;
-}
-
-.admin-category-card__remove {
-  @extend .button-remove;
+  flex-direction: column;
 }

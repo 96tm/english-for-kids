@@ -14,6 +14,8 @@ export default interface IComponent {
     attributes?: AttributeRecord
   ): IComponent;
 
+  attachTo(rootComponent: IComponent): void;
+
   render(): void;
 
   remove(): void;

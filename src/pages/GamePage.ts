@@ -29,19 +29,19 @@ export default class GamePage extends Component {
     Events.cardsLoad.emit();
   }
 
-  private handleBoardEnabled: () => void = () => {
+  private handleBoardEnabled: () => Promise<void> = async () => {
     (this.gameBoard as GameBoard).cards.forEach((card) => {
       (card as Card).enable();
     });
   };
 
-  private handleBoardDisabled: () => void = () => {
+  private handleBoardDisabled: () => Promise<void> = async () => {
     (this.gameBoard as GameBoard).cards.forEach((card) => {
       (card as Card).disable();
     });
   };
 
-  private handleGameStopped: () => void = () => {
+  private handleGameStopped: () => Promise<void> = async () => {
     (this.gameButton as GameButton).setButtonStart();
   };
 }

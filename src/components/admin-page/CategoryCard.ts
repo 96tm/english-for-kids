@@ -2,101 +2,65 @@ import Component from '../Component';
 import IComponent from '../IComponent';
 
 import Constants from '../../util/constants';
+import CategoryCardContentNormal from './CategoryCardContentNormal';
+import CategoryCardContentEdit from './CategoryCardContentEdit';
+import CategoryCardContentAdd from './CategoryCardContentAdd';
+import CategoryCardContentCreate from './CategoryCardContentCreate';
 
 export default class CategoryCard extends Component {
   name: string;
   numberOfWords: number;
-  heading: IComponent;
-  wordsLink: IComponent;
-  wordCount: IComponent;
-  buttonRemove: IComponent;
-  buttonUpdate: IComponent;
-  buttonAdd: IComponent;
-  bottomButtonsWrap: IComponent;
+  content: IComponent;
 
   constructor(
     global: Window,
     rootComponent: IComponent,
-    name: string,
-    numberOfWords: number
+    name = '',
+    numberOfWords = 0
   ) {
     super(global, rootComponent, 'div', [
       Constants.CSSClasses.adminCategoryCard,
     ]);
     this.name = name;
     this.numberOfWords = numberOfWords;
-    this.heading = new Component(global, this, 'div', [
-      Constants.CSSClasses.adminCategoryCardHeading,
-    ]);
-    this.heading.textContent = name;
-    this.wordsLink = new Component(
+    this.content = new CategoryCardContentNormal(
       global,
       this,
-      'a',
-      [Constants.CSSClasses.adminCategoryCardWordCountLink],
-      {
-        href: `#${this.name}/${Constants.Labels.adminWordsRoute}`,
-      }
+      name,
+      numberOfWords
     );
-    this.wordCount = new Component(
-      global,
-      this.wordsLink,
-      'div',
-      [Constants.CSSClasses.adminCategoryCardWordCount],
-      { 'data-title': Constants.Labels.adminCategoryCardWordCountTitle }
-    );
-    this.wordCount.textContent = String(numberOfWords);
-    [
-      this.bottomButtonsWrap,
-      this.buttonUpdate,
-      this.buttonAdd,
-      this.buttonRemove,
-    ] = this.createButtons();
-    this.addEventListeners();
   }
 
-  private createButtons(): IComponent[] {
-    const buttonRemove = new Component(this.global, this, 'button', [
-      Constants.CSSClasses.adminCategoryCardButtonRemove,
-    ]);
-    const bottomButtonsWrap = new Component(this.global, this, 'div', [
-      Constants.CSSClasses.adminCategoryCardButtonsWrap,
-    ]);
-    const buttonUpdate = new Component(
+  setNormalMode(name = this.name, numberOfWords = this.numberOfWords): void {
+    this.element.innerHTML = '';
+    this.content.remove();
+    this.name = name;
+    this.numberOfWords = numberOfWords;
+    this.content = new CategoryCardContentNormal(
       this.global,
-      this.bottomButtonsWrap,
-      'button',
-      [Constants.CSSClasses.adminCategoryCardButtonUpdate]
+      this,
+      this.name,
+      this.numberOfWords
     );
-    buttonUpdate.textContent = Constants.Labels.adminCategoryCardButtonUpdate;
-    const buttonAdd = new Component(this.global, bottomButtonsWrap, 'button', [
-      Constants.CSSClasses.adminCategoryCardButtonAdd,
-    ]);
-    buttonAdd.textContent = Constants.Labels.adminCategoryCardButtonAdd;
-    return [bottomButtonsWrap, buttonUpdate, buttonAdd, buttonRemove];
   }
 
-  private addEventListeners(): void {
-    this.element.addEventListener('click', this.handleClick);
+  setEditMode(): void {
+    this.element.innerHTML = '';
+    this.content.remove();
+    this.content = new CategoryCardContentEdit(this.global, this, this.name);
   }
 
-  private removeEventListeners(): void {
-    this.element.removeEventListener('click', this.handleClick);
+  setCreateMode(): void {
+    this.element.innerHTML = '';
+    this.content.remove();
+    this.content = new CategoryCardContentCreate(this.global, this, this.name);
   }
 
-  private handleClick: (event: MouseEvent) => void = (event) => {
-    const target = event.target as HTMLElement;
-    switch (target) {
-      case this.buttonRemove.element:
-        break;
-      case this.buttonUpdate.element:
-        break;
-      case this.buttonAdd.element:
-        break;
-      case this.wordCount.element:
-        break;
-      default:
-        break;
-    }
-  };
+  setAddMode(): void {
+    this.element.innerHTML = '';
+    this.content.remove();
+    this.content = new CategoryCardContentAdd(this.global, this);
+  }
+
+  // setCreateMode(): void {}
 }

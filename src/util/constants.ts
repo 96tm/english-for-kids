@@ -1,5 +1,4 @@
 const YEAR = 2021;
-const SERVER_URL = '';
 const NUMBER_OF_STARS = 3;
 const SCHOOL_LINK = 'https://rs.school/js';
 const GITHUB_LINK = 'https://github.com/96tm';
@@ -7,6 +6,7 @@ const NUMBER_OF_CARDS = 8;
 const NUMBER_OF_CATEGORIES = 8;
 const FINISH_SCREEN_DURATION = 2000;
 const HOMEPAGE = '';
+const SERVER_URL = 'http://localhost:4000';
 
 const CSSClasses = {
   root: 'root',
@@ -128,21 +128,42 @@ const CSSClasses = {
   adminCategories: 'admin__categories',
   adminCategoriesWrap: 'admin__categories-wrap',
   adminCategoryCard: 'admin__category-card',
+  adminCardInputWrap: 'admin-input-wrap',
+  adminCardFileInputWrap: 'admin-file-input-wrap',
+
+  adminCardInput: 'admin-input',
+  adminCardFileInput: 'admin-file-input',
+  adminCardInputLabel: 'admin-input-label',
+  adminCardFileInputLabel: 'admin-file-input-label',
+  adminCategoryCardContentNormal: 'admin__category-card-normal',
+  adminCategoryCardContentAdd: 'admin__category-card-add',
+  adminCategoryCardContentEdit: 'admin__category-card-edit',
+  adminCategoryCardContentCreate: 'admin__category-card-create',
   adminCategoryCardHeading: 'admin-category-card__heading',
   adminCategoryCardWordCountLink: 'admin-category-card__word-count-link',
   adminCategoryCardWordCount: 'admin-category-card__word-count',
+  adminCategoryCardButtonCreate: 'admin-category-card__create',
+  adminCategoryCardButtonCancel: 'admin-category-card__cancel',
   adminCategoryCardButtonRemove: 'admin-category-card__remove',
   adminCategoryCardButtonUpdate: 'admin-category-card__update',
   adminCategoryCardButtonAdd: 'admin-category-card__add',
-  adminCreateCategoryCardButton: 'admin-create-category-card__button',
+  adminCategoryCardButtonSave: 'admin-category-card__save',
+  adminCreateCategoryCardButton: 'admin-add-category-card__button',
   adminCreateWordCardButton: 'admin-create-word-card__button',
   adminCategoryCardButtonsWrap: 'admin-category-card__buttons-wrap',
   adminWordCardImageTitleWrap: 'admin-word-card__image-title-wrap',
+  adminWordCardButtonsWrap: 'admin-word-card__buttons-wrap',
   adminWordCardImageWrap: 'admin-word-card__image-wrap',
   adminWordCardImage: 'admin-word-card__image',
-  adminWordCardInfoWrap: 'admin-word-card__info-wrap',
+  adminWordCardContentNormal: 'admin-word-card-normal',
+  adminWordCardContentAdd: 'admin-word-card-add',
+  adminWordCardContentCreate: 'admin-word-card-create',
+  adminWordCardContentEdit: 'admin-word-card-edit',
   adminWordCardEditWrap: 'admin-word-card__edit-wrap',
   adminWordCardButtonChange: 'admin-word-card__change',
+  adminWordCardButtonSave: 'admin-word-card__save',
+  adminWordCardButtonCreate: 'admin-word-card__create',
+  adminWordCardButtonCancel: 'admin-word-card__cancel',
   adminWordCardButtonRemove: 'admin-word-card__remove',
   adminWordCardWord: 'admin-word-card__word',
   adminWordCardTranslation: 'admin-word-card__translation',
@@ -196,18 +217,31 @@ const Labels = {
   loginButtonCancel: 'Cancel',
   loginInputLoginPlaceholder: 'login',
   loginInputPasswordPlaceholder: 'password',
+  adminCategoryCardButtonCreate: 'Create',
+  adminCategoryCardButtonCancel: 'Cancel',
   adminCategoryCardButtonUpdate: 'Update',
   adminCategoryCardButtonAdd: 'Add word',
+  adminCategoryCardButtonSave: 'Save',
   adminCategoryCardWordCountTitle: 'Words: ',
+  adminCategoryEditInputId: 'category-input-id',
+  adminWordEditWordInputId: 'word-input-id',
+  adminWordEditAudioInputId: 'audio-input-id',
+  adminWordEditImageInputId: 'image-input-id',
+  adminWordEditTranslationInputId: 'translation-input-id',
+  adminCategoryEditInputLabel: 'Category Name',
   adminCreateCategoryCardHeading: 'Create new category',
   adminCreateWordCardHeading: 'Add new word',
   adminWordsHeading: 'Category: ',
   adminWordCardImageAlt: 'Word illustration',
   adminWordCardButtonChange: 'Change',
-  adminWordCardInfoWord: 'Word: ',
-  adminWordCardInfoTranslation: 'Translation: ',
-  adminWordCardInfoAudio: 'Sound file: ',
-  adminWordCardInfoImage: 'Image: ',
+  adminWordCardButtonSave: 'Save',
+  adminWordCardButtonCreate: 'Create',
+  adminWordCardButtonCancel: 'Cancel',
+  adminWordCardWord: 'Word: ',
+  adminWordCardSound: 'Sound:',
+  adminWordCardTranslation: 'Translation: ',
+  adminWordCardAudio: 'Sound file: ',
+  adminWordCardImage: 'Image: ',
 };
 
 const Constants = {

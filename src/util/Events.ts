@@ -7,34 +7,53 @@ import SortType from '../models/SortType';
 import SortOrder from '../models/SortOrder';
 import ICard from '../models/ICard';
 import LoginInfo from '../models/LoginInfo';
+import CategoryCardButton from '../models/CategoryCardButton';
+import WordCardButton from '../models/WordCardButton';
+import IWordCardDTO from '../models/IWordCardDTO';
 
-const menuClick = new Signal<string, void>();
-const modeButtonClick = new Signal<string, void>();
-const routeChange = new Signal<string, void>();
-const cardTurn = new Signal<string, void>();
-const cardClick = new Signal<string, void>();
-const gameModeChange = new Signal<GameMode, void>();
-const gameButtonClick = new Signal<void, void>();
-const cardClickRight = new Signal<void, void>();
-const cardGuess = new Signal<boolean, void>();
-const gameFinished = new Signal<void, void>();
-const cardsLoad = new Signal<void, void>();
-const finishScreenShow = new Signal<IGameFinishedRecord, void>();
-const gameStopped = new Signal<void, void>();
-const gameStarted = new Signal<void, void>();
-const boardDisabled = new Signal<void, void>();
-const boardEnabled = new Signal<void, void>();
-const statsTrainingClick = new Signal<IWordStatDTO, void>();
-const statsRightClick = new Signal<IWordStatDTO, void>();
-const statsWrongClick = new Signal<IWordStatDTO, void>();
-const statsCleared = new Signal<void, void>();
-const statsTableSorted = new Signal<[SortType, SortOrder], void>();
-const statsButtonRepeatClick = new Signal<void, void>();
-const statsRepeatDifficult = new Signal<ICard[], void>();
-const loginShow = new Signal<void, void>();
-const loginAttempt = new Signal<LoginInfo, void>();
-const login = new Signal<string, void>();
-const logout = new Signal<void, void>();
+const menuClick = new Signal<string, Promise<void>>();
+const modeButtonClick = new Signal<string, Promise<void>>();
+const routeChange = new Signal<string, Promise<void>>();
+const cardTurn = new Signal<string, Promise<void>>();
+const cardClick = new Signal<string, Promise<void>>();
+const gameModeChange = new Signal<GameMode, Promise<void>>();
+const gameButtonClick = new Signal<void, Promise<void>>();
+const cardClickRight = new Signal<void, Promise<void>>();
+const cardGuess = new Signal<boolean, Promise<void>>();
+const gameFinished = new Signal<void, Promise<void>>();
+const cardsLoad = new Signal<void, Promise<void>>();
+const finishScreenShow = new Signal<IGameFinishedRecord, Promise<void>>();
+const gameStopped = new Signal<void, Promise<void>>();
+const gameStarted = new Signal<void, Promise<void>>();
+const boardDisabled = new Signal<void, Promise<void>>();
+const boardEnabled = new Signal<void, Promise<void>>();
+const statsTrainingClick = new Signal<IWordStatDTO, Promise<void>>();
+const statsRightClick = new Signal<IWordStatDTO, Promise<void>>();
+const statsWrongClick = new Signal<IWordStatDTO, Promise<void>>();
+const statsCleared = new Signal<void, Promise<void>>();
+const statsTableSorted = new Signal<[SortType, SortOrder], Promise<void>>();
+const statsButtonRepeatClick = new Signal<void, Promise<void>>();
+const statsRepeatDifficult = new Signal<ICard[], Promise<void>>();
+const loginShow = new Signal<void, Promise<void>>();
+const loginAttempt = new Signal<LoginInfo, Promise<void>>();
+const login = new Signal<string, Promise<void>>();
+const logout = new Signal<void, Promise<void>>();
+const categoryCardClick = new Signal<
+  { button: CategoryCardButton; name: string; newName: string },
+  void
+>();
+const categoryUpdate = new Signal<
+  { name: string; newName: string },
+  Promise<void>
+>();
+const categoryCreate = new Signal<string, Promise<void>>();
+const categoryRemove = new Signal<string, Promise<void>>();
+const wordCardClick = new Signal<
+  { button: WordCardButton; wordInfo: IWordCardDTO },
+  void
+>();
+const wordCreate = new Signal<IWordCardDTO, Promise<void>>();
+const wordRemove = new Signal<IWordCardDTO, Promise<void>>();
 
 const Events = {
   menuClick,
@@ -64,6 +83,13 @@ const Events = {
   loginAttempt,
   login,
   logout,
+  categoryCardClick,
+  categoryUpdate,
+  categoryCreate,
+  categoryRemove,
+  wordCardClick,
+  wordCreate,
+  wordRemove,
 };
 
 export default Events;

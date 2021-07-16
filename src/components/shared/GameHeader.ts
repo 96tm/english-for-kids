@@ -25,19 +25,23 @@ export default class GameHeader extends Component {
     Events.statsRepeatDifficult.add(this.handleRepeatDifficult);
   }
 
-  private handleRepeatDifficult: () => void = () => {
+  private handleRepeatDifficult: () => Promise<void> = async () => {
     this.heading.textContent = Constants.Labels.statsRepeatHeading;
   };
 
-  private handleMenuClick: (category: string) => void = (category) => {
+  private handleMenuClick: (category: string) => Promise<void> = async (
+    category
+  ) => {
     this.heading.textContent = category;
   };
 
-  private handleGameStopped: () => void = () => {
+  private handleGameStopped: () => Promise<void> = async () => {
     this.headerScore.element.innerHTML = '';
   };
 
-  private handleRouteChange: (route: string) => void = (route) => {
+  private handleRouteChange: (route: string) => Promise<void> = async (
+    route
+  ) => {
     if (route === Constants.Labels.mainRoute) {
       this.heading.textContent = Constants.Labels.mainPageHeading;
     }

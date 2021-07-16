@@ -9,9 +9,11 @@ export default class Signal<T, S> {
     this.slots = this.slots.filter((registeredSlot) => registeredSlot === slot);
   }
 
-  emit(data: T): void {
-    this.slots.forEach((slot) => {
-      slot(data);
-    });
+  async emit(data: T): Promise<void> {
+    const promises = [];
+    for (let i = 0; i < this.slots.length; i += 1) {
+      promises.push(this.slots[i](data));
+    }
+    await Promise.all(promises);
   }
 }

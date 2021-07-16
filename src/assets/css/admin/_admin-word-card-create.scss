@@ -1,0 +1,8 @@
+.admin__category-card-create {
+  @extend .admin__category-card-edit;
+}
+
+.admin-word-card__create {
+  @extend .admin-button;
+  width: 45%;
+}
