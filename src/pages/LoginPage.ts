@@ -16,6 +16,7 @@ export default class LoginPage extends Component {
   private buttonsWrap: IComponent;
   private buttonLogin: IComponent;
   private buttonCancel: IComponent;
+  private errorContainer: IComponent;
   inputLoginWrap: IComponent;
   inputPasswordWrap: IComponent;
 
@@ -28,7 +29,7 @@ export default class LoginPage extends Component {
       Constants.CSSClasses.loginHeading,
     ]);
     this.heading.textContent = Constants.Labels.loginHeading;
-    [this.form, this.fieldset] = this.initForm();
+    [this.form, this.errorContainer, this.fieldset] = this.initForm();
     [
       this.inputLoginWrap,
       this.inputLogin,
@@ -44,7 +45,7 @@ export default class LoginPage extends Component {
 
   showError(text: string): void {
     const error = new ErrorMessage(this.global, text);
-    error.attachTo(this.loginContainer);
+    error.attachTo(this.errorContainer);
   }
 
   remove(): void {
@@ -62,10 +63,14 @@ export default class LoginPage extends Component {
     const form = new Component(this.global, this.loginContainer, 'form', [
       Constants.CSSClasses.loginForm,
     ]);
+    const errorContainer = new Component(this.global, form, 'div', [
+      Constants.CSSClasses.errorContainer,
+    ]);
+
     const fieldset = new Component(this.global, form, 'fieldset', [
       Constants.CSSClasses.loginFieldset,
     ]);
-    return [form, fieldset];
+    return [form, errorContainer, fieldset];
   }
 
   private initInputs(): IComponent[] {

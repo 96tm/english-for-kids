@@ -8,6 +8,7 @@ import GameFooter from '../components/shared/GameFooter';
 import Constants from '../util/constants';
 
 import Events from '../util/Events';
+import ErrorMessage from '../components/shared/ErrorMessage';
 
 export default class ContainerPage extends Component {
   gameToggleCheckbox: IComponent;
@@ -39,6 +40,11 @@ export default class ContainerPage extends Component {
     this.footer = new GameFooter(global, this.innerContainer);
     Events.routeChange.add(this.handleRouteChange);
     this.addEventListeners();
+  }
+
+  private showError(text: string): void {
+    const error = new ErrorMessage(this.global, text);
+    error.attachTo(this.contentWrap);
   }
 
   async init(): Promise<void> {
