@@ -2,8 +2,11 @@ import Events from './Events';
 import IController from '../controllers/IController';
 import RoutingRecord from './RoutingRecord';
 import Constants from './constants';
+import userService from './UserService';
 
 class Router {
+  guards = new Set<IController>();
+
   constructor(
     private global: Window,
     public currentPattern: string,
@@ -13,7 +16,10 @@ class Router {
   async showRoute(route: string): Promise<void> {
     const decodedRoute = decodeURIComponent(route);
     const controller = this.getController(decodedRoute);
-    if (controller) {
+    if (
+      controller &&
+      !(this.guards.has(controller) && !userService.isAuthenticated)
+    ) {
       const currentController = this.getController(
         this.currentPattern
       ) as IController;
@@ -36,10 +42,17 @@ class Router {
     this.global.location.hash = hash;
   }
 
+  addOneRoutePattern(routingRecord: RoutingRecord) {
+    this.routingRecords.push(routingRecord);
+    routingRecord.controller.hide();
+    if (routingRecord?.options?.guard) {
+      this.guards.add(routingRecord.controller);
+    }
+  }
+
   addRoutePatterns(routingRecords: RoutingRecord[]) {
     routingRecords.forEach((routingRecord) => {
-      this.routingRecords.push(routingRecord);
-      routingRecord.controller.hide();
+      this.addOneRoutePattern(routingRecord);
     });
   }
 

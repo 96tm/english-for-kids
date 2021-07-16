@@ -16,6 +16,14 @@ export default class Api {
     return categories;
   }
 
+  static async login(login: string, password: string): Promise<Response> {
+    return fetch(`${Constants.SERVER_URL}/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ login, password }),
+    });
+  }
+
   static async createCategory(name: string): Promise<void> {
     await fetch(`${Constants.SERVER_URL}/categories`, {
       method: 'POST',

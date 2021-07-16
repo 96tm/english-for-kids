@@ -116,6 +116,12 @@ export default class LoginPage extends Component {
     return [buttonsWrap, buttonLogin, buttonCancel];
   }
 
+  getLoginData(): { login: string; password: string } {
+    const login = (this.inputLogin.element as HTMLInputElement).value;
+    const password = (this.inputPassword.element as HTMLInputElement).value;
+    return { login, password };
+  }
+
   private handleClick: (event: MouseEvent) => void = (event) => {
     const target = event.target as HTMLElement;
     if (target === this.buttonLogin.element) {

@@ -63,18 +63,25 @@ import AdminWordsController from './controllers/AdminWordsController';
       pattern: Constants.Labels.statsRoute,
       controller: statisticsController,
     },
-    { pattern: Constants.Labels.adminRoute, controller: adminController },
+    {
+      pattern: Constants.Labels.adminRoute,
+      controller: adminController,
+      options: { guard: true },
+    },
     {
       pattern: Constants.Labels.adminWordsRoute,
       controller: adminWordsController,
+      options: { guard: true },
     },
     {
       pattern: Constants.Labels.adminCategoriesRoute,
       controller: adminCategoriesController,
+      options: { guard: true },
     },
     {
       pattern: '\\w/words',
       controller: adminWordsController,
+      options: { guard: true },
     },
   ]);
   await RouterService.showRoute(Constants.Labels.mainRoute);
