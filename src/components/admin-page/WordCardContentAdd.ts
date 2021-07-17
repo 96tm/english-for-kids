@@ -4,7 +4,6 @@ import IComponent from '../IComponent';
 import Constants from '../../util/constants';
 import Events from '../../util/Events';
 import WordCardButton from '../../models/WordCardButton';
-import WordInfo from '../../models/WordInfo';
 import WordCardDTO from '../../models/WordCardDTO';
 
 export default class WordCardContentAdd extends Component {

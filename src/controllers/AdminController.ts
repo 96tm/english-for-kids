@@ -11,7 +11,12 @@ export default class AdminController extends Controller {
     this.component = new AdminContainerPage(global, rootComponent);
     Events.login.add(this.handleLogin);
     Events.logout.add(this.handleLogout);
+    Events.adminErrorShow.add(this.handleShowError);
   }
+
+  private handleShowError: (text: string) => Promise<void> = async (text) => {
+    (this.component as AdminContainerPage).showError(text);
+  };
 
   private handleLogin: (login: string) => Promise<void> = async (loginInfo) => {
     this.show();

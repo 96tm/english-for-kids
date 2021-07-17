@@ -5,4 +5,8 @@
 .admin-word-card__create {
   @extend .admin-button;
   width: 45%;
+  &:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
 }

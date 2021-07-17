@@ -34,6 +34,14 @@ export default class Component implements IComponent {
     this.rootComponent.element.append(this.element);
   }
 
+  disable(): void {
+    this.element.setAttribute('disabled', '');
+  }
+
+  enable(): void {
+    this.element.removeAttribute('disabled');
+  }
+
   get textContent(): string {
     return this._textContent;
   }

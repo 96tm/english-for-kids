@@ -15,8 +15,8 @@ export default interface IComponent {
   ): IComponent;
 
   attachTo(rootComponent: IComponent): void;
-
   render(): void;
-
   remove(): void;
+  enable(): void;
+  disable(): void;
 }

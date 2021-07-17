@@ -39,13 +39,14 @@ export default class ContainerPage extends Component {
     ]);
     this.footer = new GameFooter(global, this.innerContainer);
     Events.routeChange.add(this.handleRouteChange);
+    Events.adminErrorShow.add(this.showError);
     this.addEventListeners();
   }
 
-  private showError(text: string): void {
+  private showError: (text: string) => Promise<void> = async (text) => {
     const error = new ErrorMessage(this.global, text);
     error.attachTo(this.contentWrap);
-  }
+  };
 
   async init(): Promise<void> {
     await this.gameMenu.init();

@@ -11,6 +11,13 @@
   @extend .admin-button;
 }
 
+.admin-category-card__save {
+  &:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+}
+
 .admin-category-card__cancel {
   color: $button-red-color;
   border: 2px solid $button-red-color;

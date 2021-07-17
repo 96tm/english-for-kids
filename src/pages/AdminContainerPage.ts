@@ -24,7 +24,7 @@ export default class AdminContainerPage extends Component {
     this.footer = new GameFooter(global, this);
   }
 
-  private showError(text: string): void {
+  showError(text: string): void {
     const error = new ErrorMessage(this.global, text);
     error.attachTo(this.errorContainer as IComponent);
   }

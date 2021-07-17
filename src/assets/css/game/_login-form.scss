@@ -7,7 +7,7 @@ $fieldset-padding-top: 49px;
   justify-content: center;
   height: 100%;
   width: 100%;
-  z-index: $max-z-index;
+  z-index: calc(#{$max-z-index} - 1);
   background: rgba(0, 0, 0, 0.8);
 }
 
@@ -102,4 +102,8 @@ $fieldset-padding-top: 49px;
 
 .login__button-login {
   margin-left: 10%;
+  &:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
 }

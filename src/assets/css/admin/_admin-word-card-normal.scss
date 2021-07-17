@@ -43,6 +43,9 @@
 .admin-word-card__audio {
   padding-bottom: 16px;
   word-break: break-word;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .admin-word-card__image-wrap {

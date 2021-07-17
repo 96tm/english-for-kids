@@ -25,6 +25,7 @@ export default class CategoryCardContentCreate extends BaseCategoryCardContent {
     );
     this.addEventListeners();
     this.buttonsWrap.attachTo(this);
+    this.buttonCreate.disable();
   }
 
   private createButtons(): IComponent[] {
@@ -43,11 +44,21 @@ export default class CategoryCardContentCreate extends BaseCategoryCardContent {
 
   private addEventListeners(): void {
     this.element.addEventListener('click', this.handleClick);
+    this.element.addEventListener('input', this.handleInputChange);
   }
 
   private removeEventListeners(): void {
     this.element.removeEventListener('click', this.handleClick);
+    this.element.removeEventListener('input', this.handleInputChange);
   }
+
+  private handleInputChange: (event: Event) => void = (event) => {
+    if ((this.input as TextInput).value) {
+      this.buttonCreate.enable();
+    } else {
+      this.buttonCreate.disable();
+    }
+  };
 
   private handleClick: (event: MouseEvent) => void = (event) => {
     const target = event.target as HTMLElement;

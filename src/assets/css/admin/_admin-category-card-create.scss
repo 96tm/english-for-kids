@@ -1,3 +1,7 @@
 .admin-category-card__create {
   @extend .admin-button;
+  &:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
 }

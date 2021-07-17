@@ -1,61 +1,72 @@
 import Constants from './constants';
-import ICategoryDTO from '../models/ICategoryDTO';
-import ICard from '../models/ICard';
 import IWordCardDTO from '../models/IWordCardDTO';
 import IWordCardUpdateDTO from '../models/IWordCardUpdateDTO';
 
 export default class Api {
-  static async getAllCategories(): Promise<ICategoryDTO[]> {
-    const categories: ICategoryDTO[] = await fetch(
-      `${Constants.SERVER_URL}/categories`,
-      {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-      }
-    ).then((response) => response.json());
-    return categories;
+  static async fetchWithTimeout(
+    resource: RequestInfo,
+    options: RequestInit,
+    timeout = Constants.FETCH_TIMEOUT
+  ): Promise<Response> {
+    const abortController = new AbortController();
+    const timeoutHandle = setTimeout(() => abortController.abort(), timeout);
+    const response = await fetch(resource, {
+      ...options,
+      signal: abortController.signal,
+    });
+    clearTimeout(timeoutHandle);
+    return response;
+  }
+
+  static async getAllCategories(): Promise<Response> {
+    return Api.fetchWithTimeout(`${Constants.SERVER_URL}/categories`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 
   static async login(login: string, password: string): Promise<Response> {
-    return fetch(`${Constants.SERVER_URL}/login`, {
+    return Api.fetchWithTimeout(`${Constants.SERVER_URL}/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ login, password }),
     });
   }
 
-  static async createCategory(name: string): Promise<void> {
-    await fetch(`${Constants.SERVER_URL}/categories`, {
+  static async createCategory(name: string): Promise<Response> {
+    return Api.fetchWithTimeout(`${Constants.SERVER_URL}/categories`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name }),
     });
   }
 
-  static async removeCategory(name: string): Promise<void> {
-    await fetch(`${Constants.SERVER_URL}/categories/${name}`, {
+  static async removeCategory(name: string): Promise<Response> {
+    return Api.fetchWithTimeout(`${Constants.SERVER_URL}/categories/${name}`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
     });
   }
 
-  static async updateCategory(name: string, newName: string): Promise<void> {
-    await fetch(`${Constants.SERVER_URL}/categories/${name}`, {
+  static async updateCategory(
+    name: string,
+    newName: string
+  ): Promise<Response> {
+    return Api.fetchWithTimeout(`${Constants.SERVER_URL}/categories/${name}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ newName }),
     });
   }
 
-  static async getAllWordsByCategory(category: string): Promise<ICard[]> {
-    const words = fetch(
+  static async getAllWordsByCategory(category: string): Promise<Response> {
+    return Api.fetchWithTimeout(
       `${Constants.SERVER_URL}/categories/${category}/words`,
       {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
       }
-    ).then((response) => response.json());
-    return words;
+    );
   }
 
   static async updateWord({
@@ -73,10 +84,13 @@ export default class Api {
     formData.append('translation', translation);
     formData.append('category', category);
 
-    return fetch(`http://localhost:4000/categories/${category}/words/${word}`, {
-      method: 'PUT',
-      body: formData,
-    });
+    return Api.fetchWithTimeout(
+      `http://localhost:4000/categories/${category}/words/${word}`,
+      {
+        method: 'PUT',
+        body: formData,
+      }
+    );
   }
 
   static async createWord({
@@ -93,15 +107,21 @@ export default class Api {
     formData.append('translation', translation);
     formData.append('category', category);
 
-    return fetch(`http://localhost:4000/categories/${category}/words`, {
-      method: 'POST',
-      body: formData,
-    });
+    return Api.fetchWithTimeout(
+      `http://localhost:4000/categories/${category}/words`,
+      {
+        method: 'POST',
+        body: formData,
+      }
+    );
   }
 
   static async removeWord(category: string, word: string): Promise<Response> {
-    return fetch(`http://localhost:4000/categories/${category}/words/${word}`, {
-      method: 'DELETE',
-    });
+    return Api.fetchWithTimeout(
+      `http://localhost:4000/categories/${category}/words/${word}`,
+      {
+        method: 'DELETE',
+      }
+    );
   }
 }

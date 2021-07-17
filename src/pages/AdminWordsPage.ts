@@ -6,9 +6,9 @@ import ICard from '../models/ICard';
 import WordCard from '../components/admin-page/WordCard';
 import Events from '../util/Events';
 import WordCardButton from '../models/WordCardButton';
-import Api from '../util/Api';
-import IWordCardDTO from '../models/IWordCardDTO';
 import IWordCardUpdateDTO from '../models/IWordCardUpdateDTO';
+
+import defaultWordImage from '../assets/icons/icons8-no-image.png';
 
 export default class AdminWordsPage extends Component {
   heading: IComponent;
@@ -33,10 +33,9 @@ export default class AdminWordsPage extends Component {
     Events.wordCardClick.add(this.handleWordCardClick);
   }
 
-  async init(category: string): Promise<void> {
+  async init(category: string, words: ICard[]): Promise<void> {
     this.wordsWrap.element.innerHTML = '';
     (this.createWordCard as WordCard).category = category;
-    const words = await Api.getAllWordsByCategory(category);
     this.words = [];
     (words as ICard[]).forEach((word) => {
       const updatedWord = word;
@@ -44,7 +43,12 @@ export default class AdminWordsPage extends Component {
       this.addOneWord(updatedWord);
     });
     this.heading.textContent = category;
+    (this.createWordCard as WordCard).setModeAdd();
     this.createWordCard.attachTo(this.wordsWrap);
+  }
+
+  getCard(word: string): IComponent | undefined {
+    return this.words.find((wordCard) => (wordCard as WordCard).word === word);
   }
 
   private handleWordCardClick: (data: {
@@ -107,7 +111,7 @@ export default class AdminWordsPage extends Component {
       word,
       translation,
       audioSrc,
-      `${image}`
+      `${image}` || defaultWordImage
     );
     this.words.push(wordCard);
     return wordCard;

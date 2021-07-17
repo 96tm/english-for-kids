@@ -7,22 +7,22 @@ import TextInput from './TextInput';
 import Events from '../../util/Events';
 import WordCardButton from '../../models/WordCardButton';
 import WordCardDTO from '../../models/WordCardDTO';
+import BaseWordCardContent from './BaseWordCardContent';
 
-export default class WordCardContentCreate extends Component {
+export default class WordCardContentCreate extends BaseWordCardContent {
   buttonCreate: IComponent;
   buttonCancel: IComponent;
   inputWord: IComponent;
   inputTranslation: IComponent;
   inputAudio: IComponent;
   inputImage: IComponent;
-  buttonsWrap: IComponent;
 
   constructor(
     global: Window,
     rootComponent: IComponent,
     private category: string
   ) {
-    super(global, rootComponent, 'div', [
+    super(global, rootComponent, [
       Constants.CSSClasses.adminWordCardContentEdit,
     ]);
     this.inputWord = new TextInput(
@@ -56,6 +56,7 @@ export default class WordCardContentCreate extends Component {
     ]);
     [this.buttonCreate, this.buttonCancel] = this.createButtons();
     this.addEventListeners();
+    this.buttonCreate.disable();
   }
 
   private createButtons(): IComponent[] {
@@ -78,11 +79,27 @@ export default class WordCardContentCreate extends Component {
 
   private addEventListeners(): void {
     this.element.addEventListener('click', this.handleClick);
+    this.element.addEventListener('input', this.handleInputChange);
   }
 
   private removeEventListeners(): void {
     this.element.removeEventListener('click', this.handleClick);
+    this.element.removeEventListener('input', this.handleInputChange);
   }
+
+  private handleInputChange: (event: Event) => void = (event) => {
+    if (
+      WordCardContentCreate.checkInputs(
+        this.inputWord as TextInput,
+        this.inputTranslation as TextInput,
+        this.inputAudio as FileInput
+      )
+    ) {
+      this.buttonCreate.enable();
+    } else {
+      this.buttonCreate.disable();
+    }
+  };
 
   private handleClick: (event: MouseEvent) => void = (event) => {
     const target = event.target as HTMLElement;
@@ -94,8 +111,8 @@ export default class WordCardContentCreate extends Component {
         });
         break;
       case this.buttonCreate.element: {
-        const audioFile = (this.inputAudio as FileInput).file;
-        const imageFile = (this.inputImage as FileInput).file;
+        const audioFile = (this.inputAudio as FileInput).value;
+        const imageFile = (this.inputImage as FileInput).value;
         Events.wordCardClick.emit({
           button: WordCardButton.create,
           wordInfo: new WordCardDTO(

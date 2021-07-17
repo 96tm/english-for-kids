@@ -7,6 +7,7 @@ const NUMBER_OF_CATEGORIES = 8;
 const FINISH_SCREEN_DURATION = 2000;
 const HOMEPAGE = '';
 const SERVER_URL = 'http://localhost:4000';
+const FETCH_TIMEOUT = 20000;
 
 const CSSClasses = {
   root: 'root',
@@ -176,6 +177,7 @@ const CSSClasses = {
   adminWordsWrap: 'admin__words-wrap',
 
   buttonRemove: 'button-remove',
+  loader: 'loader',
   checked: 'checked',
   hidden: 'hidden',
   invisible: 'invisible',
@@ -185,6 +187,7 @@ const CSSClasses = {
   overlay: 'overlay',
   error: 'error',
   errorContainer: 'error-container',
+  loaderContainer: 'loader-container',
 };
 
 const Labels = {
@@ -260,6 +263,7 @@ const Constants = {
   NUMBER_OF_CARDS,
   NUMBER_OF_CATEGORIES,
   FINISH_SCREEN_DURATION,
+  FETCH_TIMEOUT,
 };
 
 export default Constants;

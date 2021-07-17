@@ -15,6 +15,7 @@ import AdminController from './controllers/AdminController';
 import AdminCategoriesController from './controllers/AdminCategoriesController';
 import AdminContainerPage from './pages/AdminContainerPage';
 import AdminWordsController from './controllers/AdminWordsController';
+import LoaderAnimation from './components/shared/LoaderAnimation';
 
 (async () => {
   const global = window;
@@ -25,9 +26,13 @@ import AdminWordsController from './controllers/AdminWordsController';
   const containerController = new ContainerController(global, root);
   await containerController.init();
 
+  const loaderAnimation = new LoaderAnimation(global, root);
+  loaderAnimation.remove();
+
   const loginController = new LoginController(
     global,
-    containerController.component
+    containerController.component,
+    loaderAnimation
   );
 
   const gameController = new GameController(
@@ -49,11 +54,13 @@ import AdminWordsController from './controllers/AdminWordsController';
   const adminController = new AdminController(global, root);
   const adminCategoriesController = new AdminCategoriesController(
     global,
-    (adminController.component as AdminContainerPage).container
+    (adminController.component as AdminContainerPage).container,
+    loaderAnimation
   );
   const adminWordsController = new AdminWordsController(
     global,
-    (adminController.component as AdminContainerPage).container
+    (adminController.component as AdminContainerPage).container,
+    loaderAnimation
   );
 
   await RouterService.init([

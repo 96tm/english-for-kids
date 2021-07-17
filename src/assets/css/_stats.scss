@@ -31,7 +31,7 @@
 .stats-table__heading-item {
   padding-right: 25px;
   text-align: left;
-  background: linear-gradient(180deg, #0099ae 0%, #00bf82 100%);
+  background: $green-gradient;
   cursor: pointer;
   &:hover {
     opacity: 0.7;

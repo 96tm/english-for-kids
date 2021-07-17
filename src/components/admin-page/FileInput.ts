@@ -40,7 +40,7 @@ export default class FileInput extends Component {
     );
   }
 
-  get file(): File | undefined {
+  get value(): File | undefined {
     const { files } = this.input.element as HTMLInputElement;
     if (files && files.length) {
       return files[0];

@@ -13,7 +13,11 @@ import userService from '../util/UserService';
 export default class LoginController extends Controller {
   component: IComponent;
 
-  constructor(private global: Window, rootComponent: IComponent | null) {
+  constructor(
+    global: Window,
+    rootComponent: IComponent | null,
+    private loaderAnimation: IComponent
+  ) {
     super();
     this.component = new LoginPage(global, rootComponent);
     Events.loginShow.add(this.handleLoginShow);
@@ -29,17 +33,27 @@ export default class LoginController extends Controller {
       Events.login.emit(loginInfo.login);
       userService.login();
       RouterService.setHash(Constants.Labels.adminCategoriesRoute);
-    } else {
-      (this.component as LoginPage).showError(
-        'No user found with provided login and password'
-      );
     }
   };
 
   private async validate(): Promise<boolean> {
     const { login, password } = (this.component as LoginPage).getLoginData();
-    const response = await Api.login(login, password);
-    return response.ok;
+    try {
+      this.loaderAnimation.render();
+      const response = await Api.login(login, password);
+      if (response.ok) {
+        return true;
+      }
+      const error = await response.json();
+      (this.component as LoginPage).showError(error.message);
+    } catch (err) {
+      (this.component as LoginPage).showError(
+        `Server doesn't respond, please check your network connection`
+      );
+    } finally {
+      this.loaderAnimation.remove();
+    }
+    return false;
   }
 
   private handleLoginShow: () => Promise<void> = async () => {

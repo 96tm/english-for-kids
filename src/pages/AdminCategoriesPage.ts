@@ -5,7 +5,7 @@ import Constants from '../util/constants';
 import CategoryCard from '../components/admin-page/CategoryCard';
 import Events from '../util/Events';
 import CategoryCardButton from '../models/CategoryCardButton';
-import Api from '../util/Api';
+import ICategoryDTO from '../models/ICategoryDTO';
 
 export default class AdminCategoriesPage extends Component {
   categories: IComponent[] = [];
@@ -21,6 +21,12 @@ export default class AdminCategoriesPage extends Component {
     (this.createCategoryCard as CategoryCard).setAddMode();
     // this.addEventListeners();
     Events.categoryCardClick.add(this.handleCategoryCardClick);
+  }
+
+  getCategoryCard(name: string): IComponent | undefined {
+    return this.categories.find(
+      (category) => (category as CategoryCard).name === name
+    );
   }
 
   private handleCategoryCardClick: (data: {
@@ -43,12 +49,11 @@ export default class AdminCategoriesPage extends Component {
         }
         break;
       case CategoryCardButton.save:
-        categoryCard.setNormalMode(data.newName);
+        categoryCard.setNormalMode();
         Events.categoryUpdate.emit({ ...data });
         break;
       case CategoryCardButton.create: {
         (this.createCategoryCard as CategoryCard).setAddMode();
-
         Events.categoryCreate.emit(data.newName);
         break;
       }
@@ -56,10 +61,10 @@ export default class AdminCategoriesPage extends Component {
         (this.createCategoryCard as CategoryCard).setCreateMode();
         break;
       case CategoryCardButton.remove: {
-        this.categories = this.categories.filter(
-          (category) => category !== categoryCard
-        );
-        categoryCard.remove();
+        // this.categories = this.categories.filter(
+        //   (category) => category !== categoryCard
+        // );
+        // categoryCard.remove();
         Events.categoryRemove.emit(data.name);
         break;
       }
@@ -91,13 +96,13 @@ export default class AdminCategoriesPage extends Component {
     return category;
   }
 
-  async init(): Promise<void> {
+  async init(categories: ICategoryDTO[]): Promise<void> {
     this.categoriesWrap.element.innerHTML = '';
-    const categories = await Api.getAllCategories();
     this.categories = [];
     categories.forEach((category) =>
       this.addOneCategory(category.name, category.numberOfWords)
     );
+    (this.createCategoryCard as CategoryCard).setAddMode();
     this.createCategoryCard.attachTo(this.categoriesWrap);
   }
 }

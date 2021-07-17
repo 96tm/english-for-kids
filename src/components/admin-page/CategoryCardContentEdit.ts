@@ -25,7 +25,6 @@ export default class CategoryCardContentEdit extends BaseCategoryCardContent {
       Constants.Labels.adminCategoryEditInputLabel,
       name
     );
-
     this.addEventListeners();
     this.buttonsWrap.attachTo(this);
   }
@@ -46,11 +45,21 @@ export default class CategoryCardContentEdit extends BaseCategoryCardContent {
 
   private addEventListeners(): void {
     this.element.addEventListener('click', this.handleClick);
+    this.element.addEventListener('input', this.handleInputChange);
   }
 
   private removeEventListeners(): void {
     this.element.removeEventListener('click', this.handleClick);
+    this.element.removeEventListener('input', this.handleInputChange);
   }
+
+  private handleInputChange: (event: Event) => void = (event) => {
+    if ((this.input as TextInput).value) {
+      this.buttonSave.enable();
+    } else {
+      this.buttonSave.disable();
+    }
+  };
 
   private handleClick: (event: MouseEvent) => void = (event) => {
     const target = event.target as HTMLElement;

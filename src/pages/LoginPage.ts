@@ -40,7 +40,7 @@ export default class LoginPage extends Component {
     [this.buttonsWrap, this.buttonLogin, this.buttonCancel] =
       this.initButtons();
     this.addEventListeners();
-    this.disableSubmit();
+    this.buttonLogin.disable();
   }
 
   showError(text: string): void {
@@ -56,13 +56,17 @@ export default class LoginPage extends Component {
   private clearInputs(): void {
     (this.inputLogin.element as HTMLInputElement).value = '';
     (this.inputPassword.element as HTMLInputElement).value = '';
-    this.disableSubmit();
+    this.buttonLogin.disable();
   }
 
   private initForm(): IComponent[] {
-    const form = new Component(this.global, this.loginContainer, 'form', [
-      Constants.CSSClasses.loginForm,
-    ]);
+    const form = new Component(
+      this.global,
+      this.loginContainer,
+      'form',
+      [Constants.CSSClasses.loginForm],
+      { action: '#', method: 'POST' }
+    );
     const errorContainer = new Component(this.global, form, 'div', [
       Constants.CSSClasses.errorContainer,
     ]);
@@ -132,9 +136,13 @@ export default class LoginPage extends Component {
       Constants.CSSClasses.loginButtonCancel,
     ]);
     buttonCancel.textContent = Constants.Labels.loginButtonCancel;
-    const buttonLogin = new Component(this.global, buttonsWrap, 'button', [
-      Constants.CSSClasses.loginButtonLogin,
-    ]);
+    const buttonLogin = new Component(
+      this.global,
+      buttonsWrap,
+      'input',
+      [Constants.CSSClasses.loginButtonLogin],
+      { type: 'submit' }
+    );
     buttonLogin.textContent = Constants.Labels.loginButtonLogin;
     return [buttonsWrap, buttonLogin, buttonCancel];
   }
@@ -162,22 +170,14 @@ export default class LoginPage extends Component {
     }
   };
 
-  private disableSubmit(): void {
-    this.buttonLogin.element.setAttribute('disabled', '');
-  }
-
-  private enableSubmit(): void {
-    this.buttonLogin.element.removeAttribute('disabled');
-  }
-
   handleInputChange: (event: Event) => void = (event) => {
     if (
       (this.inputLogin.element as HTMLInputElement).value &&
       (this.inputPassword.element as HTMLInputElement).value
     ) {
-      this.enableSubmit();
+      this.buttonLogin.enable();
     } else {
-      this.disableSubmit();
+      this.buttonLogin.disable();
     }
   };
 
