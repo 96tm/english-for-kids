@@ -5,6 +5,7 @@ import Constants from '../util/constants';
 import Nav from '../components/admin-page/Nav';
 import GameFooter from '../components/shared/GameFooter';
 import ErrorMessage from '../components/shared/ErrorMessage';
+import InfoMessage from '../components/shared/InfoMessage';
 
 export default class AdminContainerPage extends Component {
   nav: IComponent;
@@ -27,5 +28,10 @@ export default class AdminContainerPage extends Component {
   showError(text: string): void {
     const error = new ErrorMessage(this.global, text);
     error.attachTo(this.errorContainer as IComponent);
+  }
+
+  showInfoMessage(text: string): void {
+    const message = new InfoMessage(this.global, text);
+    message.attachTo(this.errorContainer as IComponent);
   }
 }

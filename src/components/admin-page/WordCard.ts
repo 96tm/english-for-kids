@@ -33,7 +33,13 @@ export default class WordCard extends Component {
     );
   }
 
-  setModeNormal({ category, word, translation, audioSrc, image }: ICard): void {
+  setModeNormal({
+    category = this.category,
+    word = this.word,
+    translation = this.translation,
+    audioSrc = this.audioSrc,
+    image = this.image,
+  }: Partial<ICard>): void {
     this.element.innerHTML = '';
     this.content.remove();
     this.category = category;

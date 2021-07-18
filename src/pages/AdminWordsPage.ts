@@ -96,7 +96,7 @@ export default class AdminWordsPage extends Component {
     }
   };
 
-  private addOneWord({
+  addOneWord({
     category,
     word,
     translation,
@@ -113,6 +113,7 @@ export default class AdminWordsPage extends Component {
       `${image}` || defaultWordImage
     );
     this.words.push(wordCard);
+    this.createWordCard.attachTo(this.wordsWrap);
     return wordCard;
   }
 }

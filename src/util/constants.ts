@@ -193,6 +193,7 @@ const CSSClasses = {
   noClicks: 'no-clicks',
   overlay: 'overlay',
   error: 'error',
+  infoMessage: 'info-message',
   errorContainer: 'error-container',
   loaderContainer: 'loader-container',
 };
@@ -257,6 +258,8 @@ const Labels = {
   adminWordCardAudio: 'Sound file: ',
   adminWordCardImage: 'Image: ',
   selectFile: 'Select file',
+  noServerResponse: `Server doesn't respond`,
+  serverError: 'Server error',
   invalidEnglishWord: (fieldName: string): string =>
     `Field "${fieldName}" must contain only letters form the English alphabet and/or digits`,
   fileSizeExceeded: (size: number): string =>

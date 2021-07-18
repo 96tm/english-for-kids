@@ -42,6 +42,7 @@ export default class AdminCategoriesController extends Controller {
           updatedCard.name,
           updatedCard.numberOfWords
         );
+        Events.adminMessageShow.emit('Category updated');
       } else {
         const error: IRESTError = await response.json();
         Events.adminErrorShow.emit(error.message);
@@ -64,6 +65,7 @@ export default class AdminCategoriesController extends Controller {
       if (response.ok) {
         const categories = await this.getCategories();
         await this.init(categories);
+        Events.adminMessageShow.emit('Category created');
       } else {
         const error: IRESTError = await response.json();
         Events.adminErrorShow.emit(error.message);
@@ -91,6 +93,7 @@ export default class AdminCategoriesController extends Controller {
         ).categories.filter(
           (category) => (category as CategoryCard).name !== removedCategory.name
         );
+        Events.adminMessageShow.emit('Category removed');
       } else {
         const error: IRESTError = await response.json();
         Events.adminErrorShow.emit(error.message);

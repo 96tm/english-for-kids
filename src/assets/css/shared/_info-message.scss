@@ -1,0 +1,6 @@
+.info-message {
+  @extend .error;
+  background: $message-background-color;
+  background-color: $message-background-color;
+  border-color: $message-border-color;
+}

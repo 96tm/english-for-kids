@@ -70,11 +70,24 @@ export default class AdminWordsController extends Controller {
         ...wordUpdateInfo,
       });
       if (response.ok) {
-        const updatedWord: ICard = await response.json();
         const updatedWordCard = (this.component as AdminWordsPage).getCard(
           wordUpdateInfo.word
         );
-        (updatedWordCard as WordCard)?.setModeNormal({ ...updatedWord });
+        const { category, word, translation } = wordUpdateInfo;
+        const updatedWord: Partial<ICard> = { category, word, translation };
+        if (wordUpdateInfo.image) {
+          updatedWord.image = URL.createObjectURL(wordUpdateInfo.image);
+        }
+        if (wordUpdateInfo.audio) {
+          updatedWord.audioSrc = URL.createObjectURL(wordUpdateInfo.audio);
+        }
+        Events.adminMessageShow.emit(
+          "Word updated - uploading media into the cloud may take some time, so audio and image changes won't be reflected immediately."
+        );
+        (updatedWordCard as WordCard)?.setModeNormal({
+          ...updatedWord,
+          word: wordUpdateInfo.newWord,
+        });
       } else {
         const error: IRESTError = await response.json();
         Events.adminErrorShow.emit(error.message);
@@ -91,25 +104,35 @@ export default class AdminWordsController extends Controller {
   private handleWordCreate: (wordInfo: IWordCardDTO) => Promise<void> = async (
     wordInfo
   ) => {
-    let words: ICard[] = [];
     try {
-      words = await this.getWords(wordInfo.category);
       this.loaderAnimation.render();
       const response = await Api.createWord({ ...wordInfo });
-      if (!response.ok) {
+      if (response.ok) {
+        let image = '';
+        if (wordInfo.image) {
+          image = URL.createObjectURL(wordInfo.image);
+        }
+        const audioSrc = URL.createObjectURL(wordInfo.audio);
+        (this.component as AdminWordsPage).addOneWord({
+          ...wordInfo,
+          image,
+          audioSrc,
+        });
+        Events.adminMessageShow.emit(
+          "Word created - uploading media into the cloud may take some time, so audio and image changes won't be reflected immediately."
+        );
+      } else {
         const error: IRESTError = await response.json();
         Events.adminErrorShow.emit(error.message);
       }
     } catch (err) {
       if (err.name === 'AbortError') {
-        Events.adminErrorShow.emit(`Server doesn't respond`);
+        Events.adminErrorShow.emit(Constants.Labels.noServerResponse);
       } else {
-        Events.adminErrorShow.emit(
-          `Server doesn't respond, please check your network connection`
-        );
+        Events.adminErrorShow.emit(Constants.Labels.serverError);
+        console.log(err);
       }
     } finally {
-      await this.init(wordInfo.category, words);
       this.loaderAnimation.remove();
     }
   };
@@ -128,6 +151,7 @@ export default class AdminWordsController extends Controller {
           (wordCard) => (wordCard as WordCard).word !== removedCard.word
         );
         (this.component as AdminWordsPage).getCard(removedCard.word)?.remove();
+        Events.adminMessageShow.emit('Word removed');
       } else {
         const error: IRESTError = await response.json();
         Events.adminErrorShow.emit(error.message);

@@ -57,6 +57,7 @@ const wordCreate = new Signal<IWordCardDTO, Promise<void>>();
 const wordRemove = new Signal<IWordCardDTO, Promise<void>>();
 const wordUpdate = new Signal<IWordCardUpdateDTO, Promise<void>>();
 const adminErrorShow = new Signal<string, Promise<void>>();
+const adminMessageShow = new Signal<string, Promise<void>>();
 
 const Events = {
   menuClick,
@@ -95,6 +96,7 @@ const Events = {
   wordRemove,
   wordUpdate,
   adminErrorShow,
+  adminMessageShow,
 };
 
 export default Events;

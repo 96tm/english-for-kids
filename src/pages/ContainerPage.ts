@@ -9,6 +9,7 @@ import Constants from '../util/constants';
 
 import Events from '../util/Events';
 import ErrorMessage from '../components/shared/ErrorMessage';
+import InfoMessage from '../components/shared/InfoMessage';
 
 export default class ContainerPage extends Component {
   gameToggleCheckbox: IComponent;
@@ -45,6 +46,11 @@ export default class ContainerPage extends Component {
 
   private showError: (text: string) => Promise<void> = async (text) => {
     const error = new ErrorMessage(this.global, text);
+    error.attachTo(this.contentWrap);
+  };
+
+  private showMessage: (text: string) => Promise<void> = async (text) => {
+    const error = new InfoMessage(this.global, text);
     error.attachTo(this.contentWrap);
   };
 

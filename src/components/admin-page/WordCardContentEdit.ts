@@ -45,7 +45,6 @@ export default class WordCardContentEdit extends BaseWordCardContent {
     [this.buttonSave, this.buttonCancel] = this.createButtons();
     this.submit = this.buttonSave;
     this.addEventListeners();
-    this.submit.disable();
     this.inputWord.element.focus();
   }
 
@@ -72,7 +71,7 @@ export default class WordCardContentEdit extends BaseWordCardContent {
       Constants.Labels.adminWordEditAudioInputId,
       Constants.Labels.adminWordCardSound,
       'audio/mpeg',
-      [validateNonEmpty, validateFileSize(Constants.MAX_FILE_SIZE)]
+      [validateFileSize(Constants.MAX_FILE_SIZE)]
     );
     const inputImage = new FileInput(
       this.global,
@@ -80,7 +79,7 @@ export default class WordCardContentEdit extends BaseWordCardContent {
       Constants.Labels.adminWordEditImageInputId,
       Constants.Labels.adminWordCardImage,
       'image/jpeg',
-      [validateNonEmpty, validateFileSize(Constants.MAX_FILE_SIZE)]
+      [validateFileSize(Constants.MAX_FILE_SIZE)]
     );
     return [inputWord, inputTranslation, inputAudio, inputImage];
   }
