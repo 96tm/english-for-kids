@@ -41,17 +41,24 @@
 }
 
 .admin-word-card__audio {
+  position: relative;
   padding-bottom: 16px;
   word-break: break-word;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  // &::after {
-  //   content: '';
-  //   background: no-repeat url('../icons/audio.svg');
-  //   width: 20px;
-  //   height: 20px;
-  // }
+  cursor: pointer;
+  &::before {
+    margin-left: 25px;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    background: no-repeat url('../icons/audio.svg');
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .admin-word-card__image-wrap {

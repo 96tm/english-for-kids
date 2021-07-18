@@ -15,6 +15,7 @@ export default class WordCardContentNormal extends Component {
   wordComponent: IComponent;
   translationComponent: IComponent;
   audioComponent: IComponent;
+  audio: HTMLAudioElement;
 
   constructor(
     global: Window,
@@ -54,7 +55,22 @@ export default class WordCardContentNormal extends Component {
     this.audioComponent.textContent = audioSrc;
     [this.imageTitleWrap, this.imageWrap, this.wordImage] = this.createImage();
     [this.buttonRemove, this.buttonChange] = this.createButtons();
+    this.audio = new Audio(this.audioSrc);
     this.addEventListeners();
+  }
+
+  private async playAudio(): Promise<void> {
+    this.audio.currentTime = 0;
+    return new Promise((resolve) => {
+      this.audio.addEventListener(
+        'ended',
+        () => {
+          resolve();
+        },
+        { once: true }
+      );
+      this.audio.play();
+    });
   }
 
   private createButtons(): IComponent[] {
@@ -101,9 +117,12 @@ export default class WordCardContentNormal extends Component {
     this.element.removeEventListener('click', this.handleClick);
   }
 
-  private handleClick: (event: MouseEvent) => void = (event) => {
+  private handleClick: (event: MouseEvent) => void = async (event) => {
     const target = event.target as HTMLElement;
     switch (target) {
+      case this.audioComponent.element:
+        await this.playAudio();
+        break;
       case this.buttonChange.element:
         Events.wordCardClick.emit({
           button: WordCardButton.change,
