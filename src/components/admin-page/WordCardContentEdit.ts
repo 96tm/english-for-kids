@@ -65,6 +65,7 @@ export default class WordCardContentEdit extends BaseWordCardContent {
     [this.buttonSave, this.buttonCancel] = this.createButtons();
     this.addEventListeners();
     this.buttonSave.disable();
+    this.inputWord.element.focus();
   }
 
   private createButtons(): IComponent[] {

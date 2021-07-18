@@ -105,6 +105,7 @@ export default class LoginPage extends Component {
         placeholder: ' ',
       }
     );
+    inputLogin.element.focus();
     return [inputLoginWrap, inputLogin, inputPasswordWrap, inputPassword];
   }
 

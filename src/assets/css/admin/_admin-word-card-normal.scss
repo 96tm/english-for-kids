@@ -46,6 +46,12 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  // &::after {
+  //   content: '';
+  //   background: no-repeat url('../icons/audio.svg');
+  //   width: 20px;
+  //   height: 20px;
+  // }
 }
 
 .admin-word-card__image-wrap {

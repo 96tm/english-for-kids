@@ -7,7 +7,7 @@ const NUMBER_OF_CATEGORIES = 8;
 const FINISH_SCREEN_DURATION = 2000;
 const HOMEPAGE = '';
 const SERVER_URL = 'http://localhost:4000';
-const FETCH_TIMEOUT = 20000;
+const FETCH_TIMEOUT = 25000;
 
 const CSSClasses = {
   root: 'root',

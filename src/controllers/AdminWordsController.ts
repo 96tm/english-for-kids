@@ -101,9 +101,13 @@ export default class AdminWordsController extends Controller {
         Events.adminErrorShow.emit(error.message);
       }
     } catch (err) {
-      Events.adminErrorShow.emit(
-        `Server doesn't respond, please check your network connection`
-      );
+      if (err.name === 'AbortError') {
+        Events.adminErrorShow.emit(`Server doesn't respond`);
+      } else {
+        Events.adminErrorShow.emit(
+          `Server doesn't respond, please check your network connection`
+        );
+      }
     } finally {
       await this.init(wordInfo.category, words);
       this.loaderAnimation.remove();
