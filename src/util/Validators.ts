@@ -6,17 +6,21 @@ function validateNonEmpty(this: IInput): IInputValidationResult {
   return { isValid: !!this.value, errorMessage: '' };
 }
 
-function validateEnglishWord(this: IInput): IInputValidationResult {
-  let isValid = false;
-  let errorMessage = '';
-  if (!Constants.VALID_STRING.test(this.value as string)) {
-    errorMessage = Constants.Labels.invalidEnglishWord;
-  } else {
-    isValid = true;
-  }
-  return {
-    isValid,
-    errorMessage,
+function validateEnglishWord(
+  fieldName: string
+): (this: IInput) => IInputValidationResult {
+  return function (this: IInput) {
+    let isValid = false;
+    let errorMessage = '';
+    if (!Constants.VALID_STRING.test(this.value as string)) {
+      errorMessage = Constants.Labels.invalidEnglishWord(fieldName);
+    } else {
+      isValid = true;
+    }
+    return {
+      isValid,
+      errorMessage,
+    };
   };
 }
 

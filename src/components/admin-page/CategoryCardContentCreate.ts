@@ -6,26 +6,30 @@ import BaseCategoryCardContent from './BaseCategoryCardContent';
 import Events from '../../util/Events';
 import CategoryCardButton from '../../models/CategoryCardButton';
 import TextInput from './TextInput';
+import { validateNonEmpty, validateEnglishWord } from '../../util/Validators';
 
 export default class CategoryCardContentCreate extends BaseCategoryCardContent {
   input: IComponent;
   buttonCreate: IComponent;
   buttonCancel: IComponent;
+  submit: IComponent;
 
   constructor(global: Window, rootComponent: IComponent, private name: string) {
     super(global, rootComponent, [
       Constants.CSSClasses.adminCategoryCardContentEdit,
     ]);
     [this.buttonCreate, this.buttonCancel] = this.createButtons();
+    this.submit = this.buttonCreate;
     this.input = new TextInput(
       global,
       this,
       Constants.Labels.adminCategoryEditInputId,
-      Constants.Labels.adminCategoryEditInputLabel
+      Constants.Labels.adminCategoryEditInputLabel,
+      [validateNonEmpty, validateEnglishWord(Constants.Labels.category)]
     );
     this.addEventListeners();
     this.buttonsWrap.attachTo(this);
-    this.buttonCreate.disable();
+    this.submit.disable();
   }
 
   private createButtons(): IComponent[] {
@@ -51,14 +55,6 @@ export default class CategoryCardContentCreate extends BaseCategoryCardContent {
     this.element.removeEventListener('click', this.handleClick);
     this.element.removeEventListener('input', this.handleInputChange);
   }
-
-  private handleInputChange: (event: Event) => void = (event) => {
-    if ((this.input as TextInput).value) {
-      this.buttonCreate.enable();
-    } else {
-      this.buttonCreate.disable();
-    }
-  };
 
   private handleClick: (event: MouseEvent) => void = (event) => {
     const target = event.target as HTMLElement;

@@ -36,7 +36,7 @@ export default class WordCardContentCreate extends BaseWordCardContent {
       this,
       Constants.Labels.adminWordEditWordInputId,
       Constants.Labels.adminWordCardWord,
-      [validateNonEmpty, validateEnglishWord]
+      [validateNonEmpty, validateEnglishWord(Constants.Labels.word)]
     );
     this.inputTranslation = new TextInput(
       global,

@@ -257,7 +257,8 @@ const Labels = {
   adminWordCardAudio: 'Sound file: ',
   adminWordCardImage: 'Image: ',
   selectFile: 'Select file',
-  invalidEnglishWord: `Field "word" must contain only letters form the English alphabet and/or digits`,
+  invalidEnglishWord: (fieldName: string): string =>
+    `Field "${fieldName}" must contain only letters form the English alphabet and/or digits`,
   fileSizeExceeded: (size: number): string =>
     `File size must be at most ${size}Mb`,
 };

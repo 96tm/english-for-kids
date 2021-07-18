@@ -2,14 +2,14 @@ import Component from '../Component';
 import IComponent from '../IComponent';
 
 import Constants from '../../util/constants';
-import BaseCategoryCardContent from './BaseCategoryCardContent';
 import Events from '../../util/Events';
 import CategoryCardButton from '../../models/CategoryCardButton';
 
-export default class CategoryCardContentNormal extends BaseCategoryCardContent {
+export default class CategoryCardContentNormal extends Component {
   heading: IComponent;
   wordsLink: IComponent;
   wordCount: IComponent;
+  buttonsWrap: IComponent;
   buttonRemove: IComponent;
   buttonUpdate: IComponent;
   buttonAdd: IComponent;
@@ -20,7 +20,7 @@ export default class CategoryCardContentNormal extends BaseCategoryCardContent {
     private name: string,
     numberOfWords: number
   ) {
-    super(global, rootComponent, [
+    super(global, rootComponent, 'div', [
       Constants.CSSClasses.adminCategoryCardContentNormal,
     ]);
     this.heading = new Component(global, this, 'div', [
@@ -44,6 +44,9 @@ export default class CategoryCardContentNormal extends BaseCategoryCardContent {
       { 'data-title': Constants.Labels.adminCategoryCardWordCountTitle }
     );
     this.wordCount.textContent = String(numberOfWords);
+    this.buttonsWrap = new Component(global, this, 'div', [
+      Constants.CSSClasses.adminCategoryCardButtonsWrap,
+    ]);
     [this.buttonUpdate, this.buttonAdd, this.buttonRemove] =
       this.createButtons();
     this.buttonsWrap.attachTo(this);

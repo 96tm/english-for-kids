@@ -55,7 +55,7 @@ export default class WordCardContentEdit extends BaseWordCardContent {
       this,
       Constants.Labels.adminWordEditWordInputId,
       Constants.Labels.adminWordCardWord,
-      [validateNonEmpty, validateEnglishWord],
+      [validateNonEmpty, validateEnglishWord(Constants.Labels.word)],
       this.word
     );
     const inputTranslation = new TextInput(
