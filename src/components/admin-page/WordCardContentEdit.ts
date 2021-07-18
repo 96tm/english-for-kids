@@ -10,6 +10,11 @@ import WordCardButton from '../../models/WordCardButton';
 import WordCardDTO from '../../models/WordCardDTO';
 import WordCardUpdateDTO from '../../models/WordCardUpdateDTO';
 import BaseWordCardContent from './BaseWordCardContent';
+import {
+  validateNonEmpty,
+  validateEnglishWord,
+  validateFileSize,
+} from '../../util/Validators';
 
 export default class WordCardContentEdit extends BaseWordCardContent {
   buttonSave: IComponent;
@@ -18,6 +23,7 @@ export default class WordCardContentEdit extends BaseWordCardContent {
   inputTranslation: IComponent;
   inputAudio: IComponent;
   inputImage: IComponent;
+  submit: IComponent;
   category: string;
   word: string;
 
@@ -31,41 +37,52 @@ export default class WordCardContentEdit extends BaseWordCardContent {
     ]);
     this.category = category;
     this.word = word;
-    this.inputWord = new TextInput(
-      global,
-      this,
-      Constants.Labels.adminWordEditWordInputId,
-      Constants.Labels.adminWordCardWord,
-      word
-    );
-    this.inputTranslation = new TextInput(
-      global,
-      this,
-      Constants.Labels.adminWordEditTranslationInputId,
-      Constants.Labels.adminWordCardTranslation,
-      translation
-    );
-    this.inputAudio = new FileInput(
-      global,
-      this,
-      Constants.Labels.adminWordEditAudioInputId,
-      Constants.Labels.adminWordCardSound,
-      'audio/mpeg'
-    );
-    this.inputImage = new FileInput(
-      global,
-      this,
-      Constants.Labels.adminWordEditImageInputId,
-      Constants.Labels.adminWordCardImage,
-      'image/jpeg'
-    );
+    [this.inputWord, this.inputTranslation, this.inputAudio, this.inputImage] =
+      this.createInputs(translation);
     this.buttonsWrap = new Component(global, this, 'div', [
       Constants.CSSClasses.adminWordCardButtonsWrap,
     ]);
     [this.buttonSave, this.buttonCancel] = this.createButtons();
+    this.submit = this.buttonSave;
     this.addEventListeners();
-    this.buttonSave.disable();
+    this.submit.disable();
     this.inputWord.element.focus();
+  }
+
+  private createInputs(translation: string): IComponent[] {
+    const inputWord = new TextInput(
+      this.global,
+      this,
+      Constants.Labels.adminWordEditWordInputId,
+      Constants.Labels.adminWordCardWord,
+      [validateNonEmpty, validateEnglishWord],
+      this.word
+    );
+    const inputTranslation = new TextInput(
+      this.global,
+      this,
+      Constants.Labels.adminWordEditTranslationInputId,
+      Constants.Labels.adminWordCardTranslation,
+      [validateNonEmpty],
+      translation
+    );
+    const inputAudio = new FileInput(
+      this.global,
+      this,
+      Constants.Labels.adminWordEditAudioInputId,
+      Constants.Labels.adminWordCardSound,
+      'audio/mpeg',
+      [validateNonEmpty, validateFileSize(Constants.MAX_FILE_SIZE)]
+    );
+    const inputImage = new FileInput(
+      this.global,
+      this,
+      Constants.Labels.adminWordEditImageInputId,
+      Constants.Labels.adminWordCardImage,
+      'image/jpeg',
+      [validateNonEmpty, validateFileSize(Constants.MAX_FILE_SIZE)]
+    );
+    return [inputWord, inputTranslation, inputAudio, inputImage];
   }
 
   private createButtons(): IComponent[] {
@@ -93,23 +110,8 @@ export default class WordCardContentEdit extends BaseWordCardContent {
     this.element.removeEventListener('input', this.handleInputChange);
   }
 
-  private handleInputChange: (event: Event) => void = (event) => {
-    if (
-      WordCardContentEdit.checkInputs(
-        this.inputWord as TextInput,
-        this.inputTranslation as TextInput,
-        this.inputAudio as FileInput
-      )
-    ) {
-      this.buttonSave.enable();
-    } else {
-      this.buttonSave.disable();
-    }
-  };
-
   private handleClick: (event: MouseEvent) => void = (event) => {
     const target = event.target as HTMLElement;
-
     switch (target) {
       case this.buttonCancel.element:
         Events.wordCardClick.emit({

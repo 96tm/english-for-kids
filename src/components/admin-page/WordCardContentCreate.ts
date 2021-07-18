@@ -8,10 +8,16 @@ import Events from '../../util/Events';
 import WordCardButton from '../../models/WordCardButton';
 import WordCardDTO from '../../models/WordCardDTO';
 import BaseWordCardContent from './BaseWordCardContent';
+import {
+  validateNonEmpty,
+  validateEnglishWord,
+  validateFileSize,
+} from '../../util/Validators';
 
 export default class WordCardContentCreate extends BaseWordCardContent {
   buttonCreate: IComponent;
   buttonCancel: IComponent;
+  submit: IComponent;
   inputWord: IComponent;
   inputTranslation: IComponent;
   inputAudio: IComponent;
@@ -29,32 +35,37 @@ export default class WordCardContentCreate extends BaseWordCardContent {
       global,
       this,
       Constants.Labels.adminWordEditWordInputId,
-      Constants.Labels.adminWordCardWord
+      Constants.Labels.adminWordCardWord,
+      [validateNonEmpty, validateEnglishWord]
     );
     this.inputTranslation = new TextInput(
       global,
       this,
       Constants.Labels.adminWordEditTranslationInputId,
-      Constants.Labels.adminWordCardTranslation
+      Constants.Labels.adminWordCardTranslation,
+      [validateNonEmpty]
     );
     this.inputAudio = new FileInput(
       global,
       this,
       Constants.Labels.adminWordEditAudioInputId,
       Constants.Labels.adminWordCardSound,
-      'audio/mpeg'
+      'audio/mpeg',
+      [validateNonEmpty, validateFileSize(Constants.MAX_FILE_SIZE)]
     );
     this.inputImage = new FileInput(
       global,
       this,
       Constants.Labels.adminWordEditImageInputId,
       Constants.Labels.adminWordCardImage,
-      'image/jpeg'
+      'image/jpeg',
+      [validateFileSize(Constants.MAX_FILE_SIZE)]
     );
     this.buttonsWrap = new Component(global, this, 'div', [
       Constants.CSSClasses.adminWordCardButtonsWrap,
     ]);
     [this.buttonCreate, this.buttonCancel] = this.createButtons();
+    this.submit = this.buttonCreate;
     this.addEventListeners();
     this.buttonCreate.disable();
   }
@@ -86,20 +97,6 @@ export default class WordCardContentCreate extends BaseWordCardContent {
     this.element.removeEventListener('click', this.handleClick);
     this.element.removeEventListener('input', this.handleInputChange);
   }
-
-  private handleInputChange: (event: Event) => void = (event) => {
-    if (
-      WordCardContentCreate.checkInputs(
-        this.inputWord as TextInput,
-        this.inputTranslation as TextInput,
-        this.inputAudio as FileInput
-      )
-    ) {
-      this.buttonCreate.enable();
-    } else {
-      this.buttonCreate.disable();
-    }
-  };
 
   private handleClick: (event: MouseEvent) => void = (event) => {
     const target = event.target as HTMLElement;

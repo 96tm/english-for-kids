@@ -89,7 +89,6 @@ export default class AdminWordsPage extends Component {
         break;
       }
       case WordCardButton.save:
-        // (wordCard as WordCard).setModeNormal({ ...data.wordInfo });
         Events.wordUpdate.emit(data.wordInfo);
         break;
       default:

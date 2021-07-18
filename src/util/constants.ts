@@ -7,7 +7,9 @@ const NUMBER_OF_CATEGORIES = 8;
 const FINISH_SCREEN_DURATION = 2000;
 const HOMEPAGE = '';
 const SERVER_URL = 'http://localhost:4000';
-const FETCH_TIMEOUT = 25000;
+const FETCH_TIMEOUT = 8000;
+const MAX_FILE_SIZE = 1024 ** 2;
+const VALID_STRING = /^[a-zA-Z0-9]*$/;
 
 const CSSClasses = {
   root: 'root',
@@ -132,11 +134,16 @@ const CSSClasses = {
   adminCategoryCard: 'admin__category-card',
   adminCardInputWrap: 'admin-input-wrap',
   adminCardFileInputWrap: 'admin-file-input-wrap',
+  adminCardFileInputInnerWrap: 'admin-file-input-inner-wrap',
+  adminCardFileInputDataWrap: 'admin-file-input-data-wrap',
 
   adminCardInput: 'admin-input',
   adminCardFileInput: 'admin-file-input',
+  adminCardFileInputName: 'admin-file-input-name',
+  adminCardFileInputSize: 'admin-file-input-size',
   adminCardInputLabel: 'admin-input-label',
   adminCardFileInputLabel: 'admin-file-input-label',
+  adminCardFileInputWrapLabel: 'admin-file-input-wrap-label',
   adminCategoryCardContentNormal: 'admin__category-card-normal',
   adminCategoryCardContentAdd: 'admin__category-card-add',
   adminCategoryCardContentEdit: 'admin__category-card-edit',
@@ -249,6 +256,10 @@ const Labels = {
   adminWordCardTranslation: 'Translation: ',
   adminWordCardAudio: 'Sound file: ',
   adminWordCardImage: 'Image: ',
+  selectFile: 'Select file',
+  invalidEnglishWord: `Field "word" must contain only letters form the English alphabet and/or digits`,
+  fileSizeExceeded: (size: number): string =>
+    `File size must be at most ${size}Mb`,
 };
 
 const Constants = {
@@ -264,6 +275,8 @@ const Constants = {
   NUMBER_OF_CATEGORIES,
   FINISH_SCREEN_DURATION,
   FETCH_TIMEOUT,
+  MAX_FILE_SIZE,
+  VALID_STRING,
 };
 
 export default Constants;

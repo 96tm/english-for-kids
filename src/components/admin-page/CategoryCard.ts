@@ -61,6 +61,4 @@ export default class CategoryCard extends Component {
     this.content.remove();
     this.content = new CategoryCardContentAdd(this.global, this);
   }
-
-  // setCreateMode(): void {}
 }

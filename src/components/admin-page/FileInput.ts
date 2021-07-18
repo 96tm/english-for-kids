@@ -2,10 +2,15 @@ import Component from '../Component';
 import IComponent from '../IComponent';
 
 import Constants from '../../util/constants';
+import IInputValidationResult from './IInputValidationResult';
+import BaseValidatedInput from './BaseInput';
 
-export default class FileInput extends Component {
+export default class FileInput extends BaseValidatedInput {
   input: IComponent;
   label: IComponent;
+  wrapLabel: IComponent;
+  fileName: IComponent;
+  fileSize: IComponent;
 
   constructor(
     global: Window,
@@ -13,22 +18,26 @@ export default class FileInput extends Component {
     inputId: string,
     labelText: string,
     accept: string,
+    public validatingFunctions: Array<() => IInputValidationResult> = [],
     value = ''
   ) {
     super(global, rootComponent, 'div', [
       Constants.CSSClasses.adminCardFileInputWrap,
     ]);
-    this.label = new Component(
+    const inputWrap = new Component(global, this, 'div', [
+      Constants.CSSClasses.adminCardFileInputInnerWrap,
+    ]);
+    this.wrapLabel = new Component(
       global,
-      this,
+      inputWrap,
       'label',
-      [Constants.CSSClasses.adminCardFileInputLabel],
+      [Constants.CSSClasses.adminCardFileInputWrapLabel],
       { for: inputId }
     );
-    this.label.textContent = labelText;
+    this.wrapLabel.textContent = labelText;
     this.input = new Component(
       global,
-      this,
+      inputWrap,
       'input',
       [Constants.CSSClasses.adminCardFileInput],
       {
@@ -38,7 +47,43 @@ export default class FileInput extends Component {
         accept,
       }
     );
+
+    this.label = new Component(
+      global,
+      inputWrap,
+      'label',
+      [Constants.CSSClasses.adminCardFileInputLabel],
+      { for: inputId }
+    );
+    this.label.textContent = Constants.Labels.selectFile;
+    this.fileName = new Component(global, this, 'div', [
+      Constants.CSSClasses.adminCardFileInputName,
+    ]);
+    this.fileSize = new Component(global, this, 'div', [
+      Constants.CSSClasses.adminCardFileInputSize,
+    ]);
+    this.addEventListeners();
   }
+
+  private addEventListeners(): void {
+    this.input.element.addEventListener('change', this.handleInputChange);
+  }
+
+  private removeEventListeners(): void {
+    this.input.element.removeEventListener('change', this.handleInputChange);
+  }
+
+  private handleInputChange: (event: Event) => void = (event) => {
+    const { files } = this.input.element as HTMLInputElement;
+    if (files?.length) {
+      const file = files[0];
+      this.fileName.textContent = file.name;
+      this.fileName.element.setAttribute('title', file.name);
+      const size = file.size / 1000;
+      this.fileSize.textContent = `${size.toFixed(2)}Kb`;
+      this.fileSize.element.setAttribute('title', `${size.toFixed(2)}Kb`);
+    }
+  };
 
   get value(): File | undefined {
     const { files } = this.input.element as HTMLInputElement;

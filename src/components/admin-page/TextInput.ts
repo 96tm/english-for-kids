@@ -2,8 +2,10 @@ import Component from '../Component';
 import IComponent from '../IComponent';
 
 import Constants from '../../util/constants';
+import IInputValidationResult from './IInputValidationResult';
+import BaseValidatedInput from './BaseInput';
 
-export default class TextInput extends Component {
+export default class TextInput extends BaseValidatedInput {
   input: IComponent;
   label: IComponent;
 
@@ -12,6 +14,7 @@ export default class TextInput extends Component {
     rootComponent: IComponent,
     inputId: string,
     labelText: string,
+    public validatingFunctions: Array<() => IInputValidationResult> = [],
     value = ''
   ) {
     super(global, rootComponent, 'div', [

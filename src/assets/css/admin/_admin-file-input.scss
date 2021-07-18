@@ -1,10 +1,44 @@
 .admin-file-input-wrap {
   display: flex;
+  flex-direction: column;
   width: 100%;
 }
 
-.admin-file-input-label {
+.admin-file-input-wrap-label {
   font-weight: 700;
   font-size: 1.375rem;
   line-height: 1.6rem;
+}
+
+.admin-file-input {
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  position: absolute;
+}
+
+.admin-file-input-name,
+.admin-file-input-size {
+  overflow: hidden;
+  text-align: right;
+  word-break: break-word;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: right;
+}
+
+.admin-file-input-label {
+  @extend .admin-button;
+  width: 50%;
+  padding: 5px 15px;
+  margin-left: auto;
+  &:hover,
+  &:focus {
+    opacity: 0.7;
+  }
+}
+
+.admin-file-input-inner-wrap {
+  display: flex;
+  align-items: center;
 }

@@ -19,7 +19,6 @@ export default class AdminCategoriesPage extends Component {
     ]);
     this.createCategoryCard = new CategoryCard(global, this.categoriesWrap);
     (this.createCategoryCard as CategoryCard).setAddMode();
-    // this.addEventListeners();
     Events.categoryCardClick.add(this.handleCategoryCardClick);
   }
 
@@ -61,10 +60,6 @@ export default class AdminCategoriesPage extends Component {
         (this.createCategoryCard as CategoryCard).setCreateMode();
         break;
       case CategoryCardButton.remove: {
-        // this.categories = this.categories.filter(
-        //   (category) => category !== categoryCard
-        // );
-        // categoryCard.remove();
         Events.categoryRemove.emit(data.name);
         break;
       }
@@ -72,18 +67,6 @@ export default class AdminCategoriesPage extends Component {
         break;
     }
   };
-
-  // private addEventListeners(): void {
-  //   this.element.addEventListener('click', this.handleClick);
-  // }
-
-  // private removeEventListeners(): void {
-  //   this.element.removeEventListener('click', this.handleClick);
-  // }
-
-  // private handleClick: (event: MouseEvent) => void = (event) => {
-  //   const target = event.target as HTMLElement;
-  // };
 
   private addOneCategory(name: string, numberOfWords: number): IComponent {
     const category = new CategoryCard(

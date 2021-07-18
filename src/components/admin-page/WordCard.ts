@@ -31,7 +31,6 @@ export default class WordCard extends Component {
       audioSrc,
       image
     );
-    // this.addEventListeners();
   }
 
   setModeNormal({ category, word, translation, audioSrc, image }: ICard): void {
@@ -76,16 +75,4 @@ export default class WordCard extends Component {
     this.content.remove();
     this.content = new WordCardContentAdd(this.global, this);
   }
-
-  // private addEventListeners(): void {
-  //   this.element.addEventListener('click', this.handleClick);
-  // }
-
-  // private removeEventListeners(): void {
-  //   this.element.removeEventListener('click', this.handleClick);
-  // }
-
-  // private handleClick: (event: MouseEvent) => void = (event) => {
-  //   const target = event.target as HTMLElement;
-  // };
 }

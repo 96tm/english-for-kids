@@ -15,8 +15,4 @@ export default class AdminEditCategoryPage extends Component {
       Constants.CSSClasses.adminEditCategoryHeading,
     ]);
   }
-
-  // async init(): Promise<void> {
-  //   return;
-  // }
 }

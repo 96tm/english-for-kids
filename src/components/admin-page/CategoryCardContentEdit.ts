@@ -23,6 +23,7 @@ export default class CategoryCardContentEdit extends BaseCategoryCardContent {
       this,
       Constants.Labels.adminCategoryEditInputId,
       Constants.Labels.adminCategoryEditInputLabel,
+      [],
       name
     );
     this.addEventListeners();
