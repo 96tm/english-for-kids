@@ -55,7 +55,7 @@ export default class ContainerController extends Controller {
       categories = await Api.getAllCategories().then((response) =>
         response.json()
       );
-    } catch {
+    } catch (err) {
       Events.gameErrorShow.emit(Constants.Labels.connectionProblem);
     }
     (this.component as ContainerPage).init(categories);

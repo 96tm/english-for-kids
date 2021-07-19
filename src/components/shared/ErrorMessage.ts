@@ -1,4 +1,3 @@
-import Component from '../Component';
 import Constants from '../../util/constants';
 import BaseMessage from './BaseMessage';
 

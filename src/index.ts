@@ -24,7 +24,7 @@ import LoaderAnimation from './components/shared/LoaderAnimation';
   root.render();
 
   const containerController = new ContainerController(global, root);
-  // await containerController.init();
+  await containerController.init();
 
   const loaderAnimation = new LoaderAnimation(global, root);
   loaderAnimation.remove();
