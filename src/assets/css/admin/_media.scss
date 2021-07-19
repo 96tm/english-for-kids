@@ -10,8 +10,15 @@
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 420px) {
+  .admin__words {
+    width: 100%;
+    padding-left: 2px;
+  }
   .admin__word-card {
-    width: 300px;
+    width: 280px;
+  }
+  .admin-word-card-add {
+    min-width: 300px;
   }
 }

@@ -1,5 +1,9 @@
 $button-diameter: 150px;
 
+.admin-word-card-add {
+  min-width: 361px;
+}
+
 .admin-word-card__heading {
   @extend .admin-category-card__heading;
   padding-top: 44px;

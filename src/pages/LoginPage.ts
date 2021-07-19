@@ -40,7 +40,6 @@ export default class LoginPage extends Component {
     [this.buttonsWrap, this.buttonLogin, this.buttonCancel] =
       this.initButtons();
     this.addEventListeners();
-    this.buttonLogin.disable();
   }
 
   showError(text: string): void {
@@ -86,7 +85,11 @@ export default class LoginPage extends Component {
       inputLoginWrap,
       'input',
       [Constants.CSSClasses.loginInputLogin, Constants.CSSClasses.loginInput],
-      { id: Constants.CSSClasses.loginInputLogin, placeholder: ' ' }
+      {
+        id: Constants.CSSClasses.loginInputLogin,
+        placeholder: ' ',
+        value: 'admin',
+      }
     );
     const inputPasswordWrap = new Component(this.global, this.fieldset, 'div', [
       Constants.CSSClasses.loginInputWrap,
@@ -103,6 +106,7 @@ export default class LoginPage extends Component {
         type: 'password',
         id: Constants.CSSClasses.loginInputPassword,
         placeholder: ' ',
+        value: 'admin',
       }
     );
     inputLogin.element.focus();
