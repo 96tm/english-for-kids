@@ -9,6 +9,8 @@ import Events from '../util/Events';
 import Constants from '../util/constants';
 
 import IGameFinishedRecord from '../models/IGameFinishedRecord';
+import Api from '../util/Api';
+import ICategoryDTO from '../models/ICategoryDTO';
 
 export default class ContainerController extends Controller {
   component: IComponent;
@@ -20,10 +22,20 @@ export default class ContainerController extends Controller {
     Events.finishScreenShow.add(this.showFinishScreen);
     Events.login.add(this.handleLogin);
     Events.logout.add(this.handleLogout);
+    Events.gameErrorShow.add(this.handleShowError);
   }
 
+  async show(): Promise<void> {
+    await this.init();
+    super.show();
+  }
+
+  private handleShowError: (text: string) => Promise<void> = async (text) => {
+    (this.component as ContainerPage).showError(text);
+  };
+
   private handleLogout: () => Promise<void> = async () => {
-    this.show();
+    await this.show();
   };
 
   private handleLogin: (login: string) => Promise<void> = async (login) => {
@@ -38,7 +50,15 @@ export default class ContainerController extends Controller {
   };
 
   async init(): Promise<void> {
-    ((await this.component) as ContainerPage).init();
+    let categories: ICategoryDTO[] = [];
+    try {
+      categories = await Api.getAllCategories().then((response) =>
+        response.json()
+      );
+    } catch {
+      Events.gameErrorShow.emit(Constants.Labels.connectionProblem);
+    }
+    (this.component as ContainerPage).init(categories);
   }
 
   showFinishScreen: ({ message, isWin }: IGameFinishedRecord) => Promise<void> =

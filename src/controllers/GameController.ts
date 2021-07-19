@@ -16,6 +16,7 @@ import ICard from '../models/ICard';
 import Constants from '../util/constants';
 
 import RouterService from '../util/RouterService';
+import Api from '../util/Api';
 
 export default class GameController extends Controller {
   component: IComponent;
@@ -37,7 +38,15 @@ export default class GameController extends Controller {
   }
 
   async init(): Promise<void> {
-    await this.gameModel.setCategories();
+    let categories = [];
+    try {
+      categories = await Api.getAllCategories().then((response) =>
+        response.json()
+      );
+    } catch (err) {
+      Events.gameErrorShow.emit(Constants.Labels.connectionProblem);
+    }
+    this.gameModel.setCategories(categories);
   }
 
   private handleRouteChange: () => Promise<void> = async () => {
@@ -75,7 +84,11 @@ export default class GameController extends Controller {
   private handleMenuClick: (category: string) => Promise<void> = async (
     category
   ) => {
-    const cards = await this.gameModel.setActiveCategory(category);
+    const responsePromise = Api.getAllWordsByCategory(category);
+    const cards = await this.gameModel.setActiveCategory(
+      category,
+      responsePromise
+    );
     (this.component as GamePage).addCards(cards);
   };
 

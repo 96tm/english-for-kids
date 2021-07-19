@@ -56,14 +56,6 @@ export default class CategoryCardContentEdit extends BaseCategoryCardContent {
     this.element.removeEventListener('input', this.handleInputChange);
   }
 
-  // private handleInputChange: (event: Event) => void = (event) => {
-  //   if ((this.input as TextInput).value) {
-  //     this.buttonSave.enable();
-  //   } else {
-  //     this.buttonSave.disable();
-  //   }
-  // };
-
   private handleClick: (event: MouseEvent) => void = (event) => {
     const target = event.target as HTMLElement;
     switch (target) {

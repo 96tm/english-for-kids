@@ -52,6 +52,12 @@ html,
   height: auto;
   min-height: 100%;
   display: flex;
+  & > .error-container {
+    z-index: 3;
+    .error {
+      position: relative;
+    }
+  }
 }
 
 .page-wrap,

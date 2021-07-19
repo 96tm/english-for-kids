@@ -5,6 +5,9 @@ import Category from '../components/main-page/Category';
 import Constants from '../util/constants';
 
 import Events from '../util/Events';
+import ICategoryDTO from '../models/ICategoryDTO';
+
+import noImage from '../assets/icons/icons8-no-image.png';
 
 export default class MainPage extends Component {
   categories: IComponent[] = [];
@@ -13,25 +16,16 @@ export default class MainPage extends Component {
     super(global, rootComponent, 'div', [Constants.CSSClasses.categoriesWrap]);
   }
 
-  async init(): Promise<void> {
-    const categories = await fetch(`${Constants.HOMEPAGE}/public/cards.json`, {
-      headers: { 'Content-Type': 'application/json' },
-    }).then((response) => response.json());
-    Object.keys(categories).forEach((key) => {
-      const randomIndex = Math.floor(Math.random() * categories[key].length);
-      const { image } = categories[key][randomIndex];
-      this.addOneCategory(key, image);
+  init(categories: ICategoryDTO[]): void {
+    this.element.innerHTML = '';
+    categories.forEach((category) => {
+      this.addOneCategory(category.name, category.randomWordImage || noImage);
     });
     this.addEventListeners();
   }
 
   addOneCategory(name: string, image: string): void {
-    const category = new Category(
-      this.global,
-      this,
-      name,
-      `${Constants.HOMEPAGE}/public/${image}`
-    );
+    const category = new Category(this.global, this, name, image);
     this.categories.push(category);
   }
 

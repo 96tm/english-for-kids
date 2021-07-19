@@ -259,6 +259,7 @@ const Labels = {
   adminWordCardImage: 'Image: ',
   selectFile: 'Select file',
   noServerResponse: `Server doesn't respond`,
+  connectionProblem: `Can't connect to the server, please check your network connection`,
   serverError: 'Server error',
   invalidEnglishWord: (fieldName: string): string =>
     `Field "${fieldName}" must contain only letters form the English alphabet and/or digits`,

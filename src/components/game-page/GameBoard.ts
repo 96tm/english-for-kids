@@ -17,11 +17,11 @@ class GameBoard extends Component {
     return this.cards.find((card) => (card as Card).word === word) as Card;
   }
 
-  addCards(cardModels: ICard[]): void {
+  addCards(cards: ICard[]): void {
     this.cards = [];
     this.element.innerHTML = '';
-    cardModels.forEach((cardModel) => {
-      this.addOneCard(cardModel);
+    cards.forEach((card) => {
+      this.addOneCard(card);
     });
   }
 

@@ -130,7 +130,6 @@ export default class AdminWordsController extends Controller {
         Events.adminErrorShow.emit(Constants.Labels.noServerResponse);
       } else {
         Events.adminErrorShow.emit(Constants.Labels.serverError);
-        console.log(err);
       }
     } finally {
       this.loaderAnimation.remove();

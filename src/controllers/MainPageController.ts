@@ -3,6 +3,10 @@ import Controller from './Controller';
 import IComponent from '../components/IComponent';
 
 import MainPage from '../pages/MainPage';
+import Api from '../util/Api';
+import ICategoryDTO from '../models/ICategoryDTO';
+import Events from '../util/Events';
+import Constants from '../util/constants';
 
 export default class MainPageController extends Controller {
   component: IComponent;
@@ -13,6 +17,19 @@ export default class MainPageController extends Controller {
   }
 
   async init(): Promise<void> {
-    await (this.component as MainPage).init();
+    let categories: ICategoryDTO[] = [];
+    try {
+      categories = await Api.getAllCategories().then((response) =>
+        response.json()
+      );
+    } catch (err) {
+      Events.gameErrorShow.emit(Constants.Labels.connectionProblem);
+    }
+    (this.component as MainPage).init(categories);
+  }
+
+  async show(): Promise<void> {
+    await this.init();
+    super.show();
   }
 }

@@ -1,37 +1,31 @@
 import ICard from './ICard';
 import CardModel from './CardModel';
 
-import Constants from '../util/constants';
-
 export default class BoardModel {
   cards: ICard[] = [];
 
   addOneCard({ category, word, translation, image, audioSrc }: ICard): void {
-    const card = new CardModel(
-      category,
-      word,
-      translation,
-      `${Constants.HOMEPAGE}/public/${image}`,
-      audioSrc
-    );
+    const card = new CardModel(category, word, translation, image, audioSrc);
     this.cards.push(card);
   }
 
-  async loadCards(category: string): Promise<ICard[]> {
-    const categories = await fetch(`${Constants.HOMEPAGE}/public/cards.json`, {
-      headers: { 'Content-Type': 'application/json' },
-    }).then((response) => response.json());
+  async loadCards(
+    category: string,
+    responsePromise: Promise<Response>
+  ): Promise<ICard[]> {
+    const words: ICard[] = await responsePromise.then((response) =>
+      response.json()
+    );
     this.cards = [];
-    if (categories && categories[category]) {
-      const cards = (categories[category] as ICard[]).map((card) => {
-        const updatedCard = card;
-        updatedCard.category = category;
-        return updatedCard;
-      });
-      cards.forEach((card) => {
-        this.addOneCard(card);
-      });
-    }
+    const cards = words.map((card) => {
+      const updatedCard = card;
+      updatedCard.category = category;
+      return updatedCard;
+    });
+    cards.forEach((card) => {
+      this.addOneCard(card);
+    });
+
     return this.cards;
   }
 

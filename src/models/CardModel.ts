@@ -1,7 +1,5 @@
 import ICard from './ICard';
 
-import Constants from '../util/constants';
-
 export default class CardModel implements ICard {
   audio: HTMLAudioElement;
 
@@ -12,7 +10,7 @@ export default class CardModel implements ICard {
     public image: string = '',
     public audioSrc: string = ''
   ) {
-    this.audio = new Audio(`${Constants.HOMEPAGE}/public/${this.audioSrc}`);
+    this.audio = new Audio(audioSrc);
   }
 
   async playCardAudio(): Promise<void> {

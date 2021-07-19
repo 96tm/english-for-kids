@@ -10,6 +10,7 @@ import Constants from '../util/constants';
 import Events from '../util/Events';
 import ErrorMessage from '../components/shared/ErrorMessage';
 import InfoMessage from '../components/shared/InfoMessage';
+import ICategoryDTO from '../models/ICategoryDTO';
 
 export default class ContainerPage extends Component {
   gameToggleCheckbox: IComponent;
@@ -19,6 +20,7 @@ export default class ContainerPage extends Component {
   contentWrap: IComponent;
   footer: IComponent;
   innerContainer: IComponent;
+  errorContainer: IComponent;
 
   constructor(global: Window, rootComponent: IComponent | null) {
     super(global, rootComponent, 'div', [Constants.CSSClasses.container]);
@@ -39,23 +41,26 @@ export default class ContainerPage extends Component {
       Constants.CSSClasses.contentWrap,
     ]);
     this.footer = new GameFooter(global, this.innerContainer);
+    this.errorContainer = new Component(global, this, 'div', [
+      Constants.CSSClasses.errorContainer,
+    ]);
     Events.routeChange.add(this.handleRouteChange);
     Events.adminErrorShow.add(this.showError);
     this.addEventListeners();
   }
 
-  private showError: (text: string) => Promise<void> = async (text) => {
+  showError: (text: string) => Promise<void> = async (text) => {
     const error = new ErrorMessage(this.global, text);
-    error.attachTo(this.contentWrap);
+    error.attachTo(this.errorContainer);
   };
 
-  private showMessage: (text: string) => Promise<void> = async (text) => {
+  showMessage: (text: string) => Promise<void> = async (text) => {
     const error = new InfoMessage(this.global, text);
-    error.attachTo(this.contentWrap);
+    error.attachTo(this.errorContainer);
   };
 
-  async init(): Promise<void> {
-    await this.gameMenu.init();
+  async init(categories: ICategoryDTO[]): Promise<void> {
+    await this.gameMenu.init(categories);
   }
 
   addEventListeners(): void {

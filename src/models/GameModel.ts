@@ -7,6 +7,12 @@ import GameStatus from './GameStatus';
 import Events from '../util/Events';
 
 import Constants from '../util/constants';
+import ICategoryDTO from './ICategoryDTO';
+
+import winAudio from '../assets/sounds/win.mp3';
+import loseAudio from '../assets/sounds/lose.mp3';
+import correctAudio from '../assets/sounds/correct.mp3';
+import wrongAudio from '../assets/sounds/wrong.mp3';
 
 export default class GameModel {
   static START_DELAY = 1000;
@@ -39,40 +45,40 @@ export default class GameModel {
   }
 
   async playCorrect(): Promise<void> {
-    this.playAudio(`${Constants.HOMEPAGE}/public/audio/correct.mp3`);
+    this.playAudio(correctAudio);
   }
 
   async playWrong(): Promise<void> {
-    this.playAudio(`${Constants.HOMEPAGE}/public/audio/wrong.mp3`);
+    this.playAudio(wrongAudio);
   }
 
   async playWin(): Promise<void> {
     const audio = this.global.document.createElement('audio');
-    await this.playAudio(`${Constants.HOMEPAGE}/public/audio/win.mp3`, audio);
+    await this.playAudio(winAudio, audio);
     audio.remove();
   }
 
   async playLose(): Promise<void> {
     const audio = this.global.document.createElement('audio');
-    this.playAudio(`${Constants.HOMEPAGE}/public/audio/lose.mp3`, audio);
+    this.playAudio(loseAudio, audio);
     audio.remove();
   }
 
-  async setActiveCategory(category: string): Promise<ICard[]> {
+  async setActiveCategory(
+    category: string,
+    responsePromise: Promise<Response>
+  ): Promise<ICard[]> {
     this.activeCategory = category;
-    return this.boardModel.loadCards(category);
+    return this.boardModel.loadCards(category, responsePromise);
   }
 
   loadDifficult(cards: ICard[]): void {
     this.boardModel.cards = cards;
   }
 
-  async setCategories(): Promise<string[]> {
-    const categories = await fetch(`${Constants.HOMEPAGE}/public/cards.json`, {
-      headers: { 'Content-Type': 'application/json' },
-    }).then((response) => response.json());
-    Object.keys(categories).forEach((category) => {
-      this.categories.push(category);
+  setCategories(categories: ICategoryDTO[]): string[] {
+    categories.forEach((category) => {
+      this.categories.push(category.name);
     });
     return this.categories;
   }

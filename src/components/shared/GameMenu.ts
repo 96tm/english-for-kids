@@ -6,6 +6,7 @@ import Constants from '../../util/constants';
 import AttributeRecord from '../../util/AttributeRecord';
 
 import Events from '../../util/Events';
+import ICategoryDTO from '../../models/ICategoryDTO';
 
 export default class GameMenu extends Component {
   menuTitle: IComponent;
@@ -69,16 +70,14 @@ export default class GameMenu extends Component {
     return menuTitle;
   }
 
-  async init(): Promise<void> {
-    const categories = await fetch(`${Constants.HOMEPAGE}/public/cards.json`, {
-      headers: { 'Content-Type': 'application/json' },
-    }).then((response) => response.json());
-    Object.keys(categories).forEach((key) => {
+  init(categories: ICategoryDTO[]): void {
+    this.menuList.element.innerHTML = '';
+    categories.forEach((category) => {
       const action = this.append('a', [Constants.CSSClasses.gameMenuLink], {
         href: `#${Constants.Labels.gameRoute}`,
-        'data-menu-link-title': key,
+        'data-menu-link-title': category.name,
       });
-      action.textContent = key;
+      action.textContent = category.name;
     });
   }
 
