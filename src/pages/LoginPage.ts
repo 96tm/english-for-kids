@@ -146,9 +146,10 @@ export default class LoginPage extends Component {
       buttonsWrap,
       'input',
       [Constants.CSSClasses.loginButtonLogin],
-      { type: 'submit' }
+      { type: 'submit', value: Constants.Labels.loginButtonLogin }
     );
-    buttonLogin.textContent = Constants.Labels.loginButtonLogin;
+    buttonLogin.element as HTMLInputElement;
+    // buttonLogin.textContent = Constants.Labels.loginButtonLogin;
     return [buttonsWrap, buttonLogin, buttonCancel];
   }
 

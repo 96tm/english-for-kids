@@ -85,7 +85,7 @@ export default class Api {
     formData.append('category', category);
 
     return Api.fetchWithTimeout(
-      `http://localhost:4000/categories/${category}/words/${word}`,
+      `${Constants.SERVER_URL}/categories/${category}/words/${word}`,
       {
         method: 'PUT',
         body: formData,
@@ -108,7 +108,7 @@ export default class Api {
     formData.append('category', category);
 
     return Api.fetchWithTimeout(
-      `http://localhost:4000/categories/${category}/words`,
+      `${Constants.SERVER_URL}/categories/${category}/words`,
       {
         method: 'POST',
         body: formData,
@@ -118,7 +118,7 @@ export default class Api {
 
   static async removeWord(category: string, word: string): Promise<Response> {
     return Api.fetchWithTimeout(
-      `http://localhost:4000/categories/${category}/words/${word}`,
+      `${Constants.SERVER_URL}/categories/${category}/words/${word}`,
       {
         method: 'DELETE',
       }

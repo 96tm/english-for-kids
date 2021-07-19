@@ -53,10 +53,8 @@ html,
   min-height: 100%;
   display: flex;
   & > .error-container {
+    position: fixed;
     z-index: 3;
-    .error {
-      position: relative;
-    }
   }
 }
 
