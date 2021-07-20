@@ -65,6 +65,7 @@ module.exports = ({ development }) => ({
     }),
     new HtmlWebpackPlugin({
       template: './src/index.html',
+      favicon: './src/assets/icons/favicon.png',
     }),
     new CopyPlugin({
       patterns: [
