@@ -12,29 +12,13 @@
 
 @import 'main';
 
-@import 'game/game-menu';
-
-@import 'game/game-header';
+@import 'game/base';
 
 @import 'footer';
 
-@import 'game/cards';
-
-@import 'game/button-game';
-
-@import 'game/content-wrap';
-
-@import 'game/inner-container';
-
-@import 'game/categories';
-
-@import 'game/finish-screen';
-
 @import 'stats';
 
-@import 'game/login-form';
-
-@import 'admin/admin-page';
+@import 'admin/base';
 
 @import 'media';
 

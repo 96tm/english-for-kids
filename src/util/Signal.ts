@@ -1,4 +1,4 @@
-export default class Signal<T, S> {
+export default class Signal<T, S = Promise<void>> {
   slots: Array<(data: T) => S> = [];
 
   add(slot: (data: T) => S): void {

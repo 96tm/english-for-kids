@@ -9,7 +9,7 @@ const HOMEPAGE = '';
 const SERVER_URL = 'https://warm-basin-33080.herokuapp.com';
 const FETCH_TIMEOUT = 8000;
 const MAX_FILE_SIZE = 1024 ** 2;
-const VALID_STRING = /^[a-zA-Z0-9]*$/;
+const VALID_STRING = /^[a-zA-Z0-9 ()-_]*$/;
 
 const CSSClasses = {
   root: 'root',

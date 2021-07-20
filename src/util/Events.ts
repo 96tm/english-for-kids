@@ -12,33 +12,33 @@ import WordCardButton from '../models/WordCardButton';
 import IWordCardDTO from '../models/IWordCardDTO';
 import IWordCardUpdateDTO from '../models/IWordCardUpdateDTO';
 
-const menuClick = new Signal<string, Promise<void>>();
-const modeButtonClick = new Signal<string, Promise<void>>();
-const routeChange = new Signal<string, Promise<void>>();
-const cardTurn = new Signal<string, Promise<void>>();
-const cardClick = new Signal<string, Promise<void>>();
-const gameModeChange = new Signal<GameMode, Promise<void>>();
-const gameButtonClick = new Signal<void, Promise<void>>();
-const cardClickRight = new Signal<void, Promise<void>>();
-const cardGuess = new Signal<boolean, Promise<void>>();
-const gameFinished = new Signal<void, Promise<void>>();
-const cardsLoad = new Signal<void, Promise<void>>();
-const finishScreenShow = new Signal<IGameFinishedRecord, Promise<void>>();
-const gameStopped = new Signal<void, Promise<void>>();
-const gameStarted = new Signal<void, Promise<void>>();
-const boardDisabled = new Signal<void, Promise<void>>();
-const boardEnabled = new Signal<void, Promise<void>>();
-const statsTrainingClick = new Signal<IWordStatDTO, Promise<void>>();
-const statsRightClick = new Signal<IWordStatDTO, Promise<void>>();
-const statsWrongClick = new Signal<IWordStatDTO, Promise<void>>();
-const statsCleared = new Signal<void, Promise<void>>();
-const statsTableSorted = new Signal<[SortType, SortOrder], Promise<void>>();
-const statsButtonRepeatClick = new Signal<void, Promise<void>>();
-const statsRepeatDifficult = new Signal<ICard[], Promise<void>>();
-const loginShow = new Signal<void, Promise<void>>();
-const loginAttempt = new Signal<LoginInfo, Promise<void>>();
-const login = new Signal<string, Promise<void>>();
-const logout = new Signal<void, Promise<void>>();
+const menuClick = new Signal<string>();
+const modeButtonClick = new Signal<string>();
+const routeChange = new Signal<string>();
+const cardTurn = new Signal<string>();
+const cardClick = new Signal<string>();
+const gameModeChange = new Signal<GameMode>();
+const gameButtonClick = new Signal<void>();
+const cardClickRight = new Signal<void>();
+const cardGuess = new Signal<boolean>();
+const gameFinished = new Signal<void>();
+const cardsLoad = new Signal<void>();
+const finishScreenShow = new Signal<IGameFinishedRecord>();
+const gameStopped = new Signal<void>();
+const gameStarted = new Signal<void>();
+const boardDisabled = new Signal<void>();
+const boardEnabled = new Signal<void>();
+const statsTrainingClick = new Signal<IWordStatDTO>();
+const statsRightClick = new Signal<IWordStatDTO>();
+const statsWrongClick = new Signal<IWordStatDTO>();
+const statsCleared = new Signal<void>();
+const statsTableSorted = new Signal<[SortType, SortOrder]>();
+const statsButtonRepeatClick = new Signal<void>();
+const statsRepeatDifficult = new Signal<ICard[]>();
+const loginShow = new Signal<void>();
+const loginAttempt = new Signal<LoginInfo>();
+const login = new Signal<string>();
+const logout = new Signal<void>();
 const categoryCardClick = new Signal<
   { button: CategoryCardButton; name: string; newName: string },
   void
@@ -47,18 +47,18 @@ const categoryUpdate = new Signal<
   { name: string; newName: string },
   Promise<void>
 >();
-const categoryCreate = new Signal<string, Promise<void>>();
-const categoryRemove = new Signal<string, Promise<void>>();
+const categoryCreate = new Signal<string>();
+const categoryRemove = new Signal<string>();
 const wordCardClick = new Signal<
   { button: WordCardButton; wordInfo: IWordCardUpdateDTO },
   void
 >();
-const wordCreate = new Signal<IWordCardDTO, Promise<void>>();
-const wordRemove = new Signal<IWordCardDTO, Promise<void>>();
-const wordUpdate = new Signal<IWordCardUpdateDTO, Promise<void>>();
-const adminErrorShow = new Signal<string, Promise<void>>();
-const adminMessageShow = new Signal<string, Promise<void>>();
-const gameErrorShow = new Signal<string, Promise<void>>();
+const wordCreate = new Signal<IWordCardDTO>();
+const wordRemove = new Signal<IWordCardDTO>();
+const wordUpdate = new Signal<IWordCardUpdateDTO>();
+const adminErrorShow = new Signal<string>();
+const adminMessageShow = new Signal<string>();
+const gameErrorShow = new Signal<string>();
 
 const Events = {
   menuClick,
