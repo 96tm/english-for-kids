@@ -1,11 +1,11 @@
 import Component from '../Component';
 import IComponent from '../IComponent';
+
 import GameHeaderModeButton from './GameHeaderModeButton';
 import GameHeaderScore from './GameHeaderScore';
 
-import Constants from '../../util/constants';
-
 import Events from '../../util/Events';
+import Constants from '../../util/constants';
 
 export default class GameHeader extends Component {
   headerScore: IComponent;

@@ -1,6 +1,7 @@
 import Component from '../Component';
-import Constants from '../../util/constants';
 import IComponent from '../IComponent';
+
+import Constants from '../../util/constants';
 
 export default abstract class BaseMessage extends Component {
   static OPACITY_REDUCTION_INTERVAL = 400;

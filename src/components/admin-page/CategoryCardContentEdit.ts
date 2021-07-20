@@ -1,11 +1,13 @@
-import Component from '../Component';
 import IComponent from '../IComponent';
+import Component from '../Component';
 
-import Constants from '../../util/constants';
 import BaseCategoryCardContent from './BaseCategoryCardContent';
-import Events from '../../util/Events';
-import CategoryCardButton from '../../models/CategoryCardButton';
 import TextInput from './TextInput';
+
+import CategoryCardButton from '../../models/CategoryCardButton';
+
+import Events from '../../util/Events';
+import Constants from '../../util/constants';
 import { validateNonEmpty, validateEnglishWord } from '../../util/Validators';
 
 export default class CategoryCardContentEdit extends BaseCategoryCardContent {

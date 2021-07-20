@@ -4,8 +4,6 @@ import IComponent from '../components/IComponent';
 import StatisticsPage from '../pages/StatisticsPage';
 import StatsTable from '../components/stats-page/StatsTable';
 
-import Constants from '../util/constants';
-
 import StatsObject from '../models/StatsObject';
 import SortType from '../models/SortType';
 import SortOrder from '../models/SortOrder';
@@ -13,10 +11,9 @@ import IWordStat from '../models/IWordStat';
 import ICard from '../models/ICard';
 import CardModel from '../models/CardModel';
 
+import Constants from '../util/constants';
 import Events from '../util/Events';
-
 import RouterService from '../util/RouterService';
-
 import StatsService from '../util/StatsService';
 
 export default class StatisticsController extends Controller {

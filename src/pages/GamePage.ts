@@ -1,14 +1,12 @@
 import Component from '../components/Component';
 import IComponent from '../components/IComponent';
-
-import Constants from '../util/constants';
-
 import GameButton from '../components/game-page/GameButton';
 import GameBoard from '../components/game-page/GameBoard';
 import Card from '../components/game-page/Card';
 
 import ICard from '../models/ICard';
 
+import Constants from '../util/constants';
 import Events from '../util/Events';
 
 export default class GamePage extends Component {

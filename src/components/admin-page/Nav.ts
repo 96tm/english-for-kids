@@ -1,8 +1,10 @@
 import Component from '../Component';
 import IComponent from '../IComponent';
-import Constants from '../../util/constants';
+
 import NavItem from './NavItem';
+
 import Events from '../../util/Events';
+import Constants from '../../util/constants';
 import userService from '../../util/UserService';
 
 export default class Nav extends Component {

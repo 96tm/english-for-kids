@@ -1,13 +1,15 @@
 import Component from '../Component';
 import IComponent from '../IComponent';
 
-import Constants from '../../util/constants';
 import FileInput from './FileInput';
 import TextInput from './TextInput';
-import Events from '../../util/Events';
+import BaseWordCardContent from './BaseWordCardContent';
+
 import WordCardButton from '../../models/WordCardButton';
 import WordCardDTO from '../../models/WordCardDTO';
-import BaseWordCardContent from './BaseWordCardContent';
+
+import Events from '../../util/Events';
+import Constants from '../../util/constants';
 import {
   validateNonEmpty,
   validateEnglishWord,

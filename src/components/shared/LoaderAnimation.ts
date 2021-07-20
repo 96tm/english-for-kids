@@ -1,6 +1,7 @@
-import Component from '../Component';
-import Constants from '../../util/constants';
 import IComponent from '../IComponent';
+import Component from '../Component';
+
+import Constants from '../../util/constants';
 
 export default class LoaderAnimation extends Component {
   loader: IComponent;

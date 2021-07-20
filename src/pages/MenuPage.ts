@@ -1,9 +1,10 @@
-import Component from '../components/Component';
 import IComponent from '../components/IComponent';
+import Component from '../components/Component';
 import GameMenu from '../components/shared/GameMenu';
 
-import Constants from '../util/constants';
 import ICategoryDTO from '../models/ICategoryDTO';
+
+import Constants from '../util/constants';
 
 export default class GamePage extends Component {
   gameMenu: GameMenu;

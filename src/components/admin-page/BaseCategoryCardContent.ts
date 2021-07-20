@@ -1,8 +1,10 @@
-import Component from '../Component';
 import IComponent from '../IComponent';
-import Constants from '../../util/constants';
+import Component from '../Component';
+
 import IValidatedInput from './IValidatedInput';
+
 import Events from '../../util/Events';
+import Constants from '../../util/constants';
 
 export default abstract class BaseCategoryCardContent extends Component {
   buttonsWrap: IComponent;

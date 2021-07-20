@@ -3,11 +3,10 @@ import GameMode from './GameMode';
 import CardModel from './CardModel';
 import ICard from './ICard';
 import GameStatus from './GameStatus';
+import ICategoryDTO from './ICategoryDTO';
 
 import Events from '../util/Events';
-
 import Constants from '../util/constants';
-import ICategoryDTO from './ICategoryDTO';
 
 import winAudio from '../assets/sounds/win.mp3';
 import loseAudio from '../assets/sounds/lose.mp3';

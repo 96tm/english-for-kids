@@ -1,16 +1,17 @@
 import Signal from './Signal';
 
-import GameMode from '../models/GameMode';
+import ICard from '../models/ICard';
 import IGameFinishedRecord from '../models/IGameFinishedRecord';
 import IWordStatDTO from '../models/IWordStatDTO';
-import SortType from '../models/SortType';
-import SortOrder from '../models/SortOrder';
-import ICard from '../models/ICard';
-import LoginInfo from '../models/LoginInfo';
-import CategoryCardButton from '../models/CategoryCardButton';
-import WordCardButton from '../models/WordCardButton';
 import IWordCardDTO from '../models/IWordCardDTO';
 import IWordCardUpdateDTO from '../models/IWordCardUpdateDTO';
+
+import GameMode from '../models/GameMode';
+import SortType from '../models/SortType';
+import SortOrder from '../models/SortOrder';
+import LoginInfo from '../models/LoginInfo';
+import WordCardButton from '../models/WordCardButton';
+import CategoryCardButton from '../models/CategoryCardButton';
 
 const menuClick = new Signal<string>();
 const modeButtonClick = new Signal<string>();

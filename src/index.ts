@@ -1,21 +1,23 @@
 import './assets/css/base.scss';
 
 import GameController from './controllers/GameController';
-
-import RouterService from './util/RouterService';
-import Component from './components/Component';
-import Constants from './util/constants';
-import ContainerController from './controllers/ContainerController';
-import MainPageController from './controllers/MainPageController';
-import ContainerPage from './pages/ContainerPage';
-import StatisticsController from './controllers/StatisticsController';
-import StatsService from './util/StatsService';
 import LoginController from './controllers/LoginController';
 import AdminController from './controllers/AdminController';
-import AdminCategoriesController from './controllers/AdminCategoriesController';
-import AdminContainerPage from './pages/AdminContainerPage';
-import AdminWordsController from './controllers/AdminWordsController';
 import LoaderAnimation from './components/shared/LoaderAnimation';
+import MainPageController from './controllers/MainPageController';
+import ContainerController from './controllers/ContainerController';
+import StatisticsController from './controllers/StatisticsController';
+import AdminWordsController from './controllers/AdminWordsController';
+import AdminCategoriesController from './controllers/AdminCategoriesController';
+
+import AdminContainerPage from './pages/AdminContainerPage';
+
+import Component from './components/Component';
+
+import Constants from './util/constants';
+import StatsService from './util/StatsService';
+import RouterService from './util/RouterService';
+import ContainerPage from './pages/ContainerPage';
 
 (async () => {
   const global = window;

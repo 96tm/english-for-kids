@@ -1,12 +1,11 @@
 import Component from '../Component';
 import IComponent from '../IComponent';
 
-import Constants from '../../util/constants';
-
-import AttributeRecord from '../../util/AttributeRecord';
+import ICategoryDTO from '../../models/ICategoryDTO';
 
 import Events from '../../util/Events';
-import ICategoryDTO from '../../models/ICategoryDTO';
+import Constants from '../../util/constants';
+import AttributeRecord from '../../util/AttributeRecord';
 
 export default class GameMenu extends Component {
   menuTitle: IComponent;

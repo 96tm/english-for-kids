@@ -1,16 +1,16 @@
 import Controller from './Controller';
 
 import IComponent from '../components/IComponent';
-import ContainerPage from '../pages/ContainerPage';
 import FinishScreen from '../components/game-page/FinishScreen';
 
-import Events from '../util/Events';
-
-import Constants from '../util/constants';
-
-import IGameFinishedRecord from '../models/IGameFinishedRecord';
-import Api from '../util/Api';
 import ICategoryDTO from '../models/ICategoryDTO';
+import IGameFinishedRecord from '../models/IGameFinishedRecord';
+
+import ContainerPage from '../pages/ContainerPage';
+
+import Api from '../util/Api';
+import Events from '../util/Events';
+import Constants from '../util/constants';
 
 export default class ContainerController extends Controller {
   component: IComponent;

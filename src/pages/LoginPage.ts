@@ -1,8 +1,9 @@
-import Component from '../components/Component';
 import IComponent from '../components/IComponent';
+import Component from '../components/Component';
+import ErrorMessage from '../components/shared/ErrorMessage';
+
 import Constants from '../util/constants';
 import Events from '../util/Events';
-import ErrorMessage from '../components/shared/ErrorMessage';
 
 export default class LoginPage extends Component {
   private loginContainer: IComponent;

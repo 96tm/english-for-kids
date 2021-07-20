@@ -3,12 +3,14 @@ import Controller from './Controller';
 import IComponent from '../components/IComponent';
 
 import LoginPage from '../pages/LoginPage';
-import Events from '../util/Events';
+
 import LoginInfo from '../models/LoginInfo';
-import RouterService from '../util/RouterService';
-import Constants from '../util/constants';
+
 import Api from '../util/Api';
+import Events from '../util/Events';
+import Constants from '../util/constants';
 import userService from '../util/UserService';
+import RouterService from '../util/RouterService';
 
 export default class LoginController extends Controller {
   component: IComponent;

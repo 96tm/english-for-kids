@@ -1,11 +1,12 @@
-import Component from '../Component';
 import IComponent from '../IComponent';
+import Component from '../Component';
 
-import Constants from '../../util/constants';
 import CategoryCardContentNormal from './CategoryCardContentNormal';
 import CategoryCardContentEdit from './CategoryCardContentEdit';
 import CategoryCardContentAdd from './CategoryCardContentAdd';
 import CategoryCardContentCreate from './CategoryCardContentCreate';
+
+import Constants from '../../util/constants';
 
 export default class CategoryCard extends Component {
   name: string;

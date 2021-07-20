@@ -1,11 +1,11 @@
 import Component from '../components/Component';
 import IComponent from '../components/IComponent';
-
-import Constants from '../util/constants';
 import Nav from '../components/admin-page/Nav';
 import GameFooter from '../components/shared/GameFooter';
 import ErrorMessage from '../components/shared/ErrorMessage';
 import InfoMessage from '../components/shared/InfoMessage';
+
+import Constants from '../util/constants';
 
 export default class AdminContainerPage extends Component {
   nav: IComponent;

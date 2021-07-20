@@ -1,6 +1,7 @@
+import Constants from './constants';
+
 import IInput from '../components/admin-page/IInput';
 import IInputValidationResult from '../components/admin-page/IInputValidationResult';
-import Constants from './constants';
 
 function validateNonEmpty(this: IInput): IInputValidationResult {
   return { isValid: !!this.value, errorMessage: '' };

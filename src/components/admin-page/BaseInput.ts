@@ -1,6 +1,7 @@
-import Component from '../Component';
 import IValidatedInput from './IValidatedInput';
 import IInputValidationResult from './IInputValidationResult';
+
+import Component from '../Component';
 
 export default abstract class BaseValidatedInput
   extends Component

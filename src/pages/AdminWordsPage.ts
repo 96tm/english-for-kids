@@ -1,12 +1,13 @@
-import Component from '../components/Component';
 import IComponent from '../components/IComponent';
+import ICard from '../models/ICard';
+import IWordCardUpdateDTO from '../models/IWordCardUpdateDTO';
+
+import Component from '../components/Component';
+import WordCard from '../components/admin-page/WordCard';
+import WordCardButton from '../models/WordCardButton';
 
 import Constants from '../util/constants';
-import ICard from '../models/ICard';
-import WordCard from '../components/admin-page/WordCard';
 import Events from '../util/Events';
-import WordCardButton from '../models/WordCardButton';
-import IWordCardUpdateDTO from '../models/IWordCardUpdateDTO';
 
 import defaultWordImage from '../assets/icons/icons8-no-image.png';
 

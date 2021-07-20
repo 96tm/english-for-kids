@@ -1,10 +1,10 @@
-import Component from '../Component';
 import IComponent from '../IComponent';
+import Component from '../Component';
+import Card from './Card';
+
+import ICard from '../../models/ICard';
 
 import Constants from '../../util/constants';
-
-import Card from './Card';
-import ICard from '../../models/ICard';
 
 class GameBoard extends Component {
   cards: IComponent[] = [];

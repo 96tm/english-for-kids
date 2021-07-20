@@ -1,9 +1,8 @@
-import Component from '../Component';
 import IComponent from '../IComponent';
-
-import Constants from '../../util/constants';
+import Component from '../Component';
 
 import Events from '../../util/Events';
+import Constants from '../../util/constants';
 
 export default class GameButton extends Component {
   text: IComponent;

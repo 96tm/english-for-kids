@@ -1,10 +1,11 @@
 import Component from '../Component';
 import IComponent from '../IComponent';
 
-import Constants from '../../util/constants';
-import Events from '../../util/Events';
 import WordCardButton from '../../models/WordCardButton';
 import WordCardDTO from '../../models/WordCardDTO';
+
+import Events from '../../util/Events';
+import Constants from '../../util/constants';
 
 export default class WordCardContentNormal extends Component {
   buttonRemove: IComponent;

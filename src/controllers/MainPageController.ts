@@ -3,8 +3,10 @@ import Controller from './Controller';
 import IComponent from '../components/IComponent';
 
 import MainPage from '../pages/MainPage';
-import Api from '../util/Api';
+
 import ICategoryDTO from '../models/ICategoryDTO';
+
+import Api from '../util/Api';
 import Events from '../util/Events';
 import Constants from '../util/constants';
 

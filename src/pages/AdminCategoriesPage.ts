@@ -1,11 +1,13 @@
 import Component from '../components/Component';
 import IComponent from '../components/IComponent';
+import CategoryCard from '../components/admin-page/CategoryCard';
+
+import ICategoryDTO from '../models/ICategoryDTO';
+import CategoryCardButton from '../models/CategoryCardButton';
+
+import Events from '../util/Events';
 
 import Constants from '../util/constants';
-import CategoryCard from '../components/admin-page/CategoryCard';
-import Events from '../util/Events';
-import CategoryCardButton from '../models/CategoryCardButton';
-import ICategoryDTO from '../models/ICategoryDTO';
 
 export default class AdminCategoriesPage extends Component {
   categories: IComponent[] = [];

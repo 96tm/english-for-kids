@@ -2,7 +2,6 @@ import Component from '../Component';
 import IComponent from '../IComponent';
 
 import Constants from '../../util/constants';
-
 import AttributeRecord from '../../util/AttributeRecord';
 
 export default class GameFooter extends Component {

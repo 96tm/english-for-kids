@@ -1,13 +1,16 @@
 import IComponent from '../components/IComponent';
+import WordCard from '../components/admin-page/WordCard';
 
 import Controller from './Controller';
+
 import AdminWordsPage from '../pages/AdminWordsPage';
+
 import Events from '../util/Events';
 import Constants from '../util/constants';
-import IWordCardDTO from '../models/IWordCardDTO';
 import Api from '../util/Api';
-import WordCard from '../components/admin-page/WordCard';
+
 import ICard from '../models/ICard';
+import IWordCardDTO from '../models/IWordCardDTO';
 import IWordCardUpdateDTO from '../models/IWordCardUpdateDTO';
 import IRESTError from '../models/IRESTError';
 

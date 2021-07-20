@@ -1,8 +1,11 @@
 import Events from './Events';
-import IController from '../controllers/IController';
-import RoutingRecord from './RoutingRecord';
+
 import Constants from './constants';
+
+import RoutingRecord from './RoutingRecord';
 import userService from './UserService';
+
+import IController from '../controllers/IController';
 
 class Router {
   guards = new Set<IController>();

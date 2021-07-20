@@ -1,13 +1,15 @@
-import Component from '../Component';
 import IComponent from '../IComponent';
+import Component from '../Component';
 
-import Constants from '../../util/constants';
 import WordCardContentNormal from './WordCardContentNormal';
 import WordCardContentAdd from './WordCardContentAdd';
 import WordCardContentEdit from './WordCardContentEdit';
 import WordCardContentCreate from './WordCardContentCreate';
+
 import ICard from '../../models/ICard';
 import IWordCardDTO from '../../models/IWordCardDTO';
+
+import Constants from '../../util/constants';
 
 export default class WordCard extends Component {
   content: IComponent;

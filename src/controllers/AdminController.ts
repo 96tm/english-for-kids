@@ -1,6 +1,9 @@
 import Controller from './Controller';
+
 import IComponent from '../components/IComponent';
+
 import AdminContainerPage from '../pages/AdminContainerPage';
+
 import Events from '../util/Events';
 
 export default class AdminController extends Controller {

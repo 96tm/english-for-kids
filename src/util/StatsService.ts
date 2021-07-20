@@ -1,9 +1,9 @@
 import Events from './Events';
 
-import IWordStatDTO from '../models/IWordStatDTO';
-import StatsObject from '../models/StatsObject';
 import WordStat from '../models/WordStat';
+import StatsObject from '../models/StatsObject';
 import StatsParameter from '../models/StatsParameter';
+import IWordStatDTO from '../models/IWordStatDTO';
 
 import Constants from './constants';
 

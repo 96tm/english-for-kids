@@ -1,12 +1,15 @@
 import IComponent from '../components/IComponent';
+import CategoryCard from '../components/admin-page/CategoryCard';
 
 import Controller from './Controller';
+
 import AdminCategoriesPage from '../pages/AdminCategoriesPage';
-import Events from '../util/Events';
-import Api from '../util/Api';
+
 import IRESTError from '../models/IRESTError';
-import CategoryCard from '../components/admin-page/CategoryCard';
 import ICategoryDTO from '../models/ICategoryDTO';
+
+import Api from '../util/Api';
+import Events from '../util/Events';
 
 export default class AdminCategoriesController extends Controller {
   component: IComponent;

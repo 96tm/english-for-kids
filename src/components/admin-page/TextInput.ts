@@ -1,9 +1,10 @@
-import Component from '../Component';
 import IComponent from '../IComponent';
+import Component from '../Component';
 
-import Constants from '../../util/constants';
 import IInputValidationResult from './IInputValidationResult';
 import BaseValidatedInput from './BaseInput';
+
+import Constants from '../../util/constants';
 
 export default class TextInput extends BaseValidatedInput {
   input: IComponent;

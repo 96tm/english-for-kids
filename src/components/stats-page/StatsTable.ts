@@ -1,9 +1,11 @@
 import IComponent from '../IComponent';
-import Constants from '../../util/constants';
 import Component from '../Component';
+
 import SortType from '../../models/SortType';
 import SortOrder from '../../models/SortOrder';
+
 import Events from '../../util/Events';
+import Constants from '../../util/constants';
 
 export default class StatsTable extends Component {
   table: IComponent;

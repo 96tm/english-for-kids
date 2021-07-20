@@ -1,8 +1,10 @@
 import Component from '../Component';
 import IComponent from '../IComponent';
+
+import CategoryCardButton from '../../models/CategoryCardButton';
+
 import Constants from '../../util/constants';
 import Events from '../../util/Events';
-import CategoryCardButton from '../../models/CategoryCardButton';
 
 export default class CategoryCardContentAdd extends Component {
   heading: IComponent;

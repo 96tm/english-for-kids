@@ -1,11 +1,12 @@
-import Component from '../components/Component';
 import IComponent from '../components/IComponent';
+import Component from '../components/Component';
 import Category from '../components/main-page/Category';
+
+import ICategoryDTO from '../models/ICategoryDTO';
 
 import Constants from '../util/constants';
 
 import Events from '../util/Events';
-import ICategoryDTO from '../models/ICategoryDTO';
 
 import noImage from '../assets/icons/icons8-no-image.png';
 
