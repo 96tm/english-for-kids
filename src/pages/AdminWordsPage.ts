@@ -56,15 +56,7 @@ export default class AdminWordsPage extends Component {
     button: WordCardButton;
     wordInfo: IWordCardUpdateDTO;
   }) => Promise<void> = async (data) => {
-    const wordCard = this.words.find((word) => {
-      const currentCategory = (word as WordCard).category;
-      const currentWord = (word as WordCard).word;
-      return (
-        currentCategory === data?.wordInfo?.category &&
-        currentWord === data.wordInfo.word
-      );
-    });
-
+    const wordCard = this.getCard(data.wordInfo.word);
     switch (data.button) {
       case WordCardButton.add:
         (this.createWordCard as WordCard).setModeCreate();

@@ -35,9 +35,7 @@ export default class AdminCategoriesPage extends Component {
     name: string;
     newName: string;
   }) => void = (data) => {
-    const categoryCard = this.categories.find(
-      (category) => (category as CategoryCard).name === data.name
-    ) as CategoryCard;
+    const categoryCard = this.getCategoryCard(data.name) as CategoryCard;
     switch (data.button) {
       case CategoryCardButton.update:
         categoryCard.setEditMode();

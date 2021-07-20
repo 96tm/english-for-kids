@@ -150,7 +150,6 @@ export default class LoginPage extends Component {
       { type: 'submit', value: Constants.Labels.loginButtonLogin }
     );
     buttonLogin.element as HTMLInputElement;
-    // buttonLogin.textContent = Constants.Labels.loginButtonLogin;
     return [buttonsWrap, buttonLogin, buttonCancel];
   }
 

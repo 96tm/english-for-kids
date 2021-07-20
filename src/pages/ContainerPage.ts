@@ -1,17 +1,16 @@
 import IComponent from '../components/IComponent';
 import InfoMessage from '../components/shared/InfoMessage';
-import ICategoryDTO from '../models/ICategoryDTO';
-
 import Component from '../components/Component';
-import GameMenuToggleButton from '../components/shared/GameMenuToggleButton';
 import GameMenu from '../components/shared/GameMenu';
 import GameHeader from '../components/shared/GameHeader';
 import GameFooter from '../components/shared/GameFooter';
 import ErrorMessage from '../components/shared/ErrorMessage';
+import GameMenuToggleButton from '../components/shared/GameMenuToggleButton';
 
-import Constants from '../util/constants';
+import ICategoryDTO from '../models/ICategoryDTO';
 
 import Events from '../util/Events';
+import Constants from '../util/constants';
 
 export default class ContainerPage extends Component {
   gameToggleCheckbox: IComponent;

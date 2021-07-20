@@ -9,6 +9,7 @@ import Constants from '../../util/constants';
 export default class FileInput extends BaseValidatedInput {
   input: IComponent;
   label: IComponent;
+  inputWrap: IComponent;
   wrapLabel: IComponent;
   fileName: IComponent;
   fileSize: IComponent;
@@ -25,20 +26,33 @@ export default class FileInput extends BaseValidatedInput {
     super(global, rootComponent, 'div', [
       Constants.CSSClasses.adminCardFileInputWrap,
     ]);
-    const inputWrap = new Component(global, this, 'div', [
+    this.inputWrap = new Component(global, this, 'div', [
       Constants.CSSClasses.adminCardFileInputInnerWrap,
     ]);
     this.wrapLabel = new Component(
       global,
-      inputWrap,
+      this.inputWrap,
       'label',
       [Constants.CSSClasses.adminCardFileInputWrapLabel],
       { for: inputId }
     );
     this.wrapLabel.textContent = labelText;
-    this.input = new Component(
-      global,
-      inputWrap,
+    [this.input, this.label, this.fileName, this.fileSize] = this.createInput(
+      value,
+      accept,
+      inputId
+    );
+    this.addEventListeners();
+  }
+
+  private createInput(
+    value: string,
+    accept: string,
+    inputId: string
+  ): IComponent[] {
+    const input = new Component(
+      this.global,
+      this.inputWrap,
       'input',
       [Constants.CSSClasses.adminCardFileInput],
       {
@@ -48,22 +62,21 @@ export default class FileInput extends BaseValidatedInput {
         accept,
       }
     );
-
-    this.label = new Component(
-      global,
-      inputWrap,
+    const label = new Component(
+      this.global,
+      this.inputWrap,
       'label',
       [Constants.CSSClasses.adminCardFileInputLabel],
       { for: inputId }
     );
-    this.label.textContent = Constants.Labels.selectFile;
-    this.fileName = new Component(global, this, 'div', [
+    label.textContent = Constants.Labels.selectFile;
+    const fileName = new Component(this.global, this, 'div', [
       Constants.CSSClasses.adminCardFileInputName,
     ]);
-    this.fileSize = new Component(global, this, 'div', [
+    const fileSize = new Component(this.global, this, 'div', [
       Constants.CSSClasses.adminCardFileInputSize,
     ]);
-    this.addEventListeners();
+    return [input, label, fileName, fileSize];
   }
 
   private addEventListeners(): void {

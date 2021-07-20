@@ -33,36 +33,8 @@ export default class WordCardContentCreate extends BaseWordCardContent {
     super(global, rootComponent, [
       Constants.CSSClasses.adminWordCardContentEdit,
     ]);
-    this.inputWord = new TextInput(
-      global,
-      this,
-      Constants.Labels.adminWordEditWordInputId,
-      Constants.Labels.adminWordCardWord,
-      [validateNonEmpty, validateEnglishWord(Constants.Labels.word)]
-    );
-    this.inputTranslation = new TextInput(
-      global,
-      this,
-      Constants.Labels.adminWordEditTranslationInputId,
-      Constants.Labels.adminWordCardTranslation,
-      [validateNonEmpty]
-    );
-    this.inputAudio = new FileInput(
-      global,
-      this,
-      Constants.Labels.adminWordEditAudioInputId,
-      Constants.Labels.adminWordCardSound,
-      'audio/mpeg',
-      [validateNonEmpty, validateFileSize(Constants.MAX_FILE_SIZE)]
-    );
-    this.inputImage = new FileInput(
-      global,
-      this,
-      Constants.Labels.adminWordEditImageInputId,
-      Constants.Labels.adminWordCardImage,
-      'image/jpeg',
-      [validateFileSize(Constants.MAX_FILE_SIZE)]
-    );
+    [this.inputWord, this.inputTranslation, this.inputAudio, this.inputImage] =
+      this.createInputs();
     this.buttonsWrap = new Component(global, this, 'div', [
       Constants.CSSClasses.adminWordCardButtonsWrap,
     ]);
@@ -70,6 +42,40 @@ export default class WordCardContentCreate extends BaseWordCardContent {
     this.submit = this.buttonCreate;
     this.addEventListeners();
     this.buttonCreate.disable();
+  }
+
+  private createInputs(): IComponent[] {
+    const inputWord = new TextInput(
+      this.global,
+      this,
+      Constants.Labels.adminWordEditWordInputId,
+      Constants.Labels.adminWordCardWord,
+      [validateNonEmpty, validateEnglishWord(Constants.Labels.word)]
+    );
+    const inputTranslation = new TextInput(
+      this.global,
+      this,
+      Constants.Labels.adminWordEditTranslationInputId,
+      Constants.Labels.adminWordCardTranslation,
+      [validateNonEmpty]
+    );
+    const inputAudio = new FileInput(
+      this.global,
+      this,
+      Constants.Labels.adminWordEditAudioInputId,
+      Constants.Labels.adminWordCardSound,
+      'audio/mpeg',
+      [validateNonEmpty, validateFileSize(Constants.MAX_FILE_SIZE)]
+    );
+    const inputImage = new FileInput(
+      this.global,
+      this,
+      Constants.Labels.adminWordEditImageInputId,
+      Constants.Labels.adminWordCardImage,
+      'image/jpeg',
+      [validateFileSize(Constants.MAX_FILE_SIZE)]
+    );
+    return [inputWord, inputTranslation, inputAudio, inputImage];
   }
 
   private createButtons(): IComponent[] {
