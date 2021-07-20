@@ -6,8 +6,9 @@ const NUMBER_OF_CARDS = 8;
 const NUMBER_OF_CATEGORIES = 8;
 const FINISH_SCREEN_DURATION = 2000;
 const HOMEPAGE = '';
-const SERVER_URL = 'https://warm-basin-33080.herokuapp.com';
-const FETCH_TIMEOUT = 8000;
+const SERVER_URL = 'http://localhost:4000';
+// const SERVER_URL = 'https://warm-basin-33080.herokuapp.com';
+const FETCH_TIMEOUT = 15000;
 const MAX_FILE_SIZE = 1024 ** 2;
 const VALID_STRING = /^[a-zA-Z0-9 ()-_]*$/;
 

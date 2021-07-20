@@ -19,11 +19,14 @@ export default class Api {
     return response;
   }
 
-  static async getAllCategories(): Promise<Response> {
-    return Api.fetchWithTimeout(`${Constants.SERVER_URL}/categories`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    });
+  static async getCategories(page = 1, limit = 0): Promise<Response> {
+    return Api.fetchWithTimeout(
+      `${Constants.SERVER_URL}/categories?page=${page}&limit=${limit}`,
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
   }
 
   static async login(login: string, password: string): Promise<Response> {

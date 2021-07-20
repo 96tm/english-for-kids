@@ -6,7 +6,7 @@ export default class Signal<T, S = Promise<void>> {
   }
 
   remove(slot: (data: T) => S): void {
-    this.slots = this.slots.filter((registeredSlot) => registeredSlot === slot);
+    this.slots = this.slots.filter((registeredSlot) => registeredSlot !== slot);
   }
 
   async emit(data: T): Promise<void> {

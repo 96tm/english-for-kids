@@ -60,6 +60,7 @@ const wordUpdate = new Signal<IWordCardUpdateDTO>();
 const adminErrorShow = new Signal<string>();
 const adminMessageShow = new Signal<string>();
 const gameErrorShow = new Signal<string>();
+const scrollToEnd = new Signal<void>();
 
 const Events = {
   menuClick,
@@ -100,6 +101,7 @@ const Events = {
   adminErrorShow,
   adminMessageShow,
   gameErrorShow,
+  scrollToEnd,
 };
 
 export default Events;

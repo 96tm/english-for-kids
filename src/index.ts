@@ -18,6 +18,21 @@ import Constants from './util/constants';
 import StatsService from './util/StatsService';
 import RouterService from './util/RouterService';
 import ContainerPage from './pages/ContainerPage';
+import Events from './util/Events';
+
+function handleScroll(event: Event): void {
+  const { documentElement } = event.target as HTMLDocument;
+  if (
+    documentElement.scrollTop + documentElement.clientHeight >=
+    documentElement.scrollHeight
+  ) {
+    Events.scrollToEnd.emit();
+  }
+}
+
+function init(global: Window): void {
+  global.document.addEventListener('scroll', handleScroll);
+}
 
 (async () => {
   const global = window;
@@ -94,4 +109,5 @@ import ContainerPage from './pages/ContainerPage';
     },
   ]);
   await RouterService.showRoute(Constants.Labels.mainRoute);
+  init(global);
 })();

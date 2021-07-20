@@ -6,6 +6,7 @@ import ErrorMessage from '../components/shared/ErrorMessage';
 import InfoMessage from '../components/shared/InfoMessage';
 
 import Constants from '../util/constants';
+import Events from '../util/Events';
 
 export default class AdminContainerPage extends Component {
   nav: IComponent;
@@ -13,7 +14,7 @@ export default class AdminContainerPage extends Component {
   footer: IComponent;
   errorContainer: IComponent;
 
-  constructor(global: Window, rootComponent: IComponent | null) {
+  constructor(public global: Window, rootComponent: IComponent | null) {
     super(global, rootComponent, 'div', [Constants.CSSClasses.adminContainer]);
     this.nav = new Nav(global, this);
     this.container = new Component(global, this, 'div', [

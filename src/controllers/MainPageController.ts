@@ -21,7 +21,7 @@ export default class MainPageController extends Controller {
   async init(): Promise<void> {
     let categories: ICategoryDTO[] = [];
     try {
-      categories = await Api.getAllCategories().then((response) =>
+      categories = await Api.getCategories().then((response) =>
         response.json()
       );
     } catch (err) {

@@ -39,7 +39,7 @@ export default class GameController extends Controller {
   async init(): Promise<void> {
     let categories = [];
     try {
-      categories = await Api.getAllCategories().then((response) =>
+      categories = await Api.getCategories().then((response) =>
         response.json()
       );
     } catch (err) {

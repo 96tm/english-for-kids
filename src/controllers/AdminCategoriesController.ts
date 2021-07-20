@@ -10,9 +10,11 @@ import ICategoryDTO from '../models/ICategoryDTO';
 
 import Api from '../util/Api';
 import Events from '../util/Events';
+import Constants from '../util/constants';
 
 export default class AdminCategoriesController extends Controller {
   component: IComponent;
+  page = 1;
 
   constructor(
     global: Window,
@@ -58,6 +60,22 @@ export default class AdminCategoriesController extends Controller {
       this.loaderAnimation.remove();
     }
   };
+
+  private handleScrollToEnd: () => Promise<void> = async () => {
+    console.log('gotcha cats');
+  };
+
+  private addEventListeners() {
+    console.log('cats added');
+
+    Events.scrollToEnd.add(this.handleScrollToEnd);
+  }
+
+  private removeEventListeners() {
+    console.log('cats removed');
+
+    Events.scrollToEnd.remove(this.handleScrollToEnd);
+  }
 
   private handleCategoryCreate: (name: string) => Promise<void> = async (
     name
@@ -110,11 +128,14 @@ export default class AdminCategoriesController extends Controller {
     }
   };
 
-  private async getCategories(): Promise<ICategoryDTO[]> {
+  private async getCategories(
+    page = 1,
+    limit = Constants.NUMBER_OF_CATEGORIES
+  ): Promise<ICategoryDTO[]> {
     let categories: ICategoryDTO[] = [];
     try {
       this.loaderAnimation.render();
-      const response = await Api.getAllCategories();
+      const response = await Api.getCategories(page, limit);
       if (response.ok) {
         categories = await response.json();
       }
@@ -129,11 +150,18 @@ export default class AdminCategoriesController extends Controller {
   }
 
   async show(): Promise<void> {
+    this.addEventListeners();
+    this.page = 1;
     const categories = await this.getCategories();
     this.loaderAnimation.render();
     await this.init(categories);
     this.loaderAnimation.remove();
-    super.show();
+    await super.show();
+  }
+
+  hide(): void {
+    this.removeEventListeners();
+    super.hide();
   }
 
   async init(categories: ICategoryDTO[]): Promise<void> {

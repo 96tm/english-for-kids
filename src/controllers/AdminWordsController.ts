@@ -31,6 +31,32 @@ export default class AdminWordsController extends Controller {
     Events.wordUpdate.add(this.handleWordUpdate);
   }
 
+  private handleScrollToEnd: () => Promise<void> = async () => {
+    console.log('gotcha words');
+  };
+
+  private addEventListeners() {
+    console.log('words added');
+
+    Events.scrollToEnd.add(this.handleScrollToEnd);
+  }
+
+  private removeEventListeners() {
+    console.log('words removed');
+
+    Events.scrollToEnd.remove(this.handleScrollToEnd);
+  }
+
+  async show(): Promise<void> {
+    this.addEventListeners();
+    await super.show();
+  }
+
+  hide(): void {
+    this.removeEventListeners();
+    super.hide();
+  }
+
   private handleRouteChange: (route: string) => Promise<void> = async (
     route
   ) => {

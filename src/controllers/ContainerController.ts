@@ -27,7 +27,7 @@ export default class ContainerController extends Controller {
 
   async show(): Promise<void> {
     await this.init();
-    super.show();
+    await super.show();
   }
 
   private handleShowError: (text: string) => Promise<void> = async (text) => {
@@ -52,7 +52,7 @@ export default class ContainerController extends Controller {
   async init(): Promise<void> {
     let categories: ICategoryDTO[] = [];
     try {
-      categories = await Api.getAllCategories().then((response) =>
+      categories = await Api.getCategories().then((response) =>
         response.json()
       );
     } catch (err) {
