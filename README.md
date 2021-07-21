@@ -1,5 +1,5 @@
 1. Task
-   https://github.com/rolling-scopes-school/tasks/blob/master/tasks/rslang/english-for-kids.md#english-for-kids
+   https://github.com/rolling-scopes-school/tasks/blob/master/tasks/rslang/english-for-kids-admin-panel.md#english-for-kids
 2. Screenshot
    ![Screenshot from 2021-07-19 20-19-37](https://user-images.githubusercontent.com/2994043/126200728-c57118a5-956d-4154-934f-2770c3fcf287.png)
 3. Deployment
