@@ -16,9 +16,10 @@ import IRESTError from '../models/IRESTError';
 
 export default class AdminWordsController extends Controller {
   component: IComponent;
+  private page = 1;
 
   constructor(
-    global: Window,
+    public global: Window,
     rootComponent: IComponent | null,
     private loaderAnimation: IComponent,
     private category = ''
@@ -32,23 +33,27 @@ export default class AdminWordsController extends Controller {
   }
 
   private handleScrollToEnd: () => Promise<void> = async () => {
-    console.log('gotcha words');
+    const words = await this.getWords(this.category, this.page + 1);
+    if (words.length) {
+      this.page += 1;
+      (this.component as AdminWordsPage).appendWords(words);
+    }
+    const { scrollTop } = this.global.document.documentElement;
+    this.global.document.documentElement.scrollTop =
+      scrollTop * Constants.AUTO_SCROLL_VALUE;
   };
 
   private addEventListeners() {
-    console.log('words added');
-
     Events.scrollToEnd.add(this.handleScrollToEnd);
   }
 
   private removeEventListeners() {
-    console.log('words removed');
-
     Events.scrollToEnd.remove(this.handleScrollToEnd);
   }
 
   async show(): Promise<void> {
     this.addEventListeners();
+    this.page = 1;
     await super.show();
   }
 
@@ -61,19 +66,23 @@ export default class AdminWordsController extends Controller {
     route
   ) => {
     if (route.split('/').slice(-1)[0] === Constants.Labels.adminWordsRoute) {
-      const category = route.split('/')[0];
+      [this.category] = route.split('/');
       this.loaderAnimation.render();
-      const words = await this.getWords(category);
-      await this.init(category, words);
+      const words = await this.getWords(this.category);
+      await this.init(this.category, words);
       this.loaderAnimation.remove();
     }
   };
 
-  async getWords(category: string): Promise<ICard[]> {
+  async getWords(
+    category: string,
+    page = 1,
+    limit = Constants.NUMBER_OF_CARDS
+  ): Promise<ICard[]> {
     let words: ICard[] = [];
     try {
       this.loaderAnimation.render();
-      const response = await Api.getAllWordsByCategory(category);
+      const response = await Api.getWordsByCategory(category, page, limit);
       if (response.ok) {
         words = await response.json();
       } else {
@@ -81,9 +90,7 @@ export default class AdminWordsController extends Controller {
         Events.adminErrorShow.emit(error.message);
       }
     } catch (err) {
-      Events.adminErrorShow.emit(
-        `Server doesn't respond, please check your network connection`
-      );
+      Events.adminErrorShow.emit(Constants.Labels.connectionProblem);
     } finally {
       this.loaderAnimation.remove();
     }
@@ -111,7 +118,7 @@ export default class AdminWordsController extends Controller {
           updatedWord.audioSrc = URL.createObjectURL(wordUpdateInfo.audio);
         }
         Events.adminMessageShow.emit(
-          "Word updated - uploading media into the cloud may take some time, so audio and image changes won't be reflected immediately."
+          Constants.Labels.uploadTimeNotification('Word updated -')
         );
         (updatedWordCard as WordCard)?.setModeNormal({
           ...updatedWord,
@@ -122,9 +129,7 @@ export default class AdminWordsController extends Controller {
         Events.adminErrorShow.emit(error.message);
       }
     } catch (err) {
-      Events.adminErrorShow.emit(
-        `Server doesn't respond, please check your network connection`
-      );
+      Events.adminErrorShow.emit(Constants.Labels.connectionProblem);
     } finally {
       this.loaderAnimation.remove();
     }
@@ -148,7 +153,7 @@ export default class AdminWordsController extends Controller {
           audioSrc,
         });
         Events.adminMessageShow.emit(
-          "Word created - uploading media into the cloud may take some time, so audio and image changes won't be reflected immediately."
+          Constants.Labels.uploadTimeNotification('Word created -')
         );
       } else {
         const error: IRESTError = await response.json();
@@ -173,21 +178,14 @@ export default class AdminWordsController extends Controller {
       const response = await Api.removeWord(wordInfo.category, wordInfo.word);
       if (response.ok) {
         const removedCard: ICard = await response.json();
-        (this.component as AdminWordsPage).words = (
-          this.component as AdminWordsPage
-        ).words.filter(
-          (wordCard) => (wordCard as WordCard).word !== removedCard.word
-        );
-        (this.component as AdminWordsPage).getCard(removedCard.word)?.remove();
+        (this.component as AdminWordsPage).removeCard(removedCard.word);
         Events.adminMessageShow.emit('Word removed');
       } else {
         const error: IRESTError = await response.json();
         Events.adminErrorShow.emit(error.message);
       }
     } catch (err) {
-      Events.adminErrorShow.emit(
-        `Server doesn't respond, please check your network connection`
-      );
+      Events.adminErrorShow.emit(Constants.Labels.connectionProblem);
     } finally {
       this.loaderAnimation.remove();
     }

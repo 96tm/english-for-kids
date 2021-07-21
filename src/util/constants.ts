@@ -11,6 +11,7 @@ const SERVER_URL = 'http://localhost:4000';
 const FETCH_TIMEOUT = 15000;
 const MAX_FILE_SIZE = 1024 ** 2;
 const VALID_STRING = /^[a-zA-Z0-9 ()-_]*$/;
+const AUTO_SCROLL_VALUE = 0.99;
 
 const CSSClasses = {
   root: 'root',
@@ -259,11 +260,13 @@ const Labels = {
   adminWordCardAudio: 'Sound file: ',
   adminWordCardImage: 'Image: ',
   selectFile: 'Select file',
+  uploadTimeNotification: (beginning: string): string =>
+    `${beginning} uploading media into the cloud may take some time, so audio and image changes won't be reflected immediately.`,
   noServerResponse: `Server doesn't respond`,
   connectionProblem: `Can't connect to the server, please check your network connection`,
   serverError: 'Server error',
   invalidEnglishWord: (fieldName: string): string =>
-    `Field "${fieldName}" must contain only letters form the English alphabet and/or digits`,
+    `Field "${fieldName}" must contain only letters from the English alphabet, digits, (, ), -, _`,
   fileSizeExceeded: (size: number): string =>
     `File size must be at most ${size}Mb`,
 };
@@ -283,6 +286,7 @@ const Constants = {
   FETCH_TIMEOUT,
   MAX_FILE_SIZE,
   VALID_STRING,
+  AUTO_SCROLL_VALUE,
 };
 
 export default Constants;

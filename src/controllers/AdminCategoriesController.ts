@@ -14,10 +14,10 @@ import Constants from '../util/constants';
 
 export default class AdminCategoriesController extends Controller {
   component: IComponent;
-  page = 1;
+  private page = 1;
 
   constructor(
-    global: Window,
+    public global: Window,
     rootComponent: IComponent | null,
     private loaderAnimation: IComponent
   ) {
@@ -62,18 +62,21 @@ export default class AdminCategoriesController extends Controller {
   };
 
   private handleScrollToEnd: () => Promise<void> = async () => {
-    console.log('gotcha cats');
+    const categories = await this.getCategories(this.page + 1);
+    if (categories.length) {
+      this.page += 1;
+      (this.component as AdminCategoriesPage).appendCategories(categories);
+    }
+    const { scrollTop } = this.global.document.documentElement;
+    this.global.document.documentElement.scrollTop =
+      scrollTop * Constants.AUTO_SCROLL_VALUE;
   };
 
   private addEventListeners() {
-    console.log('cats added');
-
     Events.scrollToEnd.add(this.handleScrollToEnd);
   }
 
   private removeEventListeners() {
-    console.log('cats removed');
-
     Events.scrollToEnd.remove(this.handleScrollToEnd);
   }
 
@@ -84,8 +87,10 @@ export default class AdminCategoriesController extends Controller {
       this.loaderAnimation.render();
       const response = await Api.createCategory(name);
       if (response.ok) {
-        const categories = await this.getCategories();
-        await this.init(categories);
+        const category: ICategoryDTO = await response.json();
+        (this.component as AdminCategoriesPage).addOneCategory({
+          ...category,
+        });
         Events.adminMessageShow.emit('Category created');
       } else {
         const error: IRESTError = await response.json();
@@ -108,11 +113,8 @@ export default class AdminCategoriesController extends Controller {
       const response = await Api.removeCategory(name);
       if (response.ok) {
         const removedCategory: ICategoryDTO = await response.json();
-        (this.component as AdminCategoriesPage).getCategoryCard(name)?.remove();
-        (this.component as AdminCategoriesPage).categories = (
-          this.component as AdminCategoriesPage
-        ).categories.filter(
-          (category) => (category as CategoryCard).name !== removedCategory.name
+        (this.component as AdminCategoriesPage).removeCategoryCard(
+          removedCategory.name
         );
         Events.adminMessageShow.emit('Category removed');
       } else {

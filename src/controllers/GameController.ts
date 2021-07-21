@@ -83,7 +83,7 @@ export default class GameController extends Controller {
   private handleMenuClick: (category: string) => Promise<void> = async (
     category
   ) => {
-    const responsePromise = Api.getAllWordsByCategory(category);
+    const responsePromise = Api.getWordsByCategory(category);
     const cards = await this.gameModel.setActiveCategory(
       category,
       responsePromise

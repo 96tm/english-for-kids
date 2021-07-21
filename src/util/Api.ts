@@ -63,9 +63,13 @@ export default class Api {
     });
   }
 
-  static async getAllWordsByCategory(category: string): Promise<Response> {
+  static async getWordsByCategory(
+    category: string,
+    page = 1,
+    limit = 0
+  ): Promise<Response> {
     return Api.fetchWithTimeout(
-      `${Constants.SERVER_URL}/categories/${category}/words`,
+      `${Constants.SERVER_URL}/categories/${category}/words?page=${page}&limit=${limit}`,
       {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },

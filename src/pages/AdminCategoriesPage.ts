@@ -10,7 +10,7 @@ import Events from '../util/Events';
 import Constants from '../util/constants';
 
 export default class AdminCategoriesPage extends Component {
-  categories: IComponent[] = [];
+  categories: Record<string, IComponent> = {};
   createCategoryCard: IComponent;
   categoriesWrap: IComponent;
 
@@ -25,9 +25,7 @@ export default class AdminCategoriesPage extends Component {
   }
 
   getCategoryCard(name: string): IComponent | undefined {
-    return this.categories.find(
-      (category) => (category as CategoryCard).name === name
-    );
+    return this.categories[name];
   }
 
   private handleCategoryCardClick: (data: {
@@ -68,24 +66,36 @@ export default class AdminCategoriesPage extends Component {
     }
   };
 
-  private addOneCategory(name: string, numberOfWords: number): IComponent {
+  appendCategories(categories: ICategoryDTO[]): void {
+    categories.forEach((category) => {
+      this.addOneCategory({ ...category });
+    });
+  }
+
+  addOneCategory({ name, numberOfWords }: ICategoryDTO): void {
+    if (this.categories[name]) return;
     const category = new CategoryCard(
       this.global,
       this.categoriesWrap,
       name,
       numberOfWords
     );
-    this.categories.push(category);
-    return category;
+    this.categories[name] = category;
+    this.createCategoryCard.attachTo(this.categoriesWrap);
+  }
+
+  removeCategoryCard(name: string): void {
+    const card = this.getCategoryCard(name);
+    if (card) {
+      delete this.categories[name];
+      card.remove();
+    }
   }
 
   async init(categories: ICategoryDTO[]): Promise<void> {
     this.categoriesWrap.element.innerHTML = '';
-    this.categories = [];
-    categories.forEach((category) =>
-      this.addOneCategory(category.name, category.numberOfWords)
-    );
+    this.categories = {};
+    categories.forEach((category) => this.addOneCategory({ ...category }));
     (this.createCategoryCard as CategoryCard).setAddMode();
-    this.createCategoryCard.attachTo(this.categoriesWrap);
   }
 }

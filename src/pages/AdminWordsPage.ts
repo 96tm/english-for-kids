@@ -15,7 +15,7 @@ export default class AdminWordsPage extends Component {
   heading: IComponent;
   wordsWrap: IComponent;
   createWordCard: IComponent;
-  words: IComponent[] = [];
+  words: Record<string, IComponent> = {};
 
   constructor(global: Window, rootComponent: IComponent | null) {
     super(global, rootComponent, 'div', [Constants.CSSClasses.adminWords]);
@@ -37,7 +37,7 @@ export default class AdminWordsPage extends Component {
   async init(category: string, words: ICard[]): Promise<void> {
     this.wordsWrap.element.innerHTML = '';
     (this.createWordCard as WordCard).category = category;
-    this.words = [];
+    this.words = {};
     (words as ICard[]).forEach((word) => {
       const updatedWord = word;
       updatedWord.category = category;
@@ -45,11 +45,24 @@ export default class AdminWordsPage extends Component {
     });
     this.heading.textContent = category;
     (this.createWordCard as WordCard).setModeAdd();
-    this.createWordCard.attachTo(this.wordsWrap);
   }
 
   getCard(word: string): IComponent | undefined {
-    return this.words.find((wordCard) => (wordCard as WordCard).word === word);
+    return this.words[word];
+  }
+
+  removeCard(word: string): void {
+    const card = this.getCard(word);
+    if (card) {
+      delete this.words[word];
+      card.remove();
+    }
+  }
+
+  appendWords(words: ICard[]): void {
+    words.forEach((word) => {
+      this.addOneWord({ ...word });
+    });
   }
 
   private handleWordCardClick: (data: {
@@ -62,8 +75,6 @@ export default class AdminWordsPage extends Component {
         (this.createWordCard as WordCard).setModeCreate();
         break;
       case WordCardButton.remove:
-        this.words = this.words.filter((word) => word !== wordCard);
-        wordCard?.remove();
         Events.wordRemove.emit(data.wordInfo);
         break;
       case WordCardButton.change:
@@ -89,13 +100,8 @@ export default class AdminWordsPage extends Component {
     }
   };
 
-  addOneWord({
-    category,
-    word,
-    translation,
-    image,
-    audioSrc,
-  }: ICard): IComponent {
+  addOneWord({ category, word, translation, image, audioSrc }: ICard): void {
+    if (this.words[word]) return;
     const wordCard = new WordCard(
       this.global,
       this.wordsWrap,
@@ -105,8 +111,7 @@ export default class AdminWordsPage extends Component {
       audioSrc,
       `${image}` || defaultWordImage
     );
-    this.words.push(wordCard);
+    this.words[word] = wordCard;
     this.createWordCard.attachTo(this.wordsWrap);
-    return wordCard;
   }
 }
