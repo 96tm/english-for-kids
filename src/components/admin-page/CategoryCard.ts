@@ -33,8 +33,6 @@ export default class CategoryCard extends Component {
   }
 
   setNormalMode(name = this.name, numberOfWords = this.numberOfWords): void {
-    console.log('set normal');
-
     this.element.innerHTML = '';
     this.content.remove();
     this.name = name;

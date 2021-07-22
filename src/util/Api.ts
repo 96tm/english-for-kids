@@ -24,8 +24,6 @@ export default class Api {
       signal: abortController.signal,
     });
     if (response.status === StatusCodes.UNAUTHORIZED) {
-      console.log('api unaunthorized');
-
       Events.unauthorizedAccess.emit();
     }
     clearTimeout(timeoutHandle);
