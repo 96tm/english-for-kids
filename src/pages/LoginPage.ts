@@ -164,11 +164,10 @@ export default class LoginPage extends Component {
     const target = event.target as HTMLElement;
     if (target === this.buttonLogin.element) {
       event.preventDefault();
+      const { login, password } = this.getLoginData();
       Events.loginAttempt.emit({
-        login: String((this.inputLogin.element as HTMLInputElement).value),
-        password: String(
-          (this.inputPassword.element as HTMLInputElement).value
-        ),
+        login,
+        password,
       });
     } else if (target === this.buttonCancel.element) {
       event.preventDefault();

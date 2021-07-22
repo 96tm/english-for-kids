@@ -6,7 +6,6 @@ import LoginPage from '../pages/LoginPage';
 
 import LoginInfo from '../models/LoginInfo';
 
-import Api from '../util/Api';
 import Events from '../util/Events';
 import Constants from '../util/constants';
 import userService from '../util/UserService';
@@ -24,39 +23,26 @@ export default class LoginController extends Controller {
     this.component = new LoginPage(global, rootComponent);
     Events.loginShow.add(this.handleLoginShow);
     Events.loginAttempt.add(this.handleLoginAttempt);
+    Events.loginErrorShow.add(this.handleLoginErrorShow);
   }
+
+  private handleLoginErrorShow: (data: string) => Promise<void> = async (
+    data
+  ) => {
+    (this.component as LoginPage).showError(data);
+  };
 
   private handleLoginAttempt: (loginInfo: LoginInfo) => Promise<void> = async (
     loginInfo
   ) => {
-    const authResult = await this.validate();
-    if (authResult) {
+    this.loaderAnimation.render();
+    const loginResult = await userService.login({ ...loginInfo });
+    if (loginResult) {
       this.hide();
-      Events.login.emit(loginInfo.login);
-      userService.login();
       RouterService.setHash(Constants.Labels.adminCategoriesRoute);
     }
+    this.loaderAnimation.render();
   };
-
-  private async validate(): Promise<boolean> {
-    const { login, password } = (this.component as LoginPage).getLoginData();
-    try {
-      this.loaderAnimation.render();
-      const response = await Api.login(login, password);
-      if (response.ok) {
-        return true;
-      }
-      const error = await response.json();
-      (this.component as LoginPage).showError(error.message);
-    } catch (err) {
-      (this.component as LoginPage).showError(
-        `Server doesn't respond, please check your network connection`
-      );
-    } finally {
-      this.loaderAnimation.remove();
-    }
-    return false;
-  }
 
   private handleLoginShow: () => Promise<void> = async () => {
     this.show();

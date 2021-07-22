@@ -6,7 +6,6 @@ import ErrorMessage from '../components/shared/ErrorMessage';
 import InfoMessage from '../components/shared/InfoMessage';
 
 import Constants from '../util/constants';
-import Events from '../util/Events';
 
 export default class AdminContainerPage extends Component {
   nav: IComponent;

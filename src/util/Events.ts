@@ -59,8 +59,11 @@ const wordRemove = new Signal<IWordCardDTO>();
 const wordUpdate = new Signal<IWordCardUpdateDTO>();
 const adminErrorShow = new Signal<string>();
 const adminMessageShow = new Signal<string>();
+const gameMessageShow = new Signal<string>();
 const gameErrorShow = new Signal<string>();
+const loginErrorShow = new Signal<string>();
 const scrollToEnd = new Signal<void>();
+const unauthorizedAccess = new Signal<void>();
 
 const Events = {
   menuClick,
@@ -101,7 +104,10 @@ const Events = {
   adminErrorShow,
   adminMessageShow,
   gameErrorShow,
+  gameMessageShow,
+  loginErrorShow,
   scrollToEnd,
+  unauthorizedAccess,
 };
 
 export default Events;

@@ -5,6 +5,8 @@ import IComponent from '../components/IComponent';
 import AdminContainerPage from '../pages/AdminContainerPage';
 
 import Events from '../util/Events';
+import userService from '../util/UserService';
+import RouterService from '../util/RouterService';
 
 export default class AdminController extends Controller {
   component: IComponent;
@@ -14,6 +16,7 @@ export default class AdminController extends Controller {
     this.component = new AdminContainerPage(global, rootComponent);
     Events.login.add(this.handleLogin);
     Events.logout.add(this.handleLogout);
+    Events.unauthorizedAccess.add(this.handleUnauthorizedAccess);
     Events.adminErrorShow.add(this.handleShowError);
     Events.adminMessageShow.add(this.handleShowMessage);
   }
@@ -31,6 +34,12 @@ export default class AdminController extends Controller {
   };
 
   private handleLogout: () => Promise<void> = async () => {
+    this.hide();
+    await userService.logout();
+    RouterService.setHash('main');
+  };
+
+  private handleUnauthorizedAccess: () => Promise<void> = async () => {
     this.hide();
   };
 }

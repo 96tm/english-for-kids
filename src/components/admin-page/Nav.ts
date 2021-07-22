@@ -5,7 +5,6 @@ import NavItem from './NavItem';
 
 import Events from '../../util/Events';
 import Constants from '../../util/constants';
-import userService from '../../util/UserService';
 
 export default class Nav extends Component {
   navList: IComponent;
@@ -58,7 +57,6 @@ export default class Nav extends Component {
     const target = event.target as HTMLElement;
     if (target === (this.logoutItem as NavItem).navLink.element) {
       Events.logout.emit();
-      userService.logout();
     }
   };
 
