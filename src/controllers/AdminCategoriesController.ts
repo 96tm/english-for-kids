@@ -43,6 +43,7 @@ export default class AdminCategoriesController extends Controller {
         const categoryCard = (
           this.component as AdminCategoriesPage
         ).getCategoryCard(name);
+        (this.component as AdminCategoriesPage).updateCategories(name, newName);
         (categoryCard as CategoryCard)?.setNormalMode(
           updatedCard.name,
           updatedCard.numberOfWords
@@ -53,9 +54,7 @@ export default class AdminCategoriesController extends Controller {
         Events.adminErrorShow.emit(error.message);
       }
     } catch (err) {
-      Events.adminErrorShow.emit(
-        `Server doesn't respond, please check your network connection`
-      );
+      Events.adminErrorShow.emit(Constants.Labels.noServerResponse);
     } finally {
       this.loaderAnimation.remove();
     }
@@ -117,7 +116,6 @@ export default class AdminCategoriesController extends Controller {
         Events.adminMessageShow.emit('Category removed');
       } else {
         const error: IRESTError = await response.json();
-        console.log(error);
         Events.adminErrorShow.emit(error.message);
       }
     } catch (err) {

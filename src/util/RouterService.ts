@@ -31,7 +31,7 @@ class Router {
       await controller.show();
       Events.routeChange.emit(decodedRoute);
     } else {
-      this.showRoute(Constants.Labels.mainRoute);
+      this.setHash(Constants.Labels.mainRoute);
     }
   }
 

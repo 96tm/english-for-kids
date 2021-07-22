@@ -28,6 +28,11 @@ export default class AdminCategoriesPage extends Component {
     return this.categories[name];
   }
 
+  updateCategories(name: string, newName: string): void {
+    this.categories[newName] = this.categories[name];
+    delete this.categories[name];
+  }
+
   private handleCategoryCardClick: (data: {
     button: CategoryCardButton;
     name: string;
@@ -46,7 +51,6 @@ export default class AdminCategoriesPage extends Component {
         }
         break;
       case CategoryCardButton.save:
-        categoryCard.setNormalMode();
         Events.categoryUpdate.emit({ ...data });
         break;
       case CategoryCardButton.create: {
