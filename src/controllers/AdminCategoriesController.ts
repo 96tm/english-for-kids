@@ -71,14 +71,6 @@ export default class AdminCategoriesController extends Controller {
       scrollTop * Constants.AUTO_SCROLL_VALUE;
   };
 
-  private addEventListeners() {
-    Events.scrollToEnd.add(this.handleScrollToEnd);
-  }
-
-  private removeEventListeners() {
-    Events.scrollToEnd.remove(this.handleScrollToEnd);
-  }
-
   private handleCategoryCreate: (name: string) => Promise<void> = async (
     name
   ) => {
@@ -142,6 +134,14 @@ export default class AdminCategoriesController extends Controller {
       this.loaderAnimation.remove();
     }
     return categories;
+  }
+
+  private addEventListeners() {
+    Events.scrollToEnd.add(this.handleScrollToEnd);
+  }
+
+  private removeEventListeners() {
+    Events.scrollToEnd.remove(this.handleScrollToEnd);
   }
 
   async show(): Promise<void> {

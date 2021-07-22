@@ -32,17 +32,6 @@ export default class AdminWordsController extends Controller {
     Events.wordUpdate.add(this.handleWordUpdate);
   }
 
-  private handleScrollToEnd: () => Promise<void> = async () => {
-    const words = await this.getWords(this.category, this.page + 1);
-    if (words.length) {
-      this.page += 1;
-      (this.component as AdminWordsPage).appendWords(words);
-    }
-    const { scrollTop } = this.global.document.documentElement;
-    this.global.document.documentElement.scrollTop =
-      scrollTop * Constants.AUTO_SCROLL_VALUE;
-  };
-
   private addEventListeners() {
     Events.scrollToEnd.add(this.handleScrollToEnd);
   }
@@ -61,6 +50,21 @@ export default class AdminWordsController extends Controller {
     this.removeEventListeners();
     super.hide();
   }
+
+  async init(category: string, words: ICard[]): Promise<void> {
+    await (this.component as AdminWordsPage).init(category, words);
+  }
+
+  private handleScrollToEnd: () => Promise<void> = async () => {
+    const words = await this.getWords(this.category, this.page + 1);
+    if (words.length) {
+      this.page += 1;
+      (this.component as AdminWordsPage).appendWords(words);
+    }
+    const { scrollTop } = this.global.document.documentElement;
+    this.global.document.documentElement.scrollTop =
+      scrollTop * Constants.AUTO_SCROLL_VALUE;
+  };
 
   private handleRouteChange: (route: string) => Promise<void> = async (
     route
@@ -119,6 +123,10 @@ export default class AdminWordsController extends Controller {
         }
         Events.adminMessageShow.emit(
           Constants.Labels.uploadTimeNotification('Word updated -')
+        );
+        (this.component as AdminWordsPage).updateWords(
+          wordUpdateInfo.word,
+          wordUpdateInfo.newWord as string
         );
         (updatedWordCard as WordCard)?.setModeNormal({
           ...updatedWord,
@@ -190,8 +198,4 @@ export default class AdminWordsController extends Controller {
       this.loaderAnimation.remove();
     }
   };
-
-  async init(category: string, words: ICard[]): Promise<void> {
-    await (this.component as AdminWordsPage).init(category, words);
-  }
 }

@@ -47,6 +47,11 @@ export default class AdminWordsPage extends Component {
     (this.createWordCard as WordCard).setModeAdd();
   }
 
+  updateWords(word: string, newWord: string): void {
+    this.words[newWord] = this.words[word];
+    delete this.words[word];
+  }
+
   getCard(word: string): IComponent | undefined {
     return this.words[word];
   }
