@@ -5,6 +5,7 @@ import Category from '../components/main-page/Category';
 import Constants from '../util/constants';
 
 import Events from '../util/Events';
+import Api from '../util/Api';
 
 export default class MainPage extends Component {
   categories: IComponent[] = [];
@@ -14,9 +15,9 @@ export default class MainPage extends Component {
   }
 
   async init(): Promise<void> {
-    const categories = await fetch(`${Constants.HOMEPAGE}/public/cards.json`, {
-      headers: { 'Content-Type': 'application/json' },
-    }).then((response) => response.json());
+    const categories = await Api.getCategories().then((response) =>
+      response.json()
+    );
     Object.keys(categories).forEach((key) => {
       const randomIndex = Math.floor(Math.random() * categories[key].length);
       const { image } = categories[key][randomIndex];

@@ -7,6 +7,7 @@ import GameStatus from './GameStatus';
 import Events from '../util/Events';
 
 import Constants from '../util/constants';
+import Api from '../util/Api';
 
 export default class GameModel {
   static START_DELAY = 1000;
@@ -68,9 +69,9 @@ export default class GameModel {
   }
 
   async setCategories(): Promise<string[]> {
-    const categories = await fetch(`${Constants.HOMEPAGE}/public/cards.json`, {
-      headers: { 'Content-Type': 'application/json' },
-    }).then((response) => response.json());
+    const categories = await Api.getCategories().then((response) =>
+      response.json()
+    );
     Object.keys(categories).forEach((category) => {
       this.categories.push(category);
     });

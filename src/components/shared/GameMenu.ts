@@ -6,6 +6,7 @@ import Constants from '../../util/constants';
 import AttributeRecord from '../../util/AttributeRecord';
 
 import Events from '../../util/Events';
+import Api from '../../util/Api';
 
 export default class GameMenu extends Component {
   menuTitle: IComponent;
@@ -70,9 +71,9 @@ export default class GameMenu extends Component {
   }
 
   async init(): Promise<void> {
-    const categories = await fetch(`${Constants.HOMEPAGE}/public/cards.json`, {
-      headers: { 'Content-Type': 'application/json' },
-    }).then((response) => response.json());
+    const categories = await Api.getCategories().then((response) =>
+      response.json()
+    );
     Object.keys(categories).forEach((key) => {
       const action = this.append('a', [Constants.CSSClasses.gameMenuLink], {
         href: '#game',
