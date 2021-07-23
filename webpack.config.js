@@ -59,6 +59,7 @@ module.exports = ({ development }) => ({
     new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
     new HtmlWebpackPlugin({
       template: './src/index.html',
+      favicon: './src/assets/icons/favicon.png',
     }),
     new CopyPlugin({
       patterns: [
