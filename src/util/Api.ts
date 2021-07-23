@@ -38,13 +38,6 @@ export default class Api {
     });
   }
 
-  static async logout(): Promise<Response> {
-    return Api.fetchWithTimeout(`${Constants.SERVER_URL}/logout`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    });
-  }
-
   static async getCategories(page = 1, limit = 0): Promise<Response> {
     return Api.fetchWithTimeout(
       `${Constants.SERVER_URL}/categories?page=${page}&limit=${limit}`,

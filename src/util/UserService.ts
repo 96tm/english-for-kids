@@ -32,14 +32,8 @@ class UserService {
   }
 
   async logout(): Promise<void> {
-    try {
-      await Api.logout();
-      Events.gameMessageShow.emit('Logged out');
-    } catch (err) {
-      Events.gameErrorShow.emit(Constants.Labels.noServerResponse);
-    } finally {
-      this.removeAuthData();
-    }
+    Events.gameMessageShow.emit('Logged out');
+    this.removeAuthData();
   }
 }
 const userService = new UserService();
