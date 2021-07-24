@@ -7,12 +7,14 @@ import StatisticsController from './controllers/StatisticsController';
 import Constants from './util/constants';
 import StatsService from './util/StatsService';
 import RouterService from './util/RouterService';
+import H1 from './components/shared/H1';
 
 (async () => {
   const global = window;
   const statsService = new StatsService(global);
   await statsService.init();
   const root = new Component(global, null, 'div', [Constants.CSS_CLASSES.root]);
+  const h1 = new H1(global, root, Constants.LABELS.h1);
   const containerController = new ContainerController(global, root);
   await containerController.init();
 

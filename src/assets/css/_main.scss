@@ -17,6 +17,12 @@ body,
   height: 100%;
 }
 
+.h1 {
+  position: absolute;
+  font-size: 1px;
+  left: -9999px;
+}
+
 .container {
   position: absolute;
   width: 100%;

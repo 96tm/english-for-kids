@@ -9,6 +9,7 @@ const FINISH_SCREEN_DURATION = 2000;
 const HOMEPAGE = '';
 
 const CSS_CLASSES = {
+  h1: 'h1',
   root: 'root',
   container: 'container',
   innerContainer: 'inner-container',
@@ -111,6 +112,7 @@ const CSS_CLASSES = {
 } as const;
 
 const LABELS = {
+  h1: 'English for kids',
   train: 'Train',
   play: 'Play',
   login: 'Login',
