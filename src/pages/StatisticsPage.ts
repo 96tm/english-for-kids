@@ -4,10 +4,8 @@ import StatsTable from '../components/stats-page/StatsTable';
 
 import IWordStat from '../models/IWordStat';
 
-import Constants from '../util/constants';
-
 import Events from '../util/Events';
-
+import Constants from '../util/constants';
 import StatsService from '../util/StatsService';
 
 export default class StatisticsPage extends Component {
@@ -56,8 +54,7 @@ export default class StatisticsPage extends Component {
   };
 
   private handleResetButtonClick: () => void = () => {
-    Events.statsCleared.emit();
-    (this.table as StatsTable).tableBody.element.innerHTML = '';
+    Events.statsButtonResetClick.emit();
   };
 
   renderOneWord(wordStat: IWordStat, category = ''): IComponent {

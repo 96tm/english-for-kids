@@ -18,6 +18,8 @@ export default class Category extends Component {
     image: string
   ) {
     super(global, rootComponent, 'div', [Constants.CSSClasses.categoryWrap]);
+    this.name = name;
+    this.imagePath = `${Constants.HOMEPAGE}/public/${image}`;
     this.link = new Component(
       global,
       this,
@@ -36,13 +38,11 @@ export default class Category extends Component {
       this.categoryImageWrap,
       'img',
       [Constants.CSSClasses.categoryImage],
-      { src: image, alt: `Category: ${name}` }
+      { src: this.imagePath, alt: `Category: ${name}` }
     );
     this.categoryText = new Component(global, this.categoryImageWrap, 'div', [
       Constants.CSSClasses.categoryText,
     ]);
     this.categoryText.textContent = name;
-    this.name = name;
-    this.imagePath = image;
   }
 }

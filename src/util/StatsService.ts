@@ -1,21 +1,21 @@
-import Events from './Events';
-
+import ICard from '../models/ICard';
 import IWordStatDTO from '../models/IWordStatDTO';
-import StatsObject from '../models/StatsObject';
 import WordStat from '../models/WordStat';
+import StatsObject from '../models/StatsObject';
 import StatsParameter from '../models/StatsParameter';
 
+import Api from './Api';
+import Events from './Events';
 import Constants from './constants';
 
 export default class StatsService {
-  storage: StatsObject;
+  storage: StatsObject | null = null;
 
   constructor(private global: Window) {
-    this.storage = this.getStorage();
     Events.statsTrainingClick.add(this.handleStatsTrainingClick);
     Events.statsRightClick.add(this.handleStatsRightClick);
     Events.statsWrongClick.add(this.handleStatsWrongClick);
-    Events.statsCleared.add(this.handleStatsCleared);
+    Events.statsButtonResetClick.add(this.handleStatsButtonResetClick);
   }
 
   private handleStatsRightClick: ({
@@ -84,21 +84,20 @@ export default class StatsService {
     { category, word, translation, image, audioSrc }: IWordStatDTO,
     parameter: StatsParameter
   ) => void = ({ category, word, translation, image, audioSrc }, parameter) => {
-    if (!this.storage[category]) {
-      this.storage[category] = [];
+    if (!this.storage?.[category]) {
+      (this.storage as StatsObject)[category] = [];
     }
-    const words = this.storage[category];
+    const words = (this.storage as StatsObject)[category];
     const wordToUpdate = words.find((foundWord) => foundWord.word === word);
     if (wordToUpdate) {
       wordToUpdate[parameter] += 1;
     } else {
-      const newWord = new WordStat(
-        category,
+      const newWord = new WordStat(category, {
         word,
         translation,
         image,
-        audioSrc
-      );
+        audioSrc,
+      });
       newWord[parameter] = 1;
       words.push(newWord);
     }
@@ -112,22 +111,39 @@ export default class StatsService {
     );
   }
 
-  private handleStatsCleared: () => void = () => {
+  private handleStatsButtonResetClick: () => void = async () => {
     this.global.localStorage.removeItem(Constants.Labels.statsStorage);
-    this.storage = this.getStorage();
+    this.storage = await this.getStorage();
+    Events.statsCleared.emit();
   };
 
-  private getStorage(): StatsObject {
+  async init(): Promise<void> {
+    this.storage = await this.getStorage();
+  }
+
+  async getStorage(): Promise<StatsObject> {
     const storage = this.global.localStorage.getItem(
       Constants.Labels.statsStorage
     );
     if (storage) {
       return JSON.parse(storage);
     }
+    const newStorage: StatsObject = {};
+    const categories = await Api.getCategories().then((response) =>
+      response.json()
+    );
+    Object.keys(categories).forEach((category) => {
+      newStorage[category] = [];
+      const words: Omit<ICard, 'category'>[] = categories[category];
+      words.forEach((word) => {
+        const statsObject = new WordStat(category, { ...word });
+        newStorage[category].push(statsObject);
+      });
+    });
     this.global.localStorage.setItem(
       Constants.Labels.statsStorage,
-      JSON.stringify({})
+      JSON.stringify(newStorage)
     );
-    return {};
+    return newStorage;
   }
 }

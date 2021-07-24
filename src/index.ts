@@ -14,6 +14,7 @@ import StatsService from './util/StatsService';
 (async () => {
   const global = window;
   const statsService = new StatsService(global);
+  await statsService.init();
   const root = new Component(global, null, 'div', [Constants.CSSClasses.root]);
   const containerController = new ContainerController(global, root);
   await containerController.init();
@@ -30,10 +31,10 @@ import StatsService from './util/StatsService';
     global,
     (containerController.component as ContainerPage).contentWrap
   );
-
   const statisticsController = new StatisticsController(
     global,
-    (containerController.component as ContainerPage).contentWrap
+    (containerController.component as ContainerPage).contentWrap,
+    statsService
   );
 
   await RouterService.init({

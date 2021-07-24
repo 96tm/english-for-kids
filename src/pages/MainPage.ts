@@ -27,12 +27,7 @@ export default class MainPage extends Component {
   }
 
   addOneCategory(name: string, image: string): void {
-    const category = new Category(
-      this.global,
-      this,
-      name,
-      `${Constants.HOMEPAGE}/public/${image}`
-    );
+    const category = new Category(this.global, this, name, image);
     this.categories.push(category);
   }
 

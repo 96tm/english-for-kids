@@ -4,15 +4,19 @@ import Constants from '../util/constants';
 
 export default class CardModel implements ICard {
   audio: HTMLAudioElement;
+  image: string;
+  audioSrc: string;
 
   constructor(
     public category: string,
     public word: string,
     public translation: string,
-    public image: string = '',
-    public audioSrc: string = ''
+    image = '',
+    audioSrc = ''
   ) {
-    this.audio = new Audio(`${Constants.HOMEPAGE}/public/${this.audioSrc}`);
+    this.image = `${Constants.HOMEPAGE}/public/${image}`;
+    this.audioSrc = `${Constants.HOMEPAGE}/public/${audioSrc}`;
+    this.audio = new Audio(this.audioSrc);
   }
 
   async playCardAudio(): Promise<void> {

@@ -1,20 +1,13 @@
 import ICard from './ICard';
 import CardModel from './CardModel';
 
-import Constants from '../util/constants';
 import Api from '../util/Api';
 
 export default class BoardModel {
   cards: ICard[] = [];
 
   addOneCard({ category, word, translation, image, audioSrc }: ICard): void {
-    const card = new CardModel(
-      category,
-      word,
-      translation,
-      `${Constants.HOMEPAGE}/public/${image}`,
-      audioSrc
-    );
+    const card = new CardModel(category, word, translation, image, audioSrc);
     this.cards.push(card);
   }
 

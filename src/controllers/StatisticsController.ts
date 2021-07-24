@@ -4,41 +4,44 @@ import IComponent from '../components/IComponent';
 import StatisticsPage from '../pages/StatisticsPage';
 import StatsTable from '../components/stats-page/StatsTable';
 
-import Constants from '../util/constants';
-
-import StatsObject from '../models/StatsObject';
+import ICard from '../models/ICard';
 import SortType from '../models/SortType';
 import SortOrder from '../models/SortOrder';
 import IWordStat from '../models/IWordStat';
-import ICard from '../models/ICard';
 import CardModel from '../models/CardModel';
+import StatsObject from '../models/StatsObject';
 
 import Events from '../util/Events';
-
-import RouterService from '../util/RouterService';
-
+import Constants from '../util/constants';
 import StatsService from '../util/StatsService';
+import RouterService from '../util/RouterService';
 
 export default class StatisticsController extends Controller {
   component: IComponent;
   sortType = SortType.category;
   sortOrder = SortOrder.ascending;
 
-  constructor(private global: Window, rootComponent: IComponent) {
+  constructor(
+    private global: Window,
+    private rootComponent: IComponent,
+    private statsService: StatsService
+  ) {
     super();
     this.component = new StatisticsPage(global, rootComponent);
     Events.statsTableSorted.add(this.handleStatsTableSorted);
     Events.statsButtonRepeatClick.add(this.handleStatsButtonRepeatClick);
+    Events.statsCleared.add(this.showSortedTable);
   }
 
-  private handleStatsButtonRepeatClick: () => void = () => {
+  private handleStatsButtonRepeatClick: () => Promise<void> = async () => {
     RouterService.setHash(Constants.Labels.gameRoute);
-    Events.statsRepeatDifficult.emit(this.getDifficultWords());
+    const difficultWords = await this.getDifficultWords();
+    Events.statsRepeatDifficult.emit(difficultWords);
   };
 
-  getDifficultWords(): ICard[] {
+  async getDifficultWords(): Promise<ICard[]> {
     const words = this.sortStatsByParameter(
-      this.getAllWords(),
+      await this.getAllWords(),
       SortType.percentage
     );
     const difficultWords: ICard[] = [];
@@ -59,46 +62,36 @@ export default class StatisticsController extends Controller {
   private handleStatsTableSorted: ([sortType, sortOrder]: [
     SortType,
     SortOrder
-  ]) => void = ([sortType, sortOrder]) => {
+  ]) => Promise<void> = async ([sortType, sortOrder]) => {
     [this.sortType, this.sortOrder] = [sortType, sortOrder];
-    this.showSortedTable();
+    await this.showSortedTable();
   };
 
-  showSortedTable(): void {
+  showSortedTable: () => Promise<void> = async () => {
     const page = this.component as StatisticsPage;
     (page.table as StatsTable).tableBody.element.innerHTML = '';
-    const stats = this.global.localStorage.getItem(
-      Constants.Labels.statsStorage
-    );
-    if (stats) {
-      let statsObject: StatsObject = JSON.parse(stats);
-      if (this.sortType === SortType.category) {
-        statsObject = this.sortStatsByCategory(statsObject);
-        Object.keys(statsObject).forEach((category) => {
-          const words = statsObject[category];
-          page.renderOneCategory(category, words);
-        });
-      } else {
-        let words = this.getAllWords();
-        words = this.sortStatsByParameter(words);
-        words.forEach((word) => {
-          page.renderOneWord(word, word.category);
-        });
-      }
-    }
-  }
-
-  private getAllWords(): IWordStat[] {
-    let words: IWordStat[] = [];
-    const stats = this.global.localStorage.getItem(
-      Constants.Labels.statsStorage
-    );
-    if (stats) {
-      const statsObject: StatsObject = JSON.parse(stats);
+    let statsObject = await this.statsService.getStorage();
+    if (this.sortType === SortType.category) {
+      statsObject = this.sortStatsByCategory(statsObject);
       Object.keys(statsObject).forEach((category) => {
-        words = words.concat(statsObject[category]);
+        const words = statsObject[category];
+        page.renderOneCategory(category, words);
+      });
+    } else {
+      let words = await this.getAllWords();
+      words = this.sortStatsByParameter(words);
+      words.forEach((word) => {
+        page.renderOneWord(word, word.category);
       });
     }
+  };
+
+  private async getAllWords(): Promise<IWordStat[]> {
+    let words: IWordStat[] = [];
+    const statsObject = await this.statsService.getStorage();
+    Object.keys(statsObject).forEach((category) => {
+      words = words.concat(statsObject[category]);
+    });
     return words;
   }
 
@@ -143,8 +136,8 @@ export default class StatisticsController extends Controller {
     });
   }
 
-  show(): void {
+  async show(): Promise<void> {
     super.show();
-    this.showSortedTable();
+    await this.showSortedTable();
   }
 }

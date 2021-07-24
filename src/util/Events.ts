@@ -28,6 +28,7 @@ const statsRightClick = new Signal<IWordStatDTO, void>();
 const statsWrongClick = new Signal<IWordStatDTO, void>();
 const statsCleared = new Signal<void, void>();
 const statsTableSorted = new Signal<[SortType, SortOrder], void>();
+const statsButtonResetClick = new Signal<void, void>();
 const statsButtonRepeatClick = new Signal<void, void>();
 const statsRepeatDifficult = new Signal<ICard[], void>();
 
@@ -54,6 +55,7 @@ const Events = {
   statsWrongClick,
   statsTableSorted,
   statsButtonRepeatClick,
+  statsButtonResetClick,
   statsRepeatDifficult,
 };
 
