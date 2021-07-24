@@ -6,17 +6,17 @@ import SortOrder from '../../models/SortOrder';
 import Events from '../../util/Events';
 
 export default class StatsTable extends Component {
-  table: IComponent;
-  tableBody: IComponent;
-  tableHeadingRow: IComponent;
-  tableHeadingCategory: IComponent;
-  tableHeadingWord: IComponent;
-  tableHeadingTranslation: IComponent;
-  tableHeadingTraining: IComponent;
-  tableHeadingRight: IComponent;
-  tableHeadingWrong: IComponent;
-  tableHeadingPercentage: IComponent;
-  headingItems: IComponent[];
+  table: Component;
+  tableBody: Component;
+  tableHeadingRow: Component;
+  tableHeadingCategory: Component;
+  tableHeadingWord: Component;
+  tableHeadingTranslation: Component;
+  tableHeadingTraining: Component;
+  tableHeadingRight: Component;
+  tableHeadingWrong: Component;
+  tableHeadingPercentage: Component;
+  headingItems: Component[];
 
   constructor(global: Window, rootElement: IComponent) {
     super(global, rootElement, 'div', [Constants.CSS_CLASSES.statsTableWrap]);
@@ -41,7 +41,12 @@ export default class StatsTable extends Component {
     this.addEventListeners();
   }
 
-  private initHeadingStatsComponents(): IComponent[] {
+  private initHeadingStatsComponents(): [
+    Component,
+    Component,
+    Component,
+    Component
+  ] {
     const tableHeadingTraining = this.createTableHeadingItem(
       SortType.training,
       Constants.LABELS.training,
@@ -70,7 +75,7 @@ export default class StatsTable extends Component {
     ];
   }
 
-  private initHeadingWordComponents(): IComponent[] {
+  private initHeadingWordComponents(): [Component, Component, Component] {
     const tableHeadingCategory = this.createTableHeadingItem(
       SortType.category,
       Constants.LABELS.category,
@@ -87,7 +92,7 @@ export default class StatsTable extends Component {
     return [tableHeadingCategory, tableHeadingWord, tableHeadingTranslation];
   }
 
-  private initHeadingItems(): IComponent[] {
+  private initHeadingItems(): Component[] {
     return [
       this.tableHeadingCategory,
       this.tableHeadingWord,
@@ -103,7 +108,7 @@ export default class StatsTable extends Component {
     sortType: SortType,
     text: string,
     classes: string[] = []
-  ): IComponent {
+  ): Component {
     const item = new Component(
       this.global,
       this.tableHeadingRow,

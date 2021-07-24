@@ -6,17 +6,17 @@ import ICard from '../../models/ICard';
 import Events from '../../util/Events';
 
 export default class Card extends Component {
-  inner: IComponent;
-  front: IComponent;
-  back: IComponent;
-  overlay: IComponent;
-  backText: IComponent;
-  frontText: IComponent;
-  frontImage: IComponent;
-  backImage: IComponent;
-  buttonTurn: IComponent;
-  frontTextPanel: IComponent;
-  backTextPanel: IComponent;
+  inner: Component;
+  front: Component;
+  back: Component;
+  overlay: Component;
+  backText: Component;
+  frontText: Component;
+  frontImage: Component;
+  backImage: Component;
+  buttonTurn: Component;
+  frontTextPanel: Component;
+  backTextPanel: Component;
   category: string;
   word: string;
   translation: string;
@@ -52,7 +52,7 @@ export default class Card extends Component {
     this.addEventListeners();
   }
 
-  private initFront(): [IComponent, IComponent, IComponent, IComponent] {
+  private initFront(): [Component, Component, Component, Component] {
     const front = new Component(this.global, this.inner, 'div', [
       Constants.CSS_CLASSES.cardFront,
     ]);
@@ -73,7 +73,7 @@ export default class Card extends Component {
     return [front, frontImage, frontTextPanel, frontText];
   }
 
-  private initBack(): [IComponent, IComponent, IComponent, IComponent] {
+  private initBack(): [Component, Component, Component, Component] {
     const back = new Component(this.global, this.inner, 'div', [
       Constants.CSS_CLASSES.cardBack,
     ]);

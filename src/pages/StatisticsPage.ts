@@ -11,7 +11,7 @@ import StatsService from '../util/StatsService';
 export default class StatisticsPage extends Component {
   resetButton: IComponent;
   repeatButton: IComponent;
-  table: IComponent;
+  table: StatsTable;
 
   constructor(global: Window, rootComponent: IComponent) {
     super(global, rootComponent, 'div', [Constants.CSS_CLASSES.statsPageWrap]);
@@ -58,12 +58,9 @@ export default class StatisticsPage extends Component {
   };
 
   renderOneWord(wordStat: IWordStat, category = ''): IComponent {
-    const row = new Component(
-      this.global,
-      (this.table as StatsTable).tableBody,
-      'tr',
-      [Constants.CSS_CLASSES.statsTableWordItem]
-    );
+    const row = new Component(this.global, this.table.tableBody, 'tr', [
+      Constants.CSS_CLASSES.statsTableWordItem,
+    ]);
     const percentage = StatsService.calcRightPercentage(
       wordStat.right,
       wordStat.wrong

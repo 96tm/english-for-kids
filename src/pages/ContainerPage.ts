@@ -10,13 +10,13 @@ import Constants from '../util/constants';
 import Events from '../util/Events';
 
 export default class ContainerPage extends Component {
-  gameToggleCheckbox: IComponent;
-  gameToggleButton: IComponent;
+  gameToggleCheckbox: Component;
+  gameToggleButton: GameMenuToggleButton;
   gameMenu: GameMenu;
-  gameHeader: IComponent;
-  contentWrap: IComponent;
-  footer: IComponent;
-  innerContainer: IComponent;
+  gameHeader: GameHeader;
+  contentWrap: Component;
+  footer: GameFooter;
+  innerContainer: Component;
 
   constructor(global: Window, rootView: IComponent | null) {
     super(global, rootView, 'div', [Constants.CSS_CLASSES.container]);

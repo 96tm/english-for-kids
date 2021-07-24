@@ -8,7 +8,7 @@ import Events from '../util/Events';
 import Api from '../util/Api';
 
 export default class MainPage extends Component {
-  categories: IComponent[] = [];
+  categories: Category[] = [];
 
   constructor(global: Window, rootView: IComponent | null) {
     super(global, rootView, 'div', [Constants.CSS_CLASSES.categoriesWrap]);

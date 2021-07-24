@@ -5,7 +5,7 @@ import IComponent from '../components/IComponent';
 import MainPage from '../pages/MainPage';
 
 export default class MainPageController extends Controller {
-  component: IComponent;
+  component: MainPage;
 
   constructor(global: Window, rootComponent: IComponent | null) {
     super();
@@ -13,6 +13,6 @@ export default class MainPageController extends Controller {
   }
 
   async init(): Promise<void> {
-    await (this.component as MainPage).init();
+    await this.component.init();
   }
 }

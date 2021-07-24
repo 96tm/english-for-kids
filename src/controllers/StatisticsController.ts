@@ -2,7 +2,6 @@ import Controller from './Controller';
 
 import IComponent from '../components/IComponent';
 import StatisticsPage from '../pages/StatisticsPage';
-import StatsTable from '../components/stats-page/StatsTable';
 
 import ICard from '../models/ICard';
 import SortType from '../models/SortType';
@@ -17,7 +16,7 @@ import StatsService from '../util/StatsService';
 import RouterService from '../util/RouterService';
 
 export default class StatisticsController extends Controller {
-  component: IComponent;
+  component: StatisticsPage;
   sortType = SortType.category;
   sortOrder = SortOrder.ascending;
 
@@ -68,20 +67,19 @@ export default class StatisticsController extends Controller {
   };
 
   showSortedTable: () => Promise<void> = async () => {
-    const page = this.component as StatisticsPage;
-    (page.table as StatsTable).tableBody.element.innerHTML = '';
+    this.component.table.tableBody.element.innerHTML = '';
     let statsObject = await this.statsService.getStorage();
     if (this.sortType === SortType.category) {
       statsObject = this.sortStatsByCategory(statsObject);
       Object.keys(statsObject).forEach((category) => {
         const words = statsObject[category];
-        page.renderOneCategory(category, words);
+        this.component.renderOneCategory(category, words);
       });
     } else {
       let words = await this.getAllWords();
       words = this.sortStatsByParameter(words);
       words.forEach((word) => {
-        page.renderOneWord(word, word.category);
+        this.component.renderOneWord(word, word.category);
       });
     }
   };

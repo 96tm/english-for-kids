@@ -8,8 +8,8 @@ import Constants from '../../util/constants';
 import Events from '../../util/Events';
 
 export default class GameHeader extends Component {
-  headerScore: IComponent;
-  modeButton: IComponent;
+  headerScore: GameHeaderScore;
+  modeButton: GameHeaderModeButton;
   heading: IComponent;
 
   constructor(global: Window, rootComponent: IComponent) {

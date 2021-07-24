@@ -1,17 +1,13 @@
 import Controller from './Controller';
-
 import IComponent from '../components/IComponent';
-import ContainerPage from '../pages/ContainerPage';
 import FinishScreen from '../components/game-page/FinishScreen';
-
+import ContainerPage from '../pages/ContainerPage';
 import Events from '../util/Events';
-
 import Constants from '../util/constants';
-
 import IGameFinishedRecord from '../models/IGameFinishedRecord';
 
 export default class ContainerController extends Controller {
-  component: IComponent;
+  component: ContainerPage;
 
   constructor(private global: Window, rootComponent: IComponent | null) {
     super();
@@ -21,12 +17,12 @@ export default class ContainerController extends Controller {
   }
 
   private handleMenuClick: (menuItem: string) => void = (menuItem) => {
-    const { gameMenu } = this.component as ContainerPage;
+    const { gameMenu } = this.component;
     gameMenu.setActiveMenuItem(menuItem);
   };
 
   async init(): Promise<void> {
-    ((await this.component) as ContainerPage).init();
+    await this.component.init();
   }
 
   showFinishScreen: ({ message, isWin }: IGameFinishedRecord) => Promise<void> =

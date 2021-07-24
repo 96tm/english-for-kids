@@ -3,11 +3,10 @@ import GameMode from './GameMode';
 import CardModel from './CardModel';
 import ICard from './ICard';
 import GameStatus from './GameStatus';
-
-import Events from '../util/Events';
-
-import Constants from '../util/constants';
+import Card from '../components/game-page/Card';
 import Api from '../util/Api';
+import Events from '../util/Events';
+import Constants from '../util/constants';
 
 export default class GameModel {
   static START_DELAY = 1000;
@@ -17,7 +16,7 @@ export default class GameModel {
   status: GameStatus = GameStatus.inactive;
   categories: string[] = [];
   activeCategory = '';
-  currentCard?: ICard;
+  currentCard?: Card;
   currentIndex = 0;
   numberOfRightGuesses = 0;
   numberOfGuesses = 0;

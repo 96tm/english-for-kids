@@ -6,8 +6,8 @@ import Constants from '../../util/constants';
 import AttributeRecord from '../../util/AttributeRecord';
 
 export default class GameFooter extends Component {
-  footerItems: IComponent;
-  items: IComponent[] = [];
+  footerItems: Component;
+  items: Component[] = [];
 
   constructor(global: Window, rootComponent: IComponent) {
     super(global, rootComponent, 'div', [Constants.CSS_CLASSES.footer]);
@@ -56,8 +56,12 @@ export default class GameFooter extends Component {
     tagName: string,
     classList: string[],
     attributes: AttributeRecord
-  ): IComponent {
-    const item = this.footerItems.append(tagName, classList, attributes);
+  ): Component {
+    const item = this.footerItems.append(
+      tagName,
+      classList,
+      attributes
+    ) as Component;
     this.items.push(item);
     return item;
   }

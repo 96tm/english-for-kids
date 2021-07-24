@@ -1,9 +1,6 @@
 import Controller from './Controller';
 
 import IComponent from '../components/IComponent';
-import GameBoard from '../components/game-page/GameBoard';
-import Card from '../components/game-page/Card';
-import GameButton from '../components/game-page/GameButton';
 import GamePage from '../pages/GamePage';
 
 import Events from '../util/Events';
@@ -18,7 +15,7 @@ import Constants from '../util/constants';
 import RouterService from '../util/RouterService';
 
 export default class GameController extends Controller {
-  component: IComponent;
+  component: GamePage;
   gameModel: GameModel;
 
   constructor(global: Window, rootComponent: IComponent) {
@@ -49,7 +46,7 @@ export default class GameController extends Controller {
   };
 
   private handleRepeatDifficult: (cards: ICard[]) => void = async (cards) => {
-    (this.component as GamePage).addCards(cards);
+    this.component.addCards(cards);
     this.gameModel.loadDifficult(cards);
   };
 
@@ -74,7 +71,7 @@ export default class GameController extends Controller {
     category
   ) => {
     const cards = await this.gameModel.setActiveCategory(category);
-    (this.component as GamePage).addCards(cards);
+    this.component.addCards(cards);
   };
 
   private handleCardClick: (word: string) => void = async (word) => {
@@ -86,11 +83,9 @@ export default class GameController extends Controller {
       await this.gameModel.playCardAudio(word);
     } else if (this.gameModel.status === GameStatus.active) {
       this.gameModel.numberOfGuesses += 1;
-      const currentWordInfo = (this.gameModel as GameModel).getCurrentCard();
+      const currentWordInfo = this.gameModel.getCurrentCard();
       if (this.checkWord(word)) {
-        ((this.component as GamePage).gameBoard as GameBoard)
-          .getCard(word)
-          .markAsRight();
+        this.component.gameBoard.getCard(word).markAsRight();
         Events.statsRightClick.emit({
           ...currentWordInfo,
         });
@@ -122,13 +117,13 @@ export default class GameController extends Controller {
   }
 
   private handleGameButtonClick: () => Promise<void> = async () => {
-    ((this.component as GamePage).gameButton as GameButton).disable();
+    this.component.gameButton.disable();
     if (this.gameModel.status === GameStatus.inactive) {
       await this.gameModel.start();
-      ((this.component as GamePage).gameButton as GameButton).enable();
+      this.component.gameButton.enable();
     } else {
       await this.gameModel.repeat();
-      ((this.component as GamePage).gameButton as GameButton).enable();
+      this.component.gameButton.enable();
     }
   };
 
@@ -146,20 +141,19 @@ export default class GameController extends Controller {
   };
 
   private setCardComponents: (mode: GameMode) => void = (mode) => {
-    const gamePage = this.component as GamePage;
-    const board = gamePage.gameBoard as GameBoard;
+    const board = this.component.gameBoard;
     if (mode === GameMode.play) {
       if (board.cards.length) {
-        (gamePage.gameButton as GameButton).show();
+        this.component.gameButton.show();
       }
-      (gamePage.gameButton as GameButton).setButtonStart();
-      (board.cards as Card[]).forEach((card) => {
+      this.component.gameButton.setButtonStart();
+      board.cards.forEach((card) => {
         card.setPlayMode();
       });
     } else {
-      (gamePage.gameButton as GameButton).hide();
-      (gamePage.gameButton as GameButton).setButtonRepeat();
-      (board.cards as Card[]).forEach((card) => {
+      this.component.gameButton.hide();
+      this.component.gameButton.setButtonRepeat();
+      board.cards.forEach((card) => {
         card.setTrainMode();
       });
     }
