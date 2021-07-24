@@ -34,7 +34,7 @@ export default class StatisticsController extends Controller {
   }
 
   private handleStatsButtonRepeatClick: () => Promise<void> = async () => {
-    RouterService.setHash(Constants.Labels.gameRoute);
+    RouterService.setHash(Constants.LABELS.gameRoute);
     const difficultWords = await this.getDifficultWords();
     Events.statsRepeatDifficult.emit(difficultWords);
   };

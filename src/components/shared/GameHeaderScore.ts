@@ -8,7 +8,7 @@ import Events from '../../util/Events';
 export default class GameHeaderScore extends Component {
   constructor(global: Window, rootComponent: IComponent) {
     super(global, rootComponent, 'div', [
-      Constants.CSSClasses.gameHeaderScoreWrap,
+      Constants.CSS_CLASSES.gameHeaderScoreWrap,
     ]);
     Events.cardGuess.add(this.handleCardGuess);
   }
@@ -23,12 +23,12 @@ export default class GameHeaderScore extends Component {
 
   addStarRight: () => void = () => {
     this.append('div', [
-      Constants.CSSClasses.gameHeaderScoreStar,
-      Constants.CSSClasses.checked,
+      Constants.CSS_CLASSES.gameHeaderScoreStar,
+      Constants.CSS_CLASSES.checked,
     ]);
   };
 
   addStarWrong: () => void = () => {
-    this.append('div', [Constants.CSSClasses.gameHeaderScoreStar]);
+    this.append('div', [Constants.CSS_CLASSES.gameHeaderScoreStar]);
   };
 }

@@ -13,9 +13,9 @@ export default class GameHeader extends Component {
   heading: IComponent;
 
   constructor(global: Window, rootComponent: IComponent) {
-    super(global, rootComponent, 'header', [Constants.CSSClasses.gameHeader]);
+    super(global, rootComponent, 'header', [Constants.CSS_CLASSES.gameHeader]);
     this.heading = new Component(global, this, 'div', [
-      Constants.CSSClasses.gameHeaderHeading,
+      Constants.CSS_CLASSES.gameHeaderHeading,
     ]);
     this.headerScore = new GameHeaderScore(global, this);
     this.modeButton = new GameHeaderModeButton(global, this);
@@ -26,7 +26,7 @@ export default class GameHeader extends Component {
   }
 
   private handleRepeatDifficult: () => void = () => {
-    this.heading.textContent = Constants.Labels.statsRepeatHeading;
+    this.heading.textContent = Constants.LABELS.statsRepeatHeading;
   };
 
   private handleMenuClick: (category: string) => void = (category) => {
@@ -38,14 +38,14 @@ export default class GameHeader extends Component {
   };
 
   private handleRouteChange: (route: string) => void = (route) => {
-    if (route === Constants.Labels.mainRoute) {
-      this.heading.textContent = Constants.Labels.mainPageHeading;
+    if (route === Constants.LABELS.mainRoute) {
+      this.heading.textContent = Constants.LABELS.mainPageHeading;
     }
-    if (route === Constants.Labels.statsRoute) {
-      this.modeButton.element.classList.add(Constants.CSSClasses.invisible);
-      this.heading.textContent = Constants.Labels.stats;
+    if (route === Constants.LABELS.statsRoute) {
+      this.modeButton.element.classList.add(Constants.CSS_CLASSES.invisible);
+      this.heading.textContent = Constants.LABELS.stats;
     } else {
-      this.modeButton.element.classList.remove(Constants.CSSClasses.invisible);
+      this.modeButton.element.classList.remove(Constants.CSS_CLASSES.invisible);
     }
   };
 }

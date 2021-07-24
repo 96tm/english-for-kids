@@ -31,7 +31,7 @@ export default class ContainerController extends Controller {
 
   showFinishScreen: ({ message, isWin }: IGameFinishedRecord) => Promise<void> =
     async ({ message, isWin }) => {
-      this.component.element.classList.add(Constants.CSSClasses.hidden);
+      this.component.element.classList.add(Constants.CSS_CLASSES.hidden);
       const screen = new FinishScreen(
         this.global,
         this.component.rootComponent as IComponent,
@@ -42,6 +42,6 @@ export default class ContainerController extends Controller {
         setTimeout(resolve, Constants.FINISH_SCREEN_DURATION);
       });
       screen.remove();
-      this.component.element.classList.remove(Constants.CSSClasses.hidden);
+      this.component.element.classList.remove(Constants.CSS_CLASSES.hidden);
     };
 }

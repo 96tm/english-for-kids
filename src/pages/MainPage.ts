@@ -11,7 +11,7 @@ export default class MainPage extends Component {
   categories: IComponent[] = [];
 
   constructor(global: Window, rootView: IComponent | null) {
-    super(global, rootView, 'div', [Constants.CSSClasses.categoriesWrap]);
+    super(global, rootView, 'div', [Constants.CSS_CLASSES.categoriesWrap]);
   }
 
   async init(): Promise<void> {
@@ -34,10 +34,10 @@ export default class MainPage extends Component {
   addEventListeners(): void {
     this.element.addEventListener('click', (event) => {
       const target = event.target as HTMLElement;
-      const wrap = target.closest(`.${Constants.CSSClasses.categoryWrap}`);
+      const wrap = target.closest(`.${Constants.CSS_CLASSES.categoryWrap}`);
       if (wrap) {
         const link = wrap.querySelector(
-          `.${Constants.CSSClasses.categoryLink}`
+          `.${Constants.CSS_CLASSES.categoryLink}`
         ) as HTMLElement;
         Events.menuClick.emit(link.dataset.categoryLinkTitle as string);
       }

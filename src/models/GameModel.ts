@@ -98,7 +98,7 @@ export default class GameModel {
         numberOfWrongGuesses === 1 ? '' : 's'
       }`;
     }
-    return Constants.Labels.winMessage;
+    return Constants.LABELS.winMessage;
   }
 
   get isFinished(): boolean {

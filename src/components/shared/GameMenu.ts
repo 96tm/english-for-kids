@@ -19,25 +19,25 @@ export default class GameMenu extends Component {
   menuLinks: IComponent[] = [];
 
   constructor(global: Window, rootComponent: IComponent) {
-    super(global, rootComponent, 'aside', [Constants.CSSClasses.gameMenu]);
+    super(global, rootComponent, 'aside', [Constants.CSS_CLASSES.gameMenu]);
     this.menuItemsWrap = new Component(global, this, 'div', [
-      Constants.CSSClasses.gameMenuItemsWrap,
+      Constants.CSS_CLASSES.gameMenuItemsWrap,
     ]);
     this.menuTitle = this.initMenuTitle();
     this.menuStats = this.initMenuStats();
     this.activeItem = this.menuTitle;
-    this.activeItem.element.classList.add(Constants.CSSClasses.active);
+    this.activeItem.element.classList.add(Constants.CSS_CLASSES.active);
     this.menuList = new Component(global, this.menuItemsWrap, 'ul', [
-      Constants.CSSClasses.gameMenuList,
+      Constants.CSS_CLASSES.gameMenuList,
     ]);
     this.loginButton = new Component(
       global,
       this.menuItemsWrap,
       'a',
-      [Constants.CSSClasses.gameMenuLogin],
+      [Constants.CSS_CLASSES.gameMenuLogin],
       { href: '' }
     );
-    this.loginButton.textContent = Constants.Labels.login;
+    this.loginButton.textContent = Constants.LABELS.login;
     this.menuLinks.push(this.menuTitle, this.menuStats);
     this.addEventListeners();
   }
@@ -47,10 +47,10 @@ export default class GameMenu extends Component {
       this.global,
       this.menuItemsWrap,
       'a',
-      [Constants.CSSClasses.gameMenuStats, Constants.CSSClasses.gameMenuLink],
-      { href: '#stats', 'data-menu-link-title': Constants.Labels.stats }
+      [Constants.CSS_CLASSES.gameMenuStats, Constants.CSS_CLASSES.gameMenuLink],
+      { href: '#stats', 'data-menu-link-title': Constants.LABELS.stats }
     );
-    menuStats.textContent = Constants.Labels.stats;
+    menuStats.textContent = Constants.LABELS.stats;
     return menuStats;
   }
 
@@ -60,13 +60,13 @@ export default class GameMenu extends Component {
       this.menuItemsWrap,
       'a',
       [
-        Constants.CSSClasses.gameMenuTitle,
-        Constants.CSSClasses.gameMenuLink,
-        Constants.CSSClasses.active,
+        Constants.CSS_CLASSES.gameMenuTitle,
+        Constants.CSS_CLASSES.gameMenuLink,
+        Constants.CSS_CLASSES.active,
       ],
-      { href: '#main', 'data-menu-link-title': Constants.Labels.mainMenu }
+      { href: '#main', 'data-menu-link-title': Constants.LABELS.mainMenu }
     );
-    menuTitle.textContent = Constants.Labels.mainMenu;
+    menuTitle.textContent = Constants.LABELS.mainMenu;
     return menuTitle;
   }
 
@@ -75,7 +75,7 @@ export default class GameMenu extends Component {
       response.json()
     );
     Object.keys(categories).forEach((key) => {
-      const action = this.append('a', [Constants.CSSClasses.gameMenuLink], {
+      const action = this.append('a', [Constants.CSS_CLASSES.gameMenuLink], {
         href: '#game',
         'data-menu-link-title': key,
       });
@@ -89,36 +89,36 @@ export default class GameMenu extends Component {
 
   private handleMenuClick: (event: MouseEvent) => void = (event) => {
     const target = event.target as HTMLElement;
-    if (target.classList.contains(Constants.CSSClasses.gameMenuLink)) {
+    if (target.classList.contains(Constants.CSS_CLASSES.gameMenuLink)) {
       const menuLinkTitle = target.dataset.menuLinkTitle as string;
       if (
-        target.classList.contains(Constants.CSSClasses.gameMenuTitle) ||
-        target.classList.contains(Constants.CSSClasses.gameMenuStats)
+        target.classList.contains(Constants.CSS_CLASSES.gameMenuTitle) ||
+        target.classList.contains(Constants.CSS_CLASSES.gameMenuStats)
       ) {
         this.setActiveMenuItem(menuLinkTitle);
       } else {
         Events.menuClick.emit(target.dataset.menuLinkTitle as string);
       }
-    } else if (target.classList.contains(Constants.CSSClasses.gameMenuLogin)) {
+    } else if (target.classList.contains(Constants.CSS_CLASSES.gameMenuLogin)) {
       throw Error('Not implemented');
     }
   };
 
   setActiveMenuItem(itemName: string): void {
-    this.activeItem.element.classList.remove(Constants.CSSClasses.active);
+    this.activeItem.element.classList.remove(Constants.CSS_CLASSES.active);
     this.activeItem = this.menuLinks.find(
       (link) => link.element.dataset.menuLinkTitle === itemName
     ) as IComponent;
-    this.activeItem.element.classList.add(Constants.CSSClasses.active);
+    this.activeItem.element.classList.add(Constants.CSS_CLASSES.active);
   }
 
   append(
     tagName = 'a',
-    classList: string[] = [Constants.CSSClasses.gameMenuLink],
+    classList: string[] = [Constants.CSS_CLASSES.gameMenuLink],
     attributes: AttributeRecord = { href: '#game' }
   ): IComponent {
     const li = new Component(this.global, this.menuList, 'li', [
-      Constants.CSSClasses.gameMenuItem,
+      Constants.CSS_CLASSES.gameMenuItem,
     ]);
     const link = li.append(tagName, classList, attributes);
     this.menuItems.push(li);

@@ -28,7 +28,7 @@ export default class Card extends Component {
     rootComponent: IComponent,
     { category, word, translation, image, audioSrc }: ICard
   ) {
-    super(global, rootComponent, 'div', [Constants.CSSClasses.card], {
+    super(global, rootComponent, 'div', [Constants.CSS_CLASSES.card], {
       'data-word': word,
     });
     this.category = category;
@@ -37,37 +37,37 @@ export default class Card extends Component {
     this.image = image;
     this.audioSrc = audioSrc;
     this.inner = new Component(global, this, 'div', [
-      Constants.CSSClasses.cardInner,
+      Constants.CSS_CLASSES.cardInner,
     ]);
     [this.front, this.frontImage, this.frontTextPanel, this.frontText] =
       this.initFront();
     [this.back, this.backImage, this.backTextPanel, this.backText] =
       this.initBack();
     this.overlay = new Component(global, this, 'div', [
-      Constants.CSSClasses.cardOverlay,
+      Constants.CSS_CLASSES.cardOverlay,
     ]);
     this.buttonTurn = new Component(global, this.backTextPanel, 'button', [
-      Constants.CSSClasses.cardButtonTurn,
+      Constants.CSS_CLASSES.cardButtonTurn,
     ]);
     this.addEventListeners();
   }
 
   private initFront(): [IComponent, IComponent, IComponent, IComponent] {
     const front = new Component(this.global, this.inner, 'div', [
-      Constants.CSSClasses.cardFront,
+      Constants.CSS_CLASSES.cardFront,
     ]);
     const frontImage = new Component(
       this.global,
       front,
       'img',
-      [Constants.CSSClasses.cardFrontImage],
-      { src: this.image, alt: Constants.Labels.wordIllustration }
+      [Constants.CSS_CLASSES.cardFrontImage],
+      { src: this.image, alt: Constants.LABELS.wordIllustration }
     );
     const frontTextPanel = new Component(this.global, front, 'div', [
-      Constants.CSSClasses.cardFrontTextPanel,
+      Constants.CSS_CLASSES.cardFrontTextPanel,
     ]);
     const frontText = new Component(this.global, frontTextPanel, 'div', [
-      Constants.CSSClasses.cardFrontText,
+      Constants.CSS_CLASSES.cardFrontText,
     ]);
     frontText.textContent = this.translation;
     return [front, frontImage, frontTextPanel, frontText];
@@ -75,20 +75,20 @@ export default class Card extends Component {
 
   private initBack(): [IComponent, IComponent, IComponent, IComponent] {
     const back = new Component(this.global, this.inner, 'div', [
-      Constants.CSSClasses.cardBack,
+      Constants.CSS_CLASSES.cardBack,
     ]);
     const backImage = new Component(
       this.global,
       back,
       'img',
-      [Constants.CSSClasses.cardBackImage],
-      { src: this.image, alt: Constants.Labels.wordIllustration }
+      [Constants.CSS_CLASSES.cardBackImage],
+      { src: this.image, alt: Constants.LABELS.wordIllustration }
     );
     const backTextPanel = new Component(this.global, back, 'div', [
-      Constants.CSSClasses.cardBackTextPanel,
+      Constants.CSS_CLASSES.cardBackTextPanel,
     ]);
     const backText = new Component(this.global, backTextPanel, 'div', [
-      Constants.CSSClasses.cardBackText,
+      Constants.CSS_CLASSES.cardBackText,
     ]);
     backText.textContent = this.word;
     return [back, backImage, backTextPanel, backText];
@@ -107,7 +107,7 @@ export default class Card extends Component {
   }
 
   private handleMouseLeave: () => void = () => {
-    this.element.classList.remove(Constants.CSSClasses.animated);
+    this.element.classList.remove(Constants.CSS_CLASSES.animated);
   };
 
   private handleCardClick: (event: MouseEvent) => void = (event) => {
@@ -116,7 +116,7 @@ export default class Card extends Component {
       Events.boardDisabled.emit();
       Events.cardClick.emit(this.word);
     } else {
-      this.element.classList.add(Constants.CSSClasses.animated);
+      this.element.classList.add(Constants.CSS_CLASSES.animated);
       Events.statsTrainingClick.emit({
         ...this,
       });
@@ -132,19 +132,19 @@ export default class Card extends Component {
   }
 
   markAsRight(): void {
-    this.element.classList.add(Constants.CSSClasses.cardRight);
+    this.element.classList.add(Constants.CSS_CLASSES.cardRight);
   }
 
   setPlayMode(): void {
-    this.element.classList.remove(Constants.CSSClasses.cardRight);
-    this.element.classList.add(Constants.CSSClasses.cardFull);
+    this.element.classList.remove(Constants.CSS_CLASSES.cardRight);
+    this.element.classList.add(Constants.CSS_CLASSES.cardFull);
     this.removeEventListeners();
     this.addCardClickListener();
   }
 
   setTrainMode(): void {
-    this.element.classList.remove(Constants.CSSClasses.cardRight);
-    this.element.classList.remove(Constants.CSSClasses.cardFull);
+    this.element.classList.remove(Constants.CSS_CLASSES.cardRight);
+    this.element.classList.remove(Constants.CSS_CLASSES.cardFull);
     this.removeCardClickListener();
     this.addEventListeners();
   }

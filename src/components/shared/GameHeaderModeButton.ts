@@ -13,30 +13,30 @@ export default class GameHeaderModeButton extends Component {
 
   constructor(global: Window, rootComponent: IComponent) {
     super(global, rootComponent, 'div', [
-      Constants.CSSClasses.gameHeaderModeWrap,
+      Constants.CSS_CLASSES.gameHeaderModeWrap,
     ]);
     this.checkbox = new Component(
       global,
       this,
       'input',
-      [Constants.CSSClasses.gameHeaderModeCheckbox],
+      [Constants.CSS_CLASSES.gameHeaderModeCheckbox],
       { type: 'checkbox' }
     );
     this.modeButton = new Component(global, this, 'div', [
-      Constants.CSSClasses.gameHeaderMode,
-      Constants.CSSClasses.gameHeaderModeMixin,
+      Constants.CSS_CLASSES.gameHeaderMode,
+      Constants.CSS_CLASSES.gameHeaderModeMixin,
     ]);
 
     const modeTrain = new Component(global, this.modeButton, 'div', [
-      Constants.CSSClasses.gameHeaderModeTrain,
+      Constants.CSS_CLASSES.gameHeaderModeTrain,
     ]);
-    modeTrain.textContent = Constants.Labels.train;
+    modeTrain.textContent = Constants.LABELS.train;
 
     const modePlay = new Component(global, this.modeButton, 'div', [
-      Constants.CSSClasses.gameHeaderModePlay,
+      Constants.CSS_CLASSES.gameHeaderModePlay,
     ]);
-    modePlay.textContent = Constants.Labels.play;
-    this.modeButton.append('div', [Constants.CSSClasses.gameHeaderModeCircle]);
+    modePlay.textContent = Constants.LABELS.play;
+    this.modeButton.append('div', [Constants.CSS_CLASSES.gameHeaderModeCircle]);
     this.addEventListeners();
   }
 

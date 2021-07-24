@@ -14,15 +14,15 @@ export default class StatisticsPage extends Component {
   table: IComponent;
 
   constructor(global: Window, rootComponent: IComponent) {
-    super(global, rootComponent, 'div', [Constants.CSSClasses.statsPageWrap]);
+    super(global, rootComponent, 'div', [Constants.CSS_CLASSES.statsPageWrap]);
     this.resetButton = new Component(global, this, 'button', [
-      Constants.CSSClasses.statsResetButton,
+      Constants.CSS_CLASSES.statsResetButton,
     ]);
-    this.resetButton.textContent = Constants.Labels.statsReset;
+    this.resetButton.textContent = Constants.LABELS.statsReset;
     this.repeatButton = new Component(global, this, 'button', [
-      Constants.CSSClasses.statsRepeatButton,
+      Constants.CSS_CLASSES.statsRepeatButton,
     ]);
-    this.repeatButton.textContent = Constants.Labels.statsRepeat;
+    this.repeatButton.textContent = Constants.LABELS.statsRepeat;
     this.table = new StatsTable(global, this);
     this.addEventListeners();
   }
@@ -62,7 +62,7 @@ export default class StatisticsPage extends Component {
       this.global,
       (this.table as StatsTable).tableBody,
       'tr',
-      [Constants.CSSClasses.statsTableWordItem]
+      [Constants.CSS_CLASSES.statsTableWordItem]
     );
     const percentage = StatsService.calcRightPercentage(
       wordStat.right,
@@ -73,16 +73,16 @@ export default class StatisticsPage extends Component {
       percentageString = percentage.toFixed(2);
     }
     row.element.innerHTML = `
-      <td class="${Constants.CSSClasses.statsColumnWord}">${wordStat.word}</td>
-      <td class="${Constants.CSSClasses.statsColumnTranslation}">${wordStat.translation}</td>
-      <td class="${Constants.CSSClasses.statsColumnTraining}">${wordStat.training}</td>
-      <td class="${Constants.CSSClasses.statsColumnRight}">${wordStat.right}</td>
-      <td class="${Constants.CSSClasses.statsColumnWrong}">${wordStat.wrong}</td>
-      <td class="${Constants.CSSClasses.statsColumnPercentage}">${percentageString}%</td>
+      <td class="${Constants.CSS_CLASSES.statsColumnWord}">${wordStat.word}</td>
+      <td class="${Constants.CSS_CLASSES.statsColumnTranslation}">${wordStat.translation}</td>
+      <td class="${Constants.CSS_CLASSES.statsColumnTraining}">${wordStat.training}</td>
+      <td class="${Constants.CSS_CLASSES.statsColumnRight}">${wordStat.right}</td>
+      <td class="${Constants.CSS_CLASSES.statsColumnWrong}">${wordStat.wrong}</td>
+      <td class="${Constants.CSS_CLASSES.statsColumnPercentage}">${percentageString}%</td>
     `;
     if (category) {
       const tdCategory = `
-      <td class="${Constants.CSSClasses.statsColumnCategory}">${category}</td>
+      <td class="${Constants.CSS_CLASSES.statsColumnCategory}">${category}</td>
       `;
       row.element.insertAdjacentHTML('afterbegin', tdCategory);
     }
@@ -94,7 +94,7 @@ export default class StatisticsPage extends Component {
       const row = this.renderOneWord(word);
       if (index === 0) {
         const categoryColumn = `
-          <td class="${Constants.CSSClasses.statsColumnCategory}"
+          <td class="${Constants.CSS_CLASSES.statsColumnCategory}"
               rowspan=${words.length}>${category}
           </td>`;
         row.element.insertAdjacentHTML('afterbegin', categoryColumn);

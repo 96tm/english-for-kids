@@ -106,13 +106,13 @@ export default class StatsService {
 
   private commit(): void {
     this.global.localStorage.setItem(
-      Constants.Labels.statsStorage,
+      Constants.LABELS.statsStorage,
       JSON.stringify(this.storage)
     );
   }
 
   private handleStatsButtonResetClick: () => void = async () => {
-    this.global.localStorage.removeItem(Constants.Labels.statsStorage);
+    this.global.localStorage.removeItem(Constants.LABELS.statsStorage);
     this.storage = await this.getStorage();
     Events.statsCleared.emit();
   };
@@ -123,7 +123,7 @@ export default class StatsService {
 
   async getStorage(): Promise<StatsObject> {
     const storage = this.global.localStorage.getItem(
-      Constants.Labels.statsStorage
+      Constants.LABELS.statsStorage
     );
     if (storage) {
       return JSON.parse(storage);
@@ -141,7 +141,7 @@ export default class StatsService {
       });
     });
     this.global.localStorage.setItem(
-      Constants.Labels.statsStorage,
+      Constants.LABELS.statsStorage,
       JSON.stringify(newStorage)
     );
     return newStorage;

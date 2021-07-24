@@ -10,7 +10,7 @@ class GameBoard extends Component {
   cards: IComponent[] = [];
 
   constructor(global: Window, rootComponent: IComponent) {
-    super(global, rootComponent, 'div', [Constants.CSSClasses.gameBoard]);
+    super(global, rootComponent, 'div', [Constants.CSS_CLASSES.gameBoard]);
   }
 
   getCard(word: string): Card {

@@ -17,31 +17,31 @@ export default class Category extends Component {
     name: string,
     image: string
   ) {
-    super(global, rootComponent, 'div', [Constants.CSSClasses.categoryWrap]);
+    super(global, rootComponent, 'div', [Constants.CSS_CLASSES.categoryWrap]);
     this.name = name;
     this.imagePath = `${Constants.HOMEPAGE}/public/${image}`;
     this.link = new Component(
       global,
       this,
       'a',
-      [Constants.CSSClasses.categoryLink],
+      [Constants.CSS_CLASSES.categoryLink],
       {
-        href: `#${Constants.Labels.gameRoute}`,
+        href: `#${Constants.LABELS.gameRoute}`,
         'data-category-link-title': name,
       }
     );
     this.categoryImageWrap = new Component(global, this, 'div', [
-      Constants.CSSClasses.categoryImageWrap,
+      Constants.CSS_CLASSES.categoryImageWrap,
     ]);
     this.categoryImage = new Component(
       global,
       this.categoryImageWrap,
       'img',
-      [Constants.CSSClasses.categoryImage],
+      [Constants.CSS_CLASSES.categoryImage],
       { src: this.imagePath, alt: `Category: ${name}` }
     );
     this.categoryText = new Component(global, this.categoryImageWrap, 'div', [
-      Constants.CSSClasses.categoryText,
+      Constants.CSS_CLASSES.categoryText,
     ]);
     this.categoryText.textContent = name;
   }

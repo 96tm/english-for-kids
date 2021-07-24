@@ -10,30 +10,44 @@ export default class GameFooter extends Component {
   items: IComponent[] = [];
 
   constructor(global: Window, rootComponent: IComponent) {
-    super(global, rootComponent, 'div', [Constants.CSSClasses.footer]);
+    super(global, rootComponent, 'div', [Constants.CSS_CLASSES.footer]);
     this.footerItems = new Component(global, this, 'ul', [
-      Constants.CSSClasses.footerItems,
+      Constants.CSS_CLASSES.footerItems,
     ]);
     this.init();
   }
 
   init(): void {
-    const courseItem = this.append('li', [Constants.CSSClasses.footerItem], {});
+    const courseItem = this.append(
+      'li',
+      [Constants.CSS_CLASSES.footerItem],
+      {}
+    );
     courseItem.append(
       'a',
-      [Constants.CSSClasses.footerLink, Constants.CSSClasses.footerLinkSchool],
+      [
+        Constants.CSS_CLASSES.footerLink,
+        Constants.CSS_CLASSES.footerLinkSchool,
+      ],
       { href: Constants.SCHOOL_LINK }
     );
     const yearItem = this.append(
       'li',
-      [Constants.CSSClasses.footerItem, Constants.CSSClasses.footerItemYear],
+      [Constants.CSS_CLASSES.footerItem, Constants.CSS_CLASSES.footerItemYear],
       {}
     );
     yearItem.textContent = String(Constants.YEAR);
-    const githubItem = this.append('li', [Constants.CSSClasses.footerItem], {});
+    const githubItem = this.append(
+      'li',
+      [Constants.CSS_CLASSES.footerItem],
+      {}
+    );
     githubItem.append(
       'a',
-      [Constants.CSSClasses.footerLink, Constants.CSSClasses.footerLinkGithub],
+      [
+        Constants.CSS_CLASSES.footerLink,
+        Constants.CSS_CLASSES.footerLinkGithub,
+      ],
       { href: Constants.GITHUB_LINK }
     );
   }

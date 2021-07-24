@@ -11,28 +11,28 @@ export default class GameButton extends Component {
 
   constructor(global: Window, rootComponent: IComponent) {
     super(global, rootComponent, 'div', [
-      Constants.CSSClasses.gameButtonWrap,
-      Constants.CSSClasses.hidden,
+      Constants.CSS_CLASSES.gameButtonWrap,
+      Constants.CSS_CLASSES.hidden,
     ]);
     this.button = new Component(global, this, 'button', [
-      Constants.CSSClasses.gameButton,
+      Constants.CSS_CLASSES.gameButton,
     ]);
     this.text = new Component(global, this.button, 'span', [
-      Constants.CSSClasses.gameButtonText,
+      Constants.CSS_CLASSES.gameButtonText,
     ]);
-    this.text.textContent = Constants.Labels.start;
+    this.text.textContent = Constants.LABELS.start;
     this.addEventListeners();
   }
 
   setButtonStart(): void {
     (this.button as GameButton).element.classList.remove(
-      Constants.CSSClasses.gameButtonRepeat
+      Constants.CSS_CLASSES.gameButtonRepeat
     );
   }
 
   setButtonRepeat(): void {
     (this.button as GameButton).element.classList.add(
-      Constants.CSSClasses.gameButtonRepeat
+      Constants.CSS_CLASSES.gameButtonRepeat
     );
   }
 
@@ -45,19 +45,19 @@ export default class GameButton extends Component {
   }
 
   disable: () => void = () => {
-    this.button.element.classList.add(Constants.CSSClasses.noClicks);
+    this.button.element.classList.add(Constants.CSS_CLASSES.noClicks);
   };
 
   enable: () => void = () => {
-    this.button.element.classList.remove(Constants.CSSClasses.noClicks);
+    this.button.element.classList.remove(Constants.CSS_CLASSES.noClicks);
   };
 
   hide: () => void = () => {
-    this.element.classList.add(Constants.CSSClasses.hidden);
+    this.element.classList.add(Constants.CSS_CLASSES.hidden);
   };
 
   show: () => void = () => {
-    this.element.classList.remove(Constants.CSSClasses.hidden);
+    this.element.classList.remove(Constants.CSS_CLASSES.hidden);
   };
 
   private handleClick: () => void = () => {

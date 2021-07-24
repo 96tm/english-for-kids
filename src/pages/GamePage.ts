@@ -16,7 +16,7 @@ export default class GamePage extends Component {
   gameButton: IComponent;
 
   constructor(global: Window, rootComponent: IComponent) {
-    super(global, rootComponent, 'div', [Constants.CSSClasses.gamePageWrap]);
+    super(global, rootComponent, 'div', [Constants.CSS_CLASSES.gamePageWrap]);
     this.gameBoard = new GameBoard(global, this);
     this.gameButton = new GameButton(global, this);
     Events.gameStopped.add(this.handleGameStopped);

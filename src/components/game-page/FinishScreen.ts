@@ -12,12 +12,12 @@ export default class FinishScreen extends Component {
     message: string,
     isWin: boolean
   ) {
-    super(global, rootComponent, 'div', [Constants.CSSClasses.finishScreen]);
+    super(global, rootComponent, 'div', [Constants.CSS_CLASSES.finishScreen]);
     if (!isWin) {
-      this.element.classList.add(Constants.CSSClasses.finishScreenLose);
+      this.element.classList.add(Constants.CSS_CLASSES.finishScreenLose);
     }
     this.message = new Component(global, this, 'div', [
-      Constants.CSSClasses.finishScreenMessage,
+      Constants.CSS_CLASSES.finishScreenMessage,
     ]);
     this.message.textContent = message;
   }

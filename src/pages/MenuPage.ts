@@ -8,7 +8,7 @@ export default class GamePage extends Component {
   gameMenu: GameMenu;
 
   constructor(global: Window, rootView: IComponent | null) {
-    super(global, rootView, 'div', [Constants.CSSClasses.container]);
+    super(global, rootView, 'div', [Constants.CSS_CLASSES.container]);
     this.gameMenu = new GameMenu(global, this);
   }
 

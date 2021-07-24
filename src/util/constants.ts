@@ -8,7 +8,7 @@ const NUMBER_OF_CATEGORIES = 8;
 const FINISH_SCREEN_DURATION = 2000;
 const HOMEPAGE = '';
 
-const CSSClasses = {
+const CSS_CLASSES = {
   root: 'root',
   container: 'container',
   innerContainer: 'inner-container',
@@ -110,7 +110,7 @@ const CSSClasses = {
   noClicks: 'no-clicks',
 };
 
-const Labels = {
+const LABELS = {
   train: 'Train',
   play: 'Play',
   login: 'Login',
@@ -139,8 +139,8 @@ const Labels = {
 const Constants = {
   HOMEPAGE,
   YEAR,
-  CSSClasses,
-  Labels,
+  CSS_CLASSES,
+  LABELS,
   SERVER_URL,
   NUMBER_OF_STARS,
   SCHOOL_LINK,

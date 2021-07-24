@@ -15,7 +15,7 @@ import StatsService from './util/StatsService';
   const global = window;
   const statsService = new StatsService(global);
   await statsService.init();
-  const root = new Component(global, null, 'div', [Constants.CSSClasses.root]);
+  const root = new Component(global, null, 'div', [Constants.CSS_CLASSES.root]);
   const containerController = new ContainerController(global, root);
   await containerController.init();
 

@@ -19,9 +19,9 @@ export default class StatsTable extends Component {
   headingItems: IComponent[];
 
   constructor(global: Window, rootElement: IComponent) {
-    super(global, rootElement, 'div', [Constants.CSSClasses.statsTableWrap]);
+    super(global, rootElement, 'div', [Constants.CSS_CLASSES.statsTableWrap]);
     this.table = new Component(this.global, this, 'table', [
-      Constants.CSSClasses.statsTable,
+      Constants.CSS_CLASSES.statsTable,
     ]);
     const heading = new Component(global, this.table, 'thead');
     this.tableHeadingRow = new Component(this.global, heading, 'tr');
@@ -44,23 +44,23 @@ export default class StatsTable extends Component {
   private initHeadingStatsComponents(): IComponent[] {
     const tableHeadingTraining = this.createTableHeadingItem(
       SortType.training,
-      Constants.Labels.training,
-      [Constants.CSSClasses.statsTableHeadingTraining]
+      Constants.LABELS.training,
+      [Constants.CSS_CLASSES.statsTableHeadingTraining]
     );
     const tableHeadingRight = this.createTableHeadingItem(
       SortType.right,
-      Constants.Labels.right,
-      [Constants.CSSClasses.statsTableHeadingRight]
+      Constants.LABELS.right,
+      [Constants.CSS_CLASSES.statsTableHeadingRight]
     );
     const tableHeadingWrong = this.createTableHeadingItem(
       SortType.wrong,
-      Constants.Labels.wrong,
-      [Constants.CSSClasses.statsTableHeadingWrong]
+      Constants.LABELS.wrong,
+      [Constants.CSS_CLASSES.statsTableHeadingWrong]
     );
     const tableHeadingPercentage = this.createTableHeadingItem(
       SortType.percentage,
-      Constants.Labels.percentage,
-      [Constants.CSSClasses.statsTableHeadingPercentage]
+      Constants.LABELS.percentage,
+      [Constants.CSS_CLASSES.statsTableHeadingPercentage]
     );
     return [
       tableHeadingTraining,
@@ -73,16 +73,16 @@ export default class StatsTable extends Component {
   private initHeadingWordComponents(): IComponent[] {
     const tableHeadingCategory = this.createTableHeadingItem(
       SortType.category,
-      Constants.Labels.category,
-      [Constants.CSSClasses.statsTableHeadingCategory]
+      Constants.LABELS.category,
+      [Constants.CSS_CLASSES.statsTableHeadingCategory]
     );
     const tableHeadingWord = this.createTableHeadingItem(
       SortType.word,
-      Constants.Labels.word
+      Constants.LABELS.word
     );
     const tableHeadingTranslation = this.createTableHeadingItem(
       SortType.translation,
-      Constants.Labels.translation
+      Constants.LABELS.translation
     );
     return [tableHeadingCategory, tableHeadingWord, tableHeadingTranslation];
   }
@@ -108,7 +108,7 @@ export default class StatsTable extends Component {
       this.global,
       this.tableHeadingRow,
       'th',
-      classes.concat([Constants.CSSClasses.statsTableHeadingItem]),
+      classes.concat([Constants.CSS_CLASSES.statsTableHeadingItem]),
       { 'data-sort-type': sortType }
     );
     item.textContent = text;
@@ -119,7 +119,7 @@ export default class StatsTable extends Component {
     this.headingItems.forEach((item) => {
       if (item.element !== heading) {
         item.element.classList.remove(
-          Constants.CSSClasses.statsTableChosenHeading
+          Constants.CSS_CLASSES.statsTableChosenHeading
         );
         item.element.removeAttribute('data-sort-order');
       }
@@ -132,7 +132,7 @@ export default class StatsTable extends Component {
         heading.setAttribute('data-sort-order', SortOrder.ascending);
       }
     } else {
-      heading.classList.add(Constants.CSSClasses.statsTableChosenHeading);
+      heading.classList.add(Constants.CSS_CLASSES.statsTableChosenHeading);
       heading.setAttribute('data-sort-order', SortOrder.ascending);
     }
     return [
@@ -144,7 +144,7 @@ export default class StatsTable extends Component {
   private handleTableClick: (event: MouseEvent) => void = (event) => {
     const target = event.target as HTMLElement;
     const headingItem = target.closest(
-      `.${Constants.CSSClasses.statsTableHeadingItem}`
+      `.${Constants.CSS_CLASSES.statsTableHeadingItem}`
     );
     if (headingItem) {
       const [sortType, sortOrder] = this.markHeadingChosen(

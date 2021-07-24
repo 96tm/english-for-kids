@@ -19,22 +19,22 @@ export default class ContainerPage extends Component {
   innerContainer: IComponent;
 
   constructor(global: Window, rootView: IComponent | null) {
-    super(global, rootView, 'div', [Constants.CSSClasses.container]);
+    super(global, rootView, 'div', [Constants.CSS_CLASSES.container]);
     this.gameToggleCheckbox = new Component(
       global,
       this,
       'input',
-      [Constants.CSSClasses.gameMenuToggleCheckbox],
+      [Constants.CSS_CLASSES.gameMenuToggleCheckbox],
       { type: 'checkbox' }
     );
     this.gameToggleButton = new GameMenuToggleButton(global, this);
     this.gameMenu = new GameMenu(global, this);
     this.innerContainer = new Component(global, this, 'div', [
-      Constants.CSSClasses.innerContainer,
+      Constants.CSS_CLASSES.innerContainer,
     ]);
     this.gameHeader = new GameHeader(global, this.innerContainer);
     this.contentWrap = new Component(global, this.innerContainer, 'div', [
-      Constants.CSSClasses.contentWrap,
+      Constants.CSS_CLASSES.contentWrap,
     ]);
     this.footer = new GameFooter(global, this.innerContainer);
     Events.routeChange.add(this.handleRouteChange);
@@ -60,7 +60,7 @@ export default class ContainerPage extends Component {
   handleClick: (event: MouseEvent) => void = (event) => {
     const target = event.target as HTMLElement;
     if (
-      !target.closest(`.${Constants.CSSClasses.gameMenu}`) &&
+      !target.closest(`.${Constants.CSS_CLASSES.gameMenu}`) &&
       target !== this.gameToggleCheckbox.element
     ) {
       (this.gameToggleCheckbox.element as HTMLInputElement).checked = false;

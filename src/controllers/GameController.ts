@@ -66,8 +66,8 @@ export default class GameController extends Controller {
       await this.gameModel.playWin();
     }
     this.gameModel.stop();
-    RouterService.setHash(Constants.Labels.mainRoute);
-    Events.menuClick.emit(Constants.Labels.mainMenu);
+    RouterService.setHash(Constants.LABELS.mainRoute);
+    Events.menuClick.emit(Constants.LABELS.mainMenu);
   };
 
   private handleMenuClick: (category: string) => Promise<void> = async (
