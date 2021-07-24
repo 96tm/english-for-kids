@@ -26,11 +26,11 @@ export default class GameHeader extends Component {
   }
 
   private handleRepeatDifficult: () => void = () => {
-    this.heading.textContent = Constants.LABELS.statsRepeatHeading;
+    this.heading.setTextContent(Constants.LABELS.statsRepeatHeading);
   };
 
   private handleMenuClick: (category: string) => void = (category) => {
-    this.heading.textContent = category;
+    this.heading.setTextContent(category);
   };
 
   private handleGameStopped: () => void = () => {
@@ -39,11 +39,11 @@ export default class GameHeader extends Component {
 
   private handleRouteChange: (route: string) => void = (route) => {
     if (route === Constants.LABELS.mainRoute) {
-      this.heading.textContent = Constants.LABELS.mainPageHeading;
+      this.heading.setTextContent(Constants.LABELS.mainPageHeading);
     }
     if (route === Constants.LABELS.statsRoute) {
       this.modeButton.element.classList.add(Constants.CSS_CLASSES.invisible);
-      this.heading.textContent = Constants.LABELS.stats;
+      this.heading.setTextContent(Constants.LABELS.stats);
     } else {
       this.modeButton.element.classList.remove(Constants.CSS_CLASSES.invisible);
     }

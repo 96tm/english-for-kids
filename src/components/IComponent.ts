@@ -2,10 +2,6 @@ import AttributeRecord from '../util/AttributeRecord';
 
 export default interface IComponent {
   element: HTMLElement;
-  tagName: string;
-  classList: string[];
-  textContent: string;
-  attributes: AttributeRecord;
   rootComponent: IComponent | null;
 
   append(
@@ -13,6 +9,12 @@ export default interface IComponent {
     classList?: string[],
     attributes?: AttributeRecord
   ): IComponent;
+
+  getTagName(): string;
+  getClassList(): string[];
+  getAttributes(): AttributeRecord;
+  getTextContent(): string;
+  setTextContent(value: string): void;
 
   render(): void;
 

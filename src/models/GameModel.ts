@@ -11,7 +11,7 @@ import Constants from '../util/constants';
 export default class GameModel {
   static START_DELAY = 1000;
   private audio: HTMLAudioElement;
-  _mode: GameMode = GameMode.train;
+  mode: GameMode = GameMode.train;
   boardModel: BoardModel;
   status: GameStatus = GameStatus.inactive;
   categories: string[] = [];
@@ -75,14 +75,6 @@ export default class GameModel {
       this.categories.push(category);
     });
     return this.categories;
-  }
-
-  set mode(value: GameMode) {
-    this._mode = value;
-  }
-
-  get mode(): GameMode {
-    return this._mode;
   }
 
   getCurrentCard(): ICard {

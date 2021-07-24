@@ -69,7 +69,7 @@ export default class Card extends Component {
     const frontText = new Component(this.global, frontTextPanel, 'div', [
       Constants.CSS_CLASSES.cardFrontText,
     ]);
-    frontText.textContent = this.translation;
+    frontText.setTextContent(this.translation);
     return [front, frontImage, frontTextPanel, frontText];
   }
 
@@ -90,7 +90,7 @@ export default class Card extends Component {
     const backText = new Component(this.global, backTextPanel, 'div', [
       Constants.CSS_CLASSES.cardBackText,
     ]);
-    backText.textContent = this.word;
+    backText.setTextContent(this.word);
     return [back, backImage, backTextPanel, backText];
   }
 

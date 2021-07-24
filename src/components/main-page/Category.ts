@@ -43,6 +43,6 @@ export default class Category extends Component {
     this.categoryText = new Component(global, this.categoryImageWrap, 'div', [
       Constants.CSS_CLASSES.categoryText,
     ]);
-    this.categoryText.textContent = name;
+    this.categoryText.setTextContent(name);
   }
 }

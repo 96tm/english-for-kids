@@ -36,7 +36,7 @@ export default class GameFooter extends Component {
       [Constants.CSS_CLASSES.footerItem, Constants.CSS_CLASSES.footerItemYear],
       {}
     );
-    yearItem.textContent = String(Constants.YEAR);
+    yearItem.setTextContent(String(Constants.YEAR));
     const githubItem = this.append(
       'li',
       [Constants.CSS_CLASSES.footerItem],

@@ -19,6 +19,6 @@ export default class FinishScreen extends Component {
     this.message = new Component(global, this, 'div', [
       Constants.CSS_CLASSES.finishScreenMessage,
     ]);
-    this.message.textContent = message;
+    this.message.setTextContent(message);
   }
 }

@@ -3,10 +3,10 @@ import IComponent from './IComponent';
 import AttributeRecord from '../util/AttributeRecord';
 
 export default class Component implements IComponent {
-  _textContent: string;
-  _tagName: string;
-  _classList: string[];
-  _attributes: AttributeRecord;
+  private textContent = '';
+  private tagName: string;
+  private classList: string[];
+  private attributes: AttributeRecord;
   element: HTMLElement;
 
   constructor(
@@ -17,10 +17,9 @@ export default class Component implements IComponent {
     attributes: AttributeRecord = {}
   ) {
     this.element = this.global.document.createElement(tagName);
-    this._textContent = '';
-    this._tagName = tagName;
-    this._classList = classList;
-    this._attributes = attributes;
+    this.tagName = tagName;
+    this.classList = classList;
+    this.attributes = attributes;
     this.rootComponent?.element.append(this.element);
     this.element.classList.add(...classList);
     Object.keys(attributes).forEach((name) => {
@@ -28,32 +27,32 @@ export default class Component implements IComponent {
     });
   }
 
-  get textContent(): string {
-    return this._textContent;
+  getTextContent(): string {
+    return this.textContent;
   }
 
-  set textContent(value: string) {
+  setTextContent(value: string): void {
     this.element.textContent = value;
-    this._textContent = value;
+    this.textContent = value;
   }
 
-  get tagName(): string {
-    return this._tagName;
+  getTagName(): string {
+    return this.tagName;
   }
 
-  get classList(): string[] {
-    return this._classList;
+  getClassList(): string[] {
+    return this.classList;
   }
 
-  get attributes(): AttributeRecord {
-    return this._attributes;
+  getAttributes(): AttributeRecord {
+    return this.attributes;
   }
 
   append(
     tagName: string,
     classList: string[] = [],
     attributes: AttributeRecord = {}
-  ): IComponent {
+  ): Component {
     return new Component(this.global, this, tagName, classList, attributes);
   }
 

@@ -20,7 +20,7 @@ export default class GameButton extends Component {
     this.text = new Component(global, this.button, 'span', [
       Constants.CSS_CLASSES.gameButtonText,
     ]);
-    this.text.textContent = Constants.LABELS.start;
+    this.text.setTextContent(Constants.LABELS.start);
     this.addEventListeners();
   }
 

@@ -18,11 +18,11 @@ export default class StatisticsPage extends Component {
     this.resetButton = new Component(global, this, 'button', [
       Constants.CSS_CLASSES.statsResetButton,
     ]);
-    this.resetButton.textContent = Constants.LABELS.statsReset;
+    this.resetButton.setTextContent(Constants.LABELS.statsReset);
     this.repeatButton = new Component(global, this, 'button', [
       Constants.CSS_CLASSES.statsRepeatButton,
     ]);
-    this.repeatButton.textContent = Constants.LABELS.statsRepeat;
+    this.repeatButton.setTextContent(Constants.LABELS.statsRepeat);
     this.table = new StatsTable(global, this);
     this.addEventListeners();
   }

@@ -116,7 +116,7 @@ export default class StatsTable extends Component {
       classes.concat([Constants.CSS_CLASSES.statsTableHeadingItem]),
       { 'data-sort-type': sortType }
     );
-    item.textContent = text;
+    item.setTextContent(text);
     return item;
   }
 

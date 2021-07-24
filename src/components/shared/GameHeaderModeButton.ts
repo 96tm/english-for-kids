@@ -30,12 +30,12 @@ export default class GameHeaderModeButton extends Component {
     const modeTrain = new Component(global, this.modeButton, 'div', [
       Constants.CSS_CLASSES.gameHeaderModeTrain,
     ]);
-    modeTrain.textContent = Constants.LABELS.train;
+    modeTrain.setTextContent(Constants.LABELS.train);
 
     const modePlay = new Component(global, this.modeButton, 'div', [
       Constants.CSS_CLASSES.gameHeaderModePlay,
     ]);
-    modePlay.textContent = Constants.LABELS.play;
+    modePlay.setTextContent(Constants.LABELS.play);
     this.modeButton.append('div', [Constants.CSS_CLASSES.gameHeaderModeCircle]);
     this.addEventListeners();
   }

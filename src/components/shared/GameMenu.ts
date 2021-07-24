@@ -37,7 +37,7 @@ export default class GameMenu extends Component {
       [Constants.CSS_CLASSES.gameMenuLogin],
       { href: '' }
     );
-    this.loginButton.textContent = Constants.LABELS.login;
+    this.loginButton.setTextContent(Constants.LABELS.login);
     this.menuLinks.push(this.menuTitle, this.menuStats);
     this.addEventListeners();
   }
@@ -50,7 +50,7 @@ export default class GameMenu extends Component {
       [Constants.CSS_CLASSES.gameMenuStats, Constants.CSS_CLASSES.gameMenuLink],
       { href: '#stats', 'data-menu-link-title': Constants.LABELS.stats }
     );
-    menuStats.textContent = Constants.LABELS.stats;
+    menuStats.setTextContent(Constants.LABELS.stats);
     return menuStats;
   }
 
@@ -66,7 +66,7 @@ export default class GameMenu extends Component {
       ],
       { href: '#main', 'data-menu-link-title': Constants.LABELS.mainMenu }
     );
-    menuTitle.textContent = Constants.LABELS.mainMenu;
+    menuTitle.setTextContent(Constants.LABELS.mainMenu);
     return menuTitle;
   }
 
@@ -79,7 +79,7 @@ export default class GameMenu extends Component {
         href: '#game',
         'data-menu-link-title': key,
       });
-      action.textContent = key;
+      action.setTextContent(key);
     });
   }
 
@@ -116,7 +116,7 @@ export default class GameMenu extends Component {
     tagName = 'a',
     classList: string[] = [Constants.CSS_CLASSES.gameMenuLink],
     attributes: AttributeRecord = { href: '#game' }
-  ): IComponent {
+  ): Component {
     const li = new Component(this.global, this.menuList, 'li', [
       Constants.CSS_CLASSES.gameMenuItem,
     ]);

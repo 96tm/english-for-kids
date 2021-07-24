@@ -1,15 +1,12 @@
 import './assets/css/base.scss';
-
-import GameController from './controllers/GameController';
-
-import RouterService from './util/RouterService';
 import Component from './components/Component';
-import Constants from './util/constants';
-import ContainerController from './controllers/ContainerController';
+import GameController from './controllers/GameController';
 import MainPageController from './controllers/MainPageController';
-import ContainerPage from './pages/ContainerPage';
+import ContainerController from './controllers/ContainerController';
 import StatisticsController from './controllers/StatisticsController';
+import Constants from './util/constants';
 import StatsService from './util/StatsService';
+import RouterService from './util/RouterService';
 
 (async () => {
   const global = window;
@@ -21,7 +18,7 @@ import StatsService from './util/StatsService';
 
   const gameController = new GameController(
     global,
-    (containerController.component as ContainerPage).contentWrap
+    containerController.component.contentWrap
   );
   await gameController.init();
 
@@ -29,11 +26,11 @@ import StatsService from './util/StatsService';
 
   const mainPageController = new MainPageController(
     global,
-    (containerController.component as ContainerPage).contentWrap
+    containerController.component.contentWrap
   );
   const statisticsController = new StatisticsController(
     global,
-    (containerController.component as ContainerPage).contentWrap,
+    containerController.component.contentWrap,
     statsService
   );
 

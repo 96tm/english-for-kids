@@ -108,7 +108,7 @@ const CSS_CLASSES = {
   active: 'active',
   animated: 'animated',
   noClicks: 'no-clicks',
-};
+} as const;
 
 const LABELS = {
   train: 'Train',
@@ -134,7 +134,7 @@ const LABELS = {
   wrong: 'Wrong guesses',
   percentage: 'Right guesses percentage',
   statsStorage: 'statsStorage',
-};
+} as const;
 
 const Constants = {
   HOMEPAGE,
@@ -148,6 +148,6 @@ const Constants = {
   NUMBER_OF_CARDS,
   NUMBER_OF_CATEGORIES,
   FINISH_SCREEN_DURATION,
-};
+} as const;
 
 export default Constants;
