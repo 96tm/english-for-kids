@@ -3,6 +3,6 @@
   flex-direction: column;
   width: 70%;
   flex-shrink: 0;
-  max-width: 1007px;
+  max-width: #{$game-guidelines-width};
   height: auto;
 }
