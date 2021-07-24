@@ -17,9 +17,9 @@ $star-width: 20px;
     flex-shrink: 0;
     background: center url('../icons/star-unchecked.png') no-repeat;
     background-size: cover;
-    &.checked {
-      background: center url('../icons/star-checked.png') no-repeat;
-      background-size: cover;
-    }
+  }
+  .game-header__score-star.checked {
+    background: center url('../icons/star-checked.png') no-repeat;
+    background-size: cover;
   }
 }

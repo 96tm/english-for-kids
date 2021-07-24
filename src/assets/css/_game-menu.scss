@@ -23,38 +23,31 @@ $login-button-width: 248px;
     padding: $menu-items-padding-top $menu-items-padding-right 0 0;
     height: 100%;
   }
-
   .game-menu__title {
     text-transform: capitalize;
   }
-
   .game-menu__title,
   .game-menu__item {
     min-height: $game-menu-item-height;
     display: flex;
     align-items: center;
   }
-
   .game-menu__list {
     margin: 0;
     padding: 0;
     flex-grow: 1;
     list-style: none;
   }
-
   .game-menu__link {
     text-decoration: none;
     color: inherit;
-
-    &:hover {
-      opacity: 0.5;
-    }
-
-    &.active {
-      text-decoration: underline;
-    }
   }
-
+  .game-menu__link:hover {
+    opacity: 0.5;
+  }
+  .game-menu__link.active {
+    text-decoration: underline;
+  }
   .game-menu__login {
     width: $login-button-width;
     height: $game-menu-item-height;

@@ -51,17 +51,17 @@ $header-padding-top: 18px;
       background: $green-color;
       transition: 1s all;
       display: flex;
-      .game-header-mode__circle {
-        width: $mode-circle-diameter;
-        height: $mode-circle-diameter;
-        position: absolute;
-        top: 50%;
-        right: 6px;
-        transform: translate(0, -50%);
-        border-radius: 50%;
-        background: #fff;
-        box-shadow: 0px 3px 4px -2px rgb(0 0 0 / 50%);
-      }
+    }
+    .game-header__mode .game-header-mode__circle {
+      width: $mode-circle-diameter;
+      height: $mode-circle-diameter;
+      position: absolute;
+      top: 50%;
+      right: 6px;
+      transform: translate(0, -50%);
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0px 3px 4px -2px rgb(0 0 0 / 50%);
     }
 
     .game-header__mode-checkbox {
@@ -71,21 +71,21 @@ $header-padding-top: 18px;
       height: 100%;
       opacity: 0;
       cursor: pointer;
+    }
 
-      &:checked {
-        & ~ .game-header__mode {
-          background: $gray-color-disabled;
-        }
-        & ~ .game-header__mode .game-header-mode__train {
-          opacity: 0;
-        }
-        & ~ .game-header__mode .game-header-mode__play {
-          opacity: 1;
-        }
-        & ~ .game-header__mode .game-header-mode__circle {
-          right: initial;
-          left: 6px;
-        }
+    .game-header__mode-checkbox:checked {
+      & ~ .game-header__mode {
+        background: $gray-color-disabled;
+      }
+      & ~ .game-header__mode .game-header-mode__train {
+        opacity: 0;
+      }
+      & ~ .game-header__mode .game-header-mode__play {
+        opacity: 1;
+      }
+      & ~ .game-header__mode .game-header-mode__circle {
+        right: initial;
+        left: 6px;
       }
     }
   }

@@ -14,15 +14,16 @@ $card-right-opacity: 0.4;
   background-color: transparent;
   perspective: $card-perspective;
   border-radius: 4px;
-  &.card-full {
-    & .card__image-front,
-    .card__image-back {
-      height: 100%;
-    }
-    & .card__text-panel-front,
-    .card__text-panel-back {
-      display: none;
-    }
+}
+
+.card.card-full {
+  & .card__image-front,
+  .card__image-back {
+    height: 100%;
+  }
+  & .card__text-panel-front,
+  .card__text-panel-back {
+    display: none;
   }
 }
 
@@ -58,11 +59,9 @@ $card-right-opacity: 0.4;
   transform-style: preserve-3d;
 }
 
-.card.animated {
-  &:hover {
-    .card__inner {
-      transform: rotateY(-180deg);
-    }
+.card.animated:hover {
+  .card__inner {
+    transform: rotateY(-180deg);
   }
 }
 

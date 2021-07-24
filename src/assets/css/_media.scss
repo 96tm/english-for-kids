@@ -13,14 +13,12 @@
     transform: translate(-50%, -105%);
   }
 
-  .game-menu-toggle-checkbox:checked {
-    & ~ .game-menu {
-      margin-left: 0;
-      margin-right: calc((70% - min(70%, #{$game-guidelines-width})) / 2);
-    }
-    & ~ .inner-container .button-game-wrap {
-      transform: translate(-50%, -105%);
-    }
+  .game-menu-toggle-checkbox:checked ~ .game-menu {
+    margin-left: 0;
+    margin-right: calc((70% - min(70%, #{$game-guidelines-width})) / 2);
+  }
+  .game-menu-toggle-checkbox:checked ~ .inner-container .button-game-wrap {
+    transform: translate(-50%, -105%);
   }
   .cards {
     margin-top: calc(#{$button-game-diameter} + 5%);
@@ -28,15 +26,13 @@
 }
 
 @media (max-width: 1200px) {
-  .game-menu {
-    .game-menu__items {
-      align-items: flex-end;
-      padding: $menu-items-padding-top 5% 0 0;
-      .game-menu__login {
-        width: 100%;
-        padding-left: 5%;
-      }
-    }
+  .game-menu.game-menu__items {
+    align-items: flex-end;
+    padding: $menu-items-padding-top 5% 0 0;
+  }
+  .game-menu.game-menu__items.game-menu__login {
+    width: 100%;
+    padding-left: 5%;
   }
 }
 
@@ -58,13 +54,13 @@
   }
   .game-menu {
     position: absolute;
-    .game-menu__items {
-      align-items: flex-end;
-      padding: $menu-items-padding-top 5% 0 0;
-      .game-menu__login {
-        width: 100%;
-        padding-left: 5%;
-      }
+  }
+  .game-menu.game-menu__items {
+    align-items: flex-end;
+    padding: $menu-items-padding-top 5% 0 0;
+    .game-menu__login {
+      width: 100%;
+      padding-left: 5%;
     }
   }
   .game-header {
@@ -87,24 +83,21 @@
   .game-menu-toggle-checkbox:checked {
     transform: initial;
     right: 0;
-
-    & ~ .game-menu-toggle-bar-wrap {
-      transform: initial;
-      right: 0;
-    }
-
-    & ~ .game-menu {
-      width: 100%;
-      height: 100%;
-      margin-left: 0;
-      margin-right: calc((70% - min(70%, #{$game-guidelines-width})) / 2);
-    }
-    & ~ .inner-container {
-      display: none;
-
-      .button-game-wrap {
-        transform: translate(-50%, 50%);
-      }
+  }
+  .game-menu-toggle-checkbox:checked ~ .game-menu-toggle-bar-wrap {
+    transform: initial;
+    right: 0;
+  }
+  .game-menu-toggle-checkbox:checked ~ .game-menu {
+    width: 100%;
+    height: 100%;
+    margin-left: 0;
+    margin-right: calc((70% - min(70%, #{$game-guidelines-width})) / 2);
+  }
+  .game-menu-toggle-checkbox:checked ~ .inner-container {
+    display: none;
+    .button-game-wrap {
+      transform: translate(-50%, 50%);
     }
   }
 }
