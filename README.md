@@ -10,4 +10,5 @@ It's built using TypeScript and Webpack for bundling.
 You can select a category and start learning a predefined set of words.
 New categories can be added statically by editing file `public/cards.json` and adding assets to `public/audio` and `public/img`.
 There's also a version of this app working with a server in <a href="https://github.com/96tm/english-for-kids/tree/client-server">this branch</a>.
+This app is <a href="https://rolling-scopes-school.github.io/96tm-JSFE2021Q1/english-for-kids-part-one/">deployed here</a>.
 ![Screenshot from 2021-07-10 17-13-05](https://user-images.githubusercontent.com/2994043/125166098-a559a800-e1a2-11eb-9246-b029820c6861.png)
