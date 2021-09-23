@@ -1,12 +1,12 @@
 const YEAR = 2021;
-const SERVER_URL = '';
+const SERVER_URL = process.env.SERVER_URL || '';
 const NUMBER_OF_STARS = 3;
 const SCHOOL_LINK = 'https://rs.school/js';
 const GITHUB_LINK = 'https://github.com/96tm';
 const NUMBER_OF_CARDS = 8;
 const NUMBER_OF_CATEGORIES = 8;
 const FINISH_SCREEN_DURATION = 2000;
-const HOMEPAGE = '';
+const HOMEPAGE = process.env.HOMEPAGE || '';
 
 const CSS_CLASSES = {
   h1: 'h1',
